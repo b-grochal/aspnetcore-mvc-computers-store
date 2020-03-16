@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>aspnet-ComputersStore-54649C6B-5E5F-4182-8946-B64126B947CE</UserSecretsId>
+    <UserSecretsId>ComputersStoreDB</UserSecretsId>
   </PropertyGroup>
 
 
