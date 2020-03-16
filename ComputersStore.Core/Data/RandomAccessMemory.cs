@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Core.Data
 {
-    public class RandomAccessMemory
+    public class RandomAccessMemory : Product
     {
         public string Size { get; set; }
         public string Type { get; set; }
