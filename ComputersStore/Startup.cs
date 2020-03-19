@@ -14,6 +14,7 @@ using Microsoft.Extensions.Hosting;
 using ComputersStore.Data;
 using ComputersStore.Database.DataSeeder;
 using ComputersStore.Core.Data;
+using AutoMapper;
 
 namespace ComputersStore
 {
@@ -35,6 +36,7 @@ namespace ComputersStore
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
