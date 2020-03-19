@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Core.Data
 {
-    public class SolidStateDrive
+    public class SolidStateDrive : Product
     {
         public string Capacity { get; set; }
         public string Interface { get; set; }
