@@ -33,11 +33,6 @@ namespace ComputersStore.Database.DataSeeder
                     roleManager.CreateAsync(new IdentityRole(UserRoles.User.ToString())).Wait();
                 }
             }
-
-            using (IServiceScope scope = applicationBuilder.ApplicationServices.CreateScope())
-            {
-
-            }
         }
 
         private static void SeedUsers(IApplicationBuilder applicationBuilder)
