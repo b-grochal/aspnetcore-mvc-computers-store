@@ -12,4 +12,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ComputersStore.Core\ComputersStore.Core.csproj" />
+    <ProjectReference Include="..\ComputersStore.Database\ComputersStore.Database.csproj" />
+  </ItemGroup>
+
 </Project>
