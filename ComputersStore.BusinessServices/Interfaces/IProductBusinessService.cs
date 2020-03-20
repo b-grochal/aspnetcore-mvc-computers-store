@@ -1,4 +1,5 @@
-﻿using ComputersStore.Models.ViewModels;
+﻿using ComputersStore.Core.Data;
+using ComputersStore.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,5 +9,6 @@ namespace ComputersStore.BusinessServices.Interfaces
     public interface IProductBusinessService
     {
         IEnumerable<ProductViewModel> GetProductsCollection();
+        IEnumerable<ProductViewModel> GetProductsCollection(ProductCategory productCategrory, int pageNumber, int pageSize);
     }
 }

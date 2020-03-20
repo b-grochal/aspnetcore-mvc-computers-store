@@ -7,16 +7,39 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Models.ViewModels.Complex;
+using ComputersStore.Models.ViewModels.Specific;
 
 namespace ComputersStore.WebUI.Controllers
 {
     public class ProductsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IProductBusinessService productBusinessService;
+        private readonly int productsPerPage = 5;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IProductBusinessService productBusinessService)
         {
             _context = context;
+            this.productBusinessService = productBusinessService;
+        }
+
+        public ActionResult List(ProductCategory productCategory = ProductCategory.CPU, int pageNumber = 1)
+        {
+            var products = productBusinessService.GetProductsCollection(productCategory, pageNumber, productsPerPage);
+            var productsListViewModel = new ProductsListViewModel
+            {
+                Products = products,
+                PaginationInfo = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = productsPerPage,
+                    TotalItems = products.Count()
+                },
+                CurrentProductCategory = productCategory
+            };
+            return View(productsListViewModel);
         }
 
         // GET: Products
