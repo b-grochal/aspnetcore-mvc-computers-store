@@ -11,7 +11,9 @@ namespace ComputersStore.Models.Mappings
     {
         public ProductsMappingProfile()
         {
-            CreateMap<ProductViewModel, Product>();
+            //CreateMap<ProductViewModel, Product>();
+            //CreateMap<Product, ProductViewModel>();
+            CreateMap<CentralProcessingUnit, ProductViewModel>();
         }
     }
 }

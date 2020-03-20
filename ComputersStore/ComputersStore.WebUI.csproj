@@ -30,8 +30,10 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\ComputersStore.BusinessServices\ComputersStore.BusinessServices.csproj" />
     <ProjectReference Include="..\ComputersStore.Core\ComputersStore.Core.csproj" />
     <ProjectReference Include="..\ComputersStore.Database\ComputersStore.Database.csproj" />
+    <ProjectReference Include="..\ComputersStore.Models\ComputersStore.Models.csproj" />
   </ItemGroup>
 
 </Project>

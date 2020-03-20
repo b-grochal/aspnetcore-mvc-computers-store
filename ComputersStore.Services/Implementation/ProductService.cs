@@ -38,6 +38,15 @@ namespace ComputersStore.Services.Implementation
             return applicationDbContext.Products.ToList();
         }
 
+        public IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, int pageNumber, int pageSize)
+        {
+            return applicationDbContext.Products
+                .Where(p => p.ProductCategory == productCategory)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+        }
+
         public void UpdateProduct(Product product)
         {
             applicationDbContext.Products.Update(product);

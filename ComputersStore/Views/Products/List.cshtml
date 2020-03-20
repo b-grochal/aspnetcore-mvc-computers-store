@@ -1,0 +1,14 @@
+﻿@model ProductsListViewModel
+@{
+    ViewData["Title"] = "List";
+}
+
+
+        @foreach (var product in Model.Products)
+        {
+            @await Html.PartialAsync("_ProductCardPartial", product);
+        }
+        @*<pagination-links paging-info="@Model.PagingInfo" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
+                          page-class="btn" page-class-normal="btn-secondary"
+                          page-class-selected="btn-primary" page-url-currentProductsCategory="@Model.CurrentProductsCategory">
+        </pagination-links>*@

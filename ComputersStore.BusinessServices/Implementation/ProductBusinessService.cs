@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Core.Data;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Services.Interfaces;
 using System;
@@ -21,6 +22,14 @@ namespace ComputersStore.BusinessServices.Implementation
         public IEnumerable<ProductViewModel> GetProductsCollection()
         {
             var products = productService.GetProductsCollection();
+            var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
+            return result;
+        }
+
+        public IEnumerable<ProductViewModel> GetProductsCollection(ProductCategory productCategory, int pageNumber, int pageSize)
+        {
+
+            var products = productService.GetProductsCollection(productCategory, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return result;
         }
