@@ -20,6 +20,13 @@ namespace ComputersStore.Models.Mappings
             CreateMap<PowerSupplyUnit, ProductDetailsViewModel>();
             CreateMap<RandomAccessMemory, ProductDetailsViewModel>();
             CreateMap<SolidStateDrive, ProductDetailsViewModel>();
+            CreateMap<NewProductViewModel, CentralProcessingUnit>();
+            CreateMap<NewProductViewModel, GraphicsProcessingUnit>();
+            CreateMap<NewProductViewModel, HardDiskDrive>();
+            CreateMap<NewProductViewModel, Motherboard>();
+            CreateMap<NewProductViewModel, PowerSupplyUnit>();
+            CreateMap<NewProductViewModel, RandomAccessMemory>();
+            CreateMap<NewProductViewModel, SolidStateDrive>();
         }
     }
 }
