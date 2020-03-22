@@ -9,7 +9,7 @@ namespace ComputersStore.Models.ViewModels.Complex
     public class ProductsListViewModel
     {
         public IEnumerable<ProductViewModel> Products { get; set; }
-        public PaginationViewModel PaginationInfo { get; set; }
-        public ProductCategory CurrentProductCategory { get; set; }
+        public PaginationViewModel PaginationViewModel { get; set; }
+        public ProductCategory ProductCategory { get; set; }
     }
 }
