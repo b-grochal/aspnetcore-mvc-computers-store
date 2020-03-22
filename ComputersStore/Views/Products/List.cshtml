@@ -3,12 +3,11 @@
     ViewData["Title"] = "List";
 }
 
+@foreach (var product in Model.Products)
+{
+    @await Html.PartialAsync("_ProductCardPartial", product);
+}
 
-        @foreach (var product in Model.Products)
-        {
-            @await Html.PartialAsync("_ProductCardPartial", product);
-        }
-        @*<pagination-links paging-info="@Model.PagingInfo" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
-                          page-class="btn" page-class-normal="btn-secondary"
-                          page-class-selected="btn-primary" page-url-currentProductsCategory="@Model.CurrentProductsCategory">
-        </pagination-links>*@
+<pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
+    page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-productCategory="@Model.ProductCategory">
+</pagination-links>

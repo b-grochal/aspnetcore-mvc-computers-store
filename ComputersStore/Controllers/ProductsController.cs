@@ -31,13 +31,13 @@ namespace ComputersStore.WebUI.Controllers
             var productsListViewModel = new ProductsListViewModel
             {
                 Products = products,
-                PaginationInfo = new PaginationViewModel
+                PaginationViewModel = new PaginationViewModel
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = productsPerPage,
                     TotalItems = products.Count()
                 },
-                CurrentProductCategory = productCategory
+                ProductCategory = productCategory
             };
             return View(productsListViewModel);
         }
