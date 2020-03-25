@@ -49,21 +49,14 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int productId)
         {
-            if (id == null)
+            var productDetailsViewModel = productBusinessService.GetProduct(productId);
+            if (productDetailsViewModel == null)
             {
                 return NotFound();
             }
-
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
+            return View(productDetailsViewModel);
         }
 
         // GET: Products/Create
