@@ -49,9 +49,9 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Details/5
-        public IActionResult Details(int productId)
+        public IActionResult Details(int id)
         {
-            var productDetailsViewModel = productBusinessService.GetProduct(productId);
+            var productDetailsViewModel = productBusinessService.GetProduct(id);
             if (productDetailsViewModel == null)
             {
                 return NotFound();
