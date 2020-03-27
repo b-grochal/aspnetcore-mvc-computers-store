@@ -1,4 +1,4 @@
-﻿@model ComputersStore.Core.Data.Product
+﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -10,33 +10,31 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ProductId" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProductCategory" class="control-label"></label>
-                <select asp-for="ProductCategory" class="form-control"></select>
-                <span asp-validation-for="ProductCategory" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        @switch (Model.ProductCategory)
+        {
+            case ProductCategory.CPU:
+                @await Html.PartialAsync("_CentralProcessingUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.Motherboard:
+                @await Html.PartialAsync("_MotherboardEditFormPartial", Model);
+                break;
+            case ProductCategory.RAM:
+                @await Html.PartialAsync("_RandomAccessMemoryEditFormPartial", Model);
+                break;
+            case ProductCategory.GPU:
+                @await Html.PartialAsync("_GraphicsProcessingUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.PSU:
+                @await Html.PartialAsync("_PowerSupplyUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.HDD:
+                @await Html.PartialAsync("_HardDiskDriveEditFormPartial", Model);
+                break;
+            case ProductCategory.SSD:
+                @await Html.PartialAsync("_SolidStateDriveEditFormPartial", Model);
+                break;
+
+        }
     </div>
 </div>
 

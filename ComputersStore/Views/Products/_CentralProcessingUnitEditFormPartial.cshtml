@@ -1,0 +1,64 @@
+﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
+
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ProductId" />
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ProductCategory" class="control-label"></label>
+            <select asp-for="ProductCategory" class="form-control" disabled></select>
+            <span asp-validation-for="ProductCategory" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfCores" class="control-label"></label>
+            <select asp-for="NumberOfCores" class="form-control"></select>
+            <span asp-validation-for="NumberOfCores" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="NumberOfThreads" class="control-label"></label>
+            <select asp-for="NumberOfThreads" class="form-control"></select>
+            <span asp-validation-for="NumberOfThreads" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ClockSpeed" class="control-label"></label>
+            <select asp-for="ClockSpeed" class="form-control"></select>
+            <span asp-validation-for="ClockSpeed" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="TDP" class="control-label"></label>
+            <select asp-for="TDP" class="form-control"></select>
+            <span asp-validation-for="TDP" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Socket" class="control-label"></label>
+            <select asp-for="Socket" class="form-control"></select>
+            <span asp-validation-for="Socket" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Architecture" class="control-label"></label>
+            <select asp-for="Architecture" class="form-control"></select>
+            <span asp-validation-for="Architecture" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ManufacturingProcess" class="control-label"></label>
+            <select asp-for="ManufacturingProcess" class="form-control"></select>
+            <span asp-validation-for="ManufacturingProcess" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </form>
