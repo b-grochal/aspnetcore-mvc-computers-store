@@ -10,6 +10,7 @@ using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Models.ViewModels.Complex;
 using ComputersStore.Models.ViewModels.Specific;
+using ComputersStore.Models.ViewModels.Basic;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -82,19 +83,14 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public  ActionResult Edit(int id)
         {
-            if (id == null)
+            var productDetailsViewModel = productBusinessService.GetProduct(id);
+            if (productDetailsViewModel == null)
             {
                 return NotFound();
             }
-
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
+            return View(productDetailsViewModel);
         }
 
         // POST: Products/Edit/5
@@ -102,34 +98,19 @@ namespace ComputersStore.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductId,Name,Description,Price,ProductCategory")] Product product)
+        public  IActionResult Edit(int id, ProductDetailsViewModel productsDetailsViewModel)
         {
-            if (id != product.ProductId)
+            if (id != productsDetailsViewModel.ProductId)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.ProductId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                productBusinessService.UpdateProduct(productsDetailsViewModel);
+                return RedirectToAction(nameof(List));
             }
-            return View(product);
+            return View(productsDetailsViewModel);
         }
 
         // GET: Products/Delete/5

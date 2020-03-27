@@ -96,25 +96,25 @@ namespace ComputersStore.BusinessServices.Implementation
             switch (productViewModel.ProductCategory)
             {
                 case ProductCategory.CPU:
-                    result = mapper.Map<CentralProcessingUnit>(result);
+                    result = mapper.Map<CentralProcessingUnit>(productViewModel);
                     break;
                 case ProductCategory.GPU:
-                    result = mapper.Map<GraphicsProcessingUnit>(result);
+                    result = mapper.Map<GraphicsProcessingUnit>(productViewModel);
                     break;
                 case ProductCategory.HDD:
-                    result = mapper.Map<HardDiskDrive>(result);
+                    result = mapper.Map<HardDiskDrive>(productViewModel);
                     break;
                 case ProductCategory.Motherboard:
-                    result = mapper.Map<Motherboard>(result);
+                    result = mapper.Map<Motherboard>(productViewModel);
                     break;
                 case ProductCategory.PSU:
-                    result = mapper.Map<PowerSupplyUnit>(result);
+                    result = mapper.Map<PowerSupplyUnit>(productViewModel);
                     break;
                 case ProductCategory.RAM:
-                    result = mapper.Map<RandomAccessMemory>(result);
+                    result = mapper.Map<RandomAccessMemory>(productViewModel);
                     break;
                 case ProductCategory.SSD:
-                    result = mapper.Map<SolidStateDrive>(result);
+                    result = mapper.Map<SolidStateDrive>(productViewModel);
                     break;
             }
             return result;
@@ -126,25 +126,25 @@ namespace ComputersStore.BusinessServices.Implementation
             switch (productDetailsViewModel.ProductCategory)
             {
                 case ProductCategory.CPU:
-                    result = mapper.Map<CentralProcessingUnit>(result);
+                    result = mapper.Map<CentralProcessingUnit>(productDetailsViewModel);
                     break;
                 case ProductCategory.GPU:
-                    result = mapper.Map<GraphicsProcessingUnit>(result);
+                    result = mapper.Map<GraphicsProcessingUnit>(productDetailsViewModel);
                     break;
                 case ProductCategory.HDD:
-                    result = mapper.Map<HardDiskDrive>(result);
+                    result = mapper.Map<HardDiskDrive>(productDetailsViewModel);
                     break;
                 case ProductCategory.Motherboard:
-                    result = mapper.Map<Motherboard>(result);
+                    result = mapper.Map<Motherboard>(productDetailsViewModel);
                     break;
                 case ProductCategory.PSU:
-                    result = mapper.Map<PowerSupplyUnit>(result);
+                    result = mapper.Map<PowerSupplyUnit>(productDetailsViewModel);
                     break;
                 case ProductCategory.RAM:
-                    result = mapper.Map<RandomAccessMemory>(result);
+                    result = mapper.Map<RandomAccessMemory>(productDetailsViewModel);
                     break;
                 case ProductCategory.SSD:
-                    result = mapper.Map<SolidStateDrive>(result);
+                    result = mapper.Map<SolidStateDrive>(productDetailsViewModel);
                     break;
             }
             return result;
