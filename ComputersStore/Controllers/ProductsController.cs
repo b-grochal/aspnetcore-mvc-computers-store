@@ -61,9 +61,13 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create()
+        public IActionResult Create(ProductCategory productCategory)
         {
-            return View();
+            var newProductViewModel = new NewProductViewModel
+            {
+                ProductCategory = productCategory
+            };
+            return View(newProductViewModel);
         }
 
         // POST: Products/Create
@@ -71,15 +75,14 @@ namespace ComputersStore.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductId,Name,Description,Price,ProductCategory")] Product product)
+        public IActionResult Create(NewProductViewModel newProductViewModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                productBusinessService.AddProduct(newProductViewModel);
+                return RedirectToAction(nameof(List));
             }
-            return View(product);
+            return View(newProductViewModel);
         }
 
         // GET: Products/Edit/5

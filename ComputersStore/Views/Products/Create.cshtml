@@ -1,4 +1,4 @@
-﻿@model ComputersStore.Core.Data.Product
+﻿@model ComputersStore.Models.ViewModels.Basic.NewProductViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,27 +10,30 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        @switch (Model.ProductCategory)
+        {
+            case ProductCategory.CPU:
+                @await Html.PartialAsync("_CentralProcessingUnitCreateFormPartial", Model);
+                break;
+            case ProductCategory.Motherboard:
+                @await Html.PartialAsync("_MotherboardCreateFormPartial", Model);
+                break;
+            case ProductCategory.RAM:
+                @await Html.PartialAsync("_RandomAccessMemoryCreateFormPartial", Model);
+                break;
+            case ProductCategory.GPU:
+                @await Html.PartialAsync("_GraphicsProcessingUnitCreateFormPartial", Model);
+                break;
+            case ProductCategory.PSU:
+                @await Html.PartialAsync("_PowerSupplyUnitCreateFormPartial", Model);
+                break;
+            case ProductCategory.HDD:
+                @await Html.PartialAsync("_HardDiskDriveCreateFormPartial", Model);
+                break;
+            case ProductCategory.SSD:
+                @await Html.PartialAsync("_SolidStateDriveCreateFormPartial", Model);
+                break;
+        }
     </div>
 </div>
 
