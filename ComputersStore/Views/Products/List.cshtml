@@ -3,11 +3,39 @@
     ViewData["Title"] = "List";
 }
 
-@foreach (var product in Model.Products)
-{
-    @await Html.PartialAsync("_ProductCardPartial", product);
-}
+<div class="row">
+    <div class="col-2">
+        <form asp-controller="Products" asp-action="List" class="productsSortingForm">
+            <input name="ProductCategory" value="@Model.ProductCategory" hidden/>
+            <input name="PageNumber" value="@Model.PaginationViewModel.CurrentPage" hidden/>
+            <select asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
+                <option value="">Default sorting</option>
+                <option value="Price ASC">Price ascending</option>
+                <option value="Price DSC">Price descending</option>
+            </select>
+        </form>
+    </div>
+    <div class="col-10 text-right">
+        Number of products: @Model.PaginationViewModel.TotalItems
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        @foreach (var product in Model.Products)
+        {
+            @await Html.PartialAsync("_ProductCardPartial", product);
+        }
 
-<pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
-    page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-productCategory="@Model.ProductCategory">
-</pagination-links>
+        <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
+                          page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-productCategory="@Model.ProductCategory">
+        </pagination-links>
+    </div>
+</div>
+
+<script>
+    function submitProductsSortingForm()
+    {
+        $(".productsSortingForm").submit();
+    }
+</script>
+

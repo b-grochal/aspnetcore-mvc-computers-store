@@ -8,7 +8,7 @@ namespace ComputersStore.Services.Interfaces
     public interface IProductService
     {
         IEnumerable<Product> GetProductsCollection();
-        IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, int pageNumber, int pageSize);
+        IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, string sortOrder, int pageNumber, int pageSize);
         Product GetProduct(int productId);
         void AddProduct(Product product);
         void UpdateProduct(Product product);

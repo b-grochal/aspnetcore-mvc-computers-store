@@ -46,10 +46,10 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public IEnumerable<ProductViewModel> GetProductsCollection(ProductCategory productCategory, int pageNumber, int pageSize)
+        public IEnumerable<ProductViewModel> GetProductsCollection(ProductCategory productCategory, string sortOrder, int pageNumber, int pageSize)
         {
 
-            var products = productService.GetProductsCollection(productCategory, pageNumber, pageSize);
+            var products = productService.GetProductsCollection(productCategory, sortOrder, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return result;
         }

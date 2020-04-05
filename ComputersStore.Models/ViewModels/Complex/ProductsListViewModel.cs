@@ -11,5 +11,6 @@ namespace ComputersStore.Models.ViewModels.Complex
         public IEnumerable<ProductViewModel> Products { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }
         public ProductCategory ProductCategory { get; set; }
+        public string SortOrder { get; set; }
     }
 }

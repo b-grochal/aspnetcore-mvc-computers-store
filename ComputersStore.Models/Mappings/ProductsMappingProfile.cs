@@ -13,6 +13,7 @@ namespace ComputersStore.Models.Mappings
         public ProductsMappingProfile()
         {
             CreateMap<CentralProcessingUnit, ProductViewModel>();
+            CreateMap<GraphicsProcessingUnit, ProductViewModel>();
             CreateMap<CentralProcessingUnit, ProductDetailsViewModel>();
             CreateMap<GraphicsProcessingUnit, ProductDetailsViewModel>();
             CreateMap<HardDiskDrive, ProductDetailsViewModel>();

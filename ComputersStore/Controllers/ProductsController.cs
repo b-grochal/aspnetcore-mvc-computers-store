@@ -26,9 +26,9 @@ namespace ComputersStore.WebUI.Controllers
             this.productBusinessService = productBusinessService;
         }
 
-        public ActionResult List(ProductCategory productCategory = ProductCategory.CPU, int pageNumber = 1)
+        public ActionResult List(ProductCategory productCategory = ProductCategory.CPU, int pageNumber = 1, string sortOrder = null)
         {
-            var products = productBusinessService.GetProductsCollection(productCategory, pageNumber, productsPerPage);
+            var products = productBusinessService.GetProductsCollection(productCategory, sortOrder, pageNumber, productsPerPage);
             var productsListViewModel = new ProductsListViewModel
             {
                 Products = products,
@@ -38,7 +38,8 @@ namespace ComputersStore.WebUI.Controllers
                     ItemsPerPage = productsPerPage,
                     TotalItems = products.Count()
                 },
-                ProductCategory = productCategory
+                ProductCategory = productCategory,
+                SortOrder = sortOrder
             };
             return View(productsListViewModel);
         }
