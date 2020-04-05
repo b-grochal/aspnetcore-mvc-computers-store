@@ -1,5 +1,6 @@
 ﻿using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.Services.Extensions;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -38,10 +39,11 @@ namespace ComputersStore.Services.Implementation
             return applicationDbContext.Products.ToList();
         }
 
-        public IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, int pageNumber, int pageSize)
+        public IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, string sortOrder, int pageNumber, int pageSize)
         {
             return applicationDbContext.Products
                 .Where(p => p.ProductCategory == productCategory)
+                .Sort(sortOrder)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

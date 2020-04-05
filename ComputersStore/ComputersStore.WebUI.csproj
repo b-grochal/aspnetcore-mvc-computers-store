@@ -36,4 +36,10 @@
     <ProjectReference Include="..\ComputersStore.Models\ComputersStore.Models.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="Components\ProductsSortMenu\" />
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
