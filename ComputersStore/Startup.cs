@@ -20,6 +20,8 @@ using ComputersStore.BusinessServices.Implementation;
 using ComputersStore.Services.Interfaces;
 using ComputersStore.Services.Implementation;
 using ComputersStore.Models.Mappings;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace ComputersStore
 {
@@ -58,6 +60,13 @@ namespace ComputersStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.NumberGroupSeparator = ".";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
