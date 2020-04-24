@@ -1,0 +1,20 @@
+﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
+
+<div>
+    <h4>PSU Specification</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Size)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Size)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Wattage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Wattage)
+        </dd>
+    </dl>
+</div>
