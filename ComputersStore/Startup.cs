@@ -14,6 +14,14 @@ using Microsoft.Extensions.Hosting;
 using ComputersStore.Data;
 using ComputersStore.Database.DataSeeder;
 using ComputersStore.Core.Data;
+using AutoMapper;
+using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.BusinessServices.Implementation;
+using ComputersStore.Services.Interfaces;
+using ComputersStore.Services.Implementation;
+using ComputersStore.Models.Mappings;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
 namespace ComputersStore
 {
@@ -35,13 +43,30 @@ namespace ComputersStore
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddAutoMapper(typeof(Startup));
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ProductsMappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IProductBusinessService, ProductBusinessService>();
+            services.AddTransient<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.NumberGroupSeparator = ".";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

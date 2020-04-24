@@ -1,0 +1,46 @@
+﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        @switch (Model.ProductCategory)
+        {
+            case ProductCategory.CPU:
+                @await Html.PartialAsync("_CentralProcessingUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.Motherboard:
+                @await Html.PartialAsync("_MotherboardEditFormPartial", Model);
+                break;
+            case ProductCategory.RAM:
+                @await Html.PartialAsync("_RandomAccessMemoryEditFormPartial", Model);
+                break;
+            case ProductCategory.GPU:
+                @await Html.PartialAsync("_GraphicsProcessingUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.PSU:
+                @await Html.PartialAsync("_PowerSupplyUnitEditFormPartial", Model);
+                break;
+            case ProductCategory.HDD:
+                @await Html.PartialAsync("_HardDiskDriveEditFormPartial", Model);
+                break;
+            case ProductCategory.SSD:
+                @await Html.PartialAsync("_SolidStateDriveEditFormPartial", Model);
+                break;
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
