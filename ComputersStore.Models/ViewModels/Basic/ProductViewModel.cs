@@ -11,6 +11,8 @@ namespace ComputersStore.Models.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public bool IsRecommended { get; set; }
+        public string ImageDataUrl { get; set; }
         public ProductCategory ProductCategory { get; set; }
     }
 }
