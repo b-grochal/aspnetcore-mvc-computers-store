@@ -3,10 +3,8 @@
 }
 
 <div class="row">
-    <h1 class="text-center">The future has arrived!</h1>
-</div>
-<div class="row">
     <div class="col">
+        <h1 class="text-center">The future has arrived!</h1>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -33,5 +31,23 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h1>Recommended products</h1>
+        Porducts here
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <h1>Enroll to our newsletter</h1>
+        <form asp-controller="Newsletter" asp-action="Create" method="post">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">I accept the terms of newsletter</label>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 </div>

@@ -19,6 +19,7 @@ namespace ComputersStore.Data
         public DbSet<PowerSupplyUnit> PowerSupplyUnits { get; set; }
         public DbSet<RandomAccessMemory> RandomAccessMemories { get; set; }
         public DbSet<SolidStateDrive> SolidStateDrives { get; set; }
+        public DbSet<Newsletter> Newsletters { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
