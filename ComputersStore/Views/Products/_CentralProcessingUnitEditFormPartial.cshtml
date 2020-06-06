@@ -1,6 +1,6 @@
-﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
+﻿@model ComputersStore.Models.ViewModels.Basic.EditProductViewModel
 
-    <form asp-controller="Products" asp-action="Edit">
+    <form asp-controller="Products" asp-action="Edit" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="ProductId" />
         <select asp-for="ProductCategory" asp-items="Html.GetEnumSelectList<ProductCategory>()" class="form-control" hidden></select>
@@ -53,6 +53,11 @@
             <label asp-for="ManufacturingProcess" class="control-label"></label>
             <input asp-for="ManufacturingProcess" class="form-control">
             <span asp-validation-for="ManufacturingProcess" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input asp-for="ImageFile" type="file" class="form-control-file">
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
         <div class="form-group">
             <input type="submit" value="Save" class="btn btn-primary" />

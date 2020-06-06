@@ -39,6 +39,13 @@ namespace ComputersStore.Services.Implementation
             return applicationDbContext.Products.ToList();
         }
 
+        public int GetProductsCollectionCount(ProductCategory productCategory)
+        {
+            return applicationDbContext.Products
+                .Where(p => p.ProductCategory == productCategory)
+                .Count();
+        }
+
         public IEnumerable<Product> GetProductsCollection(ProductCategory productCategory, string sortOrder, int pageNumber, int pageSize)
         {
             return applicationDbContext.Products

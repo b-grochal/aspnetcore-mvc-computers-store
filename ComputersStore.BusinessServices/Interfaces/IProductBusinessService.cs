@@ -15,5 +15,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         void AddProduct(NewProductViewModel product);
         void UpdateProduct(ProductDetailsViewModel product);
         void DeleteProduct(ProductViewModel product);
+        int GetProductsCollectionCount(ProductCategory productCategory);
     }
 }
