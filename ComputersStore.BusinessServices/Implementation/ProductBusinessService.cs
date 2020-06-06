@@ -149,5 +149,10 @@ namespace ComputersStore.BusinessServices.Implementation
             }
             return result;
         }
+
+        public int GetProductsCollectionCount(ProductCategory productCategory)
+        {
+            return productService.GetProductsCollectionCount(productCategory);
+        }
     }
 }

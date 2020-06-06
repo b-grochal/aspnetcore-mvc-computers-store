@@ -36,7 +36,7 @@ namespace ComputersStore.WebUI.Controllers
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = productsPerPage,
-                    TotalItems = products.Count()
+                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategory), // TODO Dodać metodę zwracającą liczę 
                 },
                 ProductCategory = productCategory,
                 SortOrder = sortOrder
@@ -62,7 +62,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create(ProductCategory productCategory)
+        public IActionResult Create(ProductCategory productCategory = ProductCategory.CPU)
         {
             var newProductViewModel = new NewProductViewModel
             {

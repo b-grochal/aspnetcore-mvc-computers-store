@@ -6,8 +6,9 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Basic
 {
-    public class NewProductViewModel
+    public class EditProductViewModel
     {
+        public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
