@@ -20,7 +20,7 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public void AddProduct(NewProductViewModel newProductViewModel)
+        public void AddProduct(ProductCreateFormViewModel newProductViewModel)
         {
             var product = MapNewProductViewModelToConcreteProduct(newProductViewModel);
             productService.AddProduct(product); 
@@ -32,13 +32,6 @@ namespace ComputersStore.BusinessServices.Implementation
             productService.DeleteProduct(product);
         }
 
-        public ProductDetailsViewModel GetProduct(int productId)
-        {
-            var product = productService.GetProduct(productId);
-            var result = mapper.Map<ProductDetailsViewModel>(product);
-            return result;
-        }
-
         public IEnumerable<ProductViewModel> GetProductsCollection()
         {
             var products = productService.GetProductsCollection();
@@ -46,21 +39,39 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public IEnumerable<ProductViewModel> GetProductsCollection(ProductCategory productCategory, string sortOrder, int pageNumber, int pageSize)
+        public int GetProductsCollectionCount(ProductCategory productCategory)
         {
+            return productService.GetProductsCollectionCount(productCategory);
+        }
 
-            var products = productService.GetProductsCollection(productCategory, sortOrder, pageNumber, pageSize);
-            var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
+        public IEnumerable<ProductDetailsViewModel> GetProductsDetailCollection(ProductCategory productCategrory, string sortOrder, int pageNumber, int pageSize)
+        {
+            var products = productService.GetProductsCollection(productCategrory, sortOrder, pageNumber, pageSize);
+            var result = mapper.Map<IEnumerable<ProductDetailsViewModel>>(products);
             return result;
         }
 
-        public void UpdateProduct(ProductDetailsViewModel productDetailsViewModel)
+        public ProductDetailsViewModel GetProductDetails(int productId)
         {
-            var product = MapProductDetailsViewModelToConcreteProduct(productDetailsViewModel);
+            var product = productService.GetProduct(productId);
+            var result = mapper.Map<ProductDetailsViewModel>(product);
+            return result;
+        }
+
+        public ProductEditFormViewModel GetProductEditFormData(int productId)
+        {
+            var product = productService.GetProduct(productId);
+            var result = mapper.Map<ProductEditFormViewModel>(product);
+            return result;
+        }
+
+        public void UpdateProduct(ProductEditFormViewModel updatedProduct)
+        {
+            var product = MapProductEditFormViewModelToConcreteProduct(updatedProduct);
             productService.UpdateProduct(product);
         }
 
-        private Product MapNewProductViewModelToConcreteProduct(NewProductViewModel newProduct)
+        private Product MapNewProductViewModelToConcreteProduct(ProductCreateFormViewModel newProduct)
         {
             Product result = null;
             switch(newProduct.ProductCategory)
@@ -120,7 +131,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        private Product MapProductDetailsViewModelToConcreteProduct(ProductDetailsViewModel productDetailsViewModel)
+        private Product MapProductEditFormViewModelToConcreteProduct(ProductEditFormViewModel productDetailsViewModel)
         {
             Product result = null;
             switch (productDetailsViewModel.ProductCategory)
@@ -148,11 +159,6 @@ namespace ComputersStore.BusinessServices.Implementation
                     break;
             }
             return result;
-        }
-
-        public int GetProductsCollectionCount(ProductCategory productCategory)
-        {
-            return productService.GetProductsCollectionCount(productCategory);
         }
     }
 }
