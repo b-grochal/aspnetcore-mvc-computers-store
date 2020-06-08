@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Basic
 {
-    public class NewProductViewModel
+    class ProductCreateFormViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
