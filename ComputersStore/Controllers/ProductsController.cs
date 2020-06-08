@@ -28,8 +28,8 @@ namespace ComputersStore.WebUI.Controllers
 
         public ActionResult List(ProductCategory productCategory = ProductCategory.CPU, int pageNumber = 1, string sortOrder = null)
         {
-            var products = productBusinessService.GetProductsCollection(productCategory, sortOrder, pageNumber, productsPerPage);
-            var productsListViewModel = new ProductsListViewModel
+            var products = productBusinessService.GetProductsDetailCollection(productCategory, sortOrder, pageNumber, productsPerPage);
+            var productsListViewModel = new ProductDetailListViewModel
             {
                 Products = products,
                 PaginationViewModel = new PaginationViewModel
@@ -53,7 +53,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Details/5
         public IActionResult Details(int id)
         {
-            var productDetailsViewModel = productBusinessService.GetProduct(id);
+            var productDetailsViewModel = productBusinessService.GetProductDetails(id);
             if (productDetailsViewModel == null)
             {
                 return NotFound();
@@ -64,7 +64,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Create
         public IActionResult Create(ProductCategory productCategory = ProductCategory.CPU)
         {
-            var newProductViewModel = new NewProductViewModel
+            var newProductViewModel = new ProductCreateFormViewModel
             {
                 ProductCategory = productCategory
             };
@@ -76,7 +76,7 @@ namespace ComputersStore.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(NewProductViewModel newProductViewModel)
+        public IActionResult Create(ProductCreateFormViewModel newProductViewModel)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Edit/5
         public  ActionResult Edit(int id)
         {
-            var productDetailsViewModel = productBusinessService.GetProduct(id);
+            var productDetailsViewModel = productBusinessService.GetProductEditFormData(id);
             if (productDetailsViewModel == null)
             {
                 return NotFound();
@@ -102,7 +102,7 @@ namespace ComputersStore.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(int id, ProductDetailsViewModel productsDetailsViewModel)
+        public  IActionResult Edit(int id, ProductEditFormViewModel productsDetailsViewModel)
         {
             if (id != productsDetailsViewModel.ProductId)
             {
