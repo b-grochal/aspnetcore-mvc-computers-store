@@ -74,6 +74,7 @@ namespace ComputersStore.WebUI.Controllers
         // POST: Products/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[Bind("Name,Description,Price,NumberOfCores,NumberOfThreads,ClockSpeed,TDP,Socket,Architecture,ManufacturingProcess,ImageFile,ProductCategory")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(ProductCreateFormViewModel newProductViewModel)
