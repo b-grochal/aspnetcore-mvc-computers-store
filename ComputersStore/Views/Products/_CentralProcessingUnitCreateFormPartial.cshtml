@@ -3,60 +3,68 @@
 <form asp-controller="Products" asp-action="Create" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <select asp-for="ProductCategory" asp-items="Html.GetEnumSelectList<ProductCategory>()" class="form-control" hidden></select>
-    <div class="form-group">
-        <label asp-for="Name" class="control-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Description" class="control-label"></label>
-        <input asp-for="Description" class="form-control" />
-        <span asp-validation-for="Description" class="text-danger"></span>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="NumberOfCores" class="control-label"></label>
+            <input asp-for="NumberOfCores" class="form-control" />
+            <span asp-validation-for="NumberOfCores" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="NumberOfThreads" class="control-label"></label>
+            <input asp-for="NumberOfThreads" class="form-control">
+            <span asp-validation-for="NumberOfThreads" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="ClockSpeed" class="control-label"></label>
+            <input asp-for="ClockSpeed" class="form-control">
+            <span asp-validation-for="ClockSpeed" class="text-danger"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Price" class="control-label"></label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="TDP" class="control-label"></label>
+            <input asp-for="TDP" class="form-control">
+            <span asp-validation-for="TDP" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Socket" class="control-label"></label>
+            <input asp-for="Socket" class="form-control">
+            <span asp-validation-for="Socket" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Architecture" class="control-label"></label>
+            <input asp-for="Architecture" class="form-control">
+            <span asp-validation-for="Architecture" class="text-danger"></span>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="NumberOfCores" class="control-label"></label>
-        <input asp-for="NumberOfCores" class="form-control" />
-        <span asp-validation-for="NumberOfCores" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="NumberOfThreads" class="control-label"></label>
-        <input asp-for="NumberOfThreads" class="form-control">
-        <span asp-validation-for="NumberOfThreads" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ClockSpeed" class="control-label"></label>
-        <input asp-for="ClockSpeed" class="form-control">
-        <span asp-validation-for="ClockSpeed" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="TDP" class="control-label"></label>
-        <input asp-for="TDP" class="form-control">
-        <span asp-validation-for="TDP" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Socket" class="control-label"></label>
-        <input asp-for="Socket" class="form-control">
-        <span asp-validation-for="Socket" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Architecture" class="control-label"></label>
-        <input asp-for="Architecture" class="form-control">
-        <span asp-validation-for="Architecture" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ManufacturingProcess" class="control-label"></label>
-        <input asp-for="ManufacturingProcess" class="form-control">
-        <span asp-validation-for="ManufacturingProcess" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ImageFile" class="control-label"></label>
-        <input asp-for="ImageFile" type="file" class="form-control-file">
-        <span asp-validation-for="ImageFile" class="text-danger"></span>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="ManufacturingProcess" class="control-label"></label>
+            <input asp-for="ManufacturingProcess" class="form-control">
+            <span asp-validation-for="ManufacturingProcess" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <input asp-for="ImageFile" type="file" class="form-control-file">
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>
     </div>
     <div class="form-group">
         <input type="submit" value="Save" class="btn btn-primary" />
