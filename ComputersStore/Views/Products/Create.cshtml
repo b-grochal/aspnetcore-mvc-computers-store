@@ -6,34 +6,31 @@
 
 <h1>Create @Model.ProductCategory</h1>
 <hr />
-<div class="row">
-    <div class="col-12">
-        @switch (Model.ProductCategory)
-        {
-            case ProductCategory.CPU:
-                @await Html.PartialAsync("_CentralProcessingUnitCreateFormPartial", Model);
-                break;
-            case ProductCategory.Motherboard:
-                @await Html.PartialAsync("_MotherboardCreateFormPartial", Model);
-                break;
-            case ProductCategory.RAM:
-                @await Html.PartialAsync("_RandomAccessMemoryCreateFormPartial", Model);
-                break;
-            case ProductCategory.GPU:
-                @await Html.PartialAsync("_GraphicsProcessingUnitCreateFormPartial", Model);
-                break;
-            case ProductCategory.PSU:
-                @await Html.PartialAsync("_PowerSupplyUnitCreateFormPartial", Model);
-                break;
-            case ProductCategory.HDD:
-                @await Html.PartialAsync("_HardDiskDriveCreateFormPartial", Model);
-                break;
-            case ProductCategory.SSD:
-                @await Html.PartialAsync("_SolidStateDriveCreateFormPartial", Model);
-                break;
-        }
-    </div>
-</div>
+@switch (Model.ProductCategory)
+{
+    case ProductCategory.CPU:
+        @await Html.PartialAsync("_CentralProcessingUnitCreateFormPartial", Model);
+        break;
+    case ProductCategory.Motherboard:
+        @await Html.PartialAsync("_MotherboardCreateFormPartial", Model);
+        break;
+    case ProductCategory.RAM:
+        @await Html.PartialAsync("_RandomAccessMemoryCreateFormPartial", Model);
+        break;
+    case ProductCategory.GPU:
+        @await Html.PartialAsync("_GraphicsProcessingUnitCreateFormPartial", Model);
+        break;
+    case ProductCategory.PSU:
+        @await Html.PartialAsync("_PowerSupplyUnitCreateFormPartial", Model);
+        break;
+    case ProductCategory.HDD:
+        @await Html.PartialAsync("_HardDiskDriveCreateFormPartial", Model);
+        break;
+    case ProductCategory.SSD:
+        @await Html.PartialAsync("_SolidStateDriveCreateFormPartial", Model);
+        break;
+}
+
 
 <div>
     <a asp-action="Index">Back to List</a>
