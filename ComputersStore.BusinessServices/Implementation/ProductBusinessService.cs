@@ -68,6 +68,10 @@ namespace ComputersStore.BusinessServices.Implementation
         public void UpdateProduct(ProductEditFormViewModel updatedProduct)
         {
             var product = MapProductEditFormViewModelToConcreteProduct(updatedProduct);
+            if(product.Image == null)
+            {
+                product.Image = GetProductImage(product.ProductId);
+            }
             productService.UpdateProduct(product);
         }
 
@@ -159,6 +163,11 @@ namespace ComputersStore.BusinessServices.Implementation
                     break;
             }
             return result;
+        }
+
+        private byte[] GetProductImage(int productId)
+        {
+            return productService.GetProduct(productId).Image;
         }
     }
 }

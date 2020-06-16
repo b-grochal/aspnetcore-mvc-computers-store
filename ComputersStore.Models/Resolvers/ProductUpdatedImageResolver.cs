@@ -20,7 +20,7 @@ namespace ComputersStore.Models.Resolvers
             }
             else
             {
-                return source.Image;
+                return null;
             }
         }
     }
