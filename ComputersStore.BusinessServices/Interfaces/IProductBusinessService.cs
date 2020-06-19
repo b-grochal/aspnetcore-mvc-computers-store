@@ -17,5 +17,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         void UpdateProduct(ProductEditFormViewModel product);
         void DeleteProduct(ProductViewModel product);
         int GetProductsCollectionCount(ProductCategory productCategory);
+        IEnumerable<ProductViewModel> GetRecommendedProductsCollection(int numberOfProducts);
     }
 }

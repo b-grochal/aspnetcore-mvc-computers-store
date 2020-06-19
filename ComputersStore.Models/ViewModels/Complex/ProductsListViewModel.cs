@@ -1,4 +1,5 @@
 ﻿using ComputersStore.Core.Data;
+using ComputersStore.Models.ViewModels.Basic;
 using ComputersStore.Models.ViewModels.Specific;
 using System;
 using System.Collections.Generic;
