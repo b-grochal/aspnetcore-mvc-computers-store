@@ -56,6 +56,14 @@ namespace ComputersStore.Services.Implementation
                 .ToList();
         }
 
+        public IEnumerable<Product> GetRecommendedProductsCollection(int numberOfProducts)
+        {
+            return applicationDbContext.Products
+                .Where(x => x.IsRecommended == true)
+                .Take(numberOfProducts)
+                .ToList();
+        }
+
         public void UpdateProduct(Product product)
         {
             applicationDbContext.Products.Update(product);

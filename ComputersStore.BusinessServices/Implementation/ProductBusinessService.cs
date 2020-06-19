@@ -75,6 +75,13 @@ namespace ComputersStore.BusinessServices.Implementation
             productService.UpdateProduct(product);
         }
 
+        public IEnumerable<ProductViewModel> GetRecommendedProductsCollection(int numberOfProducts)
+        {
+            var recommendedProducts = productService.GetRecommendedProductsCollection(numberOfProducts);
+            var result = mapper.Map<IEnumerable<ProductViewModel>>(recommendedProducts);
+            return result;
+        }
+
         private Product MapNewProductViewModelToConcreteProduct(ProductCreateFormViewModel newProduct)
         {
             Product result = null;
