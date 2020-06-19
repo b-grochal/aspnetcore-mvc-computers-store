@@ -39,14 +39,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col">
-        <h1>Enroll to our newsletter</h1>
-        <form asp-controller="Newsletter" asp-action="Create" method="post">
-            <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">I accept the terms of newsletter</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <div class="col-12">
+        @await Component.InvokeAsync("NewsletterSignUpForm")
     </div>
 </div>
