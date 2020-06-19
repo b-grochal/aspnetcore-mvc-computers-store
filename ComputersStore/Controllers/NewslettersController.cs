@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Models.ViewModels.Basic;
 
 namespace ComputersStore.WebUI.Controllers
 {
     public class NewslettersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly INewsletterBusinessService newsletterBusinessService;
 
-        public NewslettersController(ApplicationDbContext context)
+        public NewslettersController(ApplicationDbContext context, INewsletterBusinessService newsletterBusinessService)
         {
             _context = context;
+            this.newsletterBusinessService = newsletterBusinessService;
         }
 
         // GET: Newsletters
@@ -54,12 +58,11 @@ namespace ComputersStore.WebUI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("NewsletterId,Email")] Newsletter newsletter)
+        public IActionResult Create(NewsletterSignUpFormViewModel newsletter)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(newsletter);
-                await _context.SaveChangesAsync();
+                newsletterBusinessService.CreateNewsletter(newsletter);
                 return RedirectToAction(nameof(Index));
             }
             return View(newsletter);

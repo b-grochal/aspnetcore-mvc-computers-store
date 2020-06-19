@@ -47,6 +47,7 @@ namespace ComputersStore
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ProductsMappingProfile());
+                mc.AddProfile(new NewsletterMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -55,6 +56,8 @@ namespace ComputersStore
             services.AddRazorPages();
             services.AddTransient<IProductBusinessService, ProductBusinessService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<INewsletterBusinessService, NewsletterBusinessService>();
+            services.AddTransient<INewsletterService, NewsletterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
