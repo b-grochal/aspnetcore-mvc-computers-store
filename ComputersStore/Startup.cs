@@ -39,7 +39,7 @@ namespace ComputersStore
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                    Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ComputersStore.Database")));
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -47,6 +47,7 @@ namespace ComputersStore
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ProductsMappingProfile());
+                mc.AddProfile(new NewsletterMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -55,6 +56,8 @@ namespace ComputersStore
             services.AddRazorPages();
             services.AddTransient<IProductBusinessService, ProductBusinessService>();
             services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<INewsletterBusinessService, NewsletterBusinessService>();
+            services.AddTransient<INewsletterService, NewsletterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

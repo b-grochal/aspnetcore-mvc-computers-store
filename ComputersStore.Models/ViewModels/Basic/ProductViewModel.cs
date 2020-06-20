@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels
+namespace ComputersStore.Models.ViewModels.Basic
 {
     public class ProductViewModel
     {
@@ -11,6 +11,8 @@ namespace ComputersStore.Models.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
+        public bool IsRecommended { get; set; }
+        public string ImageDataUrl { get; set; }
         public ProductCategory ProductCategory { get; set; }
     }
 }

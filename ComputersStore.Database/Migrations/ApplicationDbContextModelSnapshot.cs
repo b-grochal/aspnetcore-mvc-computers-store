@@ -20,6 +20,21 @@ namespace ComputersStore.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("ComputersStore.Core.Data.Newsletter", b =>
+                {
+                    b.Property<int>("NewsletterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("NewsletterId");
+
+                    b.ToTable("Newsletters");
+                });
+
             modelBuilder.Entity("ComputersStore.Core.Data.Order", b =>
                 {
                     b.Property<int>("OrderId")
@@ -85,6 +100,12 @@ namespace ComputersStore.Data.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<bool>("IsRecommended")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");

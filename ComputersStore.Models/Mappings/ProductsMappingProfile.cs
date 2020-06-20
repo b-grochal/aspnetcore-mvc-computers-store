@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using ComputersStore.Core.Data;
+using ComputersStore.Models.Converters;
+using ComputersStore.Models.Resolvers;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Models.ViewModels.Basic;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,30 +15,86 @@ namespace ComputersStore.Models.Mappings
     {
         public ProductsMappingProfile()
         {
-            CreateMap<CentralProcessingUnit, ProductViewModel>();
-            CreateMap<GraphicsProcessingUnit, ProductViewModel>();
-            CreateMap<CentralProcessingUnit, ProductDetailsViewModel>();
-            CreateMap<GraphicsProcessingUnit, ProductDetailsViewModel>();
-            CreateMap<HardDiskDrive, ProductDetailsViewModel>();
-            CreateMap<Motherboard, ProductDetailsViewModel>();
-            CreateMap<PowerSupplyUnit, ProductDetailsViewModel>();
-            CreateMap<RandomAccessMemory, ProductDetailsViewModel>();
-            CreateMap<SolidStateDrive, ProductDetailsViewModel>();
-            CreateMap<NewProductViewModel, CentralProcessingUnit>();
-            CreateMap<NewProductViewModel, GraphicsProcessingUnit>();
-            CreateMap<NewProductViewModel, HardDiskDrive>();
-            CreateMap<NewProductViewModel, Motherboard>();
-            CreateMap<NewProductViewModel, PowerSupplyUnit>();
-            CreateMap<NewProductViewModel, RandomAccessMemory>();
-            CreateMap<NewProductViewModel, SolidStateDrive>();
-            CreateMap<ProductDetailsViewModel, CentralProcessingUnit>();
-            CreateMap<ProductDetailsViewModel, GraphicsProcessingUnit>();
-            CreateMap<ProductDetailsViewModel, HardDiskDrive>();
-            CreateMap<ProductDetailsViewModel, Motherboard>();
-            CreateMap<ProductDetailsViewModel, PowerSupplyUnit>();
-            CreateMap<ProductDetailsViewModel, RandomAccessMemory>();
-            CreateMap<ProductDetailsViewModel, SolidStateDrive>();
+            CreateMap<byte[], string>().ConvertUsing<ImageByteArrayConverter>();
+            CreateMap<IFormFile, byte[]>().ConvertUsing<ImageFileConverter>();
 
+            CreateMap<CentralProcessingUnit, ProductViewModel>()
+                .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<GraphicsProcessingUnit, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<CentralProcessingUnit, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<GraphicsProcessingUnit, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<HardDiskDrive, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<Motherboard, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<PowerSupplyUnit, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<RandomAccessMemory, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<SolidStateDrive, ProductViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+
+            CreateMap<CentralProcessingUnit, ProductDetailsViewModel>()
+                .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<GraphicsProcessingUnit, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<CentralProcessingUnit, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<GraphicsProcessingUnit, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<HardDiskDrive, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<Motherboard, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<PowerSupplyUnit, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<RandomAccessMemory, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+            CreateMap<SolidStateDrive, ProductDetailsViewModel>()
+                 .ForMember(dest => dest.ImageDataUrl, opt => opt.MapFrom(src => src.Image));
+
+            CreateMap<ProductCreateFormViewModel, CentralProcessingUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, GraphicsProcessingUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, HardDiskDrive>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, Motherboard>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, PowerSupplyUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, RandomAccessMemory>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+            CreateMap<ProductCreateFormViewModel, SolidStateDrive>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
+
+            CreateMap<ProductEditFormViewModel, CentralProcessingUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, GraphicsProcessingUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, HardDiskDrive>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, Motherboard>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, PowerSupplyUnit>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, RandomAccessMemory>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+            CreateMap<ProductEditFormViewModel, SolidStateDrive>()
+                .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
+
+            CreateMap<CentralProcessingUnit, ProductEditFormViewModel>();
+            CreateMap<GraphicsProcessingUnit, ProductEditFormViewModel>();
+            CreateMap<CentralProcessingUnit, ProductEditFormViewModel>();
+            CreateMap<GraphicsProcessingUnit, ProductEditFormViewModel>();
+            CreateMap<HardDiskDrive, ProductEditFormViewModel>();
+            CreateMap<Motherboard, ProductEditFormViewModel>();
+            CreateMap<PowerSupplyUnit, ProductEditFormViewModel>();
+            CreateMap<RandomAccessMemory, ProductEditFormViewModel>();
+            CreateMap<SolidStateDrive, ProductEditFormViewModel>();
         }
     }
 }

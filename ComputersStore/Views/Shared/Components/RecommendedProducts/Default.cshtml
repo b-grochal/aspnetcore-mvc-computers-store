@@ -1,0 +1,15 @@
+﻿@model IEnumerable<ProductViewModel>
+
+<div class="card-deck">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <img class="card-img-top" src="@product.ImageDataUrl" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@product.Name</h5>
+                <p class="card-text">@product.Price</p>
+                <a href="#" class="btn btn-primary">Details</a>
+            </div>
+        </div>
+    }
+</div>

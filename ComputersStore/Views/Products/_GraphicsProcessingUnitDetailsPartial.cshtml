@@ -1,38 +1,42 @@
 ﻿@model ComputersStore.Models.ViewModels.Basic.ProductDetailsViewModel
 
-<div>
-    <h4>GPU Specification</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MemorySize)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MemorySize)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MemoryType)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MemoryType)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MemorySpeed)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MemorySpeed)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.MemoryBus)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.MemoryBus)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Interface)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Interface)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(model => model.MemorySize)
+    </div>
+    <div class="col-sm-6">
+        @Html.DisplayFor(model => model.MemorySize)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(model => model.MemoryType)
+    </div>
+    <div class="col-sm-6">
+        @Html.DisplayFor(model => model.MemoryType)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(model => model.MemorySpeed)
+    </div>
+    <div class="col-sm-6">
+        @Html.DisplayFor(model => model.MemorySpeed)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(model => model.MemoryBus)
+    </div>
+    <div class="col-sm-6">
+        @Html.DisplayFor(model => model.MemoryBus)
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(model => model.Interface)
+    </div>
+    <div class="col-sm-6">
+        @Html.DisplayFor(model => model.Interface)
+    </div>
 </div>

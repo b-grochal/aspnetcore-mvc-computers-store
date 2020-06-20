@@ -37,5 +37,6 @@ namespace ComputersStore.Models.ViewModels.Basic
         public string Type { get; set; }
         public string Speed { get; set; }
         public string CasLatency { get; set; }
+        public string ImageDataUrl { get; set; }
     }
 }

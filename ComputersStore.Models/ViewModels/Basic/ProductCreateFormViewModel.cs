@@ -1,11 +1,12 @@
 ﻿using ComputersStore.Core.Data;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Basic
 {
-    public class NewProductViewModel
+    public class ProductCreateFormViewModel
     {
         public string Name { get; set; }
         public string Description { get; set; }
@@ -36,5 +37,6 @@ namespace ComputersStore.Models.ViewModels.Basic
         public string Type { get; set; }
         public string Speed { get; set; }
         public string CasLatency { get; set; }
+        public IFormFile ImageFile { get; set; }
     }
 }

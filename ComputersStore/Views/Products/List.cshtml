@@ -1,4 +1,4 @@
-﻿@model ProductsListViewModel
+﻿@model ProductDetailListViewModel
 @{
     ViewData["Title"] = "List";
 }
@@ -23,7 +23,7 @@
     <div class="col">
         @foreach (var product in Model.Products)
         {
-            @await Html.PartialAsync("_ProductCardPartial", product);
+            @await Html.PartialAsync("_ProductHorizontalCardPartial", product);
         }
 
         <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
