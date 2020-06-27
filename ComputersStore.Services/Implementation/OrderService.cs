@@ -1,6 +1,7 @@
 ﻿using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,10 @@ namespace ComputersStore.Services.Implementation
 
         public Order GetOrder(int orderId)
         {
-            return applicationDbContext.Orders.FirstOrDefault(x => x.OrderId == orderId);
+            return applicationDbContext.Orders
+                .Include(o => o.OrderItems)
+                .Include(o => o.ApplicationUser)
+                .FirstOrDefault(x => x.OrderId == orderId);
         }
 
         public IEnumerable<Order> GetOrdersCollection()
