@@ -31,8 +31,6 @@ namespace ComputersStore.Services.Implementation
         public Order GetOrder(int orderId)
         {
             return applicationDbContext.Orders
-                .Include(o => o.OrderItems)
-                .Include(o => o.ApplicationUser)
                 .FirstOrDefault(x => x.OrderId == orderId);
         }
 

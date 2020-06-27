@@ -7,16 +7,26 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.BusinessServices.Interfaces;
 
 namespace ComputersStore.WebUI.Controllers
 {
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IOrderBusinessService orderBusinessService;
+        private readonly int ordersPerPage = 5;
 
-        public OrdersController(ApplicationDbContext context)
+        public OrdersController(ApplicationDbContext context, IOrderBusinessService orderBusinessService)
         {
             _context = context;
+            this.orderBusinessService = orderBusinessService;
+        }
+
+        public IActionResult List(int? orderId, string applicationUserId, OrderStatus? orderStatus, int pageNumber = 1)
+        {
+            var orders = orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatus, pageNumber, ordersPerPage);
+            return View(orders);
         }
 
         // GET: Orders
