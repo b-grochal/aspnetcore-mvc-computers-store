@@ -8,6 +8,7 @@ namespace ComputersStore.Models.ViewModels.Basic
     public class OrderDetailsViewModel
     {
         public OrderViewModel OrderViewModel { get; set; }
-        public virtual ICollection<OrderItemViewModel> OrderItemsViewModel { get; set; }
+        public ApplicationUserViewModel ApplicationUserViewModel {get; set;}
+        public virtual IEnumerable<OrderItemViewModel> OrderItemsViewModel { get; set; }
     }
 }

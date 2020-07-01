@@ -50,6 +50,7 @@ namespace ComputersStore
                 mc.AddProfile(new ProductsMappingProfile());
                 mc.AddProfile(new NewsletterMappingProfile());
                 mc.AddProfile(new OrdersMappingProfile());
+                mc.AddProfile(new ApplicationUserMappings());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
