@@ -37,16 +37,14 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Orders/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.ApplicationUser)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+            var order = orderBusinessService.GetOrder(id.Value);
             if (order == null)
             {
                 return NotFound();

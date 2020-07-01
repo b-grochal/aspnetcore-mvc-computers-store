@@ -36,6 +36,7 @@ namespace ComputersStore.BusinessServices.Implementation
             var result = new OrderDetailsViewModel
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
+                ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),
                 OrderItemsViewModel = mapper.Map<OrderItemViewModel[]>(order.OrderItems)
             };
             return result;
