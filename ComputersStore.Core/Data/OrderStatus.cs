@@ -4,11 +4,11 @@ using System.Text;
 
 namespace ComputersStore.Core.Data
 {
-    public enum OrderStatus
+    public class OrderStatus
     {
-        New = 1,
-        InProgress,
-        Ready,
-        Realized
+        public int OrderStatusId { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
+
 }
