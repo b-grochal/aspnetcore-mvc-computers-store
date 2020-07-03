@@ -1,7 +1,7 @@
 ﻿function enableImageInputOnSelectChange(selectBox) {
     if (selectBox.value === "true") {
-        document.getElementById("imageInput").disabled = false;
+        document.getElementById("ImageFile").disabled = false;
     } else {
-        document.getElementById("imageInput").disabled = true;
+        document.getElementById("ImageFile").disabled = true;
     }
 }
