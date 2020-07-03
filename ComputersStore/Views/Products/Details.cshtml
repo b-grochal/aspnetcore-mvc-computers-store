@@ -47,27 +47,27 @@
     </div>
 </div>
 <hr />
-@switch (Model.ProductCategory)
+@switch (Model.ProductCategoryId)
 {
-    case ProductCategory.CPU:
+    case ProductCategoryDictionary.CPU:
         @await Html.PartialAsync("_CentralProcessingUnitDetailsPartial", Model);
         break;
-    case ProductCategory.Motherboard:
+    case ProductCategoryDictionary.Motherboard:
         @await Html.PartialAsync("_MotherboardDetailsPartial", Model);
         break;
-    case ProductCategory.RAM:
+    case ProductCategoryDictionary.RAM:
         @await Html.PartialAsync("_RandomAccessMemoryDetailsPartial", Model);
         break;
-    case ProductCategory.GPU:
+    case ProductCategoryDictionary.GPU:
         @await Html.PartialAsync("_GraphicsProcessingUnitDetailsPartial", Model);
         break;
-    case ProductCategory.PSU:
+    case ProductCategoryDictionary.PSU:
         @await Html.PartialAsync("_PowerSupplyUnitDetailsPartial", Model);
         break;
-    case ProductCategory.HDD:
+    case ProductCategoryDictionary.HDD:
         @await Html.PartialAsync("_HardDiskDriveDetailsPartial", Model);
         break;
-    case ProductCategory.SSD:
+    case ProductCategoryDictionary.SSD:
         @await Html.PartialAsync("_SolidStateDriveDetailsPartial", Model);
         break;
 

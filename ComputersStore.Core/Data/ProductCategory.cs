@@ -5,15 +5,10 @@ using System.Text;
 
 namespace ComputersStore.Core.Data
 {
-    public enum ProductCategory
+    public class ProductCategory
     {
-        [Description("CPU")]
-        CPU = 1,
-        Motherboard,
-        RAM,
-        GPU,
-        PSU,
-        HDD,
-        SSD
+        public int ProductCategoryId { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

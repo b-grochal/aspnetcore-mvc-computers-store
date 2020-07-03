@@ -42,9 +42,9 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public IEnumerable<OrderViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, OrderStatus? orderStatus, int pageNumber, int pageSize)
+        public IEnumerable<OrderViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
         {
-            var orders = orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatus, pageNumber, pageSize);
+            var orders = orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<OrderViewModel>>(orders);
             return result;
         }
