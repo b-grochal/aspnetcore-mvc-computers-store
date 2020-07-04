@@ -12,7 +12,8 @@ namespace ComputersStore.Models.ViewModels.Basic
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public string ProductCategoryName { get; set; }
+        public int ProductCategoryId { get; set; }
         public int NumberOfCores { get; set; }
         public int NumberOfThreads { get; set; }
         public string ClockSpeed { get; set; }

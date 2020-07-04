@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Text;
 using ComputersStore.Core.Data;
+using ComputersStore.Core.Dictionaries;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ComputersStore.Data
+namespace ComputersStore.Database.DatabaseContext
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
+        public DbSet<ProductCategory> ProductCategories { get; set; }
+        public DbSet<PaymentType> PaymentTypes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<CentralProcessingUnit> CentralProcessingUnits { get; set; }
         public DbSet<GraphicsProcessingUnit> GraphicsProcessingUnits { get; set; }
@@ -36,18 +40,26 @@ namespace ComputersStore.Data
             modelBuilder.Entity<Product>()
             .HasKey(p => p.ProductId);
 
+            modelBuilder.Entity<ProductCategory>()
+            .HasKey(p => p.ProductCategoryId);
+
+            modelBuilder.Entity<OrderStatus>()
+            .HasKey(p => p.OrderStatusId);
+
+            modelBuilder.Entity<PaymentType>()
+            .HasKey(p => p.PaymentTypeId);
+
             modelBuilder.Entity<OrderItem>()
-                .HasKey(orderItem => new { orderItem.OrderId, orderItem.ProductId });
+            .HasKey(orderItem => new { orderItem.OrderId, orderItem.ProductId });
 
-            modelBuilder.Entity<Product>().HasDiscriminator<ProductCategory>("ProductCategory")
-                .HasValue<CentralProcessingUnit>(ProductCategory.CPU)
-                .HasValue<GraphicsProcessingUnit>(ProductCategory.GPU)
-                .HasValue<HardDiskDrive>(ProductCategory.HDD)
-                .HasValue<Motherboard>(ProductCategory.Motherboard)
-                .HasValue<PowerSupplyUnit>(ProductCategory.PSU)
-                .HasValue<RandomAccessMemory>(ProductCategory.RAM)
-                .HasValue<SolidStateDrive>(ProductCategory.SSD);
+            modelBuilder.Entity<Product>().HasDiscriminator<int>("ProductCategoryDiscriminator")
+                .HasValue<CentralProcessingUnit>(ProductCategoryDictionary.CPU)
+                .HasValue<GraphicsProcessingUnit>(ProductCategoryDictionary.GPU)
+                .HasValue<HardDiskDrive>(ProductCategoryDictionary.HDD)
+                .HasValue<Motherboard>(ProductCategoryDictionary.Motherboard)
+                .HasValue<PowerSupplyUnit>(ProductCategoryDictionary.PSU)
+                .HasValue<RandomAccessMemory>(ProductCategoryDictionary.RAM)
+                .HasValue<SolidStateDrive>(ProductCategoryDictionary.SSD);
         }
-
     }
 }

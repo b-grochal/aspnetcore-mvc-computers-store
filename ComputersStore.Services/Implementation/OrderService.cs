@@ -1,5 +1,6 @@
 ﻿using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -39,12 +40,12 @@ namespace ComputersStore.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Order> GetOrdersCollection(int? orderId, string userEmail, OrderStatus? orderStatus, int pageNumber, int pageSize)
+        public IEnumerable<Order> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize)
         {
             return applicationDbContext.Orders
                 .Where(o => orderId == null || o.OrderId == orderId)
                 .Where(o => userEmail == null || o.ApplicationUser.Email == userEmail)
-                .Where(o => orderStatus == null || o.OrderStatus == orderStatus)
+                .Where(o => orderStatusId == null || o.OrderStatusId == orderStatusId)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

@@ -4,9 +4,10 @@ using System.Text;
 
 namespace ComputersStore.Core.Data
 {
-    public enum PaymentType
+    public class PaymentType
     {
-        Cash = 1,
-        BankTransfer
+        public int PaymentTypeId { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

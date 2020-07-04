@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-2">
         <form asp-controller="Products" asp-action="List" class="productsSortingForm">
-            <input name="ProductCategory" value="@Model.ProductCategory" hidden/>
+            <input name="ProductCategoryId" value="@Model.ProductCategoryId" hidden/>
             <input name="PageNumber" value="@Model.PaginationViewModel.CurrentPage" hidden/>
             <select asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
                 <option value="">Default sorting</option>
@@ -27,7 +27,7 @@
         }
 
         <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group pull-right m-1" page-classes-enabled="true"
-                          page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-productCategory="@Model.ProductCategory">
+                          page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-primary" page-url-productCategoryId="@Model.ProductCategoryId">
         </pagination-links>
     </div>
 </div>

@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Database.DatabaseContext;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -23,9 +24,9 @@ namespace ComputersStore.WebUI.Controllers
             this.orderBusinessService = orderBusinessService;
         }
 
-        public IActionResult List(int? orderId, string applicationUserId, OrderStatus? orderStatus, int pageNumber = 1)
+        public IActionResult List(int? orderId, string applicationUserId, int? orderStatusId, int pageNumber = 1)
         {
-            var orders = orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatus, pageNumber, ordersPerPage);
+            var orders = orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage);
             return View(orders);
         }
 
