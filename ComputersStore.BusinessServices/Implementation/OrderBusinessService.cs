@@ -7,6 +7,7 @@ using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -21,19 +22,19 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public void AddOrder(Order order)
+        public async Task AddOrder(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteOrder(Order order)
+        public async Task DeleteOrder(int orderId)
         {
-            throw new NotImplementedException();
+            await orderService.DeleteOrder(orderId);
         }
 
-        public OrderDetailsViewModel GetOrder(int orderId)
+        public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
         {
-            var order = orderService.GetOrder(orderId);
+            var order = await orderService.GetOrder(orderId);
             var result = new OrderDetailsViewModel
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
@@ -43,16 +44,25 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public IEnumerable<OrderViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
+        public async Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId)
         {
-            var orders = orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
+            var order = await orderService.GetOrder(orderId);
+            var result = mapper.Map<OrderEditFormViewModel>(order);
+            return result;
+        }
+
+        public async  Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
+        {
+            var orders = await orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<OrderViewModel>>(orders);
             return result;
         }
 
-        public void UpdateOrder(Order order)
+        public async Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel)
         {
-            throw new NotImplementedException();
+            var order = await orderService.GetOrder(orderEditFormViewModel.OrderId);
+            var updatedOrder = mapper.Map(orderEditFormViewModel, order);
+            await orderService.UpdateOrder(updatedOrder);
         }
     }
 }
