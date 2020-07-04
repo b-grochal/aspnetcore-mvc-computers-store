@@ -9,6 +9,7 @@ using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Database.DatabaseContext;
+using ComputersStore.Models.ViewModels.Order;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -16,17 +17,21 @@ namespace ComputersStore.WebUI.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IOrderBusinessService orderBusinessService;
+        private readonly IOrderStatusBusinessService orderStatusBusinessService;
+        private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
         private readonly int ordersPerPage = 5;
 
-        public OrdersController(ApplicationDbContext context, IOrderBusinessService orderBusinessService)
+        public OrdersController(ApplicationDbContext context, IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService)
         {
             _context = context;
             this.orderBusinessService = orderBusinessService;
+            this.orderStatusBusinessService = orderStatusBusinessService;
+            this.paymentTypeBusinessService = paymentTypeBusinessService;
         }
 
-        public IActionResult List(int? orderId, string applicationUserId, int? orderStatusId, int pageNumber = 1)
+        public async Task<IActionResult> List(int? orderId, string applicationUserId, int? orderStatusId, int pageNumber = 1)
         {
-            var orders = orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage);
             return View(orders);
         }
 
@@ -38,14 +43,14 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Orders/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var order = orderBusinessService.GetOrder(id.Value);
+            var order = await orderBusinessService.GetOrderDetails(id.Value);
             if (order == null)
             {
                 return NotFound();
@@ -86,12 +91,13 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders.FindAsync(id);
+            var order = await orderBusinessService.GetOrderEditFormData(id.Value);
+            await PopulateUpdateFormSelectElements(order.OrderStatusId, order.PaymentTypeId);
             if (order == null)
             {
                 return NotFound();
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", order.ApplicationUserId);
+            
             return View(order);
         }
 
@@ -100,9 +106,9 @@ namespace ComputersStore.WebUI.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("OrderId,ApplicationUserId,OrderDate,ShipAddress,ShipCity,ShipPostalCode,ShipCountry,OrderStatus,PaymentType")] Order order)
+        public async Task<IActionResult> Edit(int id, OrderEditFormViewModel orderEditFormViewModel)
         {
-            if (id != order.OrderId)
+            if (id != orderEditFormViewModel.OrderId)
             {
                 return NotFound();
             }
@@ -111,12 +117,11 @@ namespace ComputersStore.WebUI.Controllers
             {
                 try
                 {
-                    _context.Update(order);
-                    await _context.SaveChangesAsync();
+                    await orderBusinessService.UpdateOrder(orderEditFormViewModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!OrderExists(order.OrderId))
+                    if (!OrderExists(orderEditFormViewModel.OrderId))
                     {
                         return NotFound();
                     }
@@ -125,10 +130,10 @@ namespace ComputersStore.WebUI.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(List));
             }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", order.ApplicationUserId);
-            return View(order);
+            await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
+            return View(orderEditFormViewModel);
         }
 
         // GET: Orders/Delete/5
@@ -164,6 +169,14 @@ namespace ComputersStore.WebUI.Controllers
         private bool OrderExists(int id)
         {
             return _context.Orders.Any(e => e.OrderId == id);
+        }
+
+        private async Task PopulateUpdateFormSelectElements(int orderStatusId, int paymentTypeId)
+        {
+            var orderStatuses = await orderStatusBusinessService.GetOrdersStatusCollection();
+            var paymentTypes = await paymentTypeBusinessService.GetOrdersStatusCollection();
+            ViewData["OrderStatuses"] = new SelectList(orderStatuses, "OrderStatusId", "Name", orderStatusId);
+            ViewData["PaymentTypes"] = new SelectList(paymentTypes, "PaymentTypeId", "Name", paymentTypeId);
         }
     }
 }
