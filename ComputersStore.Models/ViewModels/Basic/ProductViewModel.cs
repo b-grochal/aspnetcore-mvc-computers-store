@@ -8,11 +8,12 @@ namespace ComputersStore.Models.ViewModels.Basic
     public class ProductViewModel
     {
         public int ProductId { get; set; }
+        public int ProductCategoryId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
         public bool IsRecommended { get; set; }
         public string ImageDataUrl { get; set; }
-        public ProductCategory ProductCategory { get; set; }
+        public object ProductCategoryName { get; internal set; }
     }
 }

@@ -11,6 +11,8 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Models.ViewModels.Complex;
 using ComputersStore.Models.ViewModels.Specific;
 using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Database.DatabaseContext;
+using ComputersStore.Core.Dictionaries;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -26,9 +28,9 @@ namespace ComputersStore.WebUI.Controllers
             this.productBusinessService = productBusinessService;
         }
 
-        public ActionResult List(ProductCategory productCategory = ProductCategory.CPU, int pageNumber = 1, string sortOrder = null)
+        public ActionResult List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
         {
-            var products = productBusinessService.GetProductsDetailCollection(productCategory, sortOrder, pageNumber, productsPerPage);
+            var products = productBusinessService.GetProductsDetailCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
             var productsListViewModel = new ProductDetailListViewModel
             {
                 Products = products,
@@ -36,9 +38,9 @@ namespace ComputersStore.WebUI.Controllers
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = productsPerPage,
-                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategory), // TODO Dodać metodę zwracającą liczę 
+                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategoryId), // TODO Dodać metodę zwracającą liczę 
                 },
-                ProductCategory = productCategory,
+                ProductCategoryId = productCategoryId,
                 SortOrder = sortOrder
             };
             return View(productsListViewModel);
@@ -62,11 +64,11 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create(ProductCategory productCategory = ProductCategory.CPU)
+        public IActionResult Create(int productCategoryId = ProductCategoryDictionary.CPU)
         {
             var newProductViewModel = new ProductCreateFormViewModel
             {
-                ProductCategory = productCategory
+                ProductCategoryId = productCategoryId
             };
             return View(newProductViewModel);
         }

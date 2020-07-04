@@ -2,6 +2,7 @@
 using System;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
+using ComputersStore.Database.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;

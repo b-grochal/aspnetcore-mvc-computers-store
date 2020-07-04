@@ -13,7 +13,10 @@ namespace ComputersStore.Models.Mappings
         {
             //CreateMap<NewsletterSignUpFormViewModel, Newsletter>();
             CreateMap<Order, OrderViewModel>()
-                .ForMember(dest => dest.ApplicationUserEmail, opt => opt.MapFrom(src => src.ApplicationUser.Email));
+                .ForMember(dest => dest.ApplicationUserEmail, opt => opt.MapFrom(src => src.ApplicationUser.Email))
+                .ForMember(dest => dest.OrderStatusName, opt => opt.MapFrom(src => src.OrderStatus.Name))
+                .ForMember(dest => dest.PaymentTypeName, opt => opt.MapFrom(src => src.PaymentType.Name));
+
 
             CreateMap<OrderItem, OrderItemViewModel>()
                 .ForMember(dest => dest.ProductName, opt => opt.MapFrom(src => src.Product.Name))

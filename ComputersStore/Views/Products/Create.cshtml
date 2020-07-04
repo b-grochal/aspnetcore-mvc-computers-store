@@ -4,29 +4,29 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create @Model.ProductCategory</h1>
+<h1>Create @Model.ProductCategoryName</h1>
 <hr />
-@switch (Model.ProductCategory)
+@switch (Model.ProductCategoryId)
 {
-    case ProductCategory.CPU:
+    case ProductCategoryDictionary.CPU:
         @await Html.PartialAsync("_CentralProcessingUnitCreateFormPartial", Model);
         break;
-    case ProductCategory.Motherboard:
+    case ProductCategoryDictionary.Motherboard:
         @await Html.PartialAsync("_MotherboardCreateFormPartial", Model);
         break;
-    case ProductCategory.RAM:
+    case ProductCategoryDictionary.RAM:
         @await Html.PartialAsync("_RandomAccessMemoryCreateFormPartial", Model);
         break;
-    case ProductCategory.GPU:
+    case ProductCategoryDictionary.GPU:
         @await Html.PartialAsync("_GraphicsProcessingUnitCreateFormPartial", Model);
         break;
-    case ProductCategory.PSU:
+    case ProductCategoryDictionary.PSU:
         @await Html.PartialAsync("_PowerSupplyUnitCreateFormPartial", Model);
         break;
-    case ProductCategory.HDD:
+    case ProductCategoryDictionary.HDD:
         @await Html.PartialAsync("_HardDiskDriveCreateFormPartial", Model);
         break;
-    case ProductCategory.SSD:
+    case ProductCategoryDictionary.SSD:
         @await Html.PartialAsync("_SolidStateDriveCreateFormPartial", Model);
         break;
 }

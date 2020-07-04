@@ -12,7 +12,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ComputersStore.Data;
-using ComputersStore.Database.DataSeeder;
 using ComputersStore.Core.Data;
 using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
@@ -22,6 +21,7 @@ using ComputersStore.Services.Implementation;
 using ComputersStore.Models.Mappings;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
+using ComputersStore.Database.DatabaseContext;
 
 namespace ComputersStore
 {
@@ -101,7 +101,6 @@ namespace ComputersStore
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            DataSeeder.SeedData(app);
         }
     }
 }
