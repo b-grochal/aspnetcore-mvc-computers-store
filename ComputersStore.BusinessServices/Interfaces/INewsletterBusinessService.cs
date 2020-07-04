@@ -1,4 +1,4 @@
-﻿using ComputersStore.Models.ViewModels.Basic;
+﻿using ComputersStore.Models.ViewModels.Newsletter;
 using System;
 using System.Collections.Generic;
 using System.Text;

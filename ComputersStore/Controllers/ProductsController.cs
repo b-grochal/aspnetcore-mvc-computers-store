@@ -8,11 +8,10 @@ using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.ViewModels.Complex;
-using ComputersStore.Models.ViewModels.Specific;
-using ComputersStore.Models.ViewModels.Basic;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Core.Dictionaries;
+using ComputersStore.Models.ViewModels.Product;
+using ComputersStore.Models.ViewModels.Other;
 
 namespace ComputersStore.WebUI.Controllers
 {

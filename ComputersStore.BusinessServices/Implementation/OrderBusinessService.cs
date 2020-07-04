@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.ApplicationUser;
+using ComputersStore.Models.ViewModels.Order;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;

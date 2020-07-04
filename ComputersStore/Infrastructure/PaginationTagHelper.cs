@@ -1,4 +1,4 @@
-﻿using ComputersStore.Models.ViewModels.Specific;
+﻿using ComputersStore.Models.ViewModels.Other;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;

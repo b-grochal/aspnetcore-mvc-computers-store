@@ -1,19 +1,18 @@
 ﻿using ComputersStore.Core.Data;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Basic
+namespace ComputersStore.Models.ViewModels.Product
 {
-    public class ProductEditFormViewModel
+    public class ProductDetailsViewModel
     {
         public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }
-        public string ProductCategoryName { get; set; }
         public int ProductCategoryId { get; set; }
+        public string ProductCategoryName { get; set; }
         public int NumberOfCores { get; set; }
         public int NumberOfThreads { get; set; }
         public string ClockSpeed { get; set; }
@@ -39,7 +38,6 @@ namespace ComputersStore.Models.ViewModels.Basic
         public string Type { get; set; }
         public string Speed { get; set; }
         public string CasLatency { get; set; }
-        public bool IsImageUpdated { get; set; }
-        public IFormFile ImageFile { get; set; }
+        public string ImageDataUrl { get; set; }
     }
 }

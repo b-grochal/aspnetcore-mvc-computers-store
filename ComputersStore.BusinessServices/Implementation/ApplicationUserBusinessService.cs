@@ -1,5 +1,5 @@
 ﻿using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
