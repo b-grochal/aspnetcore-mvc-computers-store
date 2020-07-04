@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.ViewModels.Basic;
 using ComputersStore.Database.DatabaseContext;
+using ComputersStore.Models.ViewModels.Newsletter;
 
 namespace ComputersStore.WebUI.Controllers
 {

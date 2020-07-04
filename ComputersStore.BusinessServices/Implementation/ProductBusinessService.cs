@@ -3,7 +3,7 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
 using ComputersStore.Core.Dictionaries;
 using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
