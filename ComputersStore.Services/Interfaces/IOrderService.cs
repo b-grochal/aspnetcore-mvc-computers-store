@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.Services.Interfaces
 {
     public interface IOrderService
     {
-        IEnumerable<Order> GetOrdersCollection();
-        IEnumerable<Order> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
-        Order GetOrder(int orderId);
-        void AddOrder(Order order);
-        void UpdateOrder(Order order);
-        void DeleteOrder(Order order);
+        Task<IEnumerable<Order>> GetOrdersCollection();
+        Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
+        Task<Order> GetOrder(int orderId);
+        Task AddOrder(Order order);
+        Task UpdateOrder(Order order);
+        Task DeleteOrder(int orderId);
     }
 }
