@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.WebUI", "Com
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Core", "ComputersStore.Core\ComputersStore.Core.csproj", "{D5F74685-8122-448F-96A2-ACF106100A1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Models", "ComputersStore.Models\ComputersStore.Models.csproj", "{92A07464-B2F1-4DC5-BC2A-F6BBB96BB082}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.ViewModels", "ComputersStore.Models\ComputersStore.ViewModels.csproj", "{92A07464-B2F1-4DC5-BC2A-F6BBB96BB082}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Services", "ComputersStore.Services\ComputersStore.Services.csproj", "{724A813B-F52C-4E74-BCD4-017C3AF7B6C6}"
 EndProject

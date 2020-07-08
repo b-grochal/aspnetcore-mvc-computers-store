@@ -18,7 +18,7 @@ namespace ComputersStore.WebUI.Components.RecommendedProducts
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            var recommendedProducts = productBusinessService.GetRecommendedProductsCollection(4);
+            var recommendedProducts = await productBusinessService.GetRecommendedProductsCollection(4);
             return View(recommendedProducts);
         }
     }
