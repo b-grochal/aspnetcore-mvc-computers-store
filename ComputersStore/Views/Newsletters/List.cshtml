@@ -1,0 +1,15 @@
+﻿@model IEnumerable<NewsletterViewModel>
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col">
+        @foreach (var newsletter in Model)
+        {
+            @await Html.PartialAsync("_NewsletterItemPartial", newsletter);
+        }
+    </div>
+</div>
+

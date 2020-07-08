@@ -12,6 +12,7 @@ namespace ComputersStore.Models.Mappings
         public NewsletterMappingProfile()
         {
             CreateMap<NewsletterSignUpFormViewModel, Newsletter>();
+            CreateMap<Newsletter, NewsletterViewModel>();
         }
     }
 }

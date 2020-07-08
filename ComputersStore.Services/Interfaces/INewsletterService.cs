@@ -2,11 +2,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.Services.Interfaces
 {
     public interface INewsletterService
     {
-        void CreateNewsletter(Newsletter newsletter);
+        Task CreateNewsletter(Newsletter newsletter);
+        Task DeleteNewsletter(int newsletterId);
+        Task<IEnumerable<Newsletter>> GetNewslettersCollection();
+        Task<Newsletter> GetNewsletter(int newsletterId);
     }
 }
