@@ -143,8 +143,8 @@ namespace ComputersStore.WebUI.Controllers
 
         private async Task PopulateUpdateFormSelectElements(int orderStatusId, int paymentTypeId)
         {
-            var orderStatuses = await orderStatusBusinessService.GetOrdersStatusCollection();
-            var paymentTypes = await paymentTypeBusinessService.GetOrdersStatusCollection();
+            var orderStatuses = await orderStatusBusinessService.GetOrderStatusesCollection();
+            var paymentTypes = await paymentTypeBusinessService.GetPaymentTypesCollection();
             ViewData["OrderStatuses"] = new SelectList(orderStatuses, "OrderStatusId", "Name", orderStatusId);
             ViewData["PaymentTypes"] = new SelectList(paymentTypes, "PaymentTypeId", "Name", paymentTypeId);
         }

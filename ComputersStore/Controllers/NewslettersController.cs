@@ -15,12 +15,10 @@ namespace ComputersStore.WebUI.Controllers
 {
     public class NewslettersController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly INewsletterBusinessService newsletterBusinessService;
 
-        public NewslettersController(ApplicationDbContext context, INewsletterBusinessService newsletterBusinessService)
+        public NewslettersController(INewsletterBusinessService newsletterBusinessService)
         {
-            _context = context;
             this.newsletterBusinessService = newsletterBusinessService;
         }
 

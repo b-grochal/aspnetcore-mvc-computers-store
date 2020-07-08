@@ -8,6 +8,6 @@ namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IOrderStatusBusinessService
     {
-        Task<IEnumerable<OrderStatusViewModel>> GetOrdersStatusCollection();
+        Task<IEnumerable<OrderStatusViewModel>> GetOrderStatusesCollection();
     }
 }

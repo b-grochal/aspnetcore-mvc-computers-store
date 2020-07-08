@@ -8,6 +8,6 @@ namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IPaymentTypeBusinessService
     {
-        Task<IEnumerable<PaymentTypeViewModel>> GetOrdersStatusCollection();
+        Task<IEnumerable<PaymentTypeViewModel>> GetPaymentTypesCollection();
     }
 }

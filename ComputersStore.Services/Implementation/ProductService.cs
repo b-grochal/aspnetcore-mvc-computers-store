@@ -20,7 +20,7 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task AddProduct(Product product)
+        public async Task CreateProduct(Product product)
         {
             await applicationDbContext.Products.AddAsync(product);
             await applicationDbContext.SaveChangesAsync();
