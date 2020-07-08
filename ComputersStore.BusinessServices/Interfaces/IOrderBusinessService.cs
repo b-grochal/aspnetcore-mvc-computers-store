@@ -10,9 +10,10 @@ namespace ComputersStore.BusinessServices.Interfaces
     public interface IOrderBusinessService
     {
         Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
+        Task<OrderViewModel> GetOrder(int orderId);
         Task<OrderDetailsViewModel> GetOrderDetails(int orderId);
         Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId);
-        Task AddOrder(Order order);
+        Task CreateOrder(Order order);
         Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel);
         Task DeleteOrder(int orderId);
     }

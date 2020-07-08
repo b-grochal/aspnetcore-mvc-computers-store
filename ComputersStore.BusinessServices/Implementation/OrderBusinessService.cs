@@ -22,7 +22,7 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public async Task AddOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             throw new NotImplementedException();
         }
@@ -30,6 +30,13 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task DeleteOrder(int orderId)
         {
             await orderService.DeleteOrder(orderId);
+        }
+
+        public async Task<OrderViewModel> GetOrder(int orderId)
+        {
+            var order = await orderService.GetOrder(orderId);
+            var result = mapper.Map<OrderViewModel>(order);
+            return result;
         }
 
         public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
@@ -51,7 +58,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async  Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
+        public async Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
         {
             var orders = await orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<OrderViewModel>>(orders);
