@@ -15,15 +15,13 @@ namespace ComputersStore.WebUI.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IOrderBusinessService orderBusinessService;
         private readonly IOrderStatusBusinessService orderStatusBusinessService;
         private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
         private readonly int ordersPerPage = 5;
 
-        public OrdersController(ApplicationDbContext context, IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService)
+        public OrdersController(IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService)
         {
-            _context = context;
             this.orderBusinessService = orderBusinessService;
             this.orderStatusBusinessService = orderStatusBusinessService;
             this.paymentTypeBusinessService = paymentTypeBusinessService;
@@ -33,13 +31,6 @@ namespace ComputersStore.WebUI.Controllers
         {
             var orders = await orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage);
             return View(orders);
-        }
-
-        // GET: Orders
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Orders.Include(o => o.ApplicationUser);
-            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -59,29 +50,29 @@ namespace ComputersStore.WebUI.Controllers
             return View(order);
         }
 
-        // GET: Orders/Create
-        public IActionResult Create()
-        {
-            ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
-            return View();
-        }
+        //// GET: Orders/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
+        //    return View();
+        //}
 
-        // POST: Orders/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("OrderId,ApplicationUserId,OrderDate,ShipAddress,ShipCity,ShipPostalCode,ShipCountry,OrderStatus,PaymentType")] Order order)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(order);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", order.ApplicationUserId);
-            return View(order);
-        }
+        //// POST: Orders/Create
+        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("OrderId,ApplicationUserId,OrderDate,ShipAddress,ShipCity,ShipPostalCode,ShipCountry,OrderStatus,PaymentType")] Order order)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(order);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", order.ApplicationUserId);
+        //    return View(order);
+        //}
 
         // GET: Orders/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -92,11 +83,13 @@ namespace ComputersStore.WebUI.Controllers
             }
 
             var order = await orderBusinessService.GetOrderEditFormData(id.Value);
-            await PopulateUpdateFormSelectElements(order.OrderStatusId, order.PaymentTypeId);
+            
             if (order == null)
             {
                 return NotFound();
             }
+
+            await PopulateUpdateFormSelectElements(order.OrderStatusId, order.PaymentTypeId);
             
             return View(order);
         }
@@ -115,21 +108,7 @@ namespace ComputersStore.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    await orderBusinessService.UpdateOrder(orderEditFormViewModel);
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!OrderExists(orderEditFormViewModel.OrderId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await orderBusinessService.UpdateOrder(orderEditFormViewModel);
                 return RedirectToAction(nameof(List));
             }
             await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
@@ -144,9 +123,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Orders
-                .Include(o => o.ApplicationUser)
-                .FirstOrDefaultAsync(m => m.OrderId == id);
+            var order = await orderBusinessService.GetOrder(id.Value);
             if (order == null)
             {
                 return NotFound();
@@ -160,15 +137,8 @@ namespace ComputersStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Orders.FindAsync(id);
-            _context.Orders.Remove(order);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool OrderExists(int id)
-        {
-            return _context.Orders.Any(e => e.OrderId == id);
+            await orderBusinessService.DeleteOrder(id);
+            return RedirectToAction(nameof(List));
         }
 
         private async Task PopulateUpdateFormSelectElements(int orderStatusId, int paymentTypeId)
