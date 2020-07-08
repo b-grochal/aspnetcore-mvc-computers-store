@@ -5,3 +5,7 @@
         document.getElementById("ImageFile").disabled = true;
     }
 }
+
+function submitProductsSortingForm() {
+    $(".productsSortingForm").submit();
+}
