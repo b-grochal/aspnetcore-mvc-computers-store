@@ -18,7 +18,7 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task<IEnumerable<PaymentType>> GetPaymentTypeCollection()
+        public async Task<IEnumerable<PaymentType>> GetPaymentTypesCollection()
         {
             return await applicationDbContext.PaymentTypes.ToListAsync();
         }

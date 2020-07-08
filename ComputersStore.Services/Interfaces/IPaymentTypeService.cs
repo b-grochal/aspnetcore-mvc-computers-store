@@ -8,6 +8,6 @@ namespace ComputersStore.Services.Interfaces
 {
     public interface IPaymentTypeService
     {
-        Task<IEnumerable<PaymentType>> GetPaymentTypeCollection();
+        Task<IEnumerable<PaymentType>> GetPaymentTypesCollection();
     }
 }

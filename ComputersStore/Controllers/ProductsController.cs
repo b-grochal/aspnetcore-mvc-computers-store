@@ -74,7 +74,7 @@ namespace ComputersStore.WebUI.Controllers
         {
             if (ModelState.IsValid)
             {
-                await productBusinessService.AddProduct(newProductViewModel);
+                await productBusinessService.CreateProduct(newProductViewModel);
                 return RedirectToAction(nameof(List));
             }
             return View(newProductViewModel);

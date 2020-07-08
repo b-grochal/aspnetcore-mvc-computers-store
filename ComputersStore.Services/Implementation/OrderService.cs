@@ -20,7 +20,7 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task AddOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             throw new NotImplementedException();
         }
@@ -34,8 +34,7 @@ namespace ComputersStore.Services.Implementation
 
         public async Task<Order> GetOrder(int orderId)
         {
-            return await applicationDbContext.Orders
-                .FirstOrDefaultAsync(x => x.OrderId == orderId);
+            return await applicationDbContext.Orders.FindAsync(orderId);
         }
 
         public async Task<IEnumerable<Order>> GetOrdersCollection()

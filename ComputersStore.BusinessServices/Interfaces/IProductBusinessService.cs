@@ -14,7 +14,7 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<IEnumerable<ProductDetailsViewModel>> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<ProductDetailsViewModel> GetProductDetails(int productId);
         Task<ProductEditFormViewModel> GetProductEditFormData(int productId);
-        Task AddProduct(ProductCreateFormViewModel product);
+        Task CreateProduct(ProductCreateFormViewModel product);
         Task UpdateProduct(ProductEditFormViewModel product);
         Task DeleteProduct(int productId);
         int GetProductsCollectionCount(int productCategoryId);

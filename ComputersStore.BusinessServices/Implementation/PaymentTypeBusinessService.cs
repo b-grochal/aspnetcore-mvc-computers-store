@@ -20,9 +20,9 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<PaymentTypeViewModel>> GetOrdersStatusCollection()
+        public async Task<IEnumerable<PaymentTypeViewModel>> GetPaymentTypesCollection()
         {
-            var paymentTypes = await paymentTypeService.GetPaymentTypeCollection();
+            var paymentTypes = await paymentTypeService.GetPaymentTypesCollection();
             var result = mapper.Map<IEnumerable<PaymentTypeViewModel>>(paymentTypes);
             return result;
         }

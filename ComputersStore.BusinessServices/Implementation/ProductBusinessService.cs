@@ -22,10 +22,10 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public async Task AddProduct(ProductCreateFormViewModel newProductViewModel)
+        public async Task CreateProduct(ProductCreateFormViewModel newProductViewModel)
         {
             var product = MapNewProductViewModelToConcreteProduct(newProductViewModel);
-            await productService.AddProduct(product); 
+            await productService.CreateProduct(product); 
         }
 
         public async Task DeleteProduct(int productId)

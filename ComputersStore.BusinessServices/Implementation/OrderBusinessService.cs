@@ -42,7 +42,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
         {
             var order = await orderService.GetOrder(orderId);
-            var result = new OrderDetailsViewModel
+            var result = new OrderDetailsViewModel //TODO mapper do tworzenia viewmodelu
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),

@@ -20,9 +20,9 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public async Task<IEnumerable<OrderStatusViewModel>> GetOrdersStatusCollection()
+        public async Task<IEnumerable<OrderStatusViewModel>> GetOrderStatusesCollection()
         {
-            var orderStatuses = await orderStatusService.GetOrdersStatusCollection();
+            var orderStatuses = await orderStatusService.GetOrderStatusesCollection();
             var result = mapper.Map<IEnumerable<OrderStatusViewModel>>(orderStatuses);
             return result;
         }

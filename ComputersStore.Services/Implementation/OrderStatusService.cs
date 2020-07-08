@@ -19,7 +19,7 @@ namespace ComputersStore.Services.Implementation
             this.applicatioDbContext = applicatioDbContext;
         }
 
-        public async Task<IEnumerable<OrderStatus>> GetOrdersStatusCollection()
+        public async Task<IEnumerable<OrderStatus>> GetOrderStatusesCollection()
         {
              return await applicatioDbContext.OrderStatuses.ToListAsync();
         }
