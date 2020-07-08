@@ -3,10 +3,12 @@ using ComputersStore.Data;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Services.Extensions;
 using ComputersStore.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.Services.Implementation
 {
@@ -18,26 +20,27 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void AddProduct(Product product)
+        public async Task AddProduct(Product product)
         {
-            applicationDbContext.Products.Add(product);
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.Products.AddAsync(product);
+            await applicationDbContext.SaveChangesAsync();
         }
 
-        public void DeleteProduct(Product product)
+        public async Task DeleteProduct(int productId)
         {
+            var product = await applicationDbContext.Products.FindAsync(productId);
             applicationDbContext.Products.Remove(product);
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
         }
 
-        public Product GetProduct(int productId)
+        public async Task<Product> GetProduct(int productId)
         {
-            return applicationDbContext.Products.FirstOrDefault(x => x.ProductId == productId);
+            return await applicationDbContext.Products.FindAsync(productId);
         }
 
-        public IEnumerable<Product> GetProductsCollection()
+        public async Task<IEnumerable<Product>> GetProductsCollection()
         {
-            return applicationDbContext.Products.ToList();
+            return await applicationDbContext.Products.ToListAsync();
         }
 
         public int GetProductsCollectionCount(int productCategoryId)
@@ -47,28 +50,28 @@ namespace ComputersStore.Services.Implementation
                 .Count();
         }
 
-        public IEnumerable<Product> GetProductsCollection(int productCategoryId, string sortOrder, int pageNumber, int pageSize)
+        public async Task<IEnumerable<Product>> GetProductsCollection(int productCategoryId, string sortOrder, int pageNumber, int pageSize)
         {
-            return applicationDbContext.Products
+            return await applicationDbContext.Products
                 .Where(p => p.ProductCategoryId == productCategoryId)
                 .Sort(sortOrder)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .ToListAsync();
         }
 
-        public IEnumerable<Product> GetRecommendedProductsCollection(int numberOfProducts)
+        public async Task<IEnumerable<Product>> GetRecommendedProductsCollection(int numberOfProducts)
         {
-            return applicationDbContext.Products
+            return await applicationDbContext.Products
                 .Where(x => x.IsRecommended == true)
                 .Take(numberOfProducts)
-                .ToList();
+                .ToListAsync();
         }
 
-        public void UpdateProduct(Product product)
+        public async Task UpdateProduct(Product product)
         {
             applicationDbContext.Products.Update(product);
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }
