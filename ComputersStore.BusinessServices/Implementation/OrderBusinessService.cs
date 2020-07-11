@@ -3,9 +3,11 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
 using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,10 +60,20 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
+        public async Task<OrderListViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize, int ordersPerPage)
         {
             var orders = await orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
-            var result = mapper.Map<IEnumerable<OrderViewModel>>(orders);
+            var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
+            var result = new OrderListViewModel
+            {
+                Orders = mappedOrders,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = ordersPerPage,
+                    TotalItems = mappedOrders.Count()
+                }
+            };
             return result;
         }
 

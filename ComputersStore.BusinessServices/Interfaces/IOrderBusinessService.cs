@@ -9,7 +9,7 @@ namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IOrderBusinessService
     {
-        Task<IEnumerable<OrderViewModel>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
+        Task<OrderListViewModel> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize, int ordersPerPage);
         Task<OrderViewModel> GetOrder(int orderId);
         Task<OrderDetailsViewModel> GetOrderDetails(int orderId);
         Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId);
