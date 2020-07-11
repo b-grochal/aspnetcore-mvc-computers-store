@@ -29,7 +29,7 @@ namespace ComputersStore.WebUI.Controllers
 
         public async Task<IActionResult> List(int? orderId, string applicationUserId, int? orderStatusId, int pageNumber = 1)
         {
-            var orders = await orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage, ordersPerPage);
             return View(orders);
         }
 
