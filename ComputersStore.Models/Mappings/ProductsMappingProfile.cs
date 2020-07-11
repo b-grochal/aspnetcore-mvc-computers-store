@@ -3,7 +3,7 @@ using ComputersStore.Core.Data;
 using ComputersStore.Models.Converters;
 using ComputersStore.Models.Resolvers;
 using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Product;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

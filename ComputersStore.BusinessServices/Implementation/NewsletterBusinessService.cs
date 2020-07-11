@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Newsletter;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -20,10 +21,30 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public void CreateNewsletter(NewsletterSignUpFormViewModel newsletterSignUpFormViewModel)
+        public async Task CreateNewsletter(NewsletterSignUpFormViewModel newsletterSignUpFormViewModel)
         {
             var newsletter = mapper.Map<Newsletter>(newsletterSignUpFormViewModel);
-            newsletterService.CreateNewsletter(newsletter);
+            await newsletterService.CreateNewsletter(newsletter);
         }
+
+        public async Task DeleteNewsletter(int newsletterId)
+        {
+            await newsletterService.DeleteNewsletter(newsletterId);
+        }
+
+        public async Task<NewsletterViewModel> GetNewsletter(int newsletterId)
+        {
+            var newsletter = await newsletterService.GetNewsletter(newsletterId);
+            var result = mapper.Map<NewsletterViewModel>(newsletter);
+            return result;
+        }
+
+        public async Task<IEnumerable<NewsletterViewModel>> GetNewslletersCollection()
+        {
+            var newsletters = await newsletterService.GetNewslettersCollection();
+            var result = mapper.Map<IEnumerable<NewsletterViewModel>>(newsletters);
+            return result;
+        }
+
     }
 }

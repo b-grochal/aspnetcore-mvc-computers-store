@@ -2,9 +2,11 @@
 using ComputersStore.Data;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Services.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.Services.Implementation
 {
@@ -17,10 +19,28 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void CreateNewsletter(Newsletter newsletter)
+        public async Task CreateNewsletter(Newsletter newsletter)
         {
             applicationDbContext.Newsletters.Add(newsletter);
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteNewsletter(int newsletterId)
+        {
+            var newsletter = await applicationDbContext.Newsletters.FindAsync(newsletterId);
+            applicationDbContext.Remove(newsletter);
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Newsletter> GetNewsletter(int newsletterId)
+        {
+            return await applicationDbContext.Newsletters.FindAsync(newsletterId);
+        }
+
+        public async Task<IEnumerable<Newsletter>> GetNewslettersCollection()
+        {
+            var newsletters = await applicationDbContext.Newsletters.ToListAsync();
+            return newsletters;
         }
     }
 }

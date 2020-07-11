@@ -1,4 +1,4 @@
-﻿using ComputersStore.Models.ViewModels.Basic;
+﻿using ComputersStore.Models.ViewModels.ApplicationUser;
 using System;
 using System.Collections.Generic;
 using System.Text;

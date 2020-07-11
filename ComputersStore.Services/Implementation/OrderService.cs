@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.Services.Implementation
 {
@@ -19,42 +20,43 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void AddOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteOrder(Order order)
+        public async Task DeleteOrder(int orderId)
+        {
+            var order = await applicationDbContext.Orders.FindAsync(orderId);
+            applicationDbContext.Orders.Remove(order);
+            await applicationDbContext.SaveChangesAsync();
+        }
+
+        public async Task<Order> GetOrder(int orderId)
+        {
+            return await applicationDbContext.Orders.FindAsync(orderId);
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersCollection()
         {
             throw new NotImplementedException();
         }
 
-        public Order GetOrder(int orderId)
+        public async Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize)
         {
-            return applicationDbContext.Orders
-                .FirstOrDefault(x => x.OrderId == orderId);
-        }
-
-        public IEnumerable<Order> GetOrdersCollection()
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<Order> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize)
-        {
-            return applicationDbContext.Orders
+            return await applicationDbContext.Orders
                 .Where(o => orderId == null || o.OrderId == orderId)
                 .Where(o => userEmail == null || o.ApplicationUser.Email == userEmail)
                 .Where(o => orderStatusId == null || o.OrderStatusId == orderStatusId)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
-                .ToList();
+                .ToListAsync();
         }
 
-        public void UpdateOrder(Order order)
+        public async Task UpdateOrder(Order order)
         {
             applicationDbContext.Orders.Update(order);
-            applicationDbContext.SaveChanges();
+            await applicationDbContext.SaveChangesAsync();
         }
     }
 }

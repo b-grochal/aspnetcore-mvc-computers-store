@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Specific
+namespace ComputersStore.Models.ViewModels.Other
 {
     public class PaginationViewModel
     {

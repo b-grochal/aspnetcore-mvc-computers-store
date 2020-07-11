@@ -3,11 +3,12 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
 using ComputersStore.Core.Dictionaries;
 using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -21,21 +22,20 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public void AddProduct(ProductCreateFormViewModel newProductViewModel)
+        public async Task CreateProduct(ProductCreateFormViewModel newProductViewModel)
         {
             var product = MapNewProductViewModelToConcreteProduct(newProductViewModel);
-            productService.AddProduct(product); 
+            await productService.CreateProduct(product); 
         }
 
-        public void DeleteProduct(ProductViewModel productViewModel)
+        public async Task DeleteProduct(int productId)
         {
-            var product = MapProductViewModelToConcreteProduct(productViewModel);
-            productService.DeleteProduct(product);
+            await productService.DeleteProduct(productId);
         }
 
-        public IEnumerable<ProductViewModel> GetProductsCollection()
+        public async Task<IEnumerable<ProductViewModel>> GetProductsCollection()
         {
-            var products = productService.GetProductsCollection();
+            var products = await productService.GetProductsCollection();
             var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return result;
         }
@@ -45,40 +45,40 @@ namespace ComputersStore.BusinessServices.Implementation
             return productService.GetProductsCollectionCount(productCategoryId);
         }
 
-        public IEnumerable<ProductDetailsViewModel> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
+        public async Task<IEnumerable<ProductDetailsViewModel>> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
         {
-            var products = productService.GetProductsCollection(productCategroryId, sortOrder, pageNumber, pageSize);
+            var products = await productService.GetProductsCollection(productCategroryId, sortOrder, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<ProductDetailsViewModel>>(products);
             return result;
         }
 
-        public ProductDetailsViewModel GetProductDetails(int productId)
+        public async Task<ProductDetailsViewModel> GetProductDetails(int productId)
         {
-            var product = productService.GetProduct(productId);
+            var product = await productService.GetProduct(productId);
             var result = mapper.Map<ProductDetailsViewModel>(product);
             return result;
         }
 
-        public ProductEditFormViewModel GetProductEditFormData(int productId)
+        public async Task<ProductEditFormViewModel> GetProductEditFormData(int productId)
         {
-            var product = productService.GetProduct(productId);
+            var product = await productService.GetProduct(productId);
             var result = mapper.Map<ProductEditFormViewModel>(product);
             return result;
         }
 
-        public void UpdateProduct(ProductEditFormViewModel updatedProduct)
+        public async Task UpdateProduct(ProductEditFormViewModel updatedProduct)
         {
             var product = MapProductEditFormViewModelToConcreteProduct(updatedProduct);
             if(product.Image == null)
             {
-                product.Image = GetProductImage(product.ProductId);
+                product.Image = await GetProductImage(product.ProductId);
             }
-            productService.UpdateProduct(product);
+            await productService.UpdateProduct(product);
         }
 
-        public IEnumerable<ProductViewModel> GetRecommendedProductsCollection(int numberOfProducts)
+        public async Task<IEnumerable<ProductViewModel>> GetRecommendedProductsCollection(int numberOfProducts)
         {
-            var recommendedProducts = productService.GetRecommendedProductsCollection(numberOfProducts);
+            var recommendedProducts = await productService.GetRecommendedProductsCollection(numberOfProducts);
             var result = mapper.Map<IEnumerable<ProductViewModel>>(recommendedProducts);
             return result;
         }
@@ -173,9 +173,17 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        private byte[] GetProductImage(int productId)
+        private async Task<byte[]> GetProductImage(int productId)
         {
-            return productService.GetProduct(productId).Image;
+            var product = await productService.GetProduct(productId);
+            return product.Image;
+        }
+
+        public async Task<ProductViewModel> GetProduct(int productId)
+        {
+            var product = await productService.GetProduct(productId);
+            var result = mapper.Map<ProductViewModel>(product);
+            return result;
         }
     }
 }

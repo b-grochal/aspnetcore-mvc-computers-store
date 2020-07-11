@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Product;
 using System;
 using System.Collections.Generic;
 using System.IO;
