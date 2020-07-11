@@ -1,9 +1,10 @@
 ﻿using ComputersStore.Core.Data;
+using ComputersStore.Models.ViewModels.ApplicationUser;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Basic
+namespace ComputersStore.Models.ViewModels.Order
 {
     public class OrderDetailsViewModel
     {

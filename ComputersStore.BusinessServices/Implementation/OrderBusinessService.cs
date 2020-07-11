@@ -1,11 +1,15 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.ApplicationUser;
+using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -20,20 +24,27 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public void AddOrder(Order order)
+        public async Task CreateOrder(Order order)
         {
             throw new NotImplementedException();
         }
 
-        public void DeleteOrder(Order order)
+        public async Task DeleteOrder(int orderId)
         {
-            throw new NotImplementedException();
+            await orderService.DeleteOrder(orderId);
         }
 
-        public OrderDetailsViewModel GetOrder(int orderId)
+        public async Task<OrderViewModel> GetOrder(int orderId)
         {
-            var order = orderService.GetOrder(orderId);
-            var result = new OrderDetailsViewModel
+            var order = await orderService.GetOrder(orderId);
+            var result = mapper.Map<OrderViewModel>(order);
+            return result;
+        }
+
+        public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
+        {
+            var order = await orderService.GetOrder(orderId);
+            var result = new OrderDetailsViewModel //TODO mapper do tworzenia viewmodelu
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),
@@ -42,16 +53,35 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public IEnumerable<OrderViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize)
+        public async Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId)
         {
-            var orders = orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
-            var result = mapper.Map<IEnumerable<OrderViewModel>>(orders);
+            var order = await orderService.GetOrder(orderId);
+            var result = mapper.Map<OrderEditFormViewModel>(order);
             return result;
         }
 
-        public void UpdateOrder(Order order)
+        public async Task<OrderListViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize, int ordersPerPage)
         {
-            throw new NotImplementedException();
+            var orders = await orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
+            var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
+            var result = new OrderListViewModel
+            {
+                Orders = mappedOrders,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = ordersPerPage,
+                    TotalItems = mappedOrders.Count()
+                }
+            };
+            return result;
+        }
+
+        public async Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel)
+        {
+            var order = await orderService.GetOrder(orderEditFormViewModel.OrderId);
+            var updatedOrder = mapper.Map(orderEditFormViewModel, order);
+            await orderService.UpdateOrder(updatedOrder);
         }
     }
 }

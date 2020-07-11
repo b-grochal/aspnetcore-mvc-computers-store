@@ -51,6 +51,8 @@ namespace ComputersStore
                 mc.AddProfile(new NewsletterMappingProfile());
                 mc.AddProfile(new OrdersMappingProfile());
                 mc.AddProfile(new ApplicationUserMappings());
+                mc.AddProfile(new OrderStatusMappingProfile());
+                mc.AddProfile(new PaymentTypeMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -63,6 +65,10 @@ namespace ComputersStore
             services.AddTransient<INewsletterService, NewsletterService>();
             services.AddTransient<IOrderBusinessService, OrderBusinessService>();
             services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderStatusBusinessService, OrderStatusBusinessService>();
+            services.AddTransient<IOrderStatusService, OrderStatusService>();
+            services.AddTransient<IPaymentTypeBusinessService, PaymentTypeBusinessService>();
+            services.AddTransient<IPaymentTypeService, PaymentTypeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

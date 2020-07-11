@@ -1,11 +1,10 @@
 ﻿using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
-using ComputersStore.Models.ViewModels.Specific;
+using ComputersStore.Models.ViewModels.Other;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Complex
+namespace ComputersStore.Models.ViewModels.Product
 {
     public class ProductDetailListViewModel
     {

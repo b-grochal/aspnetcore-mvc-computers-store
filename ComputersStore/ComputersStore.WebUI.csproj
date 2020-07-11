@@ -6,9 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\ProductsSortMenu\**" />
     <Compile Remove="Migrations\**" />
+    <Content Remove="Components\ProductsSortMenu\**" />
     <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Components\ProductsSortMenu\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Components\ProductsSortMenu\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -39,7 +43,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Components\ProductsSortMenu\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

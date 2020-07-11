@@ -8,29 +8,26 @@ using Microsoft.EntityFrameworkCore;
 using ComputersStore.Core.Data;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.ViewModels.Complex;
-using ComputersStore.Models.ViewModels.Specific;
-using ComputersStore.Models.ViewModels.Basic;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Core.Dictionaries;
+using ComputersStore.Models.ViewModels.Product;
+using ComputersStore.Models.ViewModels.Other;
 
 namespace ComputersStore.WebUI.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
         private readonly IProductBusinessService productBusinessService;
         private readonly int productsPerPage = 5;
 
-        public ProductsController(ApplicationDbContext context, IProductBusinessService productBusinessService)
+        public ProductsController(IProductBusinessService productBusinessService)
         {
-            _context = context;
             this.productBusinessService = productBusinessService;
         }
 
-        public ActionResult List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
+        public async Task<ActionResult> List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
         {
-            var products = productBusinessService.GetProductsDetailCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
+            var products = await productBusinessService.GetProductsDetailCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
             var productsListViewModel = new ProductDetailListViewModel
             {
                 Products = products,
@@ -38,7 +35,7 @@ namespace ComputersStore.WebUI.Controllers
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = productsPerPage,
-                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategoryId), // TODO Dodać metodę zwracającą liczę 
+                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategoryId),
                 },
                 ProductCategoryId = productCategoryId,
                 SortOrder = sortOrder
@@ -46,16 +43,10 @@ namespace ComputersStore.WebUI.Controllers
             return View(productsListViewModel);
         }
 
-        // GET: Products
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Products.ToListAsync());
-        }
-
         // GET: Products/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var productDetailsViewModel = productBusinessService.GetProductDetails(id);
+            var productDetailsViewModel = await productBusinessService.GetProductDetails(id);
             if (productDetailsViewModel == null)
             {
                 return NotFound();
@@ -79,20 +70,20 @@ namespace ComputersStore.WebUI.Controllers
         //[Bind("Name,Description,Price,NumberOfCores,NumberOfThreads,ClockSpeed,TDP,Socket,Architecture,ManufacturingProcess,ImageFile,ProductCategory")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(ProductCreateFormViewModel newProductViewModel)
+        public async Task<IActionResult> Create(ProductCreateFormViewModel newProductViewModel)
         {
             if (ModelState.IsValid)
             {
-                productBusinessService.AddProduct(newProductViewModel);
+                await productBusinessService.CreateProduct(newProductViewModel);
                 return RedirectToAction(nameof(List));
             }
             return View(newProductViewModel);
         }
 
         // GET: Products/Edit/5
-        public  ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            var productDetailsViewModel = productBusinessService.GetProductEditFormData(id);
+            var productDetailsViewModel = await productBusinessService.GetProductEditFormData(id);
             if (productDetailsViewModel == null)
             {
                 return NotFound();
@@ -105,7 +96,7 @@ namespace ComputersStore.WebUI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public  IActionResult Edit(int id, ProductEditFormViewModel productsDetailsViewModel)
+        public async Task<IActionResult> Edit(int id, ProductEditFormViewModel productsDetailsViewModel)
         {
             if (id != productsDetailsViewModel.ProductId)
             {
@@ -114,7 +105,7 @@ namespace ComputersStore.WebUI.Controllers
 
             if (ModelState.IsValid)
             {
-                productBusinessService.UpdateProduct(productsDetailsViewModel);
+                await productBusinessService.UpdateProduct(productsDetailsViewModel);
                 return RedirectToAction(nameof(List));
             }
             return View(productsDetailsViewModel);
@@ -128,8 +119,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.ProductId == id);
+            var product = await productBusinessService.GetProduct(id.Value);
             if (product == null)
             {
                 return NotFound();
@@ -143,15 +133,8 @@ namespace ComputersStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool ProductExists(int id)
-        {
-            return _context.Products.Any(e => e.ProductId == id);
+            await productBusinessService.DeleteProduct(id);
+            return RedirectToAction(nameof(List));
         }
     }
 }

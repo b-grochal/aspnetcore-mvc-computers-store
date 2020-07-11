@@ -1,17 +1,20 @@
 ﻿using ComputersStore.Core.Data;
-using ComputersStore.Models.ViewModels.Basic;
+using ComputersStore.Models.ViewModels.Order;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IOrderBusinessService
     {
-        IEnumerable<OrderViewModel> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
-        OrderDetailsViewModel GetOrder(int orderId);
-        void AddOrder(Order order);
-        void UpdateOrder(Order order);
-        void DeleteOrder(Order order);
+        Task<OrderListViewModel> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize, int ordersPerPage);
+        Task<OrderViewModel> GetOrder(int orderId);
+        Task<OrderDetailsViewModel> GetOrderDetails(int orderId);
+        Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId);
+        Task CreateOrder(Order order);
+        Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel);
+        Task DeleteOrder(int orderId);
     }
 }
