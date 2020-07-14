@@ -21,9 +21,4 @@
     <ProjectReference Include="..\ComputersStore.Core\ComputersStore.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ViewModels\Account\" />
-    <Folder Include="ViewModels\Manage\" />
-  </ItemGroup>
-
 </Project>
