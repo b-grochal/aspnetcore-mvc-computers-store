@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
 using ComputersStore.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
@@ -14,24 +15,13 @@ namespace ComputersStore.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
-        //private readonly IEmailSender _emailSender;
-        //private readonly ISmsSender _smsSender;
-        private readonly ILogger _logger;
+        private readonly IAccountBusinessService accountBusinessService;
+        private readonly SignInManager<ApplicationUser> signInManager;
 
-        public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            //IEmailSender emailSender,
-            //ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
-            //_emailSender = emailSender;
-            //_smsSender = smsSender;
-            _logger = loggerFactory.CreateLogger<AccountController>();
+            this.accountBusinessService = accountBusinessService;
+            this.signInManager = signInManager;
         }
 
         //
@@ -65,16 +55,10 @@ namespace ComputersStore.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation(1, "User logged in.");
-                    return RedirectToLocal(returnUrl);
-                }
-                if (result.IsLockedOut)
-                {
-                    _logger.LogWarning(2, "User account locked out.");
-                    return View("Lockout");
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
                 }
                 else
                 {
@@ -102,13 +86,13 @@ namespace ComputersStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await accountBusinessService.Register(model);
+                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
@@ -117,9 +101,7 @@ namespace ComputersStore.Controllers
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
                     //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
                     //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction(nameof(Login));
                 }
                 AddErrors(result);
             }
@@ -134,26 +116,20 @@ namespace ComputersStore.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
-            await _signInManager.SignOutAsync();
-            _logger.LogInformation(4, "User logged out.");
+            await signInManager.SignOutAsync();
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
         // GET: /Account/ConfirmEmail
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        public async Task<IActionResult> ConfirmEmail(string applicationUserId, string code)
         {
-            if (userId == null || code == null)
+            if (applicationUserId == null || code == null)
             {
                 return View("Error");
             }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return View("Error");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+            var result = await accountBusinessService.ConfirmEmail(applicationUserId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -175,10 +151,15 @@ namespace ComputersStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                var isEmailConfirmed = await accountBusinessService.IsEmailConfirmed(model);
+                //var user = await _userManager.FindByEmailAsync(model.Email);
+                //if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                //{
+                //    // Don't reveal that the user does not exist or is not confirmed
+                //    return View("ForgotPasswordConfirmation");
+                //}
+                if (!isEmailConfirmed)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
                 }
 
@@ -224,13 +205,13 @@ namespace ComputersStore.Controllers
             {
                 return View(model);
             }
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+            //var user = await _userManager.FindByEmailAsync(model.Email);
+            //if (user == null)
+            //{
+            //    // Don't reveal that the user does not exist
+            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
+            //}
+            var result = await accountBusinessService.ResetPassword(model);
             if (result.Succeeded)
             {
                 return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
@@ -265,14 +246,12 @@ namespace ComputersStore.Controllers
             {
                 return View(model);
             }
-            var user = await GetCurrentUserAsync();
-            if (user != null)
+            var applicationUserId = GetCurrentUserId();
+            if (applicationUserId != null)
             {
-                var result = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
+                var result = await accountBusinessService.ChangePassword(model, applicationUserId);
                 if (result.Succeeded)
                 {
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation(3, "User changed their password successfully.");
                     return RedirectToAction(nameof(Index));
                 }
                 AddErrors(result);
@@ -292,21 +271,9 @@ namespace ComputersStore.Controllers
             }
         }
 
-        private Task<ApplicationUser> GetCurrentUserAsync()
+        private string GetCurrentUserId()
         {
-            return _userManager.GetUserAsync(HttpContext.User);
-        }
-
-        private IActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
 
         #endregion
