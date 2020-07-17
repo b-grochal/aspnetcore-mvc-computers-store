@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
+using ComputersStore.EmailService.Service.Implementation;
+using ComputersStore.EmailService.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -15,10 +17,12 @@ namespace ComputersStore.BusinessServices.Implementation
     {
         private readonly IAccountService accountService;
         private readonly IMapper mapper;
-        public AccountBusinessService(IAccountService accountService, IMapper mapper)
+        private readonly IEmailMessagesService emailMessagesService;
+        public AccountBusinessService(IAccountService accountService, IMapper mapper, IEmailMessagesService emailMessagesService)
         {
             this.accountService = accountService;
             this.mapper = mapper;
+            this.emailMessagesService = emailMessagesService;
         }
 
         public async Task<IdentityResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel, string applicationUserId)
@@ -39,7 +43,12 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<IdentityResult> Register(RegisterViewModel registerViewModel)
         {
             var applicationUser = mapper.Map<ApplicationUser>(registerViewModel);
-            return await accountService.Register(applicationUser);
+            var result = await accountService.Register(applicationUser);
+            if (result.Succeeded)
+            {
+                await emailMessagesService.SendConfirmAccountEmail(registerViewModel.Email, "https://www.onet.pl/");
+            }
+            return result; 
         }
 
         public async Task<IdentityResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)

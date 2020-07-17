@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ComputersStore.EmailService\ComputersStore.EmailService.csproj" />
     <ProjectReference Include="..\ComputersStore.Models\ComputersStore.Models.csproj" />
     <ProjectReference Include="..\ComputersStore.Services\ComputersStore.Services.csproj" />
   </ItemGroup>
