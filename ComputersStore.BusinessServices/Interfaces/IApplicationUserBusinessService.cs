@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IApplicationUserBusinessService
     {
-        ApplicationUserViewModel GetApplicationUser(string applicationUserId);
+        Task<ApplicationUserViewModel> GetApplicationUserById(string applicationUserId);
+        Task<ApplicationUserViewModel> GetApplicationUserByEmail(string applicationUserEmail);
     }
 }

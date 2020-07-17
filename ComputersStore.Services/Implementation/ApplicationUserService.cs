@@ -36,7 +36,7 @@ namespace ComputersStore.Services.Implementation
             await userManager.DeleteAsync(applicationUser);
         }
 
-        public async Task<IdentityUser> GetApplicationUser(string applicationUserId)
+        public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)
         {
             return await userManager.FindByIdAsync(applicationUserId);
         }
@@ -44,6 +44,11 @@ namespace ComputersStore.Services.Implementation
         public async Task<IEnumerable<ApplicationUser>> GetApplicationUsersCollection()
         {
             return await userManager.Users.ToListAsync();
+        }
+
+        public async Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail)
+        {
+            return await userManager.FindByEmailAsync(applicationUserEmail);
         }
     }
 }

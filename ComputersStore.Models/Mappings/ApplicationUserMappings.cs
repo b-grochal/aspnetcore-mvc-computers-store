@@ -12,7 +12,7 @@ namespace ComputersStore.Models.Mappings
         public ApplicationUserMappings()
         {
             CreateMap<ApplicationUser, ApplicationUserViewModel>()
-                .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.ApplicationUserId, opt => opt.MapFrom(src => src.Id));
                 //.ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
                 //.ForMember(dest => dest.SecondName, opt => opt.MapFrom(src => src.SecondName))
                 //.ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))

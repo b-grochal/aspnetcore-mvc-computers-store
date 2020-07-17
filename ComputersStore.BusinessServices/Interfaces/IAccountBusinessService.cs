@@ -14,6 +14,7 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<bool> IsEmailConfirmed(ForgotPasswordViewModel forgotPasswordViewModel);
         Task<IdentityResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel);
         Task<IdentityResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel, string applicationUserId);
+        Task<string> GenerateAccountEmailConfirmationTokenForUser(string applicationUserId);
 
     }
 }

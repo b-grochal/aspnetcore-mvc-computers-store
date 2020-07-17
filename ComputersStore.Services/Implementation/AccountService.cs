@@ -50,10 +50,21 @@ namespace ComputersStore.Services.Implementation
             return await userManager.ChangePasswordAsync(applicationUser, oldPassword, newPassword);
         }
 
-        //public Task<string> GenerateEmailConfirmationToken(string applicationUserEmail)
-        //{
-        //    var applicationUser = userManager.FindByEmailAsync(applicationUserEmail);
-        //    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-        //}
+        public async Task<string> GenerateEmailConfirmationToken(string applicationUserId)
+        {
+            var applicationUser = await userManager.FindByIdAsync(applicationUserId);
+            var token = await userManager.GenerateEmailConfirmationTokenAsync(applicationUser);
+            return token;
+        }
+
+        public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)
+        {
+            return await userManager.FindByIdAsync(applicationUserId);
+        }
+
+        public async Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail)
+        {
+            return await userManager.FindByEmailAsync(applicationUserEmail);
+        }
     }
 }
