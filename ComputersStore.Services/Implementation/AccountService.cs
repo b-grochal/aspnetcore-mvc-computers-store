@@ -49,5 +49,11 @@ namespace ComputersStore.Services.Implementation
             var applicationUser = await userManager.FindByIdAsync(applicationUserId);
             return await userManager.ChangePasswordAsync(applicationUser, oldPassword, newPassword);
         }
+
+        //public Task<string> GenerateEmailConfirmationToken(string applicationUserEmail)
+        //{
+        //    var applicationUser = userManager.FindByEmailAsync(applicationUserEmail);
+        //    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+        //}
     }
 }
