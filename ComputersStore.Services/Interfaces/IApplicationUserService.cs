@@ -12,7 +12,8 @@ namespace ComputersStore.Services.Interfaces
         Task CreateApplicationUser(ApplicationUser applicationUser);
         Task UpdateApplicationUser(ApplicationUser applicationUser);
         Task DeleteApplicationUser(string applicationUserId);
-        Task<IdentityUser> GetApplicationUser(string applicationUserId);
+        Task<ApplicationUser> GetApplicationUserById(string applicationUserId);
+        Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail);
         Task<IEnumerable<ApplicationUser>> GetApplicationUsersCollection();
     }
 }

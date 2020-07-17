@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
+using ComputersStore.EmailService.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,11 +18,15 @@ namespace ComputersStore.Controllers
     {
         private readonly IAccountBusinessService accountBusinessService;
         private readonly SignInManager<ApplicationUser> signInManager;
+        private readonly IApplicationUserBusinessService applicationUserBusinessService;
+        private readonly IEmailMessagesService emailMessagesService;
 
-        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager)
+        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IEmailMessagesService emailMessagesService)
         {
             this.accountBusinessService = accountBusinessService;
             this.signInManager = signInManager;
+            this.applicationUserBusinessService = applicationUserBusinessService;
+            this.emailMessagesService = emailMessagesService;
         }
 
         //
@@ -95,12 +100,17 @@ namespace ComputersStore.Controllers
                 //var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    // Send an email with this link
+                    //// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    //// Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    //    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    ////await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    ////    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(model.Email);
+                    var emailConfirmationToken = await accountBusinessService.GenerateAccountEmailConfirmationTokenForUser(applicationUser.ApplicationUserId);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = emailConfirmationToken }, protocol: HttpContext.Request.Scheme);
+                    await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
+
                     return RedirectToAction(nameof(Login));
                 }
                 AddErrors(result);

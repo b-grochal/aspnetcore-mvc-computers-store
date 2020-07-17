@@ -89,6 +89,8 @@ namespace ComputersStore
             services.AddTransient<IPaymentTypeService, PaymentTypeService>();
             services.AddTransient<IAccountBusinessService, AccountBusinessService>();
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IApplicationUserBusinessService, ApplicationUserBusinessService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
             services.AddTransient<IEmailMessagesService, EmailMessagesService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IEmailMessageFactory, EmailMessageFactory>();

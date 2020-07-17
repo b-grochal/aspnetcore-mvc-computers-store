@@ -5,7 +5,9 @@ using ComputersStore.EmailService.Service.Implementation;
 using ComputersStore.EmailService.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using ComputersStore.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Routing;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -44,16 +46,23 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             var applicationUser = mapper.Map<ApplicationUser>(registerViewModel);
             var result = await accountService.Register(applicationUser);
-            if (result.Succeeded)
-            {
-                await emailMessagesService.SendConfirmAccountEmail(registerViewModel.Email, "https://www.onet.pl/");
-            }
+            //if (result.Succeeded)
+            //{
+            //    var emailConfirmationUrl = await PrepareAccountEmailConfirmationUrlForUser(registerViewModel.Email);
+            //    await emailMessagesService.SendConfirmAccountEmail(registerViewModel.Email, "https://www.onet.pl/");
+            //}
             return result; 
         }
 
         public async Task<IdentityResult> ResetPassword(ResetPasswordViewModel resetPasswordViewModel)
         {
             return await accountService.ResetPassword(resetPasswordViewModel.Email, resetPasswordViewModel.Code, resetPasswordViewModel.Password);
+        }
+
+        public async Task<string> GenerateAccountEmailConfirmationTokenForUser(string applicationUserId)
+        {
+            var token = await accountService.GenerateEmailConfirmationToken(applicationUserId);
+            return token;
         }
     }
 }
