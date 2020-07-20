@@ -32,9 +32,8 @@ namespace ComputersStore.Controllers
         //
         // GET: /Account/Login
         [HttpGet]
-        public IActionResult Index(string returnUrl = null)
+        public IActionResult Index()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -42,9 +41,8 @@ namespace ComputersStore.Controllers
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -53,13 +51,10 @@ namespace ComputersStore.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel model)
         {
-            ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
@@ -71,8 +66,6 @@ namespace ComputersStore.Controllers
                     return View(model);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -80,9 +73,8 @@ namespace ComputersStore.Controllers
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
+        public IActionResult Register()
         {
-            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -96,27 +88,13 @@ namespace ComputersStore.Controllers
             if (ModelState.IsValid)
             {
                 var result = await accountBusinessService.Register(model);
-                //var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                //var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //// For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                    //// Send an email with this link
-                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    ////await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    ////    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                    var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(model.Email);
-                    var emailConfirmationToken = await accountBusinessService.GenerateAccountEmailConfirmationTokenForUser(applicationUser.ApplicationUserId);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = emailConfirmationToken }, protocol: HttpContext.Request.Scheme);
-                    await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
-
+                    await SendAccountConfirmationEmail(model.Email);
                     return RedirectToAction(nameof(Login));
                 }
                 AddErrors(result);
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -162,12 +140,6 @@ namespace ComputersStore.Controllers
             if (ModelState.IsValid)
             {
                 var isEmailConfirmed = await accountBusinessService.IsEmailConfirmed(model);
-                //var user = await _userManager.FindByEmailAsync(model.Email);
-                //if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                //{
-                //    // Don't reveal that the user does not exist or is not confirmed
-                //    return View("ForgotPasswordConfirmation");
-                //}
                 if (!isEmailConfirmed)
                 {
                     return View("ForgotPasswordConfirmation");
@@ -181,8 +153,6 @@ namespace ComputersStore.Controllers
                 //   "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
                 //return View("ForgotPasswordConfirmation");
             }
-
-            // If we got this far, something failed, redisplay form
             return View(model);
         }
 
@@ -215,12 +185,6 @@ namespace ComputersStore.Controllers
             {
                 return View(model);
             }
-            //var user = await _userManager.FindByEmailAsync(model.Email);
-            //if (user == null)
-            //{
-            //    // Don't reveal that the user does not exist
-            //    return RedirectToAction(nameof(AccountController.ResetPasswordConfirmation), "Account");
-            //}
             var result = await accountBusinessService.ResetPassword(model);
             if (result.Succeeded)
             {
@@ -285,6 +249,14 @@ namespace ComputersStore.Controllers
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
+
+        private async Task SendAccountConfirmationEmail(string applicationUserEmail)
+        {
+            var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
+            var emailConfirmationToken = await accountBusinessService.GenerateAccountEmailConfirmationTokenForUser(applicationUser.ApplicationUserId);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = emailConfirmationToken }, protocol: HttpContext.Request.Scheme);
+            await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
+        } 
 
         #endregion
     }
