@@ -46,11 +46,6 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             var applicationUser = mapper.Map<ApplicationUser>(registerViewModel);
             var result = await accountService.Register(applicationUser);
-            //if (result.Succeeded)
-            //{
-            //    var emailConfirmationUrl = await PrepareAccountEmailConfirmationUrlForUser(registerViewModel.Email);
-            //    await emailMessagesService.SendConfirmAccountEmail(registerViewModel.Email, "https://www.onet.pl/");
-            //}
             return result; 
         }
 
