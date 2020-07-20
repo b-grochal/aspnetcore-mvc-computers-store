@@ -23,5 +23,11 @@ namespace ComputersStore.EmailService.Service.Implementation
             var confirmEmailAccountMessage = await emailMessageFactory.GenerateConfirmAccoutEmailMessage(toEmailAddress, confirmAccountEmailUrl);
             emailSender.SendEmail(confirmEmailAccountMessage);
         }
+
+        public async Task SendResetPasswordEmail(string toEmailAddress, string resetPasswordUrl)
+        {
+            var confirmEmailAccountMessage = await emailMessageFactory.GenerateResetPasswordEmailMessage(toEmailAddress, resetPasswordUrl);
+            emailSender.SendEmail(confirmEmailAccountMessage);
+        }
     }
 }

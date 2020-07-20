@@ -59,5 +59,13 @@ namespace ComputersStore.BusinessServices.Implementation
             var token = await accountService.GenerateEmailConfirmationToken(applicationUserId);
             return token;
         }
+
+        public async Task<string> GenerateResetPasswordTokenForUser(string applicationUserId)
+        {
+            var token = await accountService.GenerateResetPasswordToken(applicationUserId);
+            return token;
+        }
+
+        
     }
 }

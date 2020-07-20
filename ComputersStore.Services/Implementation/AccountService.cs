@@ -57,6 +57,15 @@ namespace ComputersStore.Services.Implementation
             return token;
         }
 
+        public async Task<string> GenerateResetPasswordToken(string applicationUserId)
+        {
+            var applicationUser = await userManager.FindByIdAsync(applicationUserId);
+            var token = await userManager.GeneratePasswordResetTokenAsync(applicationUser);
+            return token;
+        }
+
+        
+
         public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)
         {
             return await userManager.FindByIdAsync(applicationUserId);

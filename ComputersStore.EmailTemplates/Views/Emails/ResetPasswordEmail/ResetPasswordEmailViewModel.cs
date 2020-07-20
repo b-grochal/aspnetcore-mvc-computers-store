@@ -10,7 +10,6 @@ namespace ComputersStore.EmailTemplates.Views.Emails.ResetPasswordEmail
         {
             ResetPasswordUrl = resetPasswordUrl;
         }
-
         public string ResetPasswordUrl { get; set; }
     }
 }
