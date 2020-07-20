@@ -8,5 +8,6 @@ namespace ComputersStore.EmailService.Service.Interface
     public interface IEmailMessagesService
     {
         Task SendConfirmAccountEmail(string toEmailAddress, string confirmAccountEmailUrl);
+        Task SendResetPasswordEmail(string toEmailAddress, string resetPasswordUrl);
     }
 }

@@ -144,14 +144,8 @@ namespace ComputersStore.Controllers
                 {
                     return View("ForgotPasswordConfirmation");
                 }
-
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                // Send an email with this link
-                //var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
-                //   "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
-                //return View("ForgotPasswordConfirmation");
+                await SendResetPasswordEmail(model.Email);
+                return View("ForgotPasswordConfirmation");
             }
             return View(model);
         }
@@ -258,6 +252,13 @@ namespace ComputersStore.Controllers
             await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
         } 
 
+        private async Task SendResetPasswordEmail(string applicationUserEmail)
+        {
+            var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
+            var resetPasswordToken = await accountBusinessService.GenerateResetPasswordTokenForUser(applicationUser.ApplicationUserId);
+            var callbackUrl = Url.Action("ResetPassword", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = resetPasswordToken }, protocol: HttpContext.Request.Scheme);
+            await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, callbackUrl);
+        }
         #endregion
     }
 }

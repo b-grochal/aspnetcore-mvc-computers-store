@@ -9,5 +9,6 @@ namespace ComputersStore.EmailService.Factory.Interface
     public interface IEmailMessageFactory
     {
         Task<Message> GenerateConfirmAccoutEmailMessage(string toEmailAdress, string confirmAccountUrl);
+        Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string resetPasswordUrl);
     }
 }
