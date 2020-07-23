@@ -1,0 +1,26 @@
+﻿@using ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail
+@model ConfirmAccountEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+
+<p>
+    We're excited to have you get started. First, you need to confirm your account. Just press the button below.
+</p>
+
+<br />
+
+<a href="@Model.ConfirmEmailUrl">Confirm email address.</a>
+
+<br />
+
+<p>
+    If you have any questions, just reply to this email—we're always happy to help out.
+</p>
+
+<br />
+
+<p>
+    The Contoso Team
+</p>
