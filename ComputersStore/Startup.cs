@@ -22,6 +22,15 @@ using ComputersStore.Models.Mappings;
 using Microsoft.AspNetCore.Localization;
 using System.Globalization;
 using ComputersStore.Database.DatabaseContext;
+using ComputersStore.EmailService.Configuration;
+using ComputersStore.EmailService.Service.Interface;
+using ComputersStore.EmailService.Service.Implementation;
+using ComputersStore.EmailService.Sender.Interface;
+using ComputersStore.EmailService.Factory.Interface;
+using ComputersStore.EmailService.Sender.Implementation;
+using ComputersStore.EmailService.Factory.Implementation;
+using ComputersStore.EmailTemplates.Renderer.Interface;
+using ComputersStore.EmailTemplates.Renderer.Implementation;
 
 namespace ComputersStore
 {
@@ -37,6 +46,11 @@ namespace ComputersStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration
+            .GetSection("EmailConfiguration")
+            .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseLazyLoadingProxies()
                 .UseSqlServer(
@@ -44,6 +58,9 @@ namespace ComputersStore
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<SignInManager<ApplicationUser>>();
+
             //services.AddAutoMapper(typeof(Startup));
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -53,6 +70,7 @@ namespace ComputersStore
                 mc.AddProfile(new ApplicationUserMappings());
                 mc.AddProfile(new OrderStatusMappingProfile());
                 mc.AddProfile(new PaymentTypeMappingProfile());
+                mc.AddProfile(new AccountMappings());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -69,6 +87,14 @@ namespace ComputersStore
             services.AddTransient<IOrderStatusService, OrderStatusService>();
             services.AddTransient<IPaymentTypeBusinessService, PaymentTypeBusinessService>();
             services.AddTransient<IPaymentTypeService, PaymentTypeService>();
+            services.AddTransient<IAccountBusinessService, AccountBusinessService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IApplicationUserBusinessService, ApplicationUserBusinessService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddTransient<IEmailMessagesService, EmailMessagesService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailMessageFactory, EmailMessageFactory>();
+            services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

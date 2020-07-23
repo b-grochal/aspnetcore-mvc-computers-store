@@ -3,6 +3,7 @@ using ComputersStore.Data;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,16 +14,41 @@ namespace ComputersStore.Services.Implementation
 {
     public class ApplicationUserService : IApplicationUserService
     {
-        private readonly ApplicationDbContext applicationDbContext;
-        private readonly UserManager<IdentityUser> userManager;
-        public ApplicationUserService(ApplicationDbContext applicationDbContext)
+        private readonly UserManager<ApplicationUser> userManager;
+        public ApplicationUserService(UserManager<ApplicationUser> userManager)
         {
-            this.applicationDbContext = applicationDbContext;
+            this.userManager = userManager;
         }
 
-        public Task<IdentityUser> GetApplicationUser(string applicationUserId)
+        public async Task CreateApplicationUser(ApplicationUser applicationUser)
         {
-            return userManager.FindByIdAsync(applicationUserId);
+            await userManager.CreateAsync(applicationUser);
+        }
+
+        public async Task UpdateApplicationUser(ApplicationUser applicationUser)
+        {
+            await userManager.UpdateAsync(applicationUser);
+        }
+
+        public async Task DeleteApplicationUser(string applicationUserId)
+        {
+            var applicationUser = await userManager.FindByIdAsync(applicationUserId);
+            await userManager.DeleteAsync(applicationUser);
+        }
+
+        public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)
+        {
+            return await userManager.FindByIdAsync(applicationUserId);
+        }
+
+        public async Task<IEnumerable<ApplicationUser>> GetApplicationUsersCollection()
+        {
+            return await userManager.Users.ToListAsync();
+        }
+
+        public async Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail)
+        {
+            return await userManager.FindByEmailAsync(applicationUserEmail);
         }
     }
 }

@@ -6,7 +6,7 @@ namespace ComputersStore.Models.ViewModels.ApplicationUser
 {
     public class ApplicationUserViewModel
     {
-        public string UserId { get; set; }
+        public string ApplicationUserId { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
         public string Email { get; set; }
