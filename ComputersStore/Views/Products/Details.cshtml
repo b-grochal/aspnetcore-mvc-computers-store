@@ -43,7 +43,12 @@
         <h2>@Html.DisplayFor(model => model.Name)</h2>
         <p>@Model.Description</p>
         <p>@Model.Price</p>
-        <button class="btn btn-lg btn-primary">Add to cart</button>
+        <form asp-action="AddToCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post">
+            <input type="hidden" asp-for="ProductId" />
+            <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+            <button class="btn btn-lg btn-primary" type="submit">Add to cart</button>
+        </form>
+        
     </div>
 </div>
 <hr />
