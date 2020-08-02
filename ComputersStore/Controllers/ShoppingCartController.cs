@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using ComputersStore.WebUI.Helpers;
+using ComputersStore.WebUI.Infrastructure.ShoppingCart;
+using Microsoft.AspNetCore.Mvc;
+
+namespace ComputersStore.WebUI.Controllers
+{
+    public class ShoppingCartController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public RedirectToActionResult AddProductToShoppingCart(int productId, string returnUrl)
+        {
+            ShoppingCart shoppingCart = GetShoppingCart();
+            shoppingCart.AddItem(productId);
+            SaveShoppingCart(shoppingCart);
+            return RedirectToAction("Index", new { returnUrl });
+        }
+
+        public RedirectToActionResult RemoveProductFromShoppingCart(int productId, string returnUrl)
+        {
+            ShoppingCart shoppingCart = GetShoppingCart();
+            shoppingCart.RemoweItem(productId);
+            SaveShoppingCart(shoppingCart);
+            return RedirectToAction("Index", new { returnUrl });
+        }
+
+        public ShoppingCart GetShoppingCart()
+        {
+            ShoppingCart cart = HttpContext.Session.GetJson<ShoppingCart>("ShoppingCart") ?? new ShoppingCart();
+            return cart;
+        }
+
+        public void SaveShoppingCart(ShoppingCart shoppingCart)
+        {
+            HttpContext.Session.SetJson("ShoppingCart", shoppingCart);
+        }
+    }
+}
