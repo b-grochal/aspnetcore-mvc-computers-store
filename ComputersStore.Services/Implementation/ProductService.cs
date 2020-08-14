@@ -73,5 +73,10 @@ namespace ComputersStore.Services.Implementation
             applicationDbContext.Products.Update(product);
             await applicationDbContext.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Product>> GetProductsCollectionById(IEnumerable<int> productsId)
+        {
+            return await applicationDbContext.Products.Where(p => productsId.Contains(p.ProductId)).ToListAsync(); 
+        }
     }
 }
