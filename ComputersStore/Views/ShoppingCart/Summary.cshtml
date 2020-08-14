@@ -1,8 +1,25 @@
-﻿
+﻿@model IEnumerable<ShoppingCartItemViewModel>
 @{
     ViewData["Title"] = "Summary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Summary</h1>
-
+<h1>Your's shopping cart</h1>
+<div class="row">
+    <div class="col">
+        @foreach (var shoppingCartItem in Model)
+        {
+            @await Html.PartialAsync("_ShoppingCartItemPartial", shoppingCartItem);
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <p>Total cost: @Model.Sum(x => x.ProductPrice)</p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <a>Submit order</a>
+    </div>
+</div>

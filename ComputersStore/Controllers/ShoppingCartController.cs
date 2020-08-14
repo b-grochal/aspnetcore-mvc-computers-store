@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.WebUI.Helpers;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,22 @@ namespace ComputersStore.WebUI.Controllers
 {
     public class ShoppingCartController : Controller
     {
+        private readonly IShoppingCartBusinessService shoppingCartBusinessService;
+        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService)
+        {
+            this.shoppingCartBusinessService = shoppingCartBusinessService;
+        }
+
         public IActionResult Index()
         {
             return View();
+        }
+
+        public async Task<IActionResult> Summary()
+        {
+            var shoppingCart = GetShoppingCart();
+            var result = await shoppingCartBusinessService.GetProductsForShoppingCart(shoppingCart);
+            return View(result);
         }
 
         public RedirectToActionResult AddProductToShoppingCart(int productId, string returnUrl)
@@ -23,12 +37,12 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public RedirectToActionResult RemoveProductFromShoppingCart(int productId, string returnUrl)
+        public IActionResult RemoveProductFromShoppingCart(int productId)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
             shoppingCart.RemoweItem(productId);
             SaveShoppingCart(shoppingCart);
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction("Summary");
         }
 
         private ShoppingCart GetShoppingCart()

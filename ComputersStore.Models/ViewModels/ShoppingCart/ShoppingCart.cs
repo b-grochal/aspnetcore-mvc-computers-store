@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ namespace ComputersStore.Models.ViewModels.ShoppingCart
 {
     public class ShoppingCart
     {
+        [JsonProperty]
         private List<ShoppingCartItem> shoppingCartItemsCollection = new List<ShoppingCartItem>();
 
         public void AddItem(int productId)
