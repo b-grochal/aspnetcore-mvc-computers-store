@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.WebUI.Helpers;
-using ComputersStore.WebUI.Infrastructure.ShoppingCart;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComputersStore.WebUI.Controllers
