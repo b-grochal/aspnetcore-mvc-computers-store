@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
-namespace ComputersStore.WebUI.Infrastructure.ShoppingCart
+namespace ComputersStore.Models.ViewModels.ShoppingCart
 {
     public class ShoppingCart
     {
-        private List<ShoppingCartItem> shoppingCartItemsCollection = new List<ShoppingCartItem>(); 
+        private List<ShoppingCartItem> shoppingCartItemsCollection = new List<ShoppingCartItem>();
 
         public void AddItem(int productId)
         {
@@ -15,7 +14,7 @@ namespace ComputersStore.WebUI.Infrastructure.ShoppingCart
                 .Where(x => x.ProductId == productId)
                 .FirstOrDefault();
 
-            if(shoppingCartItem == null)
+            if (shoppingCartItem == null)
             {
                 shoppingCartItemsCollection.Add(new ShoppingCartItem
                 {
@@ -42,6 +41,6 @@ namespace ComputersStore.WebUI.Infrastructure.ShoppingCart
         public IEnumerable<ShoppingCartItem> GetShoppingCartItems()
         {
             return shoppingCartItemsCollection;
-        } 
+        }
     }
 }

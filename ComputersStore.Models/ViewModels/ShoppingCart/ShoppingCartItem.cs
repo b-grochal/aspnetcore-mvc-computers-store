@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.WebUI.Infrastructure.ShoppingCart
+namespace ComputersStore.Models.ViewModels.ShoppingCart
 {
     public class ShoppingCartItem
     {

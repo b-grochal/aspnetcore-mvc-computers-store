@@ -31,13 +31,13 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction("Index", new { returnUrl });
         }
 
-        public ShoppingCart GetShoppingCart()
+        private ShoppingCart GetShoppingCart()
         {
             ShoppingCart cart = HttpContext.Session.GetJson<ShoppingCart>("ShoppingCart") ?? new ShoppingCart();
             return cart;
         }
 
-        public void SaveShoppingCart(ShoppingCart shoppingCart)
+        private void SaveShoppingCart(ShoppingCart shoppingCart)
         {
             HttpContext.Session.SetJson("ShoppingCart", shoppingCart);
         }
