@@ -58,6 +58,8 @@ namespace ComputersStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
+            var shoppingCart = GetShoppingCart();
+
             return View("SubmitOrderSummary");
         }
 

@@ -22,7 +22,8 @@ namespace ComputersStore.Services.Implementation
 
         public async Task CreateOrder(Order order)
         {
-            throw new NotImplementedException();
+            applicationDbContext.Orders.Add(order);
+            await applicationDbContext.SaveChangesAsync();
         }
 
         public async Task DeleteOrder(int orderId)
