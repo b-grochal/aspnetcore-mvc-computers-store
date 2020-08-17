@@ -1,0 +1,16 @@
+﻿@model ShoppingCartItemViewModel
+
+<div class="row">
+    <div class="col-3">
+        <p>@Model.ProductName</p>
+    </div>
+    <div class="col-3">
+        <p>@Model.Quantity</p>
+    </div>
+    <div class="col-3">
+        <p>@Model.ProductPrice</p>
+    </div>
+    <div class="col-3">
+        <a class="btn btn-primary w-100" asp-action="Delete" asp-route-id="@Model.ProductId">Remove</a>
+    </div>
+</div>
