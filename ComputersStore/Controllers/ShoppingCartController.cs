@@ -56,10 +56,10 @@ namespace ComputersStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
+        public async Task<IActionResult> SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
             var shoppingCart = GetShoppingCart();
-
+            await shoppingCartBusinessService.SubmitOrder(shoppingCart, submitOrderDetailsViewModel);
             return View("SubmitOrderSummary");
         }
 
