@@ -71,12 +71,14 @@ namespace ComputersStore
                 mc.AddProfile(new OrderStatusMappingProfile());
                 mc.AddProfile(new PaymentTypeMappingProfile());
                 mc.AddProfile(new AccountMappings());
+                mc.AddProfile(new ShoppingCartMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IShoppingCartBusinessService, ShoppingCartBusinessService>();
             services.AddTransient<IProductBusinessService, ProductBusinessService>();
             services.AddTransient<IProductService, ProductService>();
             services.AddTransient<INewsletterBusinessService, NewsletterBusinessService>();
@@ -95,6 +97,10 @@ namespace ComputersStore
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<IEmailMessageFactory, EmailMessageFactory>();
             services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+
+            services.AddMemoryCache();
+            services.AddSession();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -122,6 +128,7 @@ namespace ComputersStore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
