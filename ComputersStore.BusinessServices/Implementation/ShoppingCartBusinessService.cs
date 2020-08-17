@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Core.Data;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.Services.Interfaces;
 using System;
@@ -30,9 +31,11 @@ namespace ComputersStore.BusinessServices.Implementation
             return UpdateShoppingCartItemsQuantities(shoppingCartItemsViewModels, shoppingCart.GetShoppingCartItems());
         }
 
-        public Task SubmitOrder(ShoppingCart shoppingCart)
+        public async Task SubmitOrder(ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
-            throw new NotImplementedException();
+            var order = mapper.Map<Order>(submitOrderDetailsViewModel);
+            order = mapper.Map(shoppingCart, order);
+            await orderService.CreateOrder(order);
         }
 
         private IEnumerable<ShoppingCartItemViewModel> UpdateShoppingCartItemsQuantities(IEnumerable<ShoppingCartItemViewModel> shoppingCartItemViewModels, IEnumerable<ShoppingCartItem> shoppingCartItems)
