@@ -7,12 +7,16 @@
 
   <ItemGroup>
     <Compile Remove="Components\ProductsSortMenu\**" />
+    <Compile Remove="Infrastructure\**" />
     <Compile Remove="Migrations\**" />
     <Content Remove="Components\ProductsSortMenu\**" />
+    <Content Remove="Infrastructure\**" />
     <Content Remove="Migrations\**" />
     <EmbeddedResource Remove="Components\ProductsSortMenu\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
     <EmbeddedResource Remove="Migrations\**" />
     <None Remove="Components\ProductsSortMenu\**" />
+    <None Remove="Infrastructure\**" />
     <None Remove="Migrations\**" />
   </ItemGroup>
 
@@ -44,7 +48,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
