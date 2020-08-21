@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<ProductViewModel>
 
+<h4 class="mb-3 text-center">Recommended products</h4>
 <div class="card-deck">
     @foreach (var product in Model)
     {
         <div class="card">
-            <img class="card-img-top" src="@product.ImageDataUrl" alt="Card image cap">
+            <img class="card-img-top p-4" src="@product.ImageDataUrl" alt="Card image cap" style="max-height: 250px; width: auto;">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
                 <p class="card-text">@product.Price</p>
