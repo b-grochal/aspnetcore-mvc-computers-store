@@ -9,7 +9,7 @@
 </head>
 <body class="bg-light">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container-fluid">
                 <a class="navbar-brand h1 mb-0" asp-area="" asp-controller="Home" asp-action="Index">ComputersStore</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -47,15 +47,40 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container mb-4 mt-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
+    <footer class="footer">
         <div class="container">
-            &copy; 2020 - ComputersStore - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="accordion w-100 d-lg-flex" id="accordion">
+                        <div class="col-lg-4 col-md-12">
+                            <a href="#shopping" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
+                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
+                            <div class="collapse d-lg-flex" id="shopping" data-parent="#accordion">
+                                Lorem Ipsum
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <a href="#two" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
+                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
+                            <div class="collapse d-lg-flex" id="two" data-parent="#accordion">
+                                Lorem Ipsum
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-12">
+                            <a href="#social-media" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
+                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
+                            <div class="collapse d-lg-flex" id="social-media" data-parent="#accordion">
+                                Lorem Ipsum
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
