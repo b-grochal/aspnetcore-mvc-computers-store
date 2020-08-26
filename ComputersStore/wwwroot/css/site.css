@@ -78,3 +78,11 @@ main {
     height: 250px;
     object-fit: contain;
 }
+
+.bg-black {
+    background-color: #000;
+}
+
+.bg-dark-grey {
+    background-color: #222221;
+}
