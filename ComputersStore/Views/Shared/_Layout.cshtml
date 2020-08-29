@@ -10,67 +10,8 @@
 </head>
 <body class="bg-light">
     <header>
-        <nav class="navbar navbar-dark fixed-top p-0 d-none d-sm-flex">
-            <div class="container-fluid d-flex flex-column p-0">
-                <div class="row w-100 bg-black px-2 py-1">
-                    <div class="col-2 d-flex justify-content-start align-items-center">
-                        <form class="form-group w-100 m-0">
-                            <div class="input-group search-products-input-group pb-1">
-                                <input class="form-control w-75 search-product-input shadow-none px-0 text-white" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append w-25">
-                                    <button class="btn text-white w-100 bg-black" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-8 d-flex justify-content-center align-items-center">
-                        <a class="h1 text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">ComputersStore</a>
-                    </div>
-                    <div class="col-2 d-flex justify-content-end align-items-center">
-                        <partial name="_DesktopLoginPartial" />
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center w-100 bg-dark-grey px-2 py-2">
-                    <div class="w-50 d-flex justify-content-around">
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.CPU">CPU</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.GPU">GPU</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.Motherboard">Motherboard</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.RAM">RAM</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.PSU">PSU</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.HDD">HDD</a>
-                        <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.SSD">SSD</a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black text-white border-bottom box-shadow fixed-top d-flex d-sm-none">
-            <div class="container-fluid">
-                <a class="navbar-brand h1 mb-0" asp-area="" asp-controller="Home" asp-action="Index">ComputersStore</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Products
-                            </a>
-                            <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.CPU">CPU</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.GPU">GPU</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.Motherboard">Motherboard</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.RAM">RAM</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.PSU">PSU</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.HDD">HDD</a>
-                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.SSD">SSD</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <partial name="_MobileLoginPartial" />
-                </div>
-            </div>
-        </nav>
+        <partial name="_DesktopNavbarPartial" />
+        <partial name="_MobileNavbarPartial" />
     </header>
     <div class="container mb-4" style="margin-top: 5rem;">
         <main role="main" class="pb-3">
@@ -78,35 +19,7 @@
         </main>
     </div>
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="accordion w-100 d-lg-flex" id="accordion">
-                        <div class="col-lg-4 col-md-12">
-                            <a href="#shopping" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
-                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
-                            <div class="collapse d-lg-flex" id="shopping" data-parent="#accordion">
-                                Lorem Ipsum
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <a href="#two" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
-                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
-                            <div class="collapse d-lg-flex" id="two" data-parent="#accordion">
-                                Lorem Ipsum
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <a href="#social-media" data-toggle="collapse" class="text-uppercase nav-link p-0 d-block d-lg-none d-xl-none">Shopping</a>
-                            <div class="d-none d-lg-block d-xl-block">Shooping</div>
-                            <div class="collapse d-lg-flex" id="social-media" data-parent="#accordion">
-                                Lorem Ipsum
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <partial name="_FooterPartial" />
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
