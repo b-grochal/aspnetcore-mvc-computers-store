@@ -43,40 +43,31 @@
                 </div>
             </div>
         </nav>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow fixed-top d-flex d-sm-none">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-black text-white border-bottom box-shadow fixed-top d-flex d-sm-none">
             <div class="container-fluid">
                 <a class="navbar-brand h1 mb-0" asp-area="" asp-controller="Home" asp-action="Index">ComputersStore</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_MobileLoginPartial" />
+                <div class="navbar-collapse collapse d-sm-inline-flex">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Products
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.CPU">CPU</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.GPU">GPU</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.Motherboard">Motherboard</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.RAM">RAM</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.PSU">PSU</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.HDD">HDD</a>
-                                <a class="dropdown-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.SSD">SSD</a>
+                            <div class="dropdown-menu bg-black" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.CPU">CPU</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.GPU">GPU</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.Motherboard">Motherboard</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.RAM">RAM</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.PSU">PSU</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.HDD">HDD</a>
+                                <a class="dropdown-item dropdown-product-item" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.SSD">SSD</a>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Contact</a>
-                        </li>
                     </ul>
+                    <partial name="_MobileLoginPartial" />
                 </div>
             </div>
         </nav>

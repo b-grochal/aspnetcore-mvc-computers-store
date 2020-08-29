@@ -139,3 +139,11 @@ main {
 .navbar-desktop-user-link-caption {
     font-size: 0.7rem;
 }
+
+.dropdown-product-item {
+    color: #ffffff;
+}
+
+.dropdown-product-item:hover {
+    color: #000000;
+}
