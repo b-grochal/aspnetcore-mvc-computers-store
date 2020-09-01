@@ -20,6 +20,10 @@
     <None Remove="Migrations\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
@@ -49,6 +53,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
 </Project>
