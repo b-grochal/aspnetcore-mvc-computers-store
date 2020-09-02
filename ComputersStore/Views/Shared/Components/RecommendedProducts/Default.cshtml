@@ -5,11 +5,11 @@
     @foreach (var product in Model)
     {
         <div class="card">
-            <img class="card-img-top p-4 img-fluid" src="@product.ImageDataUrl" alt="Card image cap">
+            <img class="card-img recommended-product-card-img-top p-4 img-fluid" src="@product.ImageDataUrl" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title">@product.Name</h5>
                 <p class="card-text">@product.Price</p>
-                <a href="#" class="btn btn-primary">Details</a>
+                <a href="#" class="btn btn-black">Details</a>
             </div>
         </div>
     }

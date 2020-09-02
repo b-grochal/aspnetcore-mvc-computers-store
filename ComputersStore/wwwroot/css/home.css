@@ -1,1 +1,17 @@
-﻿
+﻿.recommended-product-card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: contain;
+}
+
+.newsletter-terms-link {
+    color: #28a745;
+}
+
+.newsletter-terms-link:hover {
+    color: #28a745;
+}
+
+.newsletter-email-input:focus {
+    border-color: #ced4da;
+}

@@ -4,16 +4,16 @@
 <form asp-controller="Newsletters" asp-action="Create" method="post">
     <div class="form-group">
         <div class="input-group mb-3">
-            <input asp-for="Email" class="form-control" placeholder="E-MAIL" />
+            <input asp-for="Email" class="form-control newsletter-email-input shadow-none" placeholder="E-MAIL" />
             <div class="input-group-append">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-black">Submit</button>
             </div>
         </div>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
     <div class="form-check">
         <input type="checkbox" class="form-check-input" id="exampleCheck1" asp-for="Email">
-        <label class="form-check-label">I accept <a asp-action="NewsletterTerms">the terms</a> of newsletter.</label>
+        <label class="form-check-label">I accept <a class="newsletter-terms-link" asp-action="NewsletterTerms">the terms</a> of newsletter.</label>
         <span asp-validation-for="AreTermsOfNewsletterAccepted" class="text-danger"></span>
     </div>
 </form>
