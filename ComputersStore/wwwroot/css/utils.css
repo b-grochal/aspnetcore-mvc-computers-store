@@ -1,0 +1,35 @@
+﻿.bg-black {
+    background-color: #000000;
+}
+
+bg-green {
+    background-color: #28a745; 
+}
+
+.bg-dark-grey {
+    background-color: #222221;
+}
+
+.bg-light-ashen {
+    background-color: #eaeaea;
+}
+
+.text-medium-ashen {
+    color: #919191;
+}
+
+.text-dark-ashen {
+    color: #6b6e68;
+}
+
+.btn-black {
+    color: #ffffff;
+    background-color: #000000;
+    border-color: #000000;
+}
+
+.btn-black:hover {
+    color: #ffffff;
+    background-color: #28a745; 
+    border-color: #28a745; 
+}
