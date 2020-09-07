@@ -1,9 +1,9 @@
 ﻿@model ProductDetailsViewModel
 
-<div class="card">
+<div class="card mb-1">
     <div class="row no-gutters">
         <div class="col-2 p-2">
-            <img class="card-img-top img-fluid" src="@Model.ImageDataUrl" />
+            <img class="card-img-top img-fluid product-card-img-top" src="@Model.ImageDataUrl" />
         </div>
         <div class="col-8">
             <div class="card-body">
@@ -13,7 +13,7 @@
         </div>
         <div class="col-2 d-flex flex-column justify-content-between align-items-center">
             <h5>@Model.Price</h5>
-            <a class="btn btn-primary w-100" asp-action="Details" asp-route-id="@Model.ProductId">Details</a>
+            <a class="btn btn-green mb-1 mr-1 w-100" asp-action="Details" asp-route-id="@Model.ProductId">Details</a>
         </div>
     </div>
 </div>
