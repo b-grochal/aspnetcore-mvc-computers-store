@@ -33,3 +33,19 @@ bg-green {
     background-color: #28a745; 
     border-color: #28a745; 
 }
+
+.border-black {
+    border-color: #000000;
+}
+
+.btn-green {
+    color: #ffffff;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-green:hover {
+    color: #ffffff;
+    background-color: #000000; 
+    border-color: #000000; 
+}
