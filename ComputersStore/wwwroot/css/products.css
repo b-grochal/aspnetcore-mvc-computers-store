@@ -9,3 +9,9 @@
     margin-bottom: 0.25rem;
     border-color: #eaeaea;
 }
+
+.product-details-img {
+    width: 100%;
+    height: 215px;
+    object-fit: contain;
+}
