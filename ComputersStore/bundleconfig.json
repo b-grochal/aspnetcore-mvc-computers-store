@@ -5,7 +5,8 @@
       "wwwroot/css/site.css",
       "wwwroot/css/utils.css",
       "wwwroot/css/layout.css",
-      "wwwroot/css/home.css"
+      "wwwroot/css/home.css",
+      "wwwroot/css/products.css"
     ]
   }
 ]

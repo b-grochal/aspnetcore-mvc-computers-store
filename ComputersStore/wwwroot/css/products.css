@@ -1,0 +1,22 @@
+﻿.product-card-img-top {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+}
+
+.products-list-hotizontal-line {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    border-color: #eaeaea;
+}
+
+.product-details-img {
+    width: 100%;
+    height: 215px;
+    object-fit: contain;
+}
+
+.product-specification-row {
+    margin-left: 0;
+    margin-right: 0;
+}
