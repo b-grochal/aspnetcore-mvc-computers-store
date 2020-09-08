@@ -1,0 +1,43 @@
+﻿.email-input {
+    border-bottom: 1px solid #eaeaea;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.email-input::placeholder {
+    opacity: 1;
+    color: #6b6e68;
+}
+
+.email-input:focus {
+    border-color: #28a745;
+    background-color: transparent;
+    color: #28a745;
+    box-shadow: none;
+}
+
+.password-input {
+    border-bottom: 1px solid #eaeaea;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.password-input::placeholder {
+    opacity: 1;
+    color: #6b6e68;
+}
+
+.password-input:focus {
+    border-color: #28a745;
+    background-color: transparent;
+    color: #28a745;
+    box-shadow: none;
+}
