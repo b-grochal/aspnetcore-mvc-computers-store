@@ -20,6 +20,10 @@
     box-shadow: none;
 }
 
+.email-input:invalid {
+    border-color: red;
+}
+
 .password-input {
     border-bottom: 1px solid #eaeaea;
     border-top: 0;
@@ -40,4 +44,8 @@
     background-color: transparent;
     color: #28a745;
     box-shadow: none;
+}
+
+.password-input:invalid {
+    border-color: red;
 }
