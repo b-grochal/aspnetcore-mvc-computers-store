@@ -32,7 +32,7 @@ namespace ComputersStore.WebUI.Controllers
             return View(result);
         }
 
-        public IActionResult AddProductToShoppingCart(int productId, string returnUrl)
+        public IActionResult AddProductToShoppingCart(int productId, string returnUrl, int quantity)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
             shoppingCart.AddItem(productId);
