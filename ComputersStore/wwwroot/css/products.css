@@ -15,3 +15,8 @@
     height: 215px;
     object-fit: contain;
 }
+
+.product-specification-row {
+    margin-left: 0;
+    margin-right: 0;
+}

@@ -34,6 +34,7 @@
     </div>
 </div>
 <hr />
+<h4>Specification</h4>
 @switch (Model.ProductCategoryId)
 {
     case ProductCategoryDictionary.CPU:
@@ -59,8 +60,3 @@
         break;
 
 }
-
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
