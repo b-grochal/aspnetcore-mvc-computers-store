@@ -49,3 +49,8 @@ bg-green {
     background-color: #000000; 
     border-color: #000000; 
 }
+
+.input-with-green-outline-on-focus:focus {
+    box-shadow: 0 0 0 0.2rem #28a745;
+    border-color: #28a745;
+}
