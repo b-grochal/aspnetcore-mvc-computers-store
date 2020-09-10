@@ -49,3 +49,35 @@
 .password-input:invalid {
     border-color: red;
 }
+
+.forgot-password-link {
+    text-decoration: underline;
+    color: #000000;
+    text-align: center;
+    font-weight: bold;
+    display: block;
+}
+
+.forgot-password-link:hover {
+    color: #28a745;
+}
+
+.login-column {
+    padding-top: 8rem;
+}
+
+.create-account-btn {
+    background-color: transparent;
+    color: #000000;
+    font-weight: bold;
+    border: 2px solid #000000;
+}
+
+.create-account-btn:hover {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.registration-column {
+    padding-top: 8rem;
+}
