@@ -1,4 +1,56 @@
-﻿.email-input {
+﻿.login-input {
+    border-bottom: 1px solid #eaeaea;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.login-input::placeholder {
+    opacity: 1;
+    color: #6b6e68;
+}
+
+.login-input:focus {
+    border-color: #28a745;
+    background-color: transparent;
+    color: #28a745;
+    box-shadow: none;
+}
+
+.login-input:invalid {
+    border-color: red;
+}
+
+.registration-input {
+    border-bottom: 1px solid #6b6e68;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.registration-input::placeholder {
+    opacity: 1;
+    color: #6b6e68;
+}
+
+.registration-input:focus {
+    border-color: #28a745;
+    background-color: transparent;
+    color: #28a745;
+    box-shadow: none;
+}
+
+.registration-input:invalid {
+    border-color: red;
+}
+
+/*.email-input {
     border-bottom: 1px solid #eaeaea;
     border-top: 0;
     border-left: 0;
@@ -48,7 +100,7 @@
 
 .password-input:invalid {
     border-color: red;
-}
+}*/
 
 .forgot-password-link {
     text-decoration: underline;
