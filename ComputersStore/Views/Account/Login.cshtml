@@ -9,20 +9,20 @@
 }
 
 <div class="row h-100">
-    <div class="col-6 d-flex justify-content-center">
+    <div class="col-6 d-flex justify-content-center login-column">
         <div class="w-50">
             <form asp-controller="Account" asp-action="Login" method="post" class="form-horizontal" role="form">
-                <h4 class="text-center">Are you a user?</h4>
+                <h4 class="text-center mb-5">Are you a user?</h4>
                 <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <input asp-for="Email" placeholder="Email" class="form-control email-input" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <input asp-for="Password" placeholder="Password" class="form-control password-input" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <div class="checkbox">
                         <label asp-for="RememberMe">
                             <input asp-for="RememberMe" />
@@ -30,20 +30,18 @@
                         </label>
                     </div>
                 </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-green w-100">Log in</button>
+                <div class="form-group mb-4">
+                    <button type="submit" class="btn btn-green w-100 font-weight-bold">Log in</button>
                 </div>
-                @*<p>
-                        <a asp-action="Register">Register as a new user?</a>
-                    </p>*@
-                <a asp-action="ForgotPassword">Forgot your password?</a>
+                <a class="forgot-password-link" asp-action="ForgotPassword">Forgot your password?</a>
             </form>
         </div>
     </div>
-    <div class="col-6 bg-light-ashen">
-        <section>
-            <h4 class="text-black">Is this your first visit?</h4>
-        </section>
+    <div class="col-6 bg-light-ashen d-flex justify-content-center registration-column">
+        <div class="w-50">
+            <h4 class="text-center text-black mb-5">Is this your first visit?</h4>
+            <button class="btn create-account-btn w-100">Create account</button>
+        </div>
     </div>
 </div>
 
