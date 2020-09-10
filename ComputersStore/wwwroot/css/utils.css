@@ -58,3 +58,7 @@ bg-green {
 .text-black {
     color: #000000;
 }
+
+.border-dark-ashen {
+    border-color: #6b6e68 !important;
+}
