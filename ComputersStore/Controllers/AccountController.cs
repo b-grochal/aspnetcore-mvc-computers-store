@@ -228,6 +228,47 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //GET: /Account/UpdateAccountData
+        [HttpGet]
+        public async Task<IActionResult> UpdateAccountData()
+        {
+            var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentUserId());
+            return View(accountData);
+        }
+
+        //
+        // POST: /Account/UpdateAccountData
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAccountData(AccountDataViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var applicationUserId = GetCurrentUserId();
+            if (applicationUserId != null)
+            {
+                var result = await accountBusinessService.UpdateAccountData(model, applicationUserId);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(UpdateAccountDataConfirmation));
+                }
+                AddErrors(result);
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        //
+        // GET: /Account/UpdateAccountDataConfirmation
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult UpdateAccountDataConfirmation()
+        {
+            return View();
+        }
+
 
         #region Helpers
 
