@@ -1,0 +1,48 @@
+﻿@model OrderListViewModel
+@{
+    ViewData["Title"] = "UpdateAccountData";
+}
+
+<h3 class="text-uppercase">My orders</h3>
+<hr class="account-panel-horizontal-line" />
+<div class="row">
+    <div class="col-3">
+        <ul class="list-unstyled">
+            <li><a href="#" class="account-panel-link text-uppercase active-account-panel-link">My orders</a></li>
+            <li><a href="#" class="account-panel-link text-uppercase">My data</a></li>
+            <li><a href="#" class="account-panel-link text-uppercase">Change password</a></li>
+            <li><a href="#" class="account-panel-link text-uppercase">Logout</a></li>
+        </ul>
+    </div>
+    <div class="col-9">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Creation date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var order in Model.Orders)
+                    {
+                        <tr>
+                            <th scope="col"><button class="btn btn-sm btn-green">@order.OrderId</button></th>
+                            <th scope="col">@order.OrderDate</th>
+                            <th scope="col">@order.OrderStatusName</th>
+                            <th scope="col">XXX</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+
