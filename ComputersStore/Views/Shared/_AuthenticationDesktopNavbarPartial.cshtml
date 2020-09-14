@@ -1,0 +1,33 @@
+﻿<nav class="navbar navbar-dark p-0 d-none d-sm-flex">
+    <div class="container-fluid d-flex flex-column p-0">
+        <div class="row w-100 bg-black px-2 py-1">
+            <div class="col-2 d-flex justify-content-start align-items-center">
+                <form class="form-group w-100 m-0">
+                    <div class="input-group navbar-search-products-input-group pb-1">
+                        <input class="form-control w-75 navbar-search-product-input shadow-none px-0 text-white" placeholder="Search" aria-label="Search">
+                        <div class="input-group-append w-25">
+                            <button class="btn text-white w-100 bg-black" type="submit"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-8 d-flex justify-content-center align-items-center">
+                <a class="h1 text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">ComputersStore</a>
+            </div>
+            <div class="col-2 d-flex justify-content-end align-items-center">
+                <partial name="_DesktopLoginPartial" />
+            </div>
+        </div>
+        <div class="row d-flex justify-content-center w-100 bg-dark-grey px-2 py-2">
+            <div class="w-50 d-flex justify-content-around">
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.CPU">CPU</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.GPU">GPU</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.Motherboard">Motherboard</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.RAM">RAM</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.PSU">PSU</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.HDD">HDD</a>
+                <a class="navbar-desktop-product-category-link py-1" asp-controller="Products" asp-action="List" asp-route-productCategoryId="@ProductCategoryDictionary.SSD">SSD</a>
+            </div>
+        </div>
+    </div>
+</nav>
