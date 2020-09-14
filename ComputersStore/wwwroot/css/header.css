@@ -38,6 +38,7 @@
 
 .navbar-desktop-user-link {
     text-decoration: none;
+    min-width: 65px;
 }
 
 .navbar-desktop-user-link:hover {
