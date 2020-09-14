@@ -66,6 +66,20 @@ namespace ComputersStore.BusinessServices.Implementation
             return token;
         }
 
+        public async Task<AccountDataViewModel> GetApplicationUserAccountData(string applicationUserId)
+        {
+            var applicationUser = await accountService.GetApplicationUserById(applicationUserId);
+            var result = mapper.Map<AccountDataViewModel>(applicationUser);
+            return result;
+        }
+
+        public async Task<IdentityResult> UpdateAccountData(AccountDataViewModel accountDataViewModel, string applicationUserId)
+        {
+            var applicationUser = await accountService.GetApplicationUserById(applicationUserId);
+            var updatedApplicationUser = mapper.Map(accountDataViewModel, applicationUser);
+            return await accountService.UpdateAccountData(updatedApplicationUser);
+        }
+
         
     }
 }
