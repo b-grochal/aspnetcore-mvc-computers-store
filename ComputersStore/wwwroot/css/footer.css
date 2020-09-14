@@ -1,0 +1,19 @@
+﻿.footer-link {
+    color: #919191;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    color: #28a745;
+    text-decoration: none;
+}
+
+.footer-category-title-link {
+    color: #6b6e68;
+    text-decoration: none;
+}
+
+.footer-category-title-link:hover {
+    color: #28a745;
+    text-decoration: none;
+}
