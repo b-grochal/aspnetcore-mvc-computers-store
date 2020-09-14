@@ -1,0 +1,19 @@
+﻿.account-panel-horizontal-line {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border-color: #eaeaea;
+}
+
+.account-panel-link {
+    color: #919191;
+    text-decoration: none;
+}
+
+.account-panel-link:hover {
+    color: #28a745;
+    text-decoration: none;
+}
+
+.active-account-panel-link {
+    color: #28a745 !important;
+}

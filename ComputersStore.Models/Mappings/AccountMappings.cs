@@ -13,6 +13,11 @@ namespace ComputersStore.Models.Mappings
         {
             CreateMap<RegisterViewModel, ApplicationUser>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
+
+            CreateMap<ApplicationUser, AccountDataViewModel>();
+
+            CreateMap<AccountDataViewModel, ApplicationUser>()
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
         }
     }
 }

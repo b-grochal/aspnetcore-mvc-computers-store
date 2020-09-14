@@ -75,5 +75,10 @@ namespace ComputersStore.Services.Implementation
         {
             return await userManager.FindByEmailAsync(applicationUserEmail);
         }
+
+        public async Task<IdentityResult> UpdateAccountData(ApplicationUser applicationUser)
+        {
+            return await userManager.UpdateAsync(applicationUser);
+        }
     }
 }
