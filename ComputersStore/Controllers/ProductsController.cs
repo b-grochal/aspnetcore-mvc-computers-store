@@ -27,8 +27,8 @@ namespace ComputersStore.WebUI.Controllers
 
         public async Task<ActionResult> List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
         {
-            var products = await productBusinessService.GetProductsDetailCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
-            var productsListViewModel = new ProductDetailListViewModel
+            var products = await productBusinessService.GetProductsCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
+            var productsListViewModel = new ProductsListViewModel
             {
                 Products = products,
                 PaginationViewModel = new PaginationViewModel
@@ -135,6 +135,14 @@ namespace ComputersStore.WebUI.Controllers
         {
             await productBusinessService.DeleteProduct(id);
             return RedirectToAction(nameof(List));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SearchProducts(string searchString)
+        {
+            var searchedProductsCollectionViewModel = await productBusinessService.GetSearchedProductsCollection(searchString);
+            return View(searchedProductsCollectionViewModel);
         }
     }
 }

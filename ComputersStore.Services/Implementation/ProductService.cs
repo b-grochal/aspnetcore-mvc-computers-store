@@ -78,5 +78,10 @@ namespace ComputersStore.Services.Implementation
         {
             return await applicationDbContext.Products.Where(p => productsId.Contains(p.ProductId)).ToListAsync(); 
         }
+
+        public async Task<IEnumerable<Product>> GetSearchedProductsCollection(string searchString)
+        {
+            return await applicationDbContext.Products.Where(p => p.Name.ToLower().Contains(searchString.ToLower())).ToListAsync();
+        }
     }
 }

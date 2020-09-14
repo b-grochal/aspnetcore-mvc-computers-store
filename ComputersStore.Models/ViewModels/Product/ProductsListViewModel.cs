@@ -12,5 +12,6 @@ namespace ComputersStore.Models.ViewModels.Product
         public PaginationViewModel PaginationViewModel { get; set; }
         public ProductCategory ProductCategory { get; set; }
         public string SortOrder { get; set; }
+        public int ProductCategoryId { get; set; }
     }
 }
