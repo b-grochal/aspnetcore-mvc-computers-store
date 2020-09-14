@@ -76,3 +76,9 @@
     color: #28a745;
     text-decoration: none;
 }
+
+.account-dropdown-menu {
+    left: auto;
+    right: 50px;
+    min-width: 20rem;
+}
