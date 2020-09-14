@@ -6,10 +6,38 @@
     <i class="fa fa-globe-americas"></i>
     <span class="navbar-desktop-user-link-caption">Language</span>
 </a>
-<a href="" class="d-flex flex-column align-items-center justify-content-between text-white h-100 py-2 px-2 navbar-desktop-user-link">
+<a href="#" data-toggle="dropdown" class="d-flex flex-column align-items-center justify-content-between text-white h-100 py-2 px-2 navbar-desktop-user-link">
     <i class="fa fa-user"></i>
     <span class="navbar-desktop-user-link-caption">Account</span>
 </a>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="dropdown-menu account-dropdown-menu p-0 rounded-0">
+        <div class="w-100 bg-light-ashen d-flex flex-column justify-content-center p-4">
+            <h5 class="mb-3">Are you a user?</h5>
+            <button class="btn btn-green w-75">Log in</button>
+        </div>
+        <div class="w-100 bg-white d-flex flex-column justify-content-center p-4">
+            <h5 class="mb-3">Is it your first visit?</h5>
+            <button class="btn btn-transparent-green w-75">Create account</button>
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="dropdown-menu account-dropdown-menu p-0 rounded-0">
+        <div class="w-100 bg-light-ashen d-flex flex-column justify-content-center p-4">
+            <h5 class="mb-3">Are you a user?</h5>
+            <button class="btn btn-green w-75">Log in</button>
+        </div>
+        <div class="w-100 bg-white d-flex flex-column justify-content-center p-4">
+            <h5 class="mb-3">Is it your first visit?</h5>
+            <button class="btn btn-transparent-green w-75">Create account</button>
+        </div>
+
+    </div>
+}
 <a href="" class="d-flex flex-column align-items-center justify-content-between text-white h-100 py-2 px-2 navbar-desktop-user-link">
     <i class="fa fa-shopping-cart"></i>
     <span class="navbar-desktop-user-link-caption">Shopping</span>

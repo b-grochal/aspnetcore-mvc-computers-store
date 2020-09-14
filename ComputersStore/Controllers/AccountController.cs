@@ -19,13 +19,16 @@ namespace ComputersStore.Controllers
         private readonly IAccountBusinessService accountBusinessService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
+        private readonly IOrderBusinessService orderBusinessService;
         private readonly IEmailMessagesService emailMessagesService;
+        private readonly int ordersPerPage = 5;
 
-        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IEmailMessagesService emailMessagesService)
+        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailMessagesService emailMessagesService)
         {
             this.accountBusinessService = accountBusinessService;
             this.signInManager = signInManager;
             this.applicationUserBusinessService = applicationUserBusinessService;
+            this.orderBusinessService = orderBusinessService;
             this.emailMessagesService = emailMessagesService;
         }
 
@@ -228,6 +231,52 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        //GET: /Account/UpdateAccountData
+        [HttpGet]
+        public async Task<IActionResult> UpdateAccountData()
+        {
+            var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentUserId());
+            return View(accountData);
+        }
+
+        //
+        // POST: /Account/UpdateAccountData
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateAccountData(AccountDataViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var applicationUserId = GetCurrentUserId();
+            if (applicationUserId != null)
+            {
+                var result = await accountBusinessService.UpdateAccountData(model, applicationUserId);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction(nameof(UpdateAccountDataConfirmation));
+                }
+                AddErrors(result);
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        //
+        // GET: /Account/UpdateAccountDataConfirmation
+        [HttpGet]
+        public IActionResult UpdateAccountDataConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet("Account/Orders")]
+        public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
+        {
+            var orders = await orderBusinessService.GetApplicationUserOrders(GetCurrentUserId(), pageNumber, ordersPerPage, ordersPerPage);
+            return View(orders);
+        }
 
         #region Helpers
 

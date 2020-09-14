@@ -16,6 +16,8 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<IdentityResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel, string applicationUserId);
         Task<string> GenerateAccountEmailConfirmationTokenForUser(string applicationUserId);
         Task<string> GenerateResetPasswordTokenForUser(string applicationUserId);
+        Task<AccountDataViewModel> GetApplicationUserAccountData(string applicationUserId);
+        Task<IdentityResult> UpdateAccountData(AccountDataViewModel accountDataViewModel, string applicationUserId);
 
     }
 }

@@ -14,5 +14,6 @@ namespace ComputersStore.Services.Interfaces
         Task CreateOrder(Order order);
         Task UpdateOrder(Order order);
         Task DeleteOrder(int orderId);
+        Task<IEnumerable<Order>> GetApplicationUserOrdersCollection(string applicationUserId);
     }
 }

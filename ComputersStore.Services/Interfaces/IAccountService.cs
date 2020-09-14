@@ -18,5 +18,6 @@ namespace ComputersStore.Services.Interfaces
         Task<ApplicationUser> GetApplicationUserById(string applicationUserId);
         Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail);
         Task<string> GenerateResetPasswordToken(string applicationUserId);
+        Task<IdentityResult> UpdateAccountData(ApplicationUser applicationUser);
     }
 }
