@@ -55,6 +55,15 @@ bg-green {
     border-color: #28a745;
 }
 
+.text-black {
+    color: #000000;
+}
+
+.border-dark-ashen {
+    border-color: #6b6e68 !important;
+}
+}
+
 .btn-transparent-green {
     color: #28a745;
     background-color: transparent;
