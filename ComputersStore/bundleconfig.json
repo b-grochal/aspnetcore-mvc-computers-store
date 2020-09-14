@@ -8,6 +8,7 @@
       "wwwroot/css/home.css",
       "wwwroot/css/products.css",
       "wwwroot/css/account.css"
+      "wwwroot/css/authentication.css"
     ]
   }
 ]
