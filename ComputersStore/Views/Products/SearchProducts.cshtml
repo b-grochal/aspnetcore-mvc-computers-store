@@ -1,0 +1,21 @@
+﻿@model SearchedProductsListViewModel
+
+@{
+    ViewData["Title"] = "SearchProducts";
+}
+
+@if (Model.Products.Count() > 0)
+{
+    <h3>@Model.Products.Count() results for "@Model.SearchString"</h3>
+    foreach (var product in Model.Products)
+    {
+        @await Html.PartialAsync("_ProductHorizontalCardPartial", product);
+    }
+}
+else
+{
+    <h3>No results for "@Model.SearchString"</h3>
+    <p>Sorry, we couldn't find anything in our store for "@Model.SearchString"</p>
+}
+
+
