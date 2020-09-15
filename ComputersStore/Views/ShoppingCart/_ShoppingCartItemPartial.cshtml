@@ -11,6 +11,9 @@
         <p class="m-0">Price: @Model.ProductPrice</p>
     </div>
     <div class="col-2 d-flex justify-content-end align-items-center">
-        <a class="btn btn-sm btn-green mb-1" asp-controller="ShoppingCart" asp-action="RemoveProductFromShoppingCart" asp-route-id="@Model.ProductId">Remove</a>
+        <form asp-controller="ShoppingCart" asp-action="RemoveProductFromShoppingCart" type="post">
+            <input hidden asp-for="ProductId" />
+            <button type="submit" class="btn btn-sm btn-green mb-1">Remove</button>
+        </form>
     </div>
 </div>
