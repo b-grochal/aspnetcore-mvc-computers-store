@@ -1,6 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
-@inject UserManager<ApplicationUser> UserManage
+@inject UserManager<ApplicationUser> UserManager
 
 <a href="" class="d-flex flex-column align-items-center justify-content-between text-white h-100 py-2 px-2 navbar-desktop-user-link">
     <i class="fa fa-globe-americas"></i>
@@ -14,12 +14,17 @@
 {
     <div class="dropdown-menu account-dropdown-menu p-0 rounded-0">
         <div class="w-100 bg-light-ashen d-flex flex-column justify-content-center p-4">
-            <h5 class="mb-3">Are you a user?</h5>
-            <a class="btn btn-green w-75" asp-controller="Account" asp-action="Login">Log in</a>
+            <h5 class="mb-3">@User.Identity.Name</h5>
+            <form class="form-inline" asp-controller="Account" asp-action="LogOff">
+                <button type="submit" class="btn btn-green btn-sm text-uppercase">Logout</button>
+            </form>
         </div>
         <div class="w-100 bg-white d-flex flex-column justify-content-center p-4">
-            <h5 class="mb-3">Is it your first visit?</h5>
-            <a class="btn btn-transparent-green w-75" asp-controller="Account" asp-action="Register">Create account</a>
+            <ul class="list-unstyled">
+                <li><i class="fa fa-box mr-2"></i><a asp-controller="Account" asp-action="ApplicationUserOrders" class="account-panel-link" account-panel-link>My orders</a></li>
+                <li><i class="fa fa-user-edit mr-2"></i><a asp-controller="Account" asp-action="UpdateAccountData" class="account-panel-link" account-panel-link>My data</a></li>
+                <li><i class="fa fa-key mr-2"></i><a asp-controller="Account" asp-action="ChangePassword" class="account-panel-link" account-panel-link>Change password</a></li>
+            </ul>
         </div>
 
     </div>
