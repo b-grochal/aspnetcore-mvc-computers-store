@@ -1,6 +1,10 @@
 ﻿<ul class="list-unstyled">
-    <li><a href="#" class="account-panel-link text-uppercase">My orders</a></li>
-    <li><a href="#" class="account-panel-link text-uppercase">My data</a></li>
-    <li><a href="#" class="account-panel-link text-uppercase active-account-panel-link">Change password</a></li>
-    <li><a href="#" class="account-panel-link text-uppercase">Logout</a></li>
+    <li><a asp-controller="Account" asp-action="ApplicationUserOrders" class="account-panel-link text-uppercase" account-panel-link>My orders</a></li>
+    <li><a asp-controller="Account" asp-action="UpdateAccountData"  class="account-panel-link text-uppercase" account-panel-link>My data</a></li>
+    <li><a asp-controller="Account" asp-action="ChangePassword" class="account-panel-link text-uppercase" account-panel-link>Change password</a></li>
+    <li class="mt-1">
+        <form class="form-inline" asp-controller="Account" asp-action="LogOff">
+            <button type="submit" class="btn btn-green btn-sm text-uppercase">Logout</button>
+        </form>
+    </li>
 </ul>
