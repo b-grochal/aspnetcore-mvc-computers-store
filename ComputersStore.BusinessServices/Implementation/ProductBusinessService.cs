@@ -33,9 +33,9 @@ namespace ComputersStore.BusinessServices.Implementation
             await productService.DeleteProduct(productId);
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductsCollection()
+        public async Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
         {
-            var products = await productService.GetProductsCollection();
+            var products = await productService.GetProductsCollection(productCategroryId, sortOrder, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return result;
         }
@@ -183,6 +183,17 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             var product = await productService.GetProduct(productId);
             var result = mapper.Map<ProductViewModel>(product);
+            return result;
+        }
+
+        public async Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString)
+        {
+            var searchedProducts = await productService.GetSearchedProductsCollection(searchString);
+            var result = new SearchedProductsListViewModel
+            {
+                Products = mapper.Map<IEnumerable<ProductViewModel>>(searchedProducts),
+                SearchString = searchString
+            };
             return result;
         }
     }

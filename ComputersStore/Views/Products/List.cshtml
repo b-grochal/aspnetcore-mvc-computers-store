@@ -1,4 +1,5 @@
-﻿@model ProductDetailListViewModel
+﻿@model ProductsListViewModel
+
 @{
     ViewData["Title"] = "List";
 }
@@ -8,7 +9,7 @@
         <form asp-controller="Products" asp-action="List" class="productsSortingForm">
             <input name="ProductCategoryId" value="@Model.ProductCategoryId" hidden/>
             <input name="PageNumber" value="@Model.PaginationViewModel.CurrentPage" hidden/>
-            <select class="form-control" asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
+            <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
                 <option value="">Default sorting</option>
                 <option value="Price ASC">Price ascending</option>
                 <option value="Price DSC">Price descending</option>
@@ -19,7 +20,7 @@
         Number of products: @Model.PaginationViewModel.TotalItems
     </div>
 </div>
-<hr class="products-list-hotizontal-line" />
+<hr class="products-list-hotizontal-line mt-2 mb-4" />
 <div class="row">
     <div class="col">
         @foreach (var product in Model.Products)
@@ -27,9 +28,13 @@
             @await Html.PartialAsync("_ProductHorizontalCardPartial", product);
         }
 
-        <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                          page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-productCategoryId="@Model.ProductCategoryId">
-        </pagination-links>
+        @if (Model.PaginationViewModel.TotalPages > 1)
+        {
+            <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="List" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-productCategoryId="@Model.ProductCategoryId">
+            </pagination-links>
+        }
+
     </div>
 </div>
 
