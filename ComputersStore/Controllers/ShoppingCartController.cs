@@ -37,9 +37,9 @@ namespace ComputersStore.WebUI.Controllers
         public IActionResult AddProductToShoppingCart(int productId, string returnUrl, int quantity)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
-            shoppingCart.AddItem(productId);
+            shoppingCart.AddItem(productId, quantity);
             SaveShoppingCart(shoppingCart);
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction(nameof(Summary));
         }
 
         public IActionResult RemoveProductFromShoppingCart(int productId)
