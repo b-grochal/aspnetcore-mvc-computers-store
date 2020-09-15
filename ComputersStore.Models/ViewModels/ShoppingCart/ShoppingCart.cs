@@ -11,7 +11,7 @@ namespace ComputersStore.Models.ViewModels.ShoppingCart
         [JsonProperty]
         private List<ShoppingCartItem> shoppingCartItemsCollection = new List<ShoppingCartItem>();
 
-        public void AddItem(int productId)
+        public void AddItem(int productId, int quantity)
         {
             var shoppingCartItem = shoppingCartItemsCollection
                 .Where(x => x.ProductId == productId)
@@ -22,12 +22,12 @@ namespace ComputersStore.Models.ViewModels.ShoppingCart
                 shoppingCartItemsCollection.Add(new ShoppingCartItem
                 {
                     ProductId = productId,
-                    Quantity = 1
+                    Quantity = quantity
                 });
             }
             else
             {
-                shoppingCartItem.Quantity++;
+                shoppingCartItem.Quantity += quantity;
             }
         }
 
