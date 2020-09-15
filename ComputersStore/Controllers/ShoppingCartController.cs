@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.WebUI.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize]
     public class ShoppingCartController : Controller
     {
         private readonly IShoppingCartBusinessService shoppingCartBusinessService;
@@ -35,9 +37,9 @@ namespace ComputersStore.WebUI.Controllers
         public IActionResult AddProductToShoppingCart(int productId, string returnUrl, int quantity)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
-            shoppingCart.AddItem(productId);
+            shoppingCart.AddItem(productId, quantity);
             SaveShoppingCart(shoppingCart);
-            return RedirectToAction("Index", new { returnUrl });
+            return RedirectToAction(nameof(Summary));
         }
 
         public IActionResult RemoveProductFromShoppingCart(int productId)
