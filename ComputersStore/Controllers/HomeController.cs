@@ -20,6 +20,15 @@ namespace ComputersStore.Controllers
 
         public IActionResult Index()
         {
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction(nameof(AdminPanel));
+            }
+            return View();
+        }
+
+        public IActionResult AdminPanel()
+        {
             return View();
         }
 
