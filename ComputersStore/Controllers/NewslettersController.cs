@@ -16,15 +16,16 @@ namespace ComputersStore.WebUI.Controllers
     public class NewslettersController : Controller
     {
         private readonly INewsletterBusinessService newsletterBusinessService;
+        private readonly int newslettersPerPage = 5;
 
         public NewslettersController(INewsletterBusinessService newsletterBusinessService)
         {
             this.newsletterBusinessService = newsletterBusinessService;
         }
 
-        public async Task<IActionResult> List()
+        public async Task<IActionResult> Table(int pageNumber = 1)
         {
-            var newsletters = await newsletterBusinessService.GetNewslletersCollection();
+            var newsletters = await newsletterBusinessService.GetNewslletersCollection(pageNumber, newslettersPerPage);
             return View(newsletters);
         }
 
@@ -60,10 +61,10 @@ namespace ComputersStore.WebUI.Controllers
         // POST: Newsletters/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id) 
         {
             await newsletterBusinessService.DeleteNewsletter(id);
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(Table));
         }
     }
 }
