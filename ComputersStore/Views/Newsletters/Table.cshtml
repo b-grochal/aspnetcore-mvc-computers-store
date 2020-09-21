@@ -1,0 +1,54 @@
+﻿@model NewslettersTableViewModel
+@{
+    ViewData["Title"] = "Table";
+}
+
+<div class="row">
+    <div class="col-12 d-flex justify-content-start align-content-center">
+        <button class="btn btn-green" data-toggle="collapse" data-target="#newslettersTableFilters" aria-expanded="false" aria-controls="newslettersTableFilters">Filter</button>
+    </div>
+</div>
+<div class="row collapse" id="newslettersTableFilters">
+    <div class="col-12">
+        <h3>Filters</h3>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Email</th>
+                        <th scope="col" class="text-right">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var newsletter in Model.Newsletters)
+                    {
+                        <tr>
+                            <td scope="col">@newsletter.NewsletterId</td>
+                            <td scope="col">@newsletter.Email</td>
+                            <td scope="col" class="text-right"><a class="btn btn-sm btn-green">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        @if (Model.PaginationViewModel.TotalPages > 1)
+        {
+            <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green">
+            </pagination-links>
+        }
+    </div>
+</div>
+
+
+

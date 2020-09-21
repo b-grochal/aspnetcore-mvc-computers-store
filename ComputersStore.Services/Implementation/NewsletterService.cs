@@ -5,6 +5,7 @@ using ComputersStore.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -37,10 +38,18 @@ namespace ComputersStore.Services.Implementation
             return await applicationDbContext.Newsletters.FindAsync(newsletterId);
         }
 
-        public async Task<IEnumerable<Newsletter>> GetNewslettersCollection()
+        public async Task<IEnumerable<Newsletter>> GetNewslettersCollection(int pageNumber, int pageSize)
         {
-            var newsletters = await applicationDbContext.Newsletters.ToListAsync();
-            return newsletters;
+            return await applicationDbContext.Newsletters
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
+        public int GetNewslettersCollectionCount()
+        {
+            return applicationDbContext.Newsletters
+                .Count();
         }
     }
 }
