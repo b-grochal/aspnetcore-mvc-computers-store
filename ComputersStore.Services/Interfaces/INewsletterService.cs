@@ -10,7 +10,7 @@ namespace ComputersStore.Services.Interfaces
     {
         Task CreateNewsletter(Newsletter newsletter);
         Task DeleteNewsletter(int newsletterId);
-        Task<IEnumerable<Newsletter>> GetNewslettersCollection(int pageNumber, int pageSize);
+        Task<IEnumerable<Newsletter>> GetNewslettersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
         Task<Newsletter> GetNewsletter(int newsletterId);
         int GetNewslettersCollectionCount();
     }

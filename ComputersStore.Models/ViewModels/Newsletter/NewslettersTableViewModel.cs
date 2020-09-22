@@ -1,4 +1,5 @@
-﻿using ComputersStore.Models.ViewModels.Other;
+﻿using ComputersStore.Models.SearchCriteria;
+using ComputersStore.Models.ViewModels.Other;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,5 +10,6 @@ namespace ComputersStore.Models.ViewModels.Newsletter
     {
         public IEnumerable<NewsletterViewModel> Newsletters { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }
+        public NewslettersCollectionSearchCriteria newslettersCollectionSearchCritera { get; set; }
     }
 }

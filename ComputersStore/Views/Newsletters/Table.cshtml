@@ -8,9 +8,24 @@
         <button class="btn btn-green" data-toggle="collapse" data-target="#newslettersTableFilters" aria-expanded="false" aria-controls="newslettersTableFilters">Filter</button>
     </div>
 </div>
-<div class="row collapse" id="newslettersTableFilters">
+<div class="row pt-3 collapse" id="newslettersTableFilters">
     <div class="col-12">
-        <h3>Filters</h3>
+        <form asp-controller="Newsletters" asp-action="Table">
+            <div class="form-row">
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
+                    <label class="control-label"></label>
+                    <input name="NewsletterId" class="form-control" type="number" value="@Model.newslettersCollectionSearchCritera.NewsletterId" />
+                </div>
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
+                    <label class="control-label"></label>
+                    <input name="NewsletterEmail" class="form-control" value="@Model.newslettersCollectionSearchCritera.NewsletterEmail" />
+                </div>
+                <div class="form-group col-md-4 d-flex justify-content-end align-items-center mb-0">
+                    <input type="submit" value="Search" class="btn btn-green mr-2" />
+                    <btn class="btn btn-green">Clear</btn>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 <hr />
@@ -44,7 +59,8 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green">
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-newsletterId="@Model.newslettersCollectionSearchCritera.NewsletterId" 
+                              page-url-newsletterEmail="@Model.newslettersCollectionSearchCritera.NewsletterEmail">
             </pagination-links>
         }
     </div>
