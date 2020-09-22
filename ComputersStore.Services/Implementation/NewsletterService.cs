@@ -38,9 +38,11 @@ namespace ComputersStore.Services.Implementation
             return await applicationDbContext.Newsletters.FindAsync(newsletterId);
         }
 
-        public async Task<IEnumerable<Newsletter>> GetNewslettersCollection(int pageNumber, int pageSize)
+        public async Task<IEnumerable<Newsletter>> GetNewslettersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
         {
             return await applicationDbContext.Newsletters
+                .Where(n => newsletterId == null || n.NewsletterId == newsletterId)
+                .Where(n => newsletterEmail == null || n.Email == newsletterEmail)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
