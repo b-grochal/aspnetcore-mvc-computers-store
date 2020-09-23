@@ -84,6 +84,7 @@ namespace ComputersStore
                 mc.AddProfile(new PaymentTypeMappingProfile());
                 mc.AddProfile(new AccountMappings());
                 mc.AddProfile(new ShoppingCartMappingProfile());
+                mc.AddProfile(new ProductCategoryMappingProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -101,6 +102,8 @@ namespace ComputersStore
             services.AddTransient<IOrderStatusService, OrderStatusService>();
             services.AddTransient<IPaymentTypeBusinessService, PaymentTypeBusinessService>();
             services.AddTransient<IPaymentTypeService, PaymentTypeService>();
+            services.AddTransient<IProductCategoryBusinessService, ProductCategoryBusinessService>();
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
             services.AddTransient<IAccountBusinessService, AccountBusinessService>();
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IApplicationUserBusinessService, ApplicationUserBusinessService>();
