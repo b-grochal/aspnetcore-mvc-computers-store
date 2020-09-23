@@ -16,15 +16,15 @@ namespace ComputersStore.WebUI.Controllers
             this.applicationUserBusinessService = applicationUserBusinessService;
         }
 
-        public IActionResult Users(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
+        public async Task<IActionResult> Users(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var usersCollectionViewModel = applicationUserBusinessService.GetUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
+            var usersCollectionViewModel = await applicationUserBusinessService.GetUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
             return View(usersCollectionViewModel);
         }
 
-        public IActionResult Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
+        public async Task<IActionResult> Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var adminsCollectionViewModel = applicationUserBusinessService.GetAdminsCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
+            var adminsCollectionViewModel = await applicationUserBusinessService.GetAdminsCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
             return View(adminsCollectionViewModel);
         }
     }
