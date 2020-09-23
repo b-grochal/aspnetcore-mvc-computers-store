@@ -50,5 +50,41 @@ namespace ComputersStore.Services.Implementation
         {
             return await userManager.FindByEmailAsync(applicationUserEmail);
         }
+
+        public async Task<IEnumerable<ApplicationUser>> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        {
+            var users = await userManager.GetUsersInRoleAsync("User");
+            return users
+                .Where(u => firstName == null || u.FirstName == firstName)
+                .Where(u => lastName == null || u.SecondName == lastName)
+                .Where(u => email == null || u.Email == email)
+                .Where(u => phoneNumber == null || u.PhoneNumber == phoneNumber)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+        }
+
+        public async Task<IEnumerable<ApplicationUser>> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        {
+            var admins = await userManager.GetUsersInRoleAsync("Admin");
+            return admins
+                .Where(u => firstName == null || u.FirstName == firstName)
+                .Where(u => lastName == null || u.SecondName == lastName)
+                .Where(u => email == null || u.Email == email)
+                .Where(u => phoneNumber == null || u.PhoneNumber == phoneNumber)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+        }
+
+        public async Task<int> GetUsersCollectionCount()
+        {
+            var users = await userManager.GetUsersInRoleAsync("Admin");
+            return users.Count();
+        }
+
+        public async Task<int> GetAdminsCollectionCount()
+        {
+            var users = await userManager.GetUsersInRoleAsync("Admin");
+            return users.Count();
+        }
     }
 }
