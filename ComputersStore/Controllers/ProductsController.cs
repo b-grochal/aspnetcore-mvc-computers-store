@@ -43,6 +43,12 @@ namespace ComputersStore.WebUI.Controllers
             return View(productsListViewModel);
         }
 
+        public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)
+        {
+            var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
+            return View(productsTableViewModel);
+        }
+
         // GET: Products/Details/5
         public async Task<IActionResult> Details(int id)
         {

@@ -2,11 +2,14 @@
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
 using ComputersStore.Core.Dictionaries;
+using ComputersStore.Models.SearchCriteria.Products;
 using ComputersStore.Models.ViewModels;
+using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -195,6 +198,29 @@ namespace ComputersStore.BusinessServices.Implementation
                 SearchString = searchString
             };
             return result;
+        }
+
+        public async Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
+        {
+            var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended);
+            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products.Skip((pageNumber - 1) * pageSize).Take(pageSize));
+            return new ProductsTableViewModel
+            {
+                Products = mappedProducts,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = pageSize,
+                    TotalItems = products.Count()
+                },
+                ProductsTableSearchCriteria = new ProductsTableSearchCriteria
+                {
+                    ProductCategoryId = productCategoryId,
+                    ProductName = productName,
+                    IsRecommended = isRecommended
+                }
+
+            };
         }
     }
 }

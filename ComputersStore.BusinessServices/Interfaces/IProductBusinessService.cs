@@ -21,5 +21,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<IEnumerable<ProductViewModel>> GetRecommendedProductsCollection(int numberOfProducts);
         Task<ProductViewModel> GetProduct(int productId);
         Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString);
+        Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize);
     }
 }
