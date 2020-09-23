@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
+using ComputersStore.Models.SearchCriteria;
 using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Models.ViewModels.Order;
 using ComputersStore.Models.ViewModels.Other;
@@ -60,9 +61,9 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrderListViewModel> GetOrdersCollection(int? orderId, string applicationUserEmail, int? orderStatusId, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrderListViewModel> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
         {
-            var orders = await orderService.GetOrdersCollection(orderId, applicationUserEmail, orderStatusId, pageNumber, pageSize);
+            var orders = await orderService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, pageSize);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
             var result = new OrderListViewModel
             {
@@ -70,8 +71,15 @@ namespace ComputersStore.BusinessServices.Implementation
                 PaginationViewModel = new PaginationViewModel
                 {
                     CurrentPage = pageNumber,
-                    ItemsPerPage = ordersPerPage,
+                    ItemsPerPage = pageSize,
                     TotalItems = mappedOrders.Count()
+                },
+                ordersTableSearchCriteria = new OrdersTableSearchCriteria
+                {
+                    OrderId = orderId,
+                    OrderStatusId = orderStatusId,
+                    PaymentTypeId = paymentTypeId,
+                    ApplicationUserEmail = applicationUserEmail
                 }
             };
             return result;

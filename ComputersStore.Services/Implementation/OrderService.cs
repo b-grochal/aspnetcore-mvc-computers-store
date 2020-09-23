@@ -43,12 +43,13 @@ namespace ComputersStore.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize)
+        public async Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string userEmail, int pageNumber, int pageSize)
         {
             return await applicationDbContext.Orders
                 .Where(o => orderId == null || o.OrderId == orderId)
-                .Where(o => userEmail == null || o.ApplicationUser.Email == userEmail)
                 .Where(o => orderStatusId == null || o.OrderStatusId == orderStatusId)
+                .Where(o => paymentTypeId == null || o.PaymentTypeId == paymentTypeId)
+                .Where(o => userEmail == null || o.ApplicationUser.Email == userEmail)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
