@@ -15,5 +15,9 @@ namespace ComputersStore.Services.Interfaces
         Task<ApplicationUser> GetApplicationUserById(string applicationUserId);
         Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail);
         Task<IEnumerable<ApplicationUser>> GetApplicationUsersCollection();
+        Task<IEnumerable<ApplicationUser>> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
+        Task<IEnumerable<ApplicationUser>> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
+        Task<int> GetUsersCollectionCount();
+        Task<int> GetAdminsCollectionCount();
     }
 }
