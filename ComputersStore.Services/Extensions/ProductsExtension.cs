@@ -1,4 +1,4 @@
-﻿using ComputersStore.Core.Data;
+﻿using ComputersStore.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

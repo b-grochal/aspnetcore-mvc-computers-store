@@ -1,5 +1,5 @@
-﻿using ComputersStore.Core.Data;
-using ComputersStore.Core.Dictionaries;
+﻿using ComputersStore.Data.Entities;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Data;
 using ComputersStore.Database.DatabaseContext;
 using Microsoft.AspNetCore.Builder;

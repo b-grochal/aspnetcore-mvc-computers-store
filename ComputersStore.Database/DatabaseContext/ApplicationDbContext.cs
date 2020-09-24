@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ComputersStore.Core.Data;
-using ComputersStore.Core.Dictionaries;
+using ComputersStore.Data.Entities;
+using ComputersStore.Data.Dictionaries;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

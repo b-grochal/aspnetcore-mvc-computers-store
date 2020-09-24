@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.Models.Converters;
 using ComputersStore.Models.Resolvers;
 using ComputersStore.Models.ViewModels;

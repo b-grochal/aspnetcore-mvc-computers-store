@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.EmailService.Service.Implementation;
 using ComputersStore.EmailService.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;

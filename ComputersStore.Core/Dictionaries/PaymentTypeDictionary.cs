@@ -1,9 +1,8 @@
-﻿using ComputersStore.Core.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Core.Dictionaries
+namespace ComputersStore.Data.Dictionaries
 {
     public static class PaymentTypeDictionary
     {

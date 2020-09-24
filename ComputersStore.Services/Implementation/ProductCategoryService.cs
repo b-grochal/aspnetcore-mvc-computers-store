@@ -1,4 +1,4 @@
-﻿using ComputersStore.Core.Data;
+﻿using ComputersStore.Data.Entities;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
