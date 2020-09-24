@@ -268,8 +268,8 @@ namespace ComputersStore.Database.DbInitializer
             {
                 var applicationUsers = new List<ApplicationUser>
                 {
-                    new ApplicationUser{Email="michael@scott.com",UserName="michael@scott.com",PhoneNumber="123-123-123",FirstName="Michael",SecondName="Scott",EmailConfirmed=true,PhoneNumberConfirmed=true},
-                    new ApplicationUser{Email="dwight@shrute.com",UserName="dwight@shrute.com",PhoneNumber="123-123-123",FirstName="Dwight",SecondName="Schrute",EmailConfirmed=true,PhoneNumberConfirmed=true}
+                    new ApplicationUser{Email="michael@scott.com",UserName="michael@scott.com",PhoneNumber="123-123-123",FirstName="Michael",LastName="Scott",EmailConfirmed=true,PhoneNumberConfirmed=true},
+                    new ApplicationUser{Email="dwight@shrute.com",UserName="dwight@shrute.com",PhoneNumber="123-123-123",FirstName="Dwight",LastName="Schrute",EmailConfirmed=true,PhoneNumberConfirmed=true}
                 };
 
                 foreach (var user in applicationUsers)
