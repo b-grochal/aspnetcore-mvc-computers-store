@@ -15,6 +15,7 @@ namespace ComputersStore.Core.Data
         public string ShipCity { get; set; }
         public string ShipPostalCode { get; set; }
         public string ShipCountry { get; set; }
+        public decimal TotalCost { get; set; }
         public virtual OrderStatus OrderStatus { get; set; }
         public virtual PaymentType PaymentType { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
