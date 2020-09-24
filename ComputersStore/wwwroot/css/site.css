@@ -75,6 +75,10 @@ body {
     flex-shrink: 0;
 }
 
+.table td {
+    vertical-align: middle !important;
+}
+
 /*hr {
     border-color: #000000;
 }*/

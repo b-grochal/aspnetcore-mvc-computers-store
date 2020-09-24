@@ -9,7 +9,7 @@ namespace ComputersStore.Services.Interfaces
     public interface IOrderService
     {
         Task<IEnumerable<Order>> GetOrdersCollection();
-        Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, string userEmail, int? orderStatusId, int pageNumber, int pageSize);
+        Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string userEmail, int pageNumber, int pageSize);
         Task<Order> GetOrder(int orderId);
         Task CreateOrder(Order order);
         Task UpdateOrder(Order order);

@@ -27,9 +27,10 @@ namespace ComputersStore.WebUI.Controllers
             this.paymentTypeBusinessService = paymentTypeBusinessService;
         }
 
-        public async Task<IActionResult> List(int? orderId, string applicationUserId, int? orderStatusId, int pageNumber = 1)
+        public async Task<IActionResult> Table(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber = 1)
         {
-            var orders = await orderBusinessService.GetOrdersCollection(orderId, applicationUserId, orderStatusId, pageNumber, ordersPerPage, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
+            await PopulateUpdateFormSelectElements(orderStatusId, paymentTypeId);
             return View(orders);
         }
 
@@ -109,7 +110,7 @@ namespace ComputersStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await orderBusinessService.UpdateOrder(orderEditFormViewModel);
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(Table));
             }
             await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
             return View(orderEditFormViewModel);
@@ -138,10 +139,10 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await orderBusinessService.DeleteOrder(id);
-            return RedirectToAction(nameof(List));
+            return RedirectToAction(nameof(Table));
         }
 
-        private async Task PopulateUpdateFormSelectElements(int orderStatusId, int paymentTypeId)
+        private async Task PopulateUpdateFormSelectElements(int? orderStatusId, int? paymentTypeId)
         {
             var orderStatuses = await orderStatusBusinessService.GetOrderStatusesCollection();
             var paymentTypes = await paymentTypeBusinessService.GetPaymentTypesCollection();
