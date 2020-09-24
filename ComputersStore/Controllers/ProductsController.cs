@@ -45,6 +45,19 @@ namespace ComputersStore.WebUI.Controllers
             return View(productsListViewModel);
         }
 
+        public async Task<IActionResult> ChooseNewProductCategory()
+        {
+            await PassProductsCategoriesSelectListToView(null);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChooseNewProductCategory(ProductCategoryFormViewModel productCategoryFormViewModel)
+        {
+            return RedirectToAction(nameof(Create), new { productCategoryId = productCategoryFormViewModel.ProductCategoryId });
+        }
+
         public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)//TODO: W parametrach najpierw productName a później reszta
         {
             var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
