@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using ComputersStore.Database.DatabaseContext;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 
 namespace ComputersStore
 {

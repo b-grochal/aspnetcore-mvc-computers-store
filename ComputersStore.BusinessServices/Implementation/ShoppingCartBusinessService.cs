@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.Services.Interfaces;
 using System;

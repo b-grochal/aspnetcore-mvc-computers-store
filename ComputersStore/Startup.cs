@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ComputersStore.Data;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.BusinessServices.Implementation;
