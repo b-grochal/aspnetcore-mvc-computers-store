@@ -16,7 +16,6 @@ namespace ComputersStore.Database.DbInitializer
     {
         public static void Initialize(ApplicationDbContext applicationDbContext, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
-            //EnsureDatabaseCreated(applicationDbContext);
             SeedUserRoles(roleManager);
             SeedUsers(userManager);
             SeedProductCategories(applicationDbContext);
@@ -25,19 +24,7 @@ namespace ComputersStore.Database.DbInitializer
             SeedProducts(applicationDbContext);
             SeedOrders(applicationDbContext);
             SeedOrderItems(applicationDbContext);
-            //SaveChanges(applicationDbContext);
         }
-
-        private static void EnsureDatabaseCreated(ApplicationDbContext applicationDbContext)
-        {
-            applicationDbContext.Database.EnsureCreated();
-        }
-
-        private static void SaveChanges(ApplicationDbContext applicationDbContext)
-        {
-            applicationDbContext.SaveChanges();
-        }
-
 
         private static void SeedOrderItems(ApplicationDbContext applicationDbContext)
         {
