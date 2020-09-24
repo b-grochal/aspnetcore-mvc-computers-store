@@ -22,7 +22,7 @@ namespace ComputersStore.Services.Implementation
 
         public async Task CreateOrder(Order order)
         {
-            applicationDbContext.Orders.Add(order);
+            applicationDbContext.Orders.Add(CalculateOrderTotalCost(order));
             await applicationDbContext.SaveChangesAsync();
         }
 
@@ -66,6 +66,12 @@ namespace ComputersStore.Services.Implementation
         {
             applicationDbContext.Orders.Update(order);
             await applicationDbContext.SaveChangesAsync();
+        }
+
+        private Order CalculateOrderTotalCost(Order order) 
+        {
+            order.TotalCost = order.OrderItems.Sum(i => i.Quantity * i.Product.Price);
+            return order;
         }
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29709.97
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.WebUI", "ComputersStore\ComputersStore.WebUI.csproj", "{A54C40C9-11BB-4BAF-8F60-2ACDF5D80B34}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Core", "ComputersStore.Core\ComputersStore.Core.csproj", "{D5F74685-8122-448F-96A2-ACF106100A1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Data", "ComputersStore.Core\ComputersStore.Data.csproj", "{D5F74685-8122-448F-96A2-ACF106100A1C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Models", "ComputersStore.Models\ComputersStore.Models.csproj", "{92A07464-B2F1-4DC5-BC2A-F6BBB96BB082}"
 EndProject
@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Database", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.EmailService", "ComputersStore.EmailService\ComputersStore.EmailService.csproj", "{AA9AF63F-7089-4373-83C0-A7A19EBCE54B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComputersStore.EmailTemplates", "ComputersStore.EmailTemplates\ComputersStore.EmailTemplates.csproj", "{A9CE4972-6240-43B3-AD16-CB64911094A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.EmailTemplates", "ComputersStore.EmailTemplates\ComputersStore.EmailTemplates.csproj", "{A9CE4972-6240-43B3-AD16-CB64911094A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
