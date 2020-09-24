@@ -56,7 +56,7 @@ namespace ComputersStore.Services.Implementation
             var users = await userManager.GetUsersInRoleAsync("User");
             return users
                 .Where(u => firstName == null || u.FirstName == firstName)
-                .Where(u => lastName == null || u.SecondName == lastName)
+                .Where(u => lastName == null || u.LastName == lastName)
                 .Where(u => email == null || u.Email == email)
                 .Where(u => phoneNumber == null || u.PhoneNumber == phoneNumber)
                 .Skip((pageNumber - 1) * pageSize)
@@ -68,7 +68,7 @@ namespace ComputersStore.Services.Implementation
             var admins = await userManager.GetUsersInRoleAsync("Admin");
             return admins
                 .Where(u => firstName == null || u.FirstName == firstName)
-                .Where(u => lastName == null || u.SecondName == lastName)
+                .Where(u => lastName == null || u.LastName == lastName)
                 .Where(u => email == null || u.Email == email)
                 .Where(u => phoneNumber == null || u.PhoneNumber == phoneNumber)
                 .Skip((pageNumber - 1) * pageSize)
