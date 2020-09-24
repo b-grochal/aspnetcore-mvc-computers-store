@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Core.Data;
+using ComputersStore.Models.SearchCriteria;
 using ComputersStore.Models.ViewModels.Newsletter;
+using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -39,11 +41,25 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<IEnumerable<NewsletterViewModel>> GetNewslletersCollection()
+        public async Task<NewslettersTableViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
         {
-            var newsletters = await newsletterService.GetNewslettersCollection();
+            var newsletters = await newsletterService.GetNewslettersCollection(newsletterId, newsletterEmail, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<NewsletterViewModel>>(newsletters);
-            return result;
+            return new NewslettersTableViewModel
+            {
+                Newsletters = result,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = pageSize,
+                    TotalItems = newsletterService.GetNewslettersCollectionCount()
+                },
+                newslettersCollectionSearchCritera = new NewslettersCollectionSearchCriteria
+                {
+                    NewsletterId = newsletterId,
+                    NewsletterEmail = newsletterEmail
+                }
+            };
         }
 
     }

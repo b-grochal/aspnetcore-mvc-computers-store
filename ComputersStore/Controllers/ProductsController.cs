@@ -18,11 +18,13 @@ namespace ComputersStore.WebUI.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductBusinessService productBusinessService;
+        private readonly IProductCategoryBusinessService productCategoryBusinessService;
         private readonly int productsPerPage = 5;
 
-        public ProductsController(IProductBusinessService productBusinessService)
+        public ProductsController(IProductBusinessService productBusinessService, IProductCategoryBusinessService productCategoryBusinessService)
         {
             this.productBusinessService = productBusinessService;
+            this.productCategoryBusinessService = productCategoryBusinessService;
         }
 
         public async Task<ActionResult> List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
@@ -41,6 +43,26 @@ namespace ComputersStore.WebUI.Controllers
                 SortOrder = sortOrder
             };
             return View(productsListViewModel);
+        }
+
+        public async Task<IActionResult> ChooseNewProductCategory()
+        {
+            await PassProductsCategoriesSelectListToView(null);
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChooseNewProductCategory(ProductCategoryFormViewModel productCategoryFormViewModel)
+        {
+            return RedirectToAction(nameof(Create), new { productCategoryId = productCategoryFormViewModel.ProductCategoryId });
+        }
+
+        public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)//TODO: W parametrach najpierw productName a później reszta
+        {
+            var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
+            await PassProductsCategoriesSelectListToView(productCategoryId);
+            return View(productsTableViewModel);
         }
 
         // GET: Products/Details/5
@@ -143,6 +165,12 @@ namespace ComputersStore.WebUI.Controllers
         {
             var searchedProductsCollectionViewModel = await productBusinessService.GetSearchedProductsCollection(searchString);
             return View(searchedProductsCollectionViewModel);
+        }
+
+        public async Task PassProductsCategoriesSelectListToView(int? productCategory)
+        {
+            var productCategories = await productCategoryBusinessService.GetProductsCategoriesCollection();
+            ViewData["ProductsCategories"] = new SelectList(productCategories, "ProductCategoryId", "Name", productCategory);
         }
     }
 }

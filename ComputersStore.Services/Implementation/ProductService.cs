@@ -50,6 +50,15 @@ namespace ComputersStore.Services.Implementation
                 .Count();
         }
 
+        public async Task<int> GetProductsCollectionCount(int? productCategoryId, string productName, bool? isRecommended)
+        {
+            return await applicationDbContext.Products
+                .Where(p => productCategoryId == null || p.ProductCategoryId == productCategoryId)
+                .Where(p => productName == null || p.Name == productName)
+                .Where(p => isRecommended == null || p.IsRecommended == isRecommended)
+                .CountAsync();
+        }
+
         public async Task<IEnumerable<Product>> GetProductsCollection(int productCategoryId, string sortOrder, int pageNumber, int pageSize)
         {
             return await applicationDbContext.Products
@@ -82,6 +91,15 @@ namespace ComputersStore.Services.Implementation
         public async Task<IEnumerable<Product>> GetSearchedProductsCollection(string searchString)
         {
             return await applicationDbContext.Products.Where(p => p.Name.ToLower().Contains(searchString.ToLower())).ToListAsync();
+        }
+
+        public async Task<IEnumerable<Product>> GetProductsCollection(int? productCategoryId, string productName, bool? isRecommended)
+        {
+            return await applicationDbContext.Products
+                .Where(p => productCategoryId == null || p.ProductCategoryId == productCategoryId)
+                .Where(p => productName == null || p.Name == productName)
+                .Where(p => isRecommended == null || p.IsRecommended == isRecommended)
+                .ToListAsync();
         }
     }
 }
