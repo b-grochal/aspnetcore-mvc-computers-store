@@ -60,6 +60,14 @@ namespace ComputersStore.Database.DatabaseContext
                 .HasValue<PowerSupplyUnit>(ProductCategoryDictionary.PSU)
                 .HasValue<RandomAccessMemory>(ProductCategoryDictionary.RAM)
                 .HasValue<SolidStateDrive>(ProductCategoryDictionary.SSD);
+
+            modelBuilder.Entity<Order>()
+                .Property(o => o.TotalCost)
+                .HasColumnType("decimal(18,2)");
+
+            modelBuilder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
         }
     }
 }
