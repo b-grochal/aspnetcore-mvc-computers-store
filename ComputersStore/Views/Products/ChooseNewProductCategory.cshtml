@@ -1,0 +1,18 @@
+﻿@model ProductCategoryFormViewModel
+@{
+    ViewData["Title"] = "ChooseNewProductCategory";
+}
+
+<h3>Choose new product's category</h3>
+<hr />
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <form asp-controller="Products" asp-action="ChooseNewProductCategory" class="w-50" method="post">
+            <div class="form-group">
+                <label asp-for="ProductCategoryId" class="control-label"></label>
+                <select asp-for="ProductCategoryId" class="form-control" asp-items="ViewBag.ProductsCategories"></select>
+            </div>
+            <input type="submit" value="Next" class="btn btn-green float-right" />
+        </form>
+    </div>
+</div>
