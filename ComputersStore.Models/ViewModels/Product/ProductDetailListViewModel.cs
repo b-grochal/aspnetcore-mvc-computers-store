@@ -1,4 +1,4 @@
-﻿using ComputersStore.Core.Data;
+﻿using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.Other;
 using System;
 using System.Collections.Generic;

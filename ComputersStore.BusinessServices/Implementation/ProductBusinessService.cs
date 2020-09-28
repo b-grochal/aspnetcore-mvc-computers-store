@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Core.Data;
-using ComputersStore.Core.Dictionaries;
+using ComputersStore.Data.Entities;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.SearchCriteria.Products;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Models.ViewModels.Other;

@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Database.DatabaseContext;
-using ComputersStore.Core.Dictionaries;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Models.ViewModels.Other;
 

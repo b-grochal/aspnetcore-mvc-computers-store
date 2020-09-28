@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Core.Data
+namespace ComputersStore.Data.Entities
 {
-    public class OrderStatus
+    public class PaymentType
     {
-        public int OrderStatusId { get; set; }
+        public int PaymentTypeId { get; set; }
         public string Name { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }
-
 }

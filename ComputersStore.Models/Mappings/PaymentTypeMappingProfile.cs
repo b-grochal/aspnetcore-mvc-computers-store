@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.PaymentType;
 using System;
 using System.Collections.Generic;

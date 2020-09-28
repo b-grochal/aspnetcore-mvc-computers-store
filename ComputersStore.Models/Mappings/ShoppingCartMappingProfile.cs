@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using ComputersStore.Core.Data;
-using ComputersStore.Core.Dictionaries;
+using ComputersStore.Data.Entities;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using System;
 using System.Collections.Generic;
