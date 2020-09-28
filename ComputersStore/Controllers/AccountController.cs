@@ -2,7 +2,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
 using ComputersStore.EmailService.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;

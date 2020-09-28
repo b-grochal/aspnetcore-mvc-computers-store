@@ -1,4 +1,4 @@
-﻿using ComputersStore.Core.Data;
+﻿using ComputersStore.Data.Entities;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;

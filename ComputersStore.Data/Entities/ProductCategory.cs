@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
 
-namespace ComputersStore.Core.Data
+namespace ComputersStore.Data.Entities 
 {
     public class ProductCategory
     {

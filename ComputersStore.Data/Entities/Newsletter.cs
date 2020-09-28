@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Core.Data
+namespace ComputersStore.Data.Entities
 {
     public class Newsletter
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Core.Dictionaries
+namespace ComputersStore.Data.Dictionaries
 {
     public static class OrderStatusDictionary
     {

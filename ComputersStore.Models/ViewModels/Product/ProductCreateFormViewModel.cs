@@ -1,4 +1,4 @@
-﻿using ComputersStore.Core.Data;
+﻿using ComputersStore.Data.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
