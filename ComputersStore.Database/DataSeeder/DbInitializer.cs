@@ -275,10 +275,10 @@ namespace ComputersStore.Database.DbInitializer
             {
                 var orderItems = new List<OrderStatus>
                 {
-                        new OrderStatus{Name="New"},
-                        new OrderStatus{Name="In progress"},
-                        new OrderStatus{Name="Ready"},
-                        new OrderStatus{Name="Realized"}
+                        new OrderStatus{OrderStatusId = OrderStatusDictionary.New, Name="New"},
+                        new OrderStatus{OrderStatusId = OrderStatusDictionary.InProgress, Name="In progress"},
+                        new OrderStatus{OrderStatusId = OrderStatusDictionary.Ready, Name="Ready"},
+                        new OrderStatus{OrderStatusId = OrderStatusDictionary.Realized, Name="Realized"}
                 };
                 orderItems.ForEach(x => applicationDbContext.OrderStatuses.Add(x));
                 applicationDbContext.SaveChanges();
@@ -291,13 +291,13 @@ namespace ComputersStore.Database.DbInitializer
             {
                 var orderItems = new List<ProductCategory>
                 {
-                        new ProductCategory{Name="CPU"},
-                        new ProductCategory{Name="Motherboard"},
-                        new ProductCategory{Name="RAM"},
-                        new ProductCategory{Name="GPU"},
-                        new ProductCategory{Name="PSU"},
-                        new ProductCategory{Name="HDD"},
-                        new ProductCategory{Name="SSD"}
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.CPU, Name="CPU"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.Motherboard, Name="Motherboard"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.RAM, Name="RAM"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.GPU, Name="GPU"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.PSU, Name="PSU"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.HDD, Name="HDD"},
+                        new ProductCategory{ProductCategoryId=ProductCategoryDictionary.SSD, Name="SSD"}
                 };
                 orderItems.ForEach(x => applicationDbContext.ProductCategories.Add(x));
                 applicationDbContext.SaveChanges();
