@@ -1,7 +1,6 @@
 ﻿$(function () {
     let modalPlaceholder = $('#modalPlaceholder');
-    var test = $('[data-toggle="ajax-modal"]');
-    $('.modalButton').click(function (event) {
+    $('[data-toggle="ajax-modal"]').click(function (event) {
         const url = $(this).data('url');
         $.get(url).done(function (data) {
             modalPlaceholder.html(data);
