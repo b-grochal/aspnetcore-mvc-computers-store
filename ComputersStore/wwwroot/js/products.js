@@ -16,6 +16,7 @@
         const formData = form.serialize();
         $.post(actionUrl, formData).done(function (data) {
             modalPlaceholder.find('.modal').modal('hide');
+            location.reload(true);
         })
     })
 })
