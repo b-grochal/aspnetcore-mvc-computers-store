@@ -61,7 +61,16 @@
                             <td scope="col">@order.OrderStatusName</td>
                             <td scope="col">@order.PaymentTypeName</td>
                             <td scope="col">@order.ApplicationUserEmail</td>
-                            <td scope="col" class="text-right"><a class="btn btn-sm btn-green mr-2">Details</a><a class="btn btn-sm btn-green">Delete</a></td>
+                            <td scope="col" class="text-right">
+                                <a class="btn btn-sm btn-green mr-2">Details</a>
+                                <btn class="btn btn-sm btn-green modalButton"
+                                     type="button"
+                                     data-toggle="ajax-modal"
+                                     data-target="#deleteOrder"
+                                     data-url="@Url.Action("Delete", "Orders", new { id = order.OrderId })">
+                                    Delete
+                                </btn>
+                            </td>
                         </tr>
                     }
                 </tbody>
