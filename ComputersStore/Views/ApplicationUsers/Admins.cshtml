@@ -56,7 +56,16 @@
                             <td scope="col">@applicationUser.SecondName</td>
                             <td scope="col">@applicationUser.Email</td>
                             <td scope="col">@applicationUser.PhoneNumber</td>
-                            <td scope="col" class="text-right"><a class="btn btn-sm btn-green mr-2">Details</a><a class="btn btn-sm btn-green">Delete</a></td>
+                            <td scope="col" class="text-right">
+                                <a class="btn btn-sm btn-green mr-2">Details</a>
+                                <btn class="btn btn-sm btn-green modalButton"
+                                     type="button"
+                                     data-toggle="ajax-modal"
+                                     data-target="#deleteApplicationUser"
+                                     data-url="@Url.Action("Delete", "ApplicationUsers", new { applicationUserId = applicationUser.ApplicationUserId })">
+                                    Delete
+                                </btn>
+                            </td>
                         </tr>
                     }
                 </tbody>

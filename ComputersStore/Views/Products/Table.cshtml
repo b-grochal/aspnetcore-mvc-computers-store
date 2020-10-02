@@ -58,7 +58,16 @@
                             <td scope="col">@product.Name</td>
                             <td scope="col">@product.Price</td>
                             <td scope="col">@product.IsRecommended</td>
-                            <td scope="col" class="text-right"><a class="btn btn-sm btn-green mr-2">Details</a><a class="btn btn-sm btn-green">Delete</a></td>
+                            <td scope="col" class="text-right">
+                                <a class="btn btn-sm btn-green mr-2">Details</a>
+                                <btn class="btn btn-sm btn-green modalButton"
+                                     type="button"
+                                     data-toggle="ajax-modal"
+                                     data-target="#deleteProduct"
+                                     data-url="@Url.Action("Delete", "Products", new { id = product.ProductId })">
+                                    Delete
+                                </btn>
+                            </td>
                         </tr>
                     }
                 </tbody>
