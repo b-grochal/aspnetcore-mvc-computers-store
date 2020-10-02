@@ -27,5 +27,31 @@ namespace ComputersStore.WebUI.Controllers
             var adminsCollectionViewModel = await applicationUserBusinessService.GetAdminsCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
             return View(adminsCollectionViewModel);
         }
+
+        // GET: ApplicationUsers/Delete/5
+        public async Task<IActionResult> Delete(string applicationUserId)
+        {
+            if (applicationUserId == null)
+            {
+                return NotFound();
+            }
+
+            var applicationUserViewModel = await applicationUserBusinessService.GetApplicationUserById(applicationUserId);
+            if (applicationUserViewModel == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_DeleteApplicationUserModal", applicationUserViewModel);
+        }
+
+        // POST: ApplicationUsers/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string applicationUserId)
+        {
+            await applicationUserBusinessService.DeleteApplicationUser(applicationUserId);
+            return Json( new { success = true});
+        }
     }
 }
