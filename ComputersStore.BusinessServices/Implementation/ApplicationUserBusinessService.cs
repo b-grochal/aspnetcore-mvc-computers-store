@@ -80,5 +80,10 @@ namespace ComputersStore.BusinessServices.Implementation
                 }
             };
         }
+
+        public Task DeleteApplicationUser(string applicationUserId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
