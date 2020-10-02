@@ -44,7 +44,15 @@
                         <tr>
                             <td scope="col">@newsletter.NewsletterId</td>
                             <td scope="col">@newsletter.Email</td>
-                            <td scope="col" class="text-right"><a class="btn btn-sm btn-green">Delete</a></td>
+                            <td scope="col" class="text-right">
+                                <btn class="btn btn-sm btn-green modalButton"
+                                     type="button"
+                                     data-toggle="ajax-modal" 
+                                     data-target="#deleteNewsletter" 
+                                     data-url="@Url.Action("Delete", "Newsletters", new { id = newsletter.NewsletterId })">
+                                    Delete
+                                </btn>
+                            </td>
                         </tr>
                     }
                 </tbody>

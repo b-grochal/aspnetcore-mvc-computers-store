@@ -130,7 +130,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            return View(order);
+            return PartialView("_DeleteOrderModalPartial", order);
         }
 
         // POST: Orders/Delete/5
