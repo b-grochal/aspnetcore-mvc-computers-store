@@ -11,25 +11,25 @@
 @switch (Model.ProductCategoryId)
 {
     case ProductCategoryDictionary.CPU:
-        @await Html.PartialAsync("_CentralProcessingUnitEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_CentralProcessingUnitEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.Motherboard:
-        @await Html.PartialAsync("_MotherboardEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_MotherboardEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.RAM:
-        @await Html.PartialAsync("_RandomAccessMemoryEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_RandomAccessMemoryEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.GPU:
-        @await Html.PartialAsync("_GraphicsProcessingUnitEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_GraphicsProcessingUnitEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.PSU:
-        @await Html.PartialAsync("_PowerSupplyUnitEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_PowerSupplyUnitEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.HDD:
-        @await Html.PartialAsync("_HardDiskDriveEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_HardDiskDriveEditFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.SSD:
-        @await Html.PartialAsync("_SolidStateDriveEditFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_SolidStateDriveEditFormPartial.cshtml" for="@Model" />
         break;
 }
 

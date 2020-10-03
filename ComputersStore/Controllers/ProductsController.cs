@@ -53,7 +53,7 @@ namespace ComputersStore.WebUI.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChooseNewProductCategory(ProductCategoryFormViewModel productCategoryFormViewModel)
+        public async Task<IActionResult> ChooseNewProductCategory(NewProductCategoryFormViewModel productCategoryFormViewModel)
         {
             return RedirectToAction(nameof(Create), new { productCategoryId = productCategoryFormViewModel.ProductCategoryId });
         }
