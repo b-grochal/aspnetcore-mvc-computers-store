@@ -33,8 +33,10 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task SubmitOrder(ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
+            var ordersProducts = await GetProductsForShoppingCart(shoppingCart);
             var order = mapper.Map<Order>(submitOrderDetailsViewModel);
             order = mapper.Map(shoppingCart, order);
+            order.TotalCost = ordersProducts.Sum(x => x.ProductPrice * x.Quantity);
             await orderService.CreateOrder(order);
         }
 
