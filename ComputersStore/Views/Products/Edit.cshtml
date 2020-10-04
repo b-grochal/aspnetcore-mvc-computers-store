@@ -4,9 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Product</h4>
+<h3>Edit product</h3>
 <hr />
 @switch (Model.ProductCategoryId)
 {
@@ -32,10 +30,6 @@
         <partial name="~/Views/Products/Partials/_SolidStateDriveEditFormPartial.cshtml" for="@Model" />
         break;
 }
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
