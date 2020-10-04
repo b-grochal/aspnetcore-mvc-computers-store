@@ -22,7 +22,7 @@ namespace ComputersStore.Services.Implementation
 
         public async Task CreateOrder(Order order)
         {
-            applicationDbContext.Orders.Add(CalculateOrderTotalCost(order));
+            applicationDbContext.Orders.Add(order);
             await applicationDbContext.SaveChangesAsync();
         }
 
