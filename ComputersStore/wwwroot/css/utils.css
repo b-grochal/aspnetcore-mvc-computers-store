@@ -67,6 +67,10 @@ bg-green {
     border-color: #28a745;
 }
 
+.file-input-with-green-outline-on-focus:focus {
+    outline-color: green;
+}
+
 .text-black {
     color: #000000;
 }
