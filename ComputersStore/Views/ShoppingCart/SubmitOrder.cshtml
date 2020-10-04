@@ -1,11 +1,10 @@
 ﻿@model SubmitOrderDetailsViewModel
 @{
     ViewData["Title"] = "Submit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h3 class="mb-4">Submit your order</h3>
-
+<hr />
 <form asp-controller="ShoppingCart" asp-action="SubmitOrder">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="form-row">
@@ -37,8 +36,9 @@
             <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
         </div>
     </div>
-    <div class="form-group">
-        <btn type="submit" class="btn btn-green float-right">Submit order</btn>
+    <div class="form-group d-flex justify-content-end">
+        <input type="submit" value="Save" class="btn btn-green" />
+        <a class="btn btn-green ml-2" asp-controller="ShoppingCart" asp-action="Summary">Cancel</a>
     </div>
 </form>
 
