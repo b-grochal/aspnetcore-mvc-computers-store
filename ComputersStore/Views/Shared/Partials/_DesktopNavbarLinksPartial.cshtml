@@ -16,11 +16,11 @@
         <div class="w-100 bg-light-ashen d-flex flex-column justify-content-center p-4">
             <h5 class="mb-3">@User.Identity.Name</h5>
             <form class="form-inline" asp-controller="Account" asp-action="LogOff">
-                <button type="submit" class="btn btn-green btn-sm text-uppercase">Logout</button>
+                <button type="submit" class="btn btn-green btn-sm">Logout</button>
             </form>
         </div>
         <div class="w-100 bg-white d-flex flex-column justify-content-center p-4">
-            <ul class="list-unstyled">
+            <ul class="list-unstyled mb-0">
                 <li><i class="fa fa-box mr-2"></i><a asp-controller="Account" asp-action="ApplicationUserOrders" class="account-panel-link" account-panel-link>My orders</a></li>
                 <li><i class="fa fa-user-edit mr-2"></i><a asp-controller="Account" asp-action="UpdateAccountData" class="account-panel-link" account-panel-link>My data</a></li>
                 <li><i class="fa fa-key mr-2"></i><a asp-controller="Account" asp-action="ChangePassword" class="account-panel-link" account-panel-link>Change password</a></li>
