@@ -59,7 +59,8 @@
                             <td scope="col">@product.Price</td>
                             <td scope="col">@product.IsRecommended</td>
                             <td scope="col" class="text-right">
-                                <a class="btn btn-sm btn-green mr-2">Details</a>
+                                <a class="btn btn-sm btn-green mr-2" asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">Details</a>
+                                <a class="btn btn-sm btn-green mr-2" asp-controller="Products" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
                                 <btn class="btn btn-sm btn-green modalButton"
                                      type="button"
                                      data-toggle="ajax-modal"
@@ -80,7 +81,7 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-productName="@Model.ProductsTableSearchCriteria.ProductName"
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-productName="@Model.ProductsTableSearchCriteria.ProductName"
                               page-url-productCategoryId="@Model.ProductsTableSearchCriteria.ProductCategoryId" page-url-isRecommended="@Model.ProductsTableSearchCriteria.IsRecommended">
             </pagination-links>
         }
