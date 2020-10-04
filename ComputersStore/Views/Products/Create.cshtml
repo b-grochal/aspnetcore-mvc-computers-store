@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create @Model.ProductCategoryName</h1>
+<h3>Create @Model.ProductCategoryName</h3>
 <hr />
 @switch (Model.ProductCategoryId)
 {
@@ -30,11 +30,6 @@
         <partial name="~/Views/Products/Partials/_SolidStateDriveCreateFormPartial.cshtml" for="@Model" />
         break;
 }
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
