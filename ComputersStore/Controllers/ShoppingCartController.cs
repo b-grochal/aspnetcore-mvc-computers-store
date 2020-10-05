@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Models.ViewModels.ShoppingCart;
@@ -61,7 +62,7 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
             var shoppingCart = GetShoppingCart();
-            await shoppingCartBusinessService.SubmitOrder(shoppingCart, submitOrderDetailsViewModel);
+            await shoppingCartBusinessService.SubmitOrder(GetCurrentUserId(), shoppingCart, submitOrderDetailsViewModel);
             return View("SubmitOrderSummary");
         }
 
@@ -80,6 +81,11 @@ namespace ComputersStore.WebUI.Controllers
         {
             var paymentTypes = await paymentTypeBusinessService.GetPaymentTypesCollection();
             ViewData["PaymentTypes"] = new SelectList(paymentTypes, "PaymentTypeId", "Name");
+        }
+
+        private string GetCurrentUserId()
+        {
+            return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
     }
 }

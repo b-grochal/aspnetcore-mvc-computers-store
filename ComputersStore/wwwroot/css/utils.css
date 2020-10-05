@@ -50,9 +50,25 @@ bg-green {
     border-color: #000000; 
 }
 
+.btn-green-without-hover {
+    color: #ffffff !important;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-green-without-hover:hover {
+    color: #ffffff !important;
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
 .input-with-green-outline-on-focus:focus {
     box-shadow: 0 0 0 0.2rem #28a745;
     border-color: #28a745;
+}
+
+.file-input-with-green-outline-on-focus:focus {
+    outline-color: green;
 }
 
 .text-black {

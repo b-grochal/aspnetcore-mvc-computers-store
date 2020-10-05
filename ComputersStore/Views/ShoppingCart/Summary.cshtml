@@ -1,17 +1,16 @@
 ﻿@model IEnumerable<ShoppingCartItemViewModel>
 @{
     ViewData["Title"] = "Summary";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @if (Model.Count() > 0)
 {
-    <h3 class="mb-4">Your's shopping cart:</h3>
+    <h3 class="mb-4">Your shopping cart:</h3>
     <div class="row no-gutters mb-2">
         <div class="col">
             @foreach (var shoppingCartItem in Model)
             {
-                @await Html.PartialAsync("_ShoppingCartItemPartial", shoppingCartItem);
+                <partial name="~/Views/ShoppingCart/Partials/_ShoppingCartItemPartial.cshtml" for="@shoppingCartItem" />
             }
         </div>
     </div>
@@ -19,11 +18,11 @@
         <p class="mb-0"><span class="font-weight-bold">Total cost:</span> @Model.Sum(x => x.ProductPrice * x.Quantity)</p>
     </div>
     <div class="row d-flex justify-content-end no-gutters">
-        <a class="btn btn-green" asp-controller="ShoppingCart" asp-action="SubmitOrder">Submit order</a>
+        <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="ShoppingCart" asp-action="SubmitOrder">Submit order</a>
     </div>
 }
 else
 {
-    <h3>Your's shopping cart is empty.</h3>
+    <h3>Your shopping cart is empty.</h3>
 }
 

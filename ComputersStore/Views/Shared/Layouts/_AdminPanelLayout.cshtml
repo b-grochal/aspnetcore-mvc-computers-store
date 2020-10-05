@@ -8,27 +8,18 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.min.css" />
 </head>
-<body class="bg-white">
+<body class="bg-white admin-panel-body">
     <header>
-        <partial name="_DesktopNavbarPartial" />
-        <partial name="_MobileNavbarPartial" />
+        <partial name="~/Views/Shared/Partials/_AdminNavbarPartial.cshtml" />
     </header>
     <div class="container layout-container">
         <main role="main" class="pb-3">
-            <h3 class="text-uppercase">My account</h3>
-            <hr class="account-panel-horizontal-line" />
-            <div class="row">
-                <div class="col-3">
-                    <partial name="_AccountPanelLinksPartial" />
-                </div>
-                <div class="col-9">
-                    @RenderBody()
-                </div>
-            </div>
+            <div id="modalPlaceholder"></div>
+            @RenderBody()
         </main>
     </div>
-    <footer class="footer bg-light-ashen mt-4">
-        <partial name="_FooterPartial" />
+    <footer class="footer bg-light-ashen mt-3">
+        <partial name="~/Views/Shared/Partials/_AdminFooterPartial.cshtml" />
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
