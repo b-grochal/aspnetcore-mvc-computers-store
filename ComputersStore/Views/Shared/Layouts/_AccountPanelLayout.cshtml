@@ -10,16 +10,25 @@
 </head>
 <body class="bg-white">
     <header>
-        <partial name="_AdminNavbarPartial" />
+        <partial name="~/Views/Shared/Partials/_DesktopNavbarPartial.cshtml" />
+        <partial name="~/Views/Shared/Partials/_MobileNavbarPartial.cshtml" />
     </header>
     <div class="container layout-container">
         <main role="main" class="pb-3">
-            <div id="modalPlaceholder"></div>
-            @RenderBody()
+            <h3 class="text-uppercase">My account</h3>
+            <hr class="account-panel-horizontal-line" />
+            <div class="row">
+                <div class="col-3">
+                    <partial name="~/Views/Shared/Partials/_AccountPanelLinksPartial.cshtml" />
+                </div>
+                <div class="col-9">
+                    @RenderBody()
+                </div>
+            </div>
         </main>
     </div>
-    <footer class="footer bg-light-ashen mt-3">
-        <partial name="_AdminFooterPartial" />
+    <footer class="footer bg-light-ashen mt-4">
+        <partial name="~/Views/Shared/Partials/_FooterPartial.cshtml" />
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

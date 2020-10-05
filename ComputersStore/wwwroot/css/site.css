@@ -64,6 +64,10 @@ body {
     padding-top: 12rem; /* TODO dodać media queries zmiejszające padding dla urządzeń mobilnych*/
 }
 
+.admin-panel-body {
+    padding-top: 7rem;
+}
+
 .layout-container {
     flex: 1 0 auto;
 }

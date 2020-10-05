@@ -8,19 +8,16 @@
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
     <link rel="stylesheet" href="~/css/site.min.css" />
 </head>
-<body class="bg-white">
+<body class="bg-white pt-0">
     <header>
-        <partial name="_DesktopNavbarPartial" />
-        <partial name="_MobileNavbarPartial" />
+        <partial name="~/Views/Shared/Partials/_DesktopNavbarPartial.cshtml" />
+        <partial name="~/Views/Shared/Partials/_MobileNavbarPartial.cshtml" />
     </header>
-    <div class="container layout-container">
-        <main role="main" class="pb-3">
+    <div class="container-fluid h-100">
+        <main role="main" class="h-100">
             @RenderBody()
         </main>
     </div>
-    <footer class="footer bg-light-ashen mt-4">
-        <partial name="_FooterPartial" />
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

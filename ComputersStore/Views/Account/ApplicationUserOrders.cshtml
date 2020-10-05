@@ -1,13 +1,13 @@
 ﻿@model OrderListViewModel
 @{
     ViewData["Title"] = "UpdateAccountData";
-    Layout = "_AccountPanelLayout";
+    Layout = "~/Views/Shared/Layouts/_AccountPanelLayout.cshtml";
 }
 
 
 <div class="table-responsive">
-    <table class="table">
-        <thead>
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
             <tr>
                 <th scope="col">Id</th>
                 <th scope="col">Creation date</th>
@@ -19,10 +19,10 @@
             @foreach (var order in Model.Orders)
             {
                 <tr>
-                    <th scope="col"><button class="btn btn-sm btn-green">@order.OrderId</button></th>
-                    <th scope="col">@order.OrderDate</th>
-                    <th scope="col">@order.OrderStatusName</th>
-                    <th scope="col">XXX</th>
+                    <td scope="col"><a asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-green">@order.OrderId</a></td>
+                    <td scope="col">@order.OrderDate</td>
+                    <td scope="col">@order.OrderStatusName</td>
+                    <td scope="col">XXX</td>
                 </tr>
             }
         </tbody>

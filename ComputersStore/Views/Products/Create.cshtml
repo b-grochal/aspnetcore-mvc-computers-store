@@ -4,37 +4,32 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create @Model.ProductCategoryName</h1>
+<h3>Create @Model.ProductCategoryName</h3>
 <hr />
 @switch (Model.ProductCategoryId)
 {
     case ProductCategoryDictionary.CPU:
-        @await Html.PartialAsync("_CentralProcessingUnitCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_CentralProcessingUnitCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.Motherboard:
-        @await Html.PartialAsync("_MotherboardCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_MotherboardCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.RAM:
-        @await Html.PartialAsync("_RandomAccessMemoryCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_RandomAccessMemoryCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.GPU:
-        @await Html.PartialAsync("_GraphicsProcessingUnitCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_GraphicsProcessingUnitCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.PSU:
-        @await Html.PartialAsync("_PowerSupplyUnitCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_PowerSupplyUnitCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.HDD:
-        @await Html.PartialAsync("_HardDiskDriveCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_HardDiskDriveCreateFormPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.SSD:
-        @await Html.PartialAsync("_SolidStateDriveCreateFormPartial", Model);
+        <partial name="~/Views/Products/Partials/_SolidStateDriveCreateFormPartial.cshtml" for="@Model" />
         break;
 }
-
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

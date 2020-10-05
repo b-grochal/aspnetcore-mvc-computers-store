@@ -1,4 +1,4 @@
-﻿@model ProductCategoryFormViewModel
+﻿@model NewProductCategoryFormViewModel
 @{
     ViewData["Title"] = "ChooseNewProductCategory";
 }
@@ -10,9 +10,11 @@
         <form asp-controller="Products" asp-action="ChooseNewProductCategory" class="w-50" method="post">
             <div class="form-group">
                 <label asp-for="ProductCategoryId" class="control-label"></label>
-                <select asp-for="ProductCategoryId" class="form-control" asp-items="ViewBag.ProductsCategories"></select>
+                <select asp-for="ProductCategoryId" class="form-control input-with-green-outline-on-focus" asp-items="ViewBag.ProductsCategories"></select>
             </div>
-            <input type="submit" value="Next" class="btn btn-green float-right" />
+            <div class="form-group">
+                <input type="submit" value="Next" class="btn btn-green float-right input-with-green-outline-on-focus" />
+            </div>
         </form>
     </div>
 </div>

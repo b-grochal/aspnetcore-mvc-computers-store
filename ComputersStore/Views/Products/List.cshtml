@@ -25,7 +25,7 @@
     <div class="col">
         @foreach (var product in Model.Products)
         {
-            @await Html.PartialAsync("_ProductHorizontalCardPartial", product);
+            <partial name="~/Views/Products/Partials/_ProductHorizontalCardPartial.cshtml" for="@product" />
         }
 
         @if (Model.PaginationViewModel.TotalPages > 1)
