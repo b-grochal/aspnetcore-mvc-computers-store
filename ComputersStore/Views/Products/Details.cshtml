@@ -14,7 +14,11 @@
             <p>@Model.Description</p>
             <p>@Model.Price</p>
         </div>
-        @if (User.IsInRole("User"))
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-green input-with-green-outline-on-focus w-25" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
+        }
+        else
         {
             <form asp-action="AddProductToShoppingCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post" class="form-inline">
                 <input type="hidden" name="ProductId" asp-for="ProductId" />
