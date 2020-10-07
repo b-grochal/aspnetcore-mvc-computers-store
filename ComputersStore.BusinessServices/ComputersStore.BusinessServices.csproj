@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ComputersStore.EmailService\ComputersStore.EmailService.csproj" />
+    <ProjectReference Include="..\ComputersStore.EmailService\ComputersStore.EmailHelper.csproj" />
     <ProjectReference Include="..\ComputersStore.Models\ComputersStore.Models.csproj" />
     <ProjectReference Include="..\ComputersStore.Services\ComputersStore.Services.csproj" />
   </ItemGroup>

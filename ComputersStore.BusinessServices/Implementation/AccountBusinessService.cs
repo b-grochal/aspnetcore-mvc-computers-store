@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.EmailService.Service.Implementation;
-using ComputersStore.EmailService.Service.Interface;
+using ComputersStore.EmailHelper.Service.Implementation;
+using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -19,8 +19,8 @@ namespace ComputersStore.BusinessServices.Implementation
     {
         private readonly IAccountService accountService;
         private readonly IMapper mapper;
-        private readonly IEmailMessagesService emailMessagesService;
-        public AccountBusinessService(IAccountService accountService, IMapper mapper, IEmailMessagesService emailMessagesService)
+        private readonly IEmailService emailMessagesService;
+        public AccountBusinessService(IAccountService accountService, IMapper mapper, IEmailService emailMessagesService)
         {
             this.accountService = accountService;
             this.mapper = mapper;
