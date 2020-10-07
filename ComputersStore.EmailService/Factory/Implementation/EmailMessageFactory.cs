@@ -1,5 +1,5 @@
-﻿using ComputersStore.EmailService.Factory.Interface;
-using ComputersStore.EmailService.Messages;
+﻿using ComputersStore.EmailHelper.Factory.Interface;
+using ComputersStore.EmailHelper.Messages;
 using ComputersStore.EmailTemplates.Renderer.Interface;
 using ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail;
 using ComputersStore.EmailTemplates.Views.Emails.ResetPasswordEmail;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputersStore.EmailService.Factory.Implementation
+namespace ComputersStore.EmailHelper.Factory.Implementation
 {
     public class EmailMessageFactory : IEmailMessageFactory
     {

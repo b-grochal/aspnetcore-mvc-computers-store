@@ -1,10 +1,10 @@
-﻿using ComputersStore.EmailService.Messages;
+﻿using ComputersStore.EmailHelper.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputersStore.EmailService.Factory.Interface
+namespace ComputersStore.EmailHelper.Factory.Interface
 {
     public interface IEmailMessageFactory
     {

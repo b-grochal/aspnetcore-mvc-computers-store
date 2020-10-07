@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.EmailService.Configuration
+namespace ComputersStore.EmailHelper.Configuration
 {
     public class EmailConfiguration
     {

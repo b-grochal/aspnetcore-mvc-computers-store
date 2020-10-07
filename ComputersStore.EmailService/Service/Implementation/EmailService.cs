@@ -1,18 +1,18 @@
-﻿using ComputersStore.EmailService.Factory.Interface;
-using ComputersStore.EmailService.Sender.Interface;
-using ComputersStore.EmailService.Service.Interface;
+﻿using ComputersStore.EmailHelper.Factory.Interface;
+using ComputersStore.EmailHelper.Sender.Interface;
+using ComputersStore.EmailHelper.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ComputersStore.EmailService.Service.Implementation
+namespace ComputersStore.EmailHelper.Service.Implementation
 {
-    public class EmailMessagesService : IEmailMessagesService
+    public class EmailService : IEmailService
     {
         private readonly IEmailSender emailSender;
         private readonly IEmailMessageFactory emailMessageFactory;
-        public EmailMessagesService(IEmailSender emailSender, IEmailMessageFactory emailMessageFactory)
+        public EmailService(IEmailSender emailSender, IEmailMessageFactory emailMessageFactory)
         {
             this.emailSender = emailSender;
             this.emailMessageFactory = emailMessageFactory;

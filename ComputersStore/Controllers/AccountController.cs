@@ -3,7 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.EmailService.Service.Interface;
+using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,10 +20,10 @@ namespace ComputersStore.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IOrderBusinessService orderBusinessService;
-        private readonly IEmailMessagesService emailMessagesService;
+        private readonly IEmailService emailMessagesService;
         private readonly int ordersPerPage = 5;
 
-        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailMessagesService emailMessagesService)
+        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailService emailMessagesService)
         {
             this.accountBusinessService = accountBusinessService;
             this.signInManager = signInManager;

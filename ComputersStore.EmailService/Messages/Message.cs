@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace ComputersStore.EmailService.Messages
+namespace ComputersStore.EmailHelper.Messages
 {
     public class Message
     {
