@@ -3,6 +3,8 @@ using ComputersStore.EmailHelper.Messages;
 using ComputersStore.EmailTemplates.Renderer.Interface;
 using ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail;
 using ComputersStore.EmailTemplates.Views.Emails.ResetPasswordEmail;
+using ComputersStore.Models.ViewModels.Emails;
+using ComputersStore.Models.ViewModels.Order;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,6 +26,26 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
             var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/ConfirmAccountEmail/ConfirmAccountEmail.cshtml", confirmAccountEmailViewModel);
             var confirmAccountEmailMessage = new Message(new string[] { toEmailAdress }, "Confirm your account email address.", emailBody);              
             return confirmAccountEmailMessage;
+        }
+
+        public Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, EmailMessageContentViewModel emailMessageContentViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Message> GenerateNewOrderAcceptanceConfirmationEmailMessage(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Message> GenerateNewsletterEmailMessage(IEnumerable<string> newsletterEmailAdresses, EmailMessageContentViewModel emailMessageContentViewModel)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Message> GenerateOrderStatusChangedEmailMessage(string toEmailAddress, OrderViewModel orderViewModel)
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string resetPasswordUrl)
