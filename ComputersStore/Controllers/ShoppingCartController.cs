@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.ShoppingCart;
 using ComputersStore.WebUI.Helpers;
 using Microsoft.AspNetCore.Authorization;
@@ -17,10 +18,14 @@ namespace ComputersStore.WebUI.Controllers
     {
         private readonly IShoppingCartBusinessService shoppingCartBusinessService;
         private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
-        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService)
+        private readonly IApplicationUserBusinessService applicationUserBusinessService;
+        private readonly IEmailService emailService;
+
+        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IEmailService emailService)
         {
             this.shoppingCartBusinessService = shoppingCartBusinessService;
             this.paymentTypeBusinessService = paymentTypeBusinessService;
+            this.emailService = emailService;
         }
 
         public IActionResult Index()
@@ -62,7 +67,8 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
             var shoppingCart = GetShoppingCart();
-            await shoppingCartBusinessService.SubmitOrder(GetCurrentUserId(), shoppingCart, submitOrderDetailsViewModel);
+            var newOrderId = await shoppingCartBusinessService.SubmitOrder(GetCurrentUserId(), shoppingCart, submitOrderDetailsViewModel);
+            await SendNewOrderConfirmationEmail(newOrderId);
             return View("SubmitOrderSummary");
         }
 
@@ -86,6 +92,12 @@ namespace ComputersStore.WebUI.Controllers
         private string GetCurrentUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
+        }
+
+        private async Task SendNewOrderConfirmationEmail(int newOrderId)
+        {
+            var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
+            await emailService.SendNewOrderAcceptanceConfirmationEmail(customer.Email, customer.FirstName, newOrderId);
         }
     }
 }

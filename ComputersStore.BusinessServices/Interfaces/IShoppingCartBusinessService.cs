@@ -9,6 +9,6 @@ namespace ComputersStore.BusinessServices.Interfaces
     public interface IShoppingCartBusinessService
     {
         Task<IEnumerable<ShoppingCartItemViewModel>> GetProductsForShoppingCart(ShoppingCart shoppingCart);
-        Task SubmitOrder(string applicationUserId, ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel);
+        Task<int> SubmitOrder(string applicationUserId, ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel);
     }
 }
