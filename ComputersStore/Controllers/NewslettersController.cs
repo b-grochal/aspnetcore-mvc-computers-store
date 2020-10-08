@@ -18,13 +18,13 @@ namespace ComputersStore.WebUI.Controllers
     public class NewslettersController : Controller
     {
         private readonly INewsletterBusinessService newsletterBusinessService;
-        private readonly IEmailService emailMessagesService;
+        private readonly IEmailService emailService;
         private readonly int newslettersPerPage = 5;
 
-        public NewslettersController(INewsletterBusinessService newsletterBusinessService, IEmailService emailMessagesService)
+        public NewslettersController(INewsletterBusinessService newsletterBusinessService, IEmailService emailService)
         {
             this.newsletterBusinessService = newsletterBusinessService;
-            this.emailMessagesService = emailMessagesService;
+            this.emailService = emailService;
         }
 
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
@@ -99,7 +99,7 @@ namespace ComputersStore.WebUI.Controllers
         private async Task SendNewsletterEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
             var newslettersEmailsCollection = await newsletterBusinessService.GetNewlettersEmailsCollection();
-            await emailMessagesService.SendNewsletterEmail(newslettersEmailsCollection, emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
+            await emailService.SendNewsletterEmail(newslettersEmailsCollection, emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
     }
 }
