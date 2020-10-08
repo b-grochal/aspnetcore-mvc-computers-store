@@ -10,6 +10,8 @@ using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.EmailHelper.Service.Interface;
+using System.Security.Claims;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -18,13 +20,17 @@ namespace ComputersStore.WebUI.Controllers
         private readonly IOrderBusinessService orderBusinessService;
         private readonly IOrderStatusBusinessService orderStatusBusinessService;
         private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
+        private readonly IApplicationUserBusinessService applicationUserBusinessService;
+        private readonly IEmailService emailService;
         private readonly int ordersPerPage = 5;
 
-        public OrdersController(IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService)
+        public OrdersController(IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IApplicationUserBusinessService applicationUserBusinessService, IEmailService emailService)
         {
             this.orderBusinessService = orderBusinessService;
             this.orderStatusBusinessService = orderStatusBusinessService;
             this.paymentTypeBusinessService = paymentTypeBusinessService;
+            this.applicationUserBusinessService = applicationUserBusinessService;
+            this.emailService = emailService;
         }
 
         public async Task<IActionResult> Table(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber = 1)
@@ -96,8 +102,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // POST: Orders/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, OrderEditFormViewModel orderEditFormViewModel)
@@ -110,6 +114,46 @@ namespace ComputersStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await orderBusinessService.UpdateOrder(orderEditFormViewModel);
+                return RedirectToAction(nameof(Table));
+            }
+            await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
+            return View(orderEditFormViewModel);
+        }
+
+        //GET: Orders/ChangeStatus/5
+        public async Task<IActionResult> ChangeStatus(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await orderBusinessService.GetOrderEditFormData(id.Value);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            await PopulateUpdateFormSelectElements(order.OrderStatusId, order.PaymentTypeId);
+
+            return View(order);
+        }
+
+        // POST: Orders/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ChangeStatus(int id, OrderEditFormViewModel orderEditFormViewModel)
+        {
+            if (id != orderEditFormViewModel.OrderId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                await orderBusinessService.UpdateOrder(orderEditFormViewModel);
+                await SendOrderStatusChangedEmail(id);
                 return RedirectToAction(nameof(Table));
             }
             await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
@@ -149,5 +193,12 @@ namespace ComputersStore.WebUI.Controllers
             ViewData["OrderStatuses"] = new SelectList(orderStatuses, "OrderStatusId", "Name", orderStatusId);
             ViewData["PaymentTypes"] = new SelectList(paymentTypes, "PaymentTypeId", "Name", paymentTypeId);
         }
+
+        private async Task SendOrderStatusChangedEmail(int orderId)
+        {
+            var updatedOrder = await orderBusinessService.GetOrderDetails(orderId);
+            await emailService.SendOrderStatusChangedEmail(updatedOrder.ApplicationUserViewModel.Email, updatedOrder.ApplicationUserViewModel.FirstName, updatedOrder.OrderViewModel.OrderId, updatedOrder.OrderViewModel.OrderStatusName);
+        }
+
     }
 }
