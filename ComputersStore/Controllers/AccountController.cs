@@ -298,7 +298,7 @@ namespace ComputersStore.Controllers
             var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
             var emailConfirmationToken = await accountBusinessService.GenerateAccountEmailConfirmationTokenForUser(applicationUser.ApplicationUserId);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = emailConfirmationToken }, protocol: HttpContext.Request.Scheme);
-            await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
+            await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, applicationUser.FirstName, callbackUrl);
         } 
 
         private async Task SendResetPasswordEmail(string applicationUserEmail)
@@ -306,7 +306,7 @@ namespace ComputersStore.Controllers
             var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
             var resetPasswordToken = await accountBusinessService.GenerateResetPasswordTokenForUser(applicationUser.ApplicationUserId);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = resetPasswordToken }, protocol: HttpContext.Request.Scheme);
-            await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, callbackUrl);
+            await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, applicationUser.FirstName, callbackUrl);
         }
         #endregion
     }

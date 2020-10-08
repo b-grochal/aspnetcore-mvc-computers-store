@@ -13,5 +13,6 @@ namespace ComputersStore.Services.Interfaces
         Task<IEnumerable<Newsletter>> GetNewslettersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
         Task<Newsletter> GetNewsletter(int newsletterId);
         int GetNewslettersCollectionCount();
+        Task<IEnumerable<string>> GetNewslettersEmailsCollection();
     }
 }
