@@ -9,11 +9,11 @@ namespace ComputersStore.EmailHelper.Service.Interface
 {
     public interface IEmailService
     {
-        Task SendConfirmAccountEmail(string toEmailAddress, string confirmAccountEmailUrl);
-        Task SendResetPasswordEmail(string toEmailAddress, string resetPasswordUrl);
-        Task SendOrderStatusChangedEmail(string toEmailAddress, OrderViewModel orderViewModel);
-        Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel);
-        Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageFormViewModel emailMessageContentViewModel);
-        Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageFormViewModel emailMessageContentViewModel);
+        Task SendConfirmAccountEmail(string toEmailAddress, string customerFirstName, string confirmAccountEmailUrl);
+        Task SendResetPasswordEmail(string toEmailAddress, string customerFirstName, string resetPasswordUrl);
+        Task SendOrderStatusChangedEmail(string toEmailAddress, string custmerFirstName, int orderId, string newStatusName);
+        Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, string customerFirstName, int orderId);
+        Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, string title, string content);
+        Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, string customerFullName, string title, string content);
     }
 }
