@@ -83,8 +83,14 @@ namespace ComputersStore.Services.Implementation
 
         public async Task<int> GetAdminsCollectionCount()
         {
-            var users = await userManager.GetUsersInRoleAsync("Admin");
-            return users.Count();
+            var admins = await userManager.GetUsersInRoleAsync("Admin");
+            return admins.Count();
+        }
+
+        public async Task<IEnumerable<string>> GetAdminsEmailAddresssesCollection()
+        {
+            var admins = await userManager.GetUsersInRoleAsync("Admin");
+            return admins.Select(a => a.Email);
         }
     }
 }
