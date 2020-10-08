@@ -4,7 +4,13 @@ using System.Text;
 
 namespace ComputersStore.EmailTemplates.Views.Emails.NewsletterEmail
 {
-    class NewsletterEmailViewModel
+    public class NewsletterEmailViewModel
     {
+        public NewsletterEmailViewModel(string content)
+        {
+            this.Content = content;
+        }
+
+        public string Content { get; set; }
     }
 }

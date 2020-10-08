@@ -2,6 +2,10 @@
 using ComputersStore.EmailHelper.Messages;
 using ComputersStore.EmailTemplates.Renderer.Interface;
 using ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail;
+using ComputersStore.EmailTemplates.Views.Emails.CustomerQuestionEmail;
+using ComputersStore.EmailTemplates.Views.Emails.NewOrderConfirmationEmail;
+using ComputersStore.EmailTemplates.Views.Emails.NewsletterEmail;
+using ComputersStore.EmailTemplates.Views.Emails.OrderStatusChangedEmail;
 using ComputersStore.EmailTemplates.Views.Emails.ResetPasswordEmail;
 using ComputersStore.Models.ViewModels.Emails;
 using ComputersStore.Models.ViewModels.Order;
@@ -28,24 +32,36 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
             return confirmAccountEmailMessage;
         }
 
-        public Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, EmailMessageContentViewModel emailMessageContentViewModel)
+        public async Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, string title, string content)
         {
-            throw new NotImplementedException();
+            var customerQuestionEmailViewModel = new CustomerQuestionEmailViewModel(content);
+            var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/CustomerQuestionEmail/CustomerQuestionEmail.cshtml", customerQuestionEmailViewModel);
+            var customerQuestionEmailMessage = new Message(adminEmailAdressess, title, emailBody);
+            return customerQuestionEmailMessage;
         }
 
-        public Task<Message> GenerateNewOrderAcceptanceConfirmationEmailMessage(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel)
+        public async Task<Message> GenerateNewOrderConfirmationEmailMessage(string toEmailAddress, string cutomerFirstName, int orderId)
         {
-            throw new NotImplementedException();
+            var newOrderConfirmationEmailViewModel = new NewOrderConfirmationEmailViewModel(cutomerFirstName, orderId);
+            var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/NewOrderConfirmationEmail/NewOrderConfirmationEmail.cshtml", newOrderConfirmationEmailViewModel);
+            var newOrderConfirmationEmailMesssage = new Message(new string[] { toEmailAddress }, "New order confirmation", emailBody);
+            return newOrderConfirmationEmailMesssage;
         }
 
-        public Task<Message> GenerateNewsletterEmailMessage(IEnumerable<string> newsletterEmailAdresses, EmailMessageContentViewModel emailMessageContentViewModel)
+        public async Task<Message> GenerateNewsletterEmailMessage(IEnumerable<string> newsletterEmailAdresses, string title, string content)
         {
-            throw new NotImplementedException();
+            var newsletterEmailViewModel = new NewsletterEmailViewModel(content);
+            var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/NewsletterEmail/NewsletterEmail.cshtml", newsletterEmailViewModel);
+            var newsletterEmailMessage = new Message(newsletterEmailAdresses, title, emailBody);
+            return newsletterEmailMessage;
         }
 
-        public Task<Message> GenerateOrderStatusChangedEmailMessage(string toEmailAddress, OrderViewModel orderViewModel)
+        public async Task<Message> GenerateOrderStatusChangedEmailMessage(string toEmailAddress, string cutomerFirstName, int orderId, string newStatusName)
         {
-            throw new NotImplementedException();
+            var orderStatusChangedEmailViewModel = new OrderStatusChangedEmailViewModel(cutomerFirstName, orderId, newStatusName);
+            var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/OrderStatusChangedEmail/OrderStatusChangedEmail.cshtml", orderStatusChangedEmailViewModel);
+            var orderStatusChangedEmailMessage = new Message(new string[] { toEmailAddress }, "Order status change", emailBody);
+            return orderStatusChangedEmailMessage;
         }
 
         public async Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string resetPasswordUrl)

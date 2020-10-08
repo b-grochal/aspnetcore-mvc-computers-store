@@ -1,5 +1,6 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@using ComputersStore.EmailTemplates.Views.Emails.CustomerQuestionEmail
+@model CustomerQuestionEmailViewModel
+
+<p>Hello,</p>
+<br />
+<p>@Model.Content</p>
