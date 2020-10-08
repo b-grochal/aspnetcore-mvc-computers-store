@@ -3,8 +3,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.EmailService.Service.Interface;
+using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
+using ComputersStore.Models.ViewModels.Emails;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,10 +21,10 @@ namespace ComputersStore.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IOrderBusinessService orderBusinessService;
-        private readonly IEmailMessagesService emailMessagesService;
+        private readonly IEmailService emailMessagesService;
         private readonly int ordersPerPage = 5;
 
-        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailMessagesService emailMessagesService)
+        public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailService emailMessagesService)
         {
             this.accountBusinessService = accountBusinessService;
             this.signInManager = signInManager;
@@ -278,6 +279,31 @@ namespace ComputersStore.Controllers
             return View(orders);
         }
 
+        [HttpGet]
+        public IActionResult AskQuestion()
+        {
+            return View();
+        }
+
+        //POST: Newsletters/SendNewsletter
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AskQuestion(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await SendCustomerQuestionEmail(emailMessageFormViewModel);
+                return RedirectToAction(nameof(AskQuestionConfirmation));
+            }
+            return View(emailMessageFormViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult AskQuestionConfirmation()
+        {
+            return View();
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
@@ -298,7 +324,7 @@ namespace ComputersStore.Controllers
             var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
             var emailConfirmationToken = await accountBusinessService.GenerateAccountEmailConfirmationTokenForUser(applicationUser.ApplicationUserId);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = emailConfirmationToken }, protocol: HttpContext.Request.Scheme);
-            await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, callbackUrl);
+            await emailMessagesService.SendConfirmAccountEmail(applicationUser.Email, applicationUser.FirstName, callbackUrl);
         } 
 
         private async Task SendResetPasswordEmail(string applicationUserEmail)
@@ -306,7 +332,14 @@ namespace ComputersStore.Controllers
             var applicationUser = await applicationUserBusinessService.GetApplicationUserByEmail(applicationUserEmail);
             var resetPasswordToken = await accountBusinessService.GenerateResetPasswordTokenForUser(applicationUser.ApplicationUserId);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = resetPasswordToken }, protocol: HttpContext.Request.Scheme);
-            await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, callbackUrl);
+            await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, applicationUser.FirstName, callbackUrl);
+        }
+
+        private async Task SendCustomerQuestionEmail(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
+            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetAdminsEmailAddressesCollection();
+            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.SecondName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
         #endregion
     }

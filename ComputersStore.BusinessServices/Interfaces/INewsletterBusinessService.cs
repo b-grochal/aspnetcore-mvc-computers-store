@@ -12,5 +12,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task DeleteNewsletter(int newsletterId);
         Task<NewslettersTableViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
         Task<NewsletterViewModel> GetNewsletter(int newsletterId);
+        Task<IEnumerable<string>> GetNewlettersEmailsCollection();
     }
 }

@@ -1,0 +1,11 @@
+﻿@using ComputersStore.EmailTemplates.Views.Emails.OrderStatusChangedEmail
+@model OrderStatusChangedEmailViewModel
+
+<p>Hi @Model.CustomerFirstName,<p />
+<p>
+    Your order no. @Model.OrderId has a new status: @Model.NewOrderStatusName.
+</p>
+<p>
+    Cheers,<br />
+    ComputersStore
+</p>

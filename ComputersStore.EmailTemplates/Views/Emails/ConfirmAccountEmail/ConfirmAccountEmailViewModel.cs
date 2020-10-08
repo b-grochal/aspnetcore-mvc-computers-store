@@ -6,11 +6,12 @@ namespace ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail
 {
     public class ConfirmAccountEmailViewModel
     {
-        public ConfirmAccountEmailViewModel(string confirmEmailUrl)
+        public ConfirmAccountEmailViewModel(string customerFirstName, string confirmEmailUrl)
         {
-            ConfirmEmailUrl = confirmEmailUrl;
+            this.CustomerFirstName = customerFirstName;
+            this.ConfirmEmailUrl = confirmEmailUrl;
         }
-
+        public string CustomerFirstName { get; set; }
         public string ConfirmEmailUrl { get; set; }
     }
 }

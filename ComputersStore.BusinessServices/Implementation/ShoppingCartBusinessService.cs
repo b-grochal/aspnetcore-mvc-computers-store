@@ -31,14 +31,14 @@ namespace ComputersStore.BusinessServices.Implementation
             return UpdateShoppingCartItemsQuantities(shoppingCartItemsViewModels, shoppingCart.GetShoppingCartItems());
         }
 
-        public async Task SubmitOrder(string applicationUserId, ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
+        public async Task<int> SubmitOrder(string applicationUserId, ShoppingCart shoppingCart, SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
         {
             var ordersProducts = await GetProductsForShoppingCart(shoppingCart);
             var order = mapper.Map<Order>(submitOrderDetailsViewModel);
             order = mapper.Map(shoppingCart, order);
             order.ApplicationUserId = applicationUserId;
             order.TotalCost = ordersProducts.Sum(x => x.ProductPrice * x.Quantity);
-            await orderService.CreateOrder(order);
+            return await orderService.CreateOrder(order);
         }
 
         private IEnumerable<ShoppingCartItemViewModel> UpdateShoppingCartItemsQuantities(IEnumerable<ShoppingCartItemViewModel> shoppingCartItemViewModels, IEnumerable<ShoppingCartItem> shoppingCartItems)
