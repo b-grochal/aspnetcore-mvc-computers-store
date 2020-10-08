@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Emails
 {
-    public class EmailMessageContentViewModel
+    public class EmailMessageFormViewModel
     {
         public string Title { get; set; }
         public string Content { get; set; }

@@ -4,7 +4,13 @@ using System.Text;
 
 namespace ComputersStore.EmailTemplates.Views.Emails.CustomerQuestionEmail
 {
-    class CustomerQuestionEmailViewModel
+    public class CustomerQuestionEmailViewModel
     {
+        public CustomerQuestionEmailViewModel(string content)
+        {
+            this.Content = content;
+        }
+
+        public string Content { get; set; }
     }
 }

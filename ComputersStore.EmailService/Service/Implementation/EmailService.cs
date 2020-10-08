@@ -26,7 +26,7 @@ namespace ComputersStore.EmailHelper.Service.Implementation
             emailSender.SendEmail(confirmEmailAccountMessage);
         }
 
-        public async Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageContentViewModel emailMessageContentViewModel)
+        public async Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageFormViewModel emailMessageContentViewModel)
         {
             var customerQuestionEmailMessage = await emailMessageFactory.GenerateCustomerQuestionEmailMessage(adminEmailAdressess, emailMessageContentViewModel);
             emailSender.SendEmail(customerQuestionEmailMessage);
@@ -34,11 +34,11 @@ namespace ComputersStore.EmailHelper.Service.Implementation
 
         public async Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel)
         {
-            var newOrderAcceptanceConfirmationEmailMessage = await emailMessageFactory.GenerateNewOrderAcceptanceConfirmationEmailMessage(toEmailAddress, orderDetailsViewModel);
+            var newOrderAcceptanceConfirmationEmailMessage = await emailMessageFactory.GenerateNewOrderConfirmationEmailMessage(toEmailAddress, orderDetailsViewModel);
             emailSender.SendEmail(newOrderAcceptanceConfirmationEmailMessage);
         }
 
-        public async Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageContentViewModel emailMessageContentViewModel)
+        public async Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageFormViewModel emailMessageContentViewModel)
         {
             var newsletterEmailMessage = await emailMessageFactory.GenerateNewsletterEmailMessage(newsletterEmailAdresses, emailMessageContentViewModel);
             emailSender.SendEmail(newsletterEmailMessage);

@@ -13,7 +13,7 @@ namespace ComputersStore.EmailHelper.Service.Interface
         Task SendResetPasswordEmail(string toEmailAddress, string resetPasswordUrl);
         Task SendOrderStatusChangedEmail(string toEmailAddress, OrderViewModel orderViewModel);
         Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel);
-        Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageContentViewModel emailMessageContentViewModel);
-        Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageContentViewModel emailMessageContentViewModel);
+        Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageFormViewModel emailMessageContentViewModel);
+        Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageFormViewModel emailMessageContentViewModel);
     }
 }

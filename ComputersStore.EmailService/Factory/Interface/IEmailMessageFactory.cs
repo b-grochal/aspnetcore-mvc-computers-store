@@ -12,9 +12,9 @@ namespace ComputersStore.EmailHelper.Factory.Interface
     {
         Task<Message> GenerateConfirmAccoutEmailMessage(string toEmailAdress, string confirmAccountUrl);
         Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string resetPasswordUrl);
-        Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, EmailMessageContentViewModel emailMessageContentViewModel);
-        Task<Message> GenerateNewOrderAcceptanceConfirmationEmailMessage(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel);
-        Task<Message> GenerateNewsletterEmailMessage(IEnumerable<string> newsletterEmailAdresses, EmailMessageContentViewModel emailMessageContentViewModel);
-        Task<Message> GenerateOrderStatusChangedEmailMessage(string toEmailAddress, OrderViewModel orderViewModel);
+        Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, string title, string content);
+        Task<Message> GenerateNewOrderConfirmationEmailMessage(string toEmailAddress, string cutomerFirstName, int orderId);
+        Task<Message> GenerateNewsletterEmailMessage(IEnumerable<string> newsletterEmailAdresses, string title, string content);
+        Task<Message> GenerateOrderStatusChangedEmailMessage(string toEmailAddress, string cutomerFirstName, int orderId, string newStatusName);
     }
 }
