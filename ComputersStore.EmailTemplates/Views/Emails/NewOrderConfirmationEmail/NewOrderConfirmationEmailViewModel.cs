@@ -12,7 +12,6 @@ namespace ComputersStore.EmailTemplates.Views.Emails.NewOrderConfirmationEmail
             this.CustomerFirstName = customerFirstName;
             this.OrderId = orderId;
         }
-
         public string CustomerFirstName { get; set; }
         public int OrderId { get; set; }
     }

@@ -12,7 +12,6 @@ namespace ComputersStore.EmailTemplates.Views.Emails.OrderStatusChangedEmail
             this.OrderId = orderId;
             this.NewOrderStatusName = newOrderStatusName;
         }
-
         public string CustomerFirstName { get; set; }
         public int OrderId { get; set; }
         public string NewOrderStatusName { get; set; }

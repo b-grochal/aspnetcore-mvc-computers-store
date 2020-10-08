@@ -1,6 +1,11 @@
 ﻿@using ComputersStore.EmailTemplates.Views.Emails.CustomerQuestionEmail
 @model CustomerQuestionEmailViewModel
 
-<p>Hello,</p>
+<p>Hi,</p>
 <br />
 <p>@Model.Content</p>
+<br />
+<p>
+    Cheers,<br />
+    @Model.CustomerFullName
+</p>

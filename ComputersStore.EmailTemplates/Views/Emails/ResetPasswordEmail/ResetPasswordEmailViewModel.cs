@@ -6,10 +6,12 @@ namespace ComputersStore.EmailTemplates.Views.Emails.ResetPasswordEmail
 {
     public class ResetPasswordEmailViewModel
     {
-        public ResetPasswordEmailViewModel(string resetPasswordUrl)
+        public ResetPasswordEmailViewModel(string customerFirstName, string resetPasswordUrl)
         {
-            ResetPasswordUrl = resetPasswordUrl;
+            this.CustomerFirstName = customerFirstName;
+            this.ResetPasswordUrl = resetPasswordUrl;
         }
+        public string CustomerFirstName { get; set; }
         public string ResetPasswordUrl { get; set; }
     }
 }
