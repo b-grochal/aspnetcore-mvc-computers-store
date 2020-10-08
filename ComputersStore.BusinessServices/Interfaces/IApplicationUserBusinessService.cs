@@ -13,5 +13,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<ApplicationUsersCollectionViewModel> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
         Task<ApplicationUsersCollectionViewModel> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
         Task DeleteApplicationUser(string applicationUserId);
+        Task<IEnumerable<string>> GetAdminsEmailAddressesCollection();
     }
 }

@@ -19,5 +19,6 @@ namespace ComputersStore.Services.Interfaces
         Task<IEnumerable<ApplicationUser>> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
         Task<int> GetUsersCollectionCount();
         Task<int> GetAdminsCollectionCount();
+        Task<IEnumerable<string>> GetAdminsEmailAddresssesCollection();
     }
 }

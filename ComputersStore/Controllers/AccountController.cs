@@ -5,6 +5,7 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
 using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
+using ComputersStore.Models.ViewModels.Emails;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -278,6 +279,31 @@ namespace ComputersStore.Controllers
             return View(orders);
         }
 
+        [HttpGet]
+        public IActionResult AskQuestion()
+        {
+            return View();
+        }
+
+        //POST: Newsletters/SendNewsletter
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AskQuestion(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await SendCustomerQuestionEmail(emailMessageFormViewModel);
+                return RedirectToAction(nameof(AskQuestionConfirmation));
+            }
+            return View(emailMessageFormViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult AskQuestionConfirmation()
+        {
+            return View();
+        }
+
         #region Helpers
 
         private void AddErrors(IdentityResult result)
@@ -307,6 +333,13 @@ namespace ComputersStore.Controllers
             var resetPasswordToken = await accountBusinessService.GenerateResetPasswordTokenForUser(applicationUser.ApplicationUserId);
             var callbackUrl = Url.Action("ResetPassword", "Account", new { applicationUserId = applicationUser.ApplicationUserId, code = resetPasswordToken }, protocol: HttpContext.Request.Scheme);
             await emailMessagesService.SendResetPasswordEmail(applicationUser.Email, applicationUser.FirstName, callbackUrl);
+        }
+
+        private async Task SendCustomerQuestionEmail(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
+            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetAdminsEmailAddressesCollection();
+            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.SecondName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
         #endregion
     }
