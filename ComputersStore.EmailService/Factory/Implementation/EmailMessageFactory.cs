@@ -24,17 +24,17 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
             this.razorViewToStringRenderer = razorViewToStringRenderer;
         }
 
-        public async Task<Message> GenerateConfirmAccoutEmailMessage(string toEmailAdress, string confirmAccountUrl)
+        public async Task<Message> GenerateConfirmAccoutEmailMessage(string toEmailAdress, string customerFirstName, string confirmAccountUrl)
         {
-            var confirmAccountEmailViewModel = new ConfirmAccountEmailViewModel(confirmAccountUrl);
+            var confirmAccountEmailViewModel = new ConfirmAccountEmailViewModel(customerFirstName, confirmAccountUrl);
             var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/ConfirmAccountEmail/ConfirmAccountEmail.cshtml", confirmAccountEmailViewModel);
             var confirmAccountEmailMessage = new Message(new string[] { toEmailAdress }, "Confirm your account email address.", emailBody);              
             return confirmAccountEmailMessage;
         }
 
-        public async Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, string title, string content)
+        public async Task<Message> GenerateCustomerQuestionEmailMessage(IEnumerable<string> adminEmailAdressess, string customerFulltName, string title, string content)
         {
-            var customerQuestionEmailViewModel = new CustomerQuestionEmailViewModel(content);
+            var customerQuestionEmailViewModel = new CustomerQuestionEmailViewModel(customerFulltName, content);
             var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/CustomerQuestionEmail/CustomerQuestionEmail.cshtml", customerQuestionEmailViewModel);
             var customerQuestionEmailMessage = new Message(adminEmailAdressess, title, emailBody);
             return customerQuestionEmailMessage;
@@ -64,9 +64,9 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
             return orderStatusChangedEmailMessage;
         }
 
-        public async Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string resetPasswordUrl)
+        public async Task<Message> GenerateResetPasswordEmailMessage(string toEmailAdress, string customerFirstName, string resetPasswordUrl)
         {
-            var resetPasswordEmailViewModel = new ResetPasswordEmailViewModel(resetPasswordUrl);
+            var resetPasswordEmailViewModel = new ResetPasswordEmailViewModel(customerFirstName, resetPasswordUrl);
             var emailBody = await razorViewToStringRenderer.RenderViewToStringAsync("/Views/Emails/ResetPasswordEmail/ResetPasswordEmail.cshtml", resetPasswordEmailViewModel);
             var resetPasswordEmailMessage = new Message(new string[] { toEmailAdress }, "Reset password.", emailBody);
             return resetPasswordEmailMessage;

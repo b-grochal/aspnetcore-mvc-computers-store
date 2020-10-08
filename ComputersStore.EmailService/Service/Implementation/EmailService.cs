@@ -20,39 +20,39 @@ namespace ComputersStore.EmailHelper.Service.Implementation
             this.emailMessageFactory = emailMessageFactory;
         }
 
-        public async Task SendConfirmAccountEmail(string toEmailAddress, string confirmAccountEmailUrl)
+        public async Task SendConfirmAccountEmail(string toEmailAddress, string customerFirstName, string confirmAccountEmailUrl)
         {
-            var confirmEmailAccountMessage = await emailMessageFactory.GenerateConfirmAccoutEmailMessage(toEmailAddress, confirmAccountEmailUrl);
+            var confirmEmailAccountMessage = await emailMessageFactory.GenerateConfirmAccoutEmailMessage(toEmailAddress, customerFirstName, confirmAccountEmailUrl);
             emailSender.SendEmail(confirmEmailAccountMessage);
         }
 
-        public async Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, EmailMessageFormViewModel emailMessageContentViewModel)
+        public async Task SendCustomerQuestionEmail(IEnumerable<string> adminEmailAdressess, string customerFullName, string title, string content)
         {
-            var customerQuestionEmailMessage = await emailMessageFactory.GenerateCustomerQuestionEmailMessage(adminEmailAdressess, emailMessageContentViewModel);
+            var customerQuestionEmailMessage = await emailMessageFactory.GenerateCustomerQuestionEmailMessage(adminEmailAdressess, customerFullName, title, content);
             emailSender.SendEmail(customerQuestionEmailMessage);
         }
 
-        public async Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, OrderDetailsViewModel orderDetailsViewModel)
+        public async Task SendNewOrderAcceptanceConfirmationEmail(string toEmailAddress, string customerFirstName, int orderId)
         {
-            var newOrderAcceptanceConfirmationEmailMessage = await emailMessageFactory.GenerateNewOrderConfirmationEmailMessage(toEmailAddress, orderDetailsViewModel);
+            var newOrderAcceptanceConfirmationEmailMessage = await emailMessageFactory.GenerateNewOrderConfirmationEmailMessage(toEmailAddress, customerFirstName, orderId);
             emailSender.SendEmail(newOrderAcceptanceConfirmationEmailMessage);
         }
 
-        public async Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, EmailMessageFormViewModel emailMessageContentViewModel)
+        public async Task SendNewsletterEmail(IEnumerable<string> newsletterEmailAdresses, string title, string content)
         {
-            var newsletterEmailMessage = await emailMessageFactory.GenerateNewsletterEmailMessage(newsletterEmailAdresses, emailMessageContentViewModel);
+            var newsletterEmailMessage = await emailMessageFactory.GenerateNewsletterEmailMessage(newsletterEmailAdresses, title, content);
             emailSender.SendEmail(newsletterEmailMessage);
         }
 
-        public async Task SendOrderStatusChangedEmail(string toEmailAddress, OrderViewModel orderViewModel)
+        public async Task SendOrderStatusChangedEmail(string toEmailAddress, string custmerFirstName, int orderId, string newStatusName)
         {
-            var orderStatusChangedEmail = await emailMessageFactory.GenerateOrderStatusChangedEmailMessage(toEmailAddress, orderViewModel);
+            var orderStatusChangedEmail = await emailMessageFactory.GenerateOrderStatusChangedEmailMessage(toEmailAddress, custmerFirstName, orderId, newStatusName);
             emailSender.SendEmail(orderStatusChangedEmail);
         }
 
-        public async Task SendResetPasswordEmail(string toEmailAddress, string resetPasswordUrl)
+        public async Task SendResetPasswordEmail(string toEmailAddress, string customerFirstName, string resetPasswordUrl)
         {
-            var confirmEmailAccountMessage = await emailMessageFactory.GenerateResetPasswordEmailMessage(toEmailAddress, resetPasswordUrl);
+            var confirmEmailAccountMessage = await emailMessageFactory.GenerateResetPasswordEmailMessage(toEmailAddress, customerFirstName, resetPasswordUrl);
             emailSender.SendEmail(confirmEmailAccountMessage);
         }
     }
