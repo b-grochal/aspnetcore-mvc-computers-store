@@ -11,7 +11,7 @@ namespace ComputersStore.Services.Interfaces
         Task<IEnumerable<Order>> GetOrdersCollection();
         Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string userEmail, int pageNumber, int pageSize);
         Task<Order> GetOrder(int orderId);
-        Task CreateOrder(Order order);
+        Task<int> CreateOrder(Order order);
         Task UpdateOrder(Order order);
         Task DeleteOrder(int orderId);
         Task<IEnumerable<Order>> GetApplicationUserOrdersCollection(string applicationUserId);

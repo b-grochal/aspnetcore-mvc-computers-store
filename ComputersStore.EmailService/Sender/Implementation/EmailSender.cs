@@ -1,13 +1,13 @@
-﻿using ComputersStore.EmailService.Configuration;
-using ComputersStore.EmailService.Messages;
-using ComputersStore.EmailService.Sender.Interface;
+﻿using ComputersStore.EmailHelper.Configuration;
+using ComputersStore.EmailHelper.Messages;
+using ComputersStore.EmailHelper.Sender.Interface;
 using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.EmailService.Sender.Implementation
+namespace ComputersStore.EmailHelper.Sender.Implementation
 {//string[] Documents = System.IO.Directory.GetFiles("../../Data/"); TODO
     public class EmailSender : IEmailSender
     {

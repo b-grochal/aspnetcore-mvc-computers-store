@@ -10,17 +10,21 @@ using ComputersStore.Data;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Models.ViewModels.Newsletter;
+using ComputersStore.Models.ViewModels.Emails;
+using ComputersStore.EmailHelper.Service.Interface;
 
 namespace ComputersStore.WebUI.Controllers
 {
     public class NewslettersController : Controller
     {
         private readonly INewsletterBusinessService newsletterBusinessService;
+        private readonly IEmailService emailService;
         private readonly int newslettersPerPage = 5;
 
-        public NewslettersController(INewsletterBusinessService newsletterBusinessService)
+        public NewslettersController(INewsletterBusinessService newsletterBusinessService, IEmailService emailService)
         {
             this.newsletterBusinessService = newsletterBusinessService;
+            this.emailService = emailService;
         }
 
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
@@ -65,6 +69,37 @@ namespace ComputersStore.WebUI.Controllers
         {
             await newsletterBusinessService.DeleteNewsletter(id);
             return RedirectToAction(nameof(Table));
+        }
+
+        // GET: Newsletter/SendNewsletter
+        public IActionResult SendNewsletter()
+        {
+            return View();
+        }
+
+        //POST: Newsletters/SendNewsletter
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendNewsletter(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                await SendNewsletterEmail(emailMessageFormViewModel);
+                return RedirectToAction(nameof(SendNewsletterConfirmation));
+            }
+            return View(emailMessageFormViewModel);
+        }
+
+        [HttpGet]
+        public IActionResult SendNewsletterConfirmation()
+        {
+            return View();
+        }
+
+        private async Task SendNewsletterEmail(EmailMessageFormViewModel emailMessageFormViewModel)
+        {
+            var newslettersEmailsCollection = await newsletterBusinessService.GetNewlettersEmailsCollection();
+            await emailService.SendNewsletterEmail(newslettersEmailsCollection, emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
     }
 }

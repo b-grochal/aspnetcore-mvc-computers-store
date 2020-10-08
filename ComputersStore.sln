@@ -15,7 +15,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.BusinessServ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.Database", "ComputersStore.Database\ComputersStore.Database.csproj", "{51A00CC0-D2DE-496E-8BB5-4D219160C622}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.EmailService", "ComputersStore.EmailService\ComputersStore.EmailService.csproj", "{AA9AF63F-7089-4373-83C0-A7A19EBCE54B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.EmailHelper", "ComputersStore.EmailService\ComputersStore.EmailHelper.csproj", "{AA9AF63F-7089-4373-83C0-A7A19EBCE54B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComputersStore.EmailTemplates", "ComputersStore.EmailTemplates\ComputersStore.EmailTemplates.csproj", "{A9CE4972-6240-43B3-AD16-CB64911094A9}"
 EndProject

@@ -85,5 +85,10 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<string>> GetAdminsEmailAddressesCollection()
+        {
+            return await applicationUserService.GetAdminsEmailAddresssesCollection();
+        }
     }
 }
