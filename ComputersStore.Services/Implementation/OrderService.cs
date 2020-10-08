@@ -20,10 +20,11 @@ namespace ComputersStore.Services.Implementation
             this.applicationDbContext = applicationDbContext;
         }
 
-        public async Task CreateOrder(Order order)
+        public async Task<int> CreateOrder(Order order)
         {
             applicationDbContext.Orders.Add(order);
             await applicationDbContext.SaveChangesAsync();
+            return order.OrderId;
         }
 
         public async Task DeleteOrder(int orderId)
