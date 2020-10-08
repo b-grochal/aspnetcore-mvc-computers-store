@@ -10,7 +10,6 @@ namespace ComputersStore.EmailTemplates.Views.Emails.NewsletterEmail
         {
             this.Content = content;
         }
-
         public string Content { get; set; }
     }
 }
