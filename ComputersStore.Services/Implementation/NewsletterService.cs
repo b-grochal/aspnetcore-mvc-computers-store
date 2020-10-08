@@ -53,5 +53,12 @@ namespace ComputersStore.Services.Implementation
             return applicationDbContext.Newsletters
                 .Count();
         }
+
+        public async Task<IEnumerable<string>> GetNewslettersEmailsCollection()
+        {
+            return await applicationDbContext.Newsletters
+                .Select(n => n.Email)
+                .ToListAsync();
+        }
     }
 }

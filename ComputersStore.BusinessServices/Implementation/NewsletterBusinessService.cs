@@ -34,6 +34,11 @@ namespace ComputersStore.BusinessServices.Implementation
             await newsletterService.DeleteNewsletter(newsletterId);
         }
 
+        public async Task<IEnumerable<string>> GetNewlettersEmailsCollection()
+        {
+            return await newsletterService.GetNewslettersEmailsCollection();
+        }
+
         public async Task<NewsletterViewModel> GetNewsletter(int newsletterId)
         {
             var newsletter = await newsletterService.GetNewsletter(newsletterId);
