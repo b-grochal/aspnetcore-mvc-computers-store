@@ -42,7 +42,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            return PartialView("_DeleteApplicationUserModal", applicationUserViewModel);
+            return PartialView("~/Views/ApplicationUsers/Modals/_DeleteApplicationUserModal.cshtml", applicationUserViewModel);
         }
 
         // POST: ApplicationUsers/Delete/5
