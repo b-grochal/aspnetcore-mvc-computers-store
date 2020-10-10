@@ -144,7 +144,7 @@ namespace ComputersStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeStatus(int id, int orderStatusId)
         {
-            //await orderBusinessService.UpdateOrder(orderEditFormViewModel);
+            await orderBusinessService.UpdateOrderStatus(id, orderStatusId);
             return Json( new { success = true });
         }
 
