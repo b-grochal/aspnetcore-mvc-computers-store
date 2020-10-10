@@ -128,36 +128,24 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            var order = await orderBusinessService.GetOrderEditFormData(id.Value);
+            var order = await orderBusinessService.GetOrder(id.Value);
 
             if (order == null)
             {
                 return NotFound();
             }
 
-            await PopulateUpdateFormSelectElements(order.OrderStatusId, order.PaymentTypeId);
-
-            return View(order);
+            await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
+            return PartialView("~/Views/Orders/Modals/_ChangeOrderStatusModal.cshtml" ,order);
         }
 
         // POST: Orders/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangeStatus(int id, OrderEditFormViewModel orderEditFormViewModel)
+        public async Task<IActionResult> ChangeStatus(int id, int orderStatusId)
         {
-            if (id != orderEditFormViewModel.OrderId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                await orderBusinessService.UpdateOrder(orderEditFormViewModel);
-                await SendOrderStatusChangedEmail(id);
-                return RedirectToAction(nameof(Table));
-            }
-            await PopulateUpdateFormSelectElements(orderEditFormViewModel.OrderStatusId, orderEditFormViewModel.PaymentTypeId);
-            return View(orderEditFormViewModel);
+            //await orderBusinessService.UpdateOrder(orderEditFormViewModel);
+            return Json( new { success = true });
         }
 
         // GET: Orders/Delete/5
@@ -192,6 +180,12 @@ namespace ComputersStore.WebUI.Controllers
             var paymentTypes = await paymentTypeBusinessService.GetPaymentTypesCollection();
             ViewData["OrderStatuses"] = new SelectList(orderStatuses, "OrderStatusId", "Name", orderStatusId);
             ViewData["PaymentTypes"] = new SelectList(paymentTypes, "PaymentTypeId", "Name", paymentTypeId);
+        }
+
+        private async Task PopulateChangeOrdersStatusFormSelectElements(int? orderStatusId)
+        {
+            var orderStatuses = await orderStatusBusinessService.GetOrderStatusesCollection();
+            ViewData["OrderStatuses"] = new SelectList(orderStatuses, "OrderStatusId", "Name", orderStatusId);
         }
 
         private async Task SendOrderStatusChangedEmail(int orderId)
