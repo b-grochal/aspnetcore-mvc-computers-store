@@ -17,5 +17,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel);
         Task DeleteOrder(int orderId);
         Task<OrderListViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage);
+        Task UpdateOrderStatus(int orderId, int newOrderStatusId);
     }
 }

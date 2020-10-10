@@ -108,5 +108,10 @@ namespace ComputersStore.BusinessServices.Implementation
             var updatedOrder = mapper.Map(orderEditFormViewModel, order);
             await orderService.UpdateOrder(updatedOrder);
         }
+
+        public async Task UpdateOrderStatus(int orderId, int newOrderStatusId)
+        {
+            await orderService.UpdateOrderStatus(orderId, newOrderStatusId);
+        }
     }
 }
