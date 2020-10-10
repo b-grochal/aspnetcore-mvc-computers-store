@@ -74,5 +74,12 @@ namespace ComputersStore.Services.Implementation
             order.TotalCost = order.OrderItems.Sum(i => i.Quantity * i.Product.Price);
             return order;
         }
+
+        public async Task UpdateOrderStatus(int orderId, int newOrderStatusId)
+        {
+            var order = await applicationDbContext.Orders.FindAsync(orderId);
+            order.OrderStatusId = newOrderStatusId;
+            await applicationDbContext.SaveChangesAsync();
+        }
     }
 }

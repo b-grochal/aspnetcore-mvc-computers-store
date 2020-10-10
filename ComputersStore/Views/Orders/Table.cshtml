@@ -65,7 +65,13 @@
                             <td scope="col" class="text-right">
                                 <a class="btn btn-sm btn-green mr-2" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">Details</a>
                                 <a class="btn btn-sm btn-green mr-2" asp-controller="Orders" asp-action="Edit" asp-route-id="@order.OrderId">Edit</a>
-                                <a class="btn btn-sm btn-green mr-2" asp-controller="Orders" asp-action="ChangeStatus" asp-route-id="@order.OrderId">Change status</a>
+                                <btn class="btn btn-sm btn-green mr-2" 
+                                     type="button"
+                                     data-toggle="ajax-modal"
+                                     data-target="#changeOrderStatus"
+                                     data-url="@Url.Action("ChangeStatus", "Orders", new { id = order.OrderId })">
+                                    Change status
+                                </btn>
                                 <btn class="btn btn-sm btn-green modalButton"
                                      type="button"
                                      data-toggle="ajax-modal"

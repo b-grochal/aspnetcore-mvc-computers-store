@@ -147,7 +147,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            return PartialView("_DeleteProductModal", product);
+            return PartialView("~/Views/Products/Modals/_DeleteProductModal.cshtml", product);
         }
 
         // POST: Products/Delete/5
