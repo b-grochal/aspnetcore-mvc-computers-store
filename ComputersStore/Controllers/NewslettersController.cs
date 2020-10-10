@@ -59,7 +59,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            return PartialView("_DeleteNewsletterModalPartial", newsletter);
+            return PartialView("~/Views/Newsletters/Modals/_DeleteNewsletterModal.cshtml", newsletter);
         }
 
         // POST: Newsletters/Delete/5
