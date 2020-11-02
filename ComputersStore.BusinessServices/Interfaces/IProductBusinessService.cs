@@ -17,6 +17,7 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task CreateProduct(ProductCreateFormViewModel product);
         Task UpdateProduct(ProductEditFormViewModel product);
         Task DeleteProduct(int productId);
+        ProductCreateFormViewModel PrepareNewEmptyProduct(int productCategoryId);
         int GetProductsCollectionCount(int productCategoryId);
         Task<IEnumerable<ProductViewModel>> GetRecommendedProductsCollection(int numberOfProducts);
         Task<ProductViewModel> GetProduct(int productId);

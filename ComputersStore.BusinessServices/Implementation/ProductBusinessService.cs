@@ -13,6 +13,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ComputersStore.Models.ViewModels.Product.Specifc;
+using ComputersStore.Models.ViewModels.Product.Specifc.CentralProcessingUnit;
+using ComputersStore.Models.ViewModels.Product.Specifc.GraphicsProcessingUnit;
+using ComputersStore.Models.ViewModels.Product.Specifc.HardDiskDrive;
+using ComputersStore.Models.ViewModels.Product.Specifc.Motherboard;
+using ComputersStore.Models.ViewModels.Product.Specifc.PowerSupplyUnit;
+using ComputersStore.Models.ViewModels.Product.Specifc.RandomAccessMemory;
+using ComputersStore.Models.ViewModels.Product.Specifc.SolidStateDrive;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -215,6 +222,29 @@ namespace ComputersStore.BusinessServices.Implementation
                 }
 
             };
+        }
+
+        public ProductCreateFormViewModel PrepareNewEmptyProduct(int productCategoryId)
+        {
+            switch (productCategoryId)
+            {
+                case ProductCategoryDictionary.CPU:
+                    return new CentralProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.GPU:
+                    return new GraphicsProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.HDD:
+                    return new HardDiskDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.Motherboard:
+                    return new MotherboardCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.PSU:
+                    return new PowerSupplyUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.RAM:
+                    return new RandomAccessMemoryCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.SSD:
+                    return new SolidStateDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
+                default:
+                    return null;
+            }
         }
     }
 }

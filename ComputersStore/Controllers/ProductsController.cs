@@ -77,12 +77,9 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create(int productCategoryId = ProductCategoryDictionary.CPU)
+        public IActionResult Create(int productCategoryId)
         {
-            var newProductViewModel = new ProductCreateFormViewModel
-            {
-                ProductCategoryId = productCategoryId
-            };
+            var newProductViewModel = productBusinessService.PrepareNewEmptyProduct(productCategoryId);
             return View(newProductViewModel);
         }
 
