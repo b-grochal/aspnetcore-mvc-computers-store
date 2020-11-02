@@ -135,7 +135,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
+            //await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
             return PartialView("~/Views/Orders/Modals/_ChangeOrderStatusModal.cshtml" ,order);
         }
 
