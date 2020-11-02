@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Specifc
 {
-    public class MotherboardViewModel : ProductViewModel
+    public class MotherboardDetailsViewModel : ProductDetailsViewModel
     {
         public string FormFactor { get; set; }
         public string CpuSocket { get; set; }
