@@ -4,11 +4,9 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Specifc
 {
-    public class HardDiskDriveViewModel : ProductViewModel
+    public class SolidStateDriveDetailsViewModel : ProductDetailsViewModel
     {
         public string Capacity { get; set; }
-        public string RotationSpeed { get; set; }
-        public string CacheSize { get; set; }
         public string Interface { get; set; }
     }
 }

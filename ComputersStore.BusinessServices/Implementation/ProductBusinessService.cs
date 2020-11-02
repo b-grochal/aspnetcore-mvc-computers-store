@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ComputersStore.Models.ViewModels.Product.Specifc;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -58,7 +59,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<ProductDetailsViewModel> GetProductDetails(int productId)
         {
             var product = await productService.GetProduct(productId);
-            var result = mapper.Map<ProductDetailsViewModel>(product);
+            var result = MapProductToSpecificDetailsViewModel(product);
             return result;
         }
 
@@ -116,34 +117,27 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        private Product MapProductViewModelToConcreteProduct(ProductViewModel productViewModel)
+        private ProductDetailsViewModel MapProductToSpecificDetailsViewModel(Product product)
         {
-            Product result = null;
-            switch (productViewModel.ProductCategoryId)
+            switch (product.ProductCategoryId)
             {
                 case ProductCategoryDictionary.CPU:
-                    result = mapper.Map<CentralProcessingUnit>(productViewModel);
-                    break;
+                    return mapper.Map<CentralProcessingUnitDetailsViewModel>(product);
                 case ProductCategoryDictionary.GPU:
-                    result = mapper.Map<GraphicsProcessingUnit>(productViewModel);
-                    break;
+                    return mapper.Map<GraphicsProcessingUnitDetailsViewModel>(product);
                 case ProductCategoryDictionary.HDD:
-                    result = mapper.Map<HardDiskDrive>(productViewModel);
-                    break;
+                    return mapper.Map<HardDiskDriveDetailsViewModel>(product);
                 case ProductCategoryDictionary.Motherboard:
-                    result = mapper.Map<Motherboard>(productViewModel);
-                    break;
+                    return mapper.Map<MotherboardDetailsViewModel>(product);
                 case ProductCategoryDictionary.PSU:
-                    result = mapper.Map<PowerSupplyUnit>(productViewModel);
-                    break;
+                    return mapper.Map<PowerSupplyUnitDetailsViewModel>(product);
                 case ProductCategoryDictionary.RAM:
-                    result = mapper.Map<RandomAccessMemory>(productViewModel);
-                    break;
+                    return mapper.Map<RandomAccessMemoryDetailsViewModel>(product);
                 case ProductCategoryDictionary.SSD:
-                    result = mapper.Map<SolidStateDrive>(productViewModel);
-                    break;
+                    return mapper.Map<SolidStateDriveDetailsViewModel>(product);
+                default:
+                    return null;
             }
-            return result;
         }
 
         private Product MapProductEditFormViewModelToConcreteProduct(ProductEditFormViewModel productDetailsViewModel)

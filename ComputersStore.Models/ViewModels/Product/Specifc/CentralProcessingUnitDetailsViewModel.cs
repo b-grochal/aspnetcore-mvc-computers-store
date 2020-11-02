@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Specifc
 {
-    public class CentralProcessingUnitViewModel : ProductViewModel
+    public class CentralProcessingUnitDetailsViewModel : ProductDetailsViewModel
     {
         public int NumberOfCores { get; set; }
         public int NumberOfThreads { get; set; }

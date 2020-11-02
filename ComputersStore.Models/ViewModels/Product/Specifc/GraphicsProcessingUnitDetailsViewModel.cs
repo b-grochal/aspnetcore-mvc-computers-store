@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Specifc
 {
-    public class GraphicsProcessingUnitViewModel : ProductViewModel
+    public class GraphicsProcessingUnitDetailsViewModel : ProductDetailsViewModel
     {
         public string MemorySize { get; set; }
         public string MemoryType { get; set; }

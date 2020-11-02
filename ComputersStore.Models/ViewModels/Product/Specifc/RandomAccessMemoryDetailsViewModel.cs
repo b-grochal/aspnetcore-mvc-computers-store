@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Specifc
 {
-    public class RandomAccessMemoryViewModel : ProductViewModel
+    public class RandomAccessMemoryDetailsViewModel : ProductDetailsViewModel
     {
         public string Size { get; set; }
         public string Type { get; set; }
