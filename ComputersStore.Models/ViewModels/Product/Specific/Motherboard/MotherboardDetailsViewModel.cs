@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc
+namespace ComputersStore.Models.ViewModels.Product.Specific
 {
     public class MotherboardDetailsViewModel : ProductDetailsViewModel
     {

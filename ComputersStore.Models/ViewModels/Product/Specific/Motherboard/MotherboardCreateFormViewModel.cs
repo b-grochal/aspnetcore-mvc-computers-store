@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.Motherboard
+namespace ComputersStore.Models.ViewModels.Product.Specific.Motherboard
 {
     public class MotherboardCreateFormViewModel : ProductCreateFormViewModel
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.PowerSupplyUnit
+namespace ComputersStore.Models.ViewModels.Product.Specific.PowerSupplyUnit
 {
     public class PowerSupplyUnitCreateFormViewModel : ProductCreateFormViewModel
     {

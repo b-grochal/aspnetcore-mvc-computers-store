@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.RandomAccessMemory
+namespace ComputersStore.Models.ViewModels.Product.Specific.RandomAccessMemory
 {
     public class RandomAccessMemoryCreateFormViewModel : ProductCreateFormViewModel
     {

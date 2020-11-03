@@ -12,14 +12,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ComputersStore.Models.ViewModels.Product.Specifc;
-using ComputersStore.Models.ViewModels.Product.Specifc.CentralProcessingUnit;
-using ComputersStore.Models.ViewModels.Product.Specifc.GraphicsProcessingUnit;
-using ComputersStore.Models.ViewModels.Product.Specifc.HardDiskDrive;
-using ComputersStore.Models.ViewModels.Product.Specifc.Motherboard;
-using ComputersStore.Models.ViewModels.Product.Specifc.PowerSupplyUnit;
-using ComputersStore.Models.ViewModels.Product.Specifc.RandomAccessMemory;
-using ComputersStore.Models.ViewModels.Product.Specifc.SolidStateDrive;
+using ComputersStore.Models.ViewModels.Product.Specific;
+using ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit;
+using ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit;
+using ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive;
+using ComputersStore.Models.ViewModels.Product.Specific.Motherboard;
+using ComputersStore.Models.ViewModels.Product.Specific.PowerSupplyUnit;
+using ComputersStore.Models.ViewModels.Product.Specific.RandomAccessMemory;
+using ComputersStore.Models.ViewModels.Product.Specific.SolidStateDrive;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
