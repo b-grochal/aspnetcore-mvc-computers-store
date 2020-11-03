@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.GraphicsProcessingUnit
+namespace ComputersStore.Models.ViewModels.Product.Specific
 {
-    public class GraphicsProcessingUnitCreateFormViewModel : ProductCreateFormViewModel
+    public class GraphicsProcessingUnitDetailsViewModel : ProductDetailsViewModel
     {
         public string MemorySize { get; set; }
         public string MemoryType { get; set; }

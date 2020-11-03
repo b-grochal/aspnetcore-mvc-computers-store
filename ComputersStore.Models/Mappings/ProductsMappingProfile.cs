@@ -4,7 +4,7 @@ using ComputersStore.Models.Converters;
 using ComputersStore.Models.Resolvers;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Models.ViewModels.Product;
-using ComputersStore.Models.ViewModels.Product.Specifc;
+using ComputersStore.Models.ViewModels.Product.Specific;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.HardDiskDrive
+namespace ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive
 {
     public class HardDiskDriveCreateFormViewModel : ProductCreateFormViewModel
     {

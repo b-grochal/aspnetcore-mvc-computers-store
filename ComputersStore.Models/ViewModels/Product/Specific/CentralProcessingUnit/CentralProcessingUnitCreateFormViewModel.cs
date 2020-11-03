@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specifc.CentralProcessingUnit
+namespace ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit
 {
     public class CentralProcessingUnitCreateFormViewModel : ProductCreateFormViewModel
     {
