@@ -85,30 +85,28 @@ namespace ComputersStore.Models.Mappings
             CreateMap<SolidStateDriveCreateFormViewModel, SolidStateDrive>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom(src => src.ImageFile));
 
-            CreateMap<ProductEditFormViewModel, CentralProcessingUnit>()
+            CreateMap<CentralProcessingUnitEditFormViewModel, CentralProcessingUnit>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, GraphicsProcessingUnit>()
+            CreateMap<GraphicsProcessingUnitEditFormViewModel, GraphicsProcessingUnit>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, HardDiskDrive>()
+            CreateMap<HardDiskDriveEditFormViewModel, HardDiskDrive>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, Motherboard>()
+            CreateMap<MotherboardEditFormViewModel, Motherboard>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, PowerSupplyUnit>()
+            CreateMap<PowerSupplyUnitEditFormViewModel, PowerSupplyUnit>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, RandomAccessMemory>()
+            CreateMap<RandomAccessMemoryEditFormViewModel, RandomAccessMemory>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
-            CreateMap<ProductEditFormViewModel, SolidStateDrive>()
+            CreateMap<SolidStateDriveEditFormViewModel, SolidStateDrive>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
 
-            CreateMap<CentralProcessingUnit, ProductEditFormViewModel>();
-            CreateMap<GraphicsProcessingUnit, ProductEditFormViewModel>();
-            CreateMap<CentralProcessingUnit, ProductEditFormViewModel>();
-            CreateMap<GraphicsProcessingUnit, ProductEditFormViewModel>();
-            CreateMap<HardDiskDrive, ProductEditFormViewModel>();
-            CreateMap<Motherboard, ProductEditFormViewModel>();
-            CreateMap<PowerSupplyUnit, ProductEditFormViewModel>();
-            CreateMap<RandomAccessMemory, ProductEditFormViewModel>();
-            CreateMap<SolidStateDrive, ProductEditFormViewModel>();
+            CreateMap<CentralProcessingUnit, CentralProcessingUnitEditFormViewModel>();
+            CreateMap<GraphicsProcessingUnit, GraphicsProcessingUnitEditFormViewModel>();
+            CreateMap<HardDiskDrive, HardDiskDriveEditFormViewModel>();
+            CreateMap<Motherboard, MotherboardEditFormViewModel>();
+            CreateMap<PowerSupplyUnit, PowerSupplyUnitEditFormViewModel>();
+            CreateMap<RandomAccessMemory, RandomAccessMemoryEditFormViewModel>();
+            CreateMap<SolidStateDrive, SolidStateDriveEditFormViewModel>();
         }
     }
 }
