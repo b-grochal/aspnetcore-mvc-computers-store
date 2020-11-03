@@ -120,6 +120,7 @@ namespace ComputersStore
             services.AddControllers(options =>
             {
                 options.ModelBinderProviders.Insert(0, new ProductCreateFormModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new ProductEditFormModelBinderProvider());
             });
 
         }
