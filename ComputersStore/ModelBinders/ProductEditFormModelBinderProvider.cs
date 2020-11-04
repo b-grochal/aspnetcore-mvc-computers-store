@@ -41,7 +41,7 @@ namespace ComputersStore.WebUI.ModelBinders
                 binders[type] = (modelMetadata, context.CreateBinder(modelMetadata));
             }
 
-            return new ProductCreateFormModelBinder(binders);
+            return new ProductEditFormModelBinder(binders);
         }
     }
 }

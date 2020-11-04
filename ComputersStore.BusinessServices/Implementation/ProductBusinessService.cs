@@ -70,10 +70,10 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ProductEditFormViewModel> GetProductEditFormData(int productId)
+        public async Task<ProductEditFormViewModel> GetProductForUpdate(int productId)
         {
             var product = await productService.GetProduct(productId);
-            var result = mapper.Map<ProductEditFormViewModel>(product);
+            var result = MapProductToSpceificEditFormViewModel(product);
             return result;
         }
 
@@ -142,6 +142,29 @@ namespace ComputersStore.BusinessServices.Implementation
                     return mapper.Map<RandomAccessMemoryDetailsViewModel>(product);
                 case ProductCategoryDictionary.SSD:
                     return mapper.Map<SolidStateDriveDetailsViewModel>(product);
+                default:
+                    return null;
+            }
+        }
+
+        private ProductEditFormViewModel MapProductToSpceificEditFormViewModel(Product product)
+        {
+            switch (product.ProductCategoryId)
+            {
+                case ProductCategoryDictionary.CPU:
+                    return mapper.Map<CentralProcessingUnitEditFormViewModel>(product);
+                case ProductCategoryDictionary.GPU:
+                    return mapper.Map<GraphicsProcessingUnitEditFormViewModel>(product);
+                case ProductCategoryDictionary.HDD:
+                    return mapper.Map<HardDiskDriveEditFormViewModel>(product);
+                case ProductCategoryDictionary.Motherboard:
+                    return mapper.Map<MotherboardEditFormViewModel>(product);
+                case ProductCategoryDictionary.PSU:
+                    return mapper.Map<PowerSupplyUnitEditFormViewModel>(product);
+                case ProductCategoryDictionary.RAM:
+                    return mapper.Map<RandomAccessMemoryEditFormViewModel>(product);
+                case ProductCategoryDictionary.SSD:
+                    return mapper.Map<SolidStateDriveEditFormViewModel>(product);
                 default:
                     return null;
             }
