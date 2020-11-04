@@ -13,7 +13,7 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<IEnumerable<ProductDetailsViewModel>> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<ProductDetailsViewModel> GetProductDetails(int productId);
-        Task<ProductEditFormViewModel> GetProductEditFormData(int productId);
+        Task<ProductEditFormViewModel> GetProductForUpdate(int productId);
         Task CreateProduct(ProductCreateFormViewModel product);
         Task UpdateProduct(ProductEditFormViewModel product);
         Task DeleteProduct(int productId);
