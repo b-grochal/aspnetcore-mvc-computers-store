@@ -77,12 +77,9 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Create
-        public IActionResult Create(int productCategoryId = ProductCategoryDictionary.CPU)
+        public IActionResult Create(int productCategoryId)
         {
-            var newProductViewModel = new ProductCreateFormViewModel
-            {
-                ProductCategoryId = productCategoryId
-            };
+            var newProductViewModel = productBusinessService.PrepareNewEmptyProduct(productCategoryId);
             return View(newProductViewModel);
         }
 
@@ -105,12 +102,12 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var productDetailsViewModel = await productBusinessService.GetProductEditFormData(id);
-            if (productDetailsViewModel == null)
+            var productEditFormViewModel = await productBusinessService.GetProductForUpdate(id);
+            if (productEditFormViewModel == null)
             {
                 return NotFound();
             }
-            return View(productDetailsViewModel);
+            return View(productEditFormViewModel);
         }
 
         // POST: Products/Edit/5
