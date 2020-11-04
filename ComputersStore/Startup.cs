@@ -31,6 +31,7 @@ using ComputersStore.EmailHelper.Sender.Implementation;
 using ComputersStore.EmailHelper.Factory.Implementation;
 using ComputersStore.EmailTemplates.Renderer.Interface;
 using ComputersStore.EmailTemplates.Renderer.Implementation;
+using ComputersStore.WebUI.ModelBinders;
 
 namespace ComputersStore
 {
@@ -115,6 +116,12 @@ namespace ComputersStore
 
             services.AddMemoryCache();
             services.AddSession();
+
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new ProductCreateFormModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new ProductEditFormModelBinderProvider());
+            });
 
         }
 
