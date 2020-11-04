@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -21,7 +22,9 @@ namespace ComputersStore.Models.Attributes
 
             bool.TryParse(type.GetProperty(propertyName).GetValue(instance)?.ToString(), out bool propertyValue);
 
-            if (propertyValue && string.IsNullOrWhiteSpace(value?.ToString()))
+            var file = value as IFormFile;
+
+            if (propertyValue && file == null)
             {
                 return new ValidationResult(ErrorMessage);
             }
