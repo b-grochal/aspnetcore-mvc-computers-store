@@ -1,0 +1,39 @@
+﻿@model ApplicationUserViewModel
+
+<h3>Application user details</h3>
+<hr /> 
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-sm-6 text-right">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="col-sm-6 text-left">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-sm-6 text-right">
+        @Html.DisplayNameFor(model => model.SecondName)
+    </div>
+    <div class="col-sm-6 text-left">
+        @Html.DisplayFor(model => model.SecondName)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-sm-6 text-right">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="col-sm-6 text-left">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-sm-6 text-right">
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="col-sm-6 text-left">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+</div>
+<div class="d-flex justify-content-end mt-2">
+    <a class="btn btn-green ml-2" asp-controller="ApplicationUsers" asp-action="Table">Back</a>
+</div>
