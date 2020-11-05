@@ -53,5 +53,12 @@ namespace ComputersStore.WebUI.Controllers
             await applicationUserBusinessService.DeleteApplicationUser(applicationUserId);
             return Json( new { success = true});
         }
+
+        // GET: ApplicationUsers/Details/5
+        public async Task<IActionResult> Details(string id)
+        {
+            var applicationUserViewModel = await applicationUserBusinessService.GetApplicationUserById(id);
+            return View(applicationUserViewModel);
+        }
     }
 }
