@@ -58,7 +58,7 @@
                             <td scope="col">@applicationUser.Email</td>
                             <td scope="col">@applicationUser.PhoneNumber</td>
                             <td scope="col" class="text-right">
-                                <a class="btn btn-sm btn-green mr-2">Details</a>
+                                <a class="btn btn-sm btn-green mr-2" asp-controller="ApplicationUsers" asp-action="Details" asp-route-id="@applicationUser.ApplicationUserId">Details</a>
                                 <btn class="btn btn-sm btn-green modalButton"
                                      type="button"
                                      data-toggle="ajax-modal"
