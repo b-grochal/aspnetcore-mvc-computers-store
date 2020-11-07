@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.SearchCriteria;
+using ComputersStore.Models.SearchParams;
 using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Models.ViewModels.Order;
 using ComputersStore.Models.ViewModels.Other;
@@ -69,7 +69,7 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = mappedOrders.Count()
                 },
-                ordersTableSearchCriteria = new OrdersTableSearchCriteria
+                ordersTableSearchCriteria = new OrdersTableSearchParams
                 {
                     OrderId = orderId,
                     OrderStatusId = orderStatusId,

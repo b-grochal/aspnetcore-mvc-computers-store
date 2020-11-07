@@ -12,15 +12,15 @@ namespace ComputersStore.Models.Resolvers
     {
         public byte[] Resolve(ProductEditFormViewModel source, Product destination, byte[] destMember, ResolutionContext context)
         {
-            if(source.IsImageUpdated && source.ImageFile != null)
+            if(source.IsImageUpdated && source.NewImageFile != null)
             {
                 MemoryStream ms = new MemoryStream();
-                source.ImageFile.CopyTo(ms);
+                source.NewImageFile.CopyTo(ms);
                 return ms.ToArray();
             }
             else
             {
-                return null;
+                return source.OldImage;
             }
         }
     }

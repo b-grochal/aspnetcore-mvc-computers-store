@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Dictionaries;
-using ComputersStore.Models.SearchCriteria.ApplicationUser;
+using ComputersStore.Models.SearchParams.ApplicationUser;
 using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
@@ -50,7 +50,7 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName)
                 },
-                applicationUserSearchCriteria = new ApplicationUserSearchCriteria
+                applicationUserSearchCriteria = new ApplicationUsersTableSearchParams
                 {
                     FirstName = firstName,
                     LastName = lastName,

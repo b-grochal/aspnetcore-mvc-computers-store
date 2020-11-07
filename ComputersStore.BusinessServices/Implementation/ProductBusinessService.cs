@@ -2,7 +2,7 @@
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
 using ComputersStore.Data.Dictionaries;
-using ComputersStore.Models.SearchCriteria.Products;
+using ComputersStore.Models.SearchParams.Product;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Models.ViewModels.Product;
@@ -119,7 +119,7 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = products.Count()
                 },
-                ProductsTableSearchCriteria = new ProductsTableSearchCriteria
+                ProductsTableSearchCriteria = new ProductsTableSearchParams
                 {
                     ProductCategoryId = productCategoryId,
                     ProductName = productName,
