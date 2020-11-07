@@ -15,8 +15,6 @@ namespace ComputersStore.Services.Interfaces
         Task<IdentityResult> ResetPassword(string applicationUserEmail, string code, string password);
         Task<IdentityResult> ChangePassword(string applicationUserId, string oldPassword, string newPassword);
         Task<string> GenerateEmailConfirmationToken(string applicationUserId);
-        Task<ApplicationUser> GetApplicationUserById(string applicationUserId);
-        Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail);
         Task<string> GenerateResetPasswordToken(string applicationUserId);
         Task<IdentityResult> UpdateAccountData(ApplicationUser applicationUser);
     }

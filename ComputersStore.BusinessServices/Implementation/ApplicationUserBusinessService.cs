@@ -37,7 +37,7 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<ApplicationUsersCollectionViewModel> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
         {
-            var users = await applicationUserService.GetUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, pageSize);
+            var users = await applicationUserService.GetCustomersCollection(firstName, lastName, email, phoneNumber, pageNumber, pageSize);
             var usersViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(users);
             return new ApplicationUsersCollectionViewModel
             {
@@ -46,7 +46,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = await applicationUserService.GetUsersCollectionCount()
+                    TotalItems = await applicationUserService.GetCustomersCollectionCount()
                 },
                 applicationUserSearchCriteria = new ApplicationUserSearchCriteria
                 {
