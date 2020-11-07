@@ -26,7 +26,7 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<IEnumerable<ShoppingCartItemViewModel>> GetProductsForShoppingCart(ShoppingCart shoppingCart)
         {
-            var products = await productsService.GetProductsCollectionById(shoppingCart.GetShoppingCartItems().Select(x => x.ProductId));
+            var products = await productsService.GetProductsCollectionByIds(shoppingCart.GetShoppingCartItems().Select(x => x.ProductId));
             var shoppingCartItemsViewModels = mapper.Map<IEnumerable<ShoppingCartItemViewModel>>(products);
             return UpdateShoppingCartItemsQuantities(shoppingCartItemsViewModels, shoppingCart.GetShoppingCartItems());
         }

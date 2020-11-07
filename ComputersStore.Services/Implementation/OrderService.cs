@@ -39,11 +39,6 @@ namespace ComputersStore.Services.Implementation
             return await applicationDbContext.Orders.FindAsync(orderId);
         }
 
-        public async Task<IEnumerable<Order>> GetOrdersCollection()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IEnumerable<Order>> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string userEmail, int pageNumber, int pageSize)
         {
             return await applicationDbContext.Orders
@@ -67,12 +62,6 @@ namespace ComputersStore.Services.Implementation
         {
             applicationDbContext.Orders.Update(order);
             await applicationDbContext.SaveChangesAsync();
-        }
-
-        private Order CalculateOrderTotalCost(Order order) 
-        {
-            order.TotalCost = order.OrderItems.Sum(i => i.Quantity * i.Product.Price);
-            return order;
         }
 
         public async Task UpdateOrderStatus(int orderId, int newOrderStatusId)
