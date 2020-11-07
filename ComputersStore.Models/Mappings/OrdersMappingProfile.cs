@@ -11,7 +11,6 @@ namespace ComputersStore.Models.Mappings
     {
         public OrdersMappingProfile()
         {
-            //CreateMap<NewsletterSignUpFormViewModel, Newsletter>();
             CreateMap<Order, OrderViewModel>()
                 .ForMember(dest => dest.ApplicationUserEmail, opt => opt.MapFrom(src => src.ApplicationUser.Email))
                 .ForMember(dest => dest.OrderStatusName, opt => opt.MapFrom(src => src.OrderStatus.Name))

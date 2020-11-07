@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.SearchCriteria;
+using ComputersStore.Models.SearchParams;
 using ComputersStore.Models.ViewModels.Newsletter;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;

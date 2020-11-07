@@ -11,9 +11,11 @@ namespace ComputersStore.Models.Converters
     {
         public byte[] Convert(IFormFile source, byte[] destination, ResolutionContext context)
         {
-            MemoryStream ms = new MemoryStream();
-            source.CopyTo(ms);
-            return ms.ToArray();
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                source.CopyTo(memoryStream);
+                return memoryStream.ToArray();
+            }
         }
     }
 }

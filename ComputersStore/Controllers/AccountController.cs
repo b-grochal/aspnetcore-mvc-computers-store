@@ -339,7 +339,7 @@ namespace ComputersStore.Controllers
         {
             var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
             var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection();
-            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.SecondName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
+            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
         #endregion
     }
