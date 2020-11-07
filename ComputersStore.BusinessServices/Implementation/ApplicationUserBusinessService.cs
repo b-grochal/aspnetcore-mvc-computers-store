@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.SearchCriteria.ApplicationUser;
 using ComputersStore.Models.ViewModels.ApplicationUser;
 using ComputersStore.Models.ViewModels.Other;
@@ -15,6 +16,7 @@ namespace ComputersStore.BusinessServices.Implementation
     {
         private readonly IApplicationUserService applicationUserService;
         private readonly IMapper mapper;
+
         public ApplicationUserBusinessService(IApplicationUserService applicationUserService, IMapper mapper)
         {
             this.applicationUserService = applicationUserService;
@@ -35,18 +37,18 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ApplicationUsersCollectionViewModel> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        public async Task<ApplicationUsersCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
         {
-            var users = await applicationUserService.GetCustomersCollection(firstName, lastName, email, phoneNumber, pageNumber, pageSize);
-            var usersViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(users);
+            var applicationUsers = await applicationUserService.GetApplicationUsersCollection(roleName, firstName, lastName, email, phoneNumber, pageNumber, pageSize);
+            var applicationUsersViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(applicationUsers);
             return new ApplicationUsersCollectionViewModel
             {
-                applicationUsers = usersViewModels,
+                applicationUsers = applicationUsersViewModels,
                 PaginationViewModel = new PaginationViewModel
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = await applicationUserService.GetCustomersCollectionCount()
+                    TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName)
                 },
                 applicationUserSearchCriteria = new ApplicationUserSearchCriteria
                 {
@@ -58,37 +60,14 @@ namespace ComputersStore.BusinessServices.Implementation
             };
         }
 
-        public async Task<ApplicationUsersCollectionViewModel> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        public async Task DeleteApplicationUser(string applicationUserId)
         {
-            var admins = await applicationUserService.GetAdminsCollection(firstName, lastName, email, phoneNumber, pageNumber, pageSize);
-            var adminsViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(admins);
-            return new ApplicationUsersCollectionViewModel
-            {
-                applicationUsers = adminsViewModels,
-                PaginationViewModel = new PaginationViewModel
-                {
-                    CurrentPage = pageNumber,
-                    ItemsPerPage = pageSize,
-                    TotalItems = await applicationUserService.GetAdminsCollectionCount()
-                },
-                applicationUserSearchCriteria = new ApplicationUserSearchCriteria
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    PhoneNumber = phoneNumber
-                }
-            };
+            await applicationUserService.DeleteApplicationUser(applicationUserId);
         }
 
-        public Task DeleteApplicationUser(string applicationUserId)
+        public async Task<IEnumerable<string>> GetApplicationUsersEmailsCollection(string roleName)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<string>> GetAdminsEmailAddressesCollection()
-        {
-            return await applicationUserService.GetAdminsEmailAddresssesCollection();
+            return await applicationUserService.GetApplicationUsersEmailsCollection(roleName);
         }
     }
 }

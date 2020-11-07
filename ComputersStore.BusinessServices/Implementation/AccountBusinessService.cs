@@ -18,13 +18,14 @@ namespace ComputersStore.BusinessServices.Implementation
     public class AccountBusinessService : IAccountBusinessService
     {
         private readonly IAccountService accountService;
+        private readonly IApplicationUserService applicationUserService;
         private readonly IMapper mapper;
-        private readonly IEmailService emailMessagesService;
-        public AccountBusinessService(IAccountService accountService, IMapper mapper, IEmailService emailMessagesService)
+
+        public AccountBusinessService(IAccountService accountService, IApplicationUserService applicationUserService, IMapper mapper)
         {
             this.accountService = accountService;
+            this.applicationUserService = applicationUserService;
             this.mapper = mapper;
-            this.emailMessagesService = emailMessagesService;
         }
 
         public async Task<IdentityResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel, string applicationUserId)
@@ -68,18 +69,16 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<AccountDataViewModel> GetApplicationUserAccountData(string applicationUserId)
         {
-            var applicationUser = await accountService.GetApplicationUserById(applicationUserId);
+            var applicationUser = await applicationUserService.GetApplicationUserById(applicationUserId);
             var result = mapper.Map<AccountDataViewModel>(applicationUser);
             return result;
         }
 
         public async Task<IdentityResult> UpdateAccountData(AccountDataViewModel accountDataViewModel, string applicationUserId)
         {
-            var applicationUser = await accountService.GetApplicationUserById(applicationUserId);
+            var applicationUser = await applicationUserService.GetApplicationUserById(applicationUserId);
             var updatedApplicationUser = mapper.Map(accountDataViewModel, applicationUser);
             return await accountService.UpdateAccountData(updatedApplicationUser);
         }
-
-        
     }
 }

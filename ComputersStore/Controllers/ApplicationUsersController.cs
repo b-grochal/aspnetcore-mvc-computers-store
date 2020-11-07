@@ -18,7 +18,7 @@ namespace ComputersStore.WebUI.Controllers
 
         public async Task<IActionResult> Users(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var usersCollectionViewModel = await applicationUserBusinessService.GetUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
+            var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
             return View(usersCollectionViewModel);
         }
 

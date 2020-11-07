@@ -338,7 +338,7 @@ namespace ComputersStore.Controllers
         private async Task SendCustomerQuestionEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
             var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
-            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetAdminsEmailAddressesCollection();
+            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection();
             await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.SecondName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
         #endregion

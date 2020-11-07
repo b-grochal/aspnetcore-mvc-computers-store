@@ -13,7 +13,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<OrderViewModel> GetOrder(int orderId);
         Task<OrderDetailsViewModel> GetOrderDetails(int orderId);
         Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId);
-        Task CreateOrder(Order order);
         Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel);
         Task DeleteOrder(int orderId);
         Task<OrderListViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage);
