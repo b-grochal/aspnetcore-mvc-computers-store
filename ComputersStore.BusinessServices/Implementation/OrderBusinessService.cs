@@ -25,11 +25,6 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
-        public async Task CreateOrder(Order order)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task DeleteOrder(int orderId)
         {
             await orderService.DeleteOrder(orderId);
@@ -45,7 +40,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
         {
             var order = await orderService.GetOrder(orderId);
-            var result = new OrderDetailsViewModel //TODO mapper do tworzenia viewmodelu
+            var result = new OrderDetailsViewModel
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),

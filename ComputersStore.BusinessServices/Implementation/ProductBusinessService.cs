@@ -27,6 +27,7 @@ namespace ComputersStore.BusinessServices.Implementation
     {
         private readonly IProductService productService;
         private readonly IMapper mapper;
+
         public ProductBusinessService(IProductService productService, IMapper mapper)
         {
             this.productService = productService;
@@ -35,7 +36,7 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task CreateProduct(ProductCreateFormViewModel newProductViewModel)
         {
-            var product = MapNewProductViewModelToConcreteProduct(newProductViewModel);
+            var product = MapNewProductViewModelToSpecificProduct(newProductViewModel);
             await productService.CreateProduct(product); 
         }
 
@@ -54,13 +55,6 @@ namespace ComputersStore.BusinessServices.Implementation
         public int GetProductsCollectionCount(int productCategoryId)
         {
             return productService.GetProductsCollectionCount(productCategoryId);
-        }
-
-        public async Task<IEnumerable<ProductDetailsViewModel>> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
-        {
-            var products = await productService.GetProductsCollection(productCategroryId, sortOrder, pageNumber, pageSize);
-            var result = mapper.Map<IEnumerable<ProductDetailsViewModel>>(products);
-            return result;
         }
 
         public async Task<ProductDetailsViewModel> GetProductDetails(int productId)
@@ -94,10 +88,74 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        private Product MapNewProductViewModelToConcreteProduct(ProductCreateFormViewModel newProduct)
+        public async Task<ProductViewModel> GetProduct(int productId)
+        {
+            var product = await productService.GetProduct(productId);
+            var result = mapper.Map<ProductViewModel>(product);
+            return result;
+        }
+
+        public async Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString)
+        {
+            var searchedProducts = await productService.GetSearchedProductsCollection(searchString);
+            var result = new SearchedProductsListViewModel
+            {
+                Products = mapper.Map<IEnumerable<ProductViewModel>>(searchedProducts),
+                SearchString = searchString
+            };
+            return result;
+        }
+
+        public async Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
+        {
+            var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended);
+            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products.Skip((pageNumber - 1) * pageSize).Take(pageSize));
+            return new ProductsTableViewModel
+            {
+                Products = mappedProducts,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = pageSize,
+                    TotalItems = products.Count()
+                },
+                ProductsTableSearchCriteria = new ProductsTableSearchCriteria
+                {
+                    ProductCategoryId = productCategoryId,
+                    ProductName = productName,
+                    IsRecommended = isRecommended
+                }
+
+            };
+        }
+
+        public ProductCreateFormViewModel PrepareNewEmptyProduct(int productCategoryId)
+        {
+            switch (productCategoryId)
+            {
+                case ProductCategoryDictionary.CPU:
+                    return new CentralProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.GPU:
+                    return new GraphicsProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.HDD:
+                    return new HardDiskDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.Motherboard:
+                    return new MotherboardCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.PSU:
+                    return new PowerSupplyUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.RAM:
+                    return new RandomAccessMemoryCreateFormViewModel { ProductCategoryId = productCategoryId };
+                case ProductCategoryDictionary.SSD:
+                    return new SolidStateDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
+                default:
+                    return null;
+            }
+        }
+
+        private Product MapNewProductViewModelToSpecificProduct(ProductCreateFormViewModel newProduct)
         {
             Product result = null;
-            switch(newProduct.ProductCategoryId)
+            switch (newProduct.ProductCategoryId)
             {
                 case ProductCategoryDictionary.CPU:
                     result = mapper.Map<CentralProcessingUnit>(newProduct);
@@ -198,76 +256,6 @@ namespace ComputersStore.BusinessServices.Implementation
                     break;
             }
             return result;
-        }
-
-        private async Task<byte[]> GetProductImage(int productId)
-        {
-            var product = await productService.GetProduct(productId);
-            return product.Image;
-        }
-
-        public async Task<ProductViewModel> GetProduct(int productId)
-        {
-            var product = await productService.GetProduct(productId);
-            var result = mapper.Map<ProductViewModel>(product);
-            return result;
-        }
-
-        public async Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString)
-        {
-            var searchedProducts = await productService.GetSearchedProductsCollection(searchString);
-            var result = new SearchedProductsListViewModel
-            {
-                Products = mapper.Map<IEnumerable<ProductViewModel>>(searchedProducts),
-                SearchString = searchString
-            };
-            return result;
-        }
-
-        public async Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
-        {
-            var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended);
-            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products.Skip((pageNumber - 1) * pageSize).Take(pageSize));
-            return new ProductsTableViewModel
-            {
-                Products = mappedProducts,
-                PaginationViewModel = new PaginationViewModel
-                {
-                    CurrentPage = pageNumber,
-                    ItemsPerPage = pageSize,
-                    TotalItems = products.Count()
-                },
-                ProductsTableSearchCriteria = new ProductsTableSearchCriteria
-                {
-                    ProductCategoryId = productCategoryId,
-                    ProductName = productName,
-                    IsRecommended = isRecommended
-                }
-
-            };
-        }
-
-        public ProductCreateFormViewModel PrepareNewEmptyProduct(int productCategoryId)
-        {
-            switch (productCategoryId)
-            {
-                case ProductCategoryDictionary.CPU:
-                    return new CentralProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.GPU:
-                    return new GraphicsProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.HDD:
-                    return new HardDiskDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.Motherboard:
-                    return new MotherboardCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.PSU:
-                    return new PowerSupplyUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.RAM:
-                    return new RandomAccessMemoryCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.SSD:
-                    return new SolidStateDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
-                default:
-                    return null;
-            }
         }
     }
 }
