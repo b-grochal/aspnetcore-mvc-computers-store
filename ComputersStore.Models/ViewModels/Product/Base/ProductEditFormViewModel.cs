@@ -28,6 +28,10 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         public int ProductCategoryId { get; set; }
 
         [Required]
+        [Display(Name = "Is recommended")]
+        public bool IsRecommended { get; set; }
+
+        [Required]
         [Display(Name="Update image?")]
         public bool IsImageUpdated { get; set; }
 
@@ -36,6 +40,6 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         [AllowedExtensions(new string[] { ".jpg" })]
         public IFormFile NewImageFile { get; set; }
 
-        public byte[] OldImage { get; set; }
+        public string OldImage { get; set; }
     }
 }
