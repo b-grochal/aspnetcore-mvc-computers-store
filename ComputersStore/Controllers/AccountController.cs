@@ -2,9 +2,11 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.Data.Entities;
 using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
+using ComputersStore.Models.ViewModels.Account.Base;
 using ComputersStore.Models.ViewModels.Emails;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,12 +19,18 @@ namespace ComputersStore.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        #region Fields
+
         private readonly IAccountBusinessService accountBusinessService;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IOrderBusinessService orderBusinessService;
         private readonly IEmailService emailMessagesService;
         private readonly int ordersPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
 
         public AccountController(IAccountBusinessService accountBusinessService, SignInManager<ApplicationUser> signInManager, IApplicationUserBusinessService applicationUserBusinessService, IOrderBusinessService orderBusinessService, IEmailService emailMessagesService)
         {
@@ -33,15 +41,10 @@ namespace ComputersStore.Controllers
             this.emailMessagesService = emailMessagesService;
         }
 
-        //
-        // GET: /Account/Login
-        [HttpGet]
-        public IActionResult Index()
-        {
-            return View();
-        }
+        #endregion Constructors
 
-        //
+        #region Actions
+
         // GET: /Account/Login
         [HttpGet]
         [AllowAnonymous]
@@ -50,7 +53,6 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -73,7 +75,6 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/Register
         [HttpGet]
         [AllowAnonymous]
@@ -82,7 +83,6 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -102,7 +102,6 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -125,7 +124,6 @@ namespace ComputersStore.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        //
         // GET: /Account/ForgotPassword
         [HttpGet]
         [AllowAnonymous]
@@ -134,7 +132,6 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        //
         // POST: /Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
@@ -154,7 +151,6 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
         [AllowAnonymous]
@@ -163,7 +159,6 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPassword
         [HttpGet]
         [AllowAnonymous]
@@ -172,7 +167,6 @@ namespace ComputersStore.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -192,7 +186,6 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        //
         // GET: /Account/ResetPasswordConfirmation
         [HttpGet]
         [AllowAnonymous]
@@ -201,16 +194,17 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        // GET: /Manage/ChangePassword
+        // GET: /Account/ChangePassword
         [HttpGet]
+        [Authorize(Roles="Customer")]
         public IActionResult ChangePassword()
         {
             return View();
         }
 
-        //
-        // POST: /Manage/ChangePassword
+        // POST: /Account/ChangePassword
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -232,17 +226,18 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //GET: /Account/UpdateAccountData
+        // GET: /Account/UpdateAccountData
         [HttpGet]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> UpdateAccountData()
         {
             var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentUserId());
             return View(accountData);
         }
 
-        //
         // POST: /Account/UpdateAccountData
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAccountData(AccountDataViewModel model)
         {
@@ -264,29 +259,34 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //
         // GET: /Account/UpdateAccountDataConfirmation
         [HttpGet]
+        [Authorize(Roles = "Customer")]
         public IActionResult UpdateAccountDataConfirmation()
         {
             return View();
         }
 
+        // GET: /Account/Orders
         [HttpGet("Account/Orders")]
+        [Authorize(Roles = "Customer")]
         public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
         {
             var orders = await orderBusinessService.GetApplicationUserOrders(GetCurrentUserId(), pageNumber, ordersPerPage, ordersPerPage);
             return View(orders);
         }
 
+        // GET: /Account/AskQuestion
         [HttpGet]
+        [Authorize(Roles = "Customer")]
         public IActionResult AskQuestion()
         {
             return View();
         }
 
-        //POST: Newsletters/SendNewsletter
+        // POST: /Account/AskQuestion
         [HttpPost]
+        [Authorize(Roles = "Customer")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AskQuestion(EmailMessageFormViewModel emailMessageFormViewModel)
         {
@@ -298,11 +298,15 @@ namespace ComputersStore.Controllers
             return View(emailMessageFormViewModel);
         }
 
+        // GET: /Account/AskQuestionConfirmation
         [HttpGet]
+        [Authorize(Roles = "Customer")]
         public IActionResult AskQuestionConfirmation()
         {
             return View();
         }
+
+        #endregion Actions
 
         #region Helpers
 
@@ -341,6 +345,7 @@ namespace ComputersStore.Controllers
             var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection();
             await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
-        #endregion
+
+        #endregion Helpers
     }
 }
