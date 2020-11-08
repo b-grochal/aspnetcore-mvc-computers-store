@@ -12,20 +12,33 @@ using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Models.ViewModels.Newsletter;
 using ComputersStore.Models.ViewModels.Emails;
 using ComputersStore.EmailHelper.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
+using ComputersStore.Data.Dictionaries;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
     public class NewslettersController : Controller
     {
+        #region Fields
+
         private readonly INewsletterBusinessService newsletterBusinessService;
         private readonly IEmailService emailService;
         private readonly int newslettersPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
 
         public NewslettersController(INewsletterBusinessService newsletterBusinessService, IEmailService emailService)
         {
             this.newsletterBusinessService = newsletterBusinessService;
             this.emailService = emailService;
         }
+
+        #endregion Constructors 
+
+        #region Actions
 
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
         {
@@ -34,6 +47,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewsletterSignUpFormViewModel newsletter)
         {
@@ -96,10 +110,16 @@ namespace ComputersStore.WebUI.Controllers
             return View();
         }
 
+        #endregion Actions
+
+        #region Helpers
+
         private async Task SendNewsletterEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
             var newslettersEmailsCollection = await newsletterBusinessService.GetNewlettersEmailsCollection();
             await emailService.SendNewsletterEmail(newslettersEmailsCollection, emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
+
+        #endregion Helpers
     }
 }
