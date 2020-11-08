@@ -31,7 +31,6 @@ namespace ComputersStore.WebUI.Controllers
         #region Actions
 
         // GET: /ApplicationUsers/Customers
-        [HttpGet]
         public async Task<IActionResult> Customers(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
             var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Customer, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
@@ -39,7 +38,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: /ApplicationUsers/Admins
-        [HttpGet]
         public async Task<IActionResult> Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
             var adminsCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Admin, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
@@ -47,7 +45,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: ApplicationUsers/Delete/5
-        [HttpGet]
         public async Task<IActionResult> Delete(string applicationUserId)
         {
             if (applicationUserId == null)
@@ -74,7 +71,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: ApplicationUsers/Details/5
-        [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
             var applicationUserViewModel = await applicationUserBusinessService.GetApplicationUserById(id);
