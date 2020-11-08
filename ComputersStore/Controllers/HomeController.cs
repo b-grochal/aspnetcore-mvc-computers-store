@@ -30,7 +30,7 @@ namespace ComputersStore.Controllers
 
         #region Actions
 
-        // GET: /Home/Index
+        // GET: Home/Index
         public IActionResult Index()
         {
             if (User.IsInRole("Admin"))
@@ -40,19 +40,20 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        // GET: /Home/AdminPanel
+        // GET: Home/AdminPanel
         [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public IActionResult AdminPanel()
         {
             return View();
         }
 
-        // GET: /Home/Privacy
+        // GET: Home/Privacy
         public IActionResult Privacy()
         {
             return View();
         }
 
+        // GET: Home/Error
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

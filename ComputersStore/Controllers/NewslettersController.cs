@@ -40,12 +40,14 @@ namespace ComputersStore.WebUI.Controllers
 
         #region Actions
 
+        // GET: Newsletters/Table
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
         {
             var newsletters = await newsletterBusinessService.GetNewslletersCollection(newsletterId, newsletterEmail, pageNumber, newslettersPerPage);
             return View(newsletters);
         }
 
+        // POST: Newsletters/Create
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -104,6 +106,7 @@ namespace ComputersStore.WebUI.Controllers
             return View(emailMessageFormViewModel);
         }
 
+        // GET: Newsletter/SendNewsletterConfiration
         [HttpGet]
         public IActionResult SendNewsletterConfirmation()
         {
