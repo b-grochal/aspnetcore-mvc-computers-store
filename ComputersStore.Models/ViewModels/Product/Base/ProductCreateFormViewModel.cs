@@ -26,6 +26,10 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         public int ProductCategoryId { get; set; }
 
         public string ProductCategoryName { get; set; }
+
+        [Required]
+        [Display(Name="Is recommended")]
+        public bool IsRecommended { get; set; }
         
         [Required]
         [Display(Name="Image")]

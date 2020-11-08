@@ -28,6 +28,10 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         public int ProductCategoryId { get; set; }
 
         [Required]
+        [Display(Name = "Is recommended")]
+        public bool IsRecommended { get; set; }
+
+        [Required]
         [Display(Name="Update image?")]
         public bool IsImageUpdated { get; set; }
 
