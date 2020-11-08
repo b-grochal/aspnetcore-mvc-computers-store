@@ -1,4 +1,6 @@
 ﻿using ComputersStore.Models.ViewModels.ApplicationUser;
+using ComputersStore.Models.ViewModels.ApplicationUser.Base;
+using ComputersStore.Models.ViewModels.ApplicationUser.Complex;
 using System;
 using System.Collections.Generic;
 using System.Text;
