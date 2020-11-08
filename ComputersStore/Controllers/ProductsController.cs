@@ -77,7 +77,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Table
-        public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)//TODO: W parametrach najpierw productName a później reszta
+        public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)
         {
             var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
             await PassProductsCategoriesSelectListToView(productCategoryId);
@@ -140,7 +140,7 @@ namespace ComputersStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await productBusinessService.UpdateProduct(productsDetailsViewModel);
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(Table));
             }
             return View(productsDetailsViewModel);
         }
