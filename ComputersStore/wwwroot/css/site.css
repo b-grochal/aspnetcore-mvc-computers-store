@@ -60,7 +60,7 @@ body {
     display: flex;
     -ms-flex-direction: column;
     flex-direction: column;
-    height: 100vh; /* Use height insted of min-height for IE 10/11. */
+    height: 100vh;
     padding-top: 12rem; /* TODO dodać media queries zmiejszające padding dla urządzeń mobilnych*/
 }
 
@@ -82,7 +82,3 @@ body {
 .table td {
     vertical-align: middle !important;
 }
-
-/*hr {
-    border-color: #000000;
-}*/

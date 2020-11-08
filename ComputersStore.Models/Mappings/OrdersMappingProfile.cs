@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.Models.ViewModels.Order.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,7 +12,6 @@ namespace ComputersStore.Models.Mappings
     {
         public OrdersMappingProfile()
         {
-            //CreateMap<NewsletterSignUpFormViewModel, Newsletter>();
             CreateMap<Order, OrderViewModel>()
                 .ForMember(dest => dest.ApplicationUserEmail, opt => opt.MapFrom(src => src.ApplicationUser.Email))
                 .ForMember(dest => dest.OrderStatusName, opt => opt.MapFrom(src => src.OrderStatus.Name))

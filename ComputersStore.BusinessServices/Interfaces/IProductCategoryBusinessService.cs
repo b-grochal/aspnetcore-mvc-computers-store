@@ -1,8 +1,5 @@
-﻿using ComputersStore.Models.ViewModels.PaymentType;
-using ComputersStore.Models.ViewModels.ProductCategory;
-using System;
+﻿using ComputersStore.Models.ViewModels.ProductCategory.Base;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces

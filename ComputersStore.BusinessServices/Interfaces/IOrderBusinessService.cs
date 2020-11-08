@@ -1,8 +1,5 @@
-﻿using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.Order;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ComputersStore.Models.ViewModels.Order.Base;
+using ComputersStore.Models.ViewModels.Order.Complex;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces
@@ -13,7 +10,6 @@ namespace ComputersStore.BusinessServices.Interfaces
         Task<OrderViewModel> GetOrder(int orderId);
         Task<OrderDetailsViewModel> GetOrderDetails(int orderId);
         Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId);
-        Task CreateOrder(Order order);
         Task UpdateOrder(OrderEditFormViewModel orderEditFormViewModel);
         Task DeleteOrder(int orderId);
         Task<OrderListViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage);

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product
+namespace ComputersStore.Models.ViewModels.Product.Base
 {
     public class ProductViewModel
     {

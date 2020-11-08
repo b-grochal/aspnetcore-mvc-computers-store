@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.ShoppingCart;
+using ComputersStore.Models.ViewModels.ShoppingCart.Base;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
@@ -26,7 +24,7 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<IEnumerable<ShoppingCartItemViewModel>> GetProductsForShoppingCart(ShoppingCart shoppingCart)
         {
-            var products = await productsService.GetProductsCollectionById(shoppingCart.GetShoppingCartItems().Select(x => x.ProductId));
+            var products = await productsService.GetProductsCollectionByIds(shoppingCart.GetShoppingCartItems().Select(x => x.ProductId));
             var shoppingCartItemsViewModels = mapper.Map<IEnumerable<ShoppingCartItemViewModel>>(products);
             return UpdateShoppingCartItemsQuantities(shoppingCartItemsViewModels, shoppingCart.GetShoppingCartItems());
         }

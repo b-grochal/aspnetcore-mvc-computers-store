@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.Product;
-using System;
-using System.Collections.Generic;
+using ComputersStore.Models.ViewModels.Product.Base;
 using System.IO;
-using System.Text;
 
 namespace ComputersStore.Models.Resolvers
 {
@@ -12,15 +9,15 @@ namespace ComputersStore.Models.Resolvers
     {
         public byte[] Resolve(ProductEditFormViewModel source, Product destination, byte[] destMember, ResolutionContext context)
         {
-            if(source.IsImageUpdated && source.ImageFile != null)
+            if(source.IsImageUpdated && source.NewImageFile != null)
             {
                 MemoryStream ms = new MemoryStream();
-                source.ImageFile.CopyTo(ms);
+                source.NewImageFile.CopyTo(ms);
                 return ms.ToArray();
             }
             else
             {
-                return null;
+                return source.OldImage;
             }
         }
     }

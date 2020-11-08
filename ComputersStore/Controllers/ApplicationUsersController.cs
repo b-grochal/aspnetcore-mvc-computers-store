@@ -3,28 +3,44 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Data.Dictionaries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
     public class ApplicationUsersController : Controller
     {
+        #region Fields
+
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
-        private readonly int usersPerPage = 5;
+        private readonly int applicationUserPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
+
         public ApplicationUsersController(IApplicationUserBusinessService applicationUserBusinessService)
         {
             this.applicationUserBusinessService = applicationUserBusinessService;
         }
 
-        public async Task<IActionResult> Users(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
+        #endregion Constrctors
+
+        #region Actions
+
+        // GET: ApplicationUsers/Customers
+        public async Task<IActionResult> Customers(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var usersCollectionViewModel = await applicationUserBusinessService.GetUsersCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
+            var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Customer, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
             return View(usersCollectionViewModel);
         }
 
+        // GET: ApplicationUsers/Admins
         public async Task<IActionResult> Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var adminsCollectionViewModel = await applicationUserBusinessService.GetAdminsCollection(firstName, lastName, email, phoneNumber, pageNumber, usersPerPage);
+            var adminsCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Admin, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
             return View(adminsCollectionViewModel);
         }
 
@@ -60,5 +76,7 @@ namespace ComputersStore.WebUI.Controllers
             var applicationUserViewModel = await applicationUserBusinessService.GetApplicationUserById(id);
             return View(applicationUserViewModel);
         }
+
+        #endregion Actions
     }
 }

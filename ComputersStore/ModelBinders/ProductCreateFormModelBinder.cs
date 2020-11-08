@@ -1,5 +1,5 @@
 ﻿using ComputersStore.Data.Dictionaries;
-using ComputersStore.Models.ViewModels.Product;
+using ComputersStore.Models.ViewModels.Product.Base;
 using ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive;
@@ -11,14 +11,13 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ComputersStore.WebUI.ModelBinders
 {
     public class ProductCreateFormModelBinder : IModelBinder
     {
-        private Dictionary<Type, (ModelMetadata, IModelBinder)> binders;
+        private readonly Dictionary<Type, (ModelMetadata, IModelBinder)> binders;
 
         public ProductCreateFormModelBinder(Dictionary<Type, (ModelMetadata, IModelBinder)> binders)
         {

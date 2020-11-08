@@ -22,7 +22,6 @@
         {
             <form asp-action="AddProductToShoppingCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post" class="form-inline">
                 <input type="hidden" name="ProductId" asp-for="ProductId" />
-                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                 <select class="form-control form-control mr-2 input-with-green-outline-on-focus" name="Quantity">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -45,25 +44,25 @@
 @switch (Model.ProductCategoryId)
 {
     case ProductCategoryDictionary.CPU:
-        <partial name="~/Views/Products/Partials/_CentralProcessingUnitDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/CentralProcessingUnit/_CentralProcessingUnitDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.Motherboard:
-        <partial name="~/Views/Products/Partials/_MotherboardDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/Motherboard/_MotherboardDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.RAM:
-        <partial name="~/Views/Products/Partials/_RandomAccessMemoryDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/RandomAccessMemory/_RandomAccessMemoryDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.GPU:
-        <partial name="~/Views/Products/Partials/_GraphicsProcessingUnitDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/GraphicsProcessingUnit/_GraphicsProcessingUnitDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.PSU:
-        <partial name="~/Views/Products/Partials/_PowerSupplyUnitDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/PowerSupplyUnit/_PowerSupplyUnitDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.HDD:
-        <partial name="~/Views/Products/Partials/_HardDiskDriveDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/HardDiskDrive/_HardDiskDriveDetailsPartial.cshtml" for="@Model" />
         break;
     case ProductCategoryDictionary.SSD:
-        <partial name="~/Views/Products/Partials/_SolidStateDriveDetailsPartial.cshtml" for="@Model" />
+        <partial name="~/Views/Products/Partials/SolidStateDrive/_SolidStateDriveDetailsPartial.cshtml" for="@Model" />
         break;
 
 }

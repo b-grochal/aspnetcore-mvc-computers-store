@@ -1,0 +1,78 @@
+﻿@model MotherboardEditFormViewModel
+
+<form asp-action="Edit" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="ProductId" type="hidden" />
+    <input asp-for="ProductCategoryId" hidden>
+    <input asp-for="OldImage" hidden>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control input-with-green-outline-on-focus" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Description" class="control-label"></label>
+            <input asp-for="Description" class="form-control input-with-green-outline-on-focus" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Price" class="control-label"></label>
+            <input asp-for="Price" class="form-control input-with-green-outline-on-focus" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="FormFactor" class="control-label"></label>
+            <input asp-for="FormFactor" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="FormFactor" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="CpuSocket" class="control-label"></label>
+            <input asp-for="CpuSocket" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="CpuSocket" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="Chipset" class="control-label"></label>
+            <input asp-for="Chipset" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="Chipset" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="MemoryType" class="control-label"></label>
+            <input asp-for="MemoryType" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="MemoryType" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="MemoryChannel" class="control-label"></label>
+            <input asp-for="MemoryChannel" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="MemoryChannel" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="SataSupport" class="control-label"></label>
+            <input asp-for="SataSupport" class="form-control input-with-green-outline-on-focus">
+            <span asp-validation-for="SataSupport" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label asp-for="IsImageUpdated" class="control-label"></label>
+            <select asp-for="IsImageUpdated" class="form-control input-with-green-outline-on-focus" onchange="enableImageInputOnSelectChange(this)">
+                <option value="false" selected>No</option>
+                <option value="true">Yes</option>
+            </select>
+            <span asp-validation-for="IsImageUpdated" class="text-danger"></span>
+        </div>
+        <div class="form-group col-md-4">
+            <label asp-for="NewImageFile" class="control-label"></label>
+            <input asp-for="NewImageFile" type="file" class="form-control-file file-input-with-green-outline-on-focus" disabled>
+            <span asp-validation-for="NewImageFile" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group d-flex justify-content-end">
+        <input type="submit" value="Save" class="btn btn-green" />
+        <a class="btn btn-green ml-2" asp-controller="Products" asp-action="Table">Cancel</a>
+    </div>
+</form>

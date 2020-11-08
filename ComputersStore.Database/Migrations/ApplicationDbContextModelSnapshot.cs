@@ -19,7 +19,7 @@ namespace ComputersStore.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ComputersStore.Core.Data.ApplicationUser", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -90,7 +90,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Newsletter", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Newsletter", b =>
                 {
                     b.Property<int>("NewsletterId")
                         .ValueGeneratedOnAdd()
@@ -105,7 +105,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("Newsletters");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Order", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Order", b =>
                 {
                     b.Property<int>("OrderId")
                         .ValueGeneratedOnAdd()
@@ -150,7 +150,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.OrderItem", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.OrderItem", b =>
                 {
                     b.Property<int>("OrderId")
                         .HasColumnType("int");
@@ -168,7 +168,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("OrderItems");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.OrderStatus", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.OrderStatus", b =>
                 {
                     b.Property<int>("OrderStatusId")
                         .ValueGeneratedOnAdd()
@@ -183,7 +183,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("OrderStatuses");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.PaymentType", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.PaymentType", b =>
                 {
                     b.Property<int>("PaymentTypeId")
                         .ValueGeneratedOnAdd()
@@ -198,7 +198,7 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("PaymentTypes");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Product", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .ValueGeneratedOnAdd()
@@ -235,7 +235,7 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator<int>("ProductCategoryDiscriminator");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.ProductCategory", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.ProductCategory", b =>
                 {
                     b.Property<int>("ProductCategoryId")
                         .ValueGeneratedOnAdd()
@@ -385,9 +385,9 @@ namespace ComputersStore.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.CentralProcessingUnit", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.CentralProcessingUnit", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("Architecture")
                         .HasColumnType("nvarchar(max)");
@@ -413,9 +413,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(1);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.GraphicsProcessingUnit", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.GraphicsProcessingUnit", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("Interface")
                         .HasColumnType("nvarchar(max)");
@@ -435,9 +435,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(4);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.HardDiskDrive", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.HardDiskDrive", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("CacheSize")
                         .HasColumnType("nvarchar(max)");
@@ -455,9 +455,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(6);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Motherboard", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Motherboard", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("Chipset")
                         .HasColumnType("nvarchar(max)");
@@ -481,9 +481,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(2);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.PowerSupplyUnit", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.PowerSupplyUnit", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
@@ -494,9 +494,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(5);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.RandomAccessMemory", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.RandomAccessMemory", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("CasLatency")
                         .HasColumnType("nvarchar(max)");
@@ -514,9 +514,9 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(3);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.SolidStateDrive", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.SolidStateDrive", b =>
                 {
-                    b.HasBaseType("ComputersStore.Core.Data.Product");
+                    b.HasBaseType("ComputersStore.Data.Entities.Product");
 
                     b.Property<string>("Capacity")
                         .HasColumnName("SolidStateDrive_Capacity")
@@ -529,43 +529,43 @@ namespace ComputersStore.Data.Migrations
                     b.HasDiscriminator().HasValue(7);
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Order", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Order", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.ApplicationUser", "ApplicationUser")
+                    b.HasOne("ComputersStore.Data.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany("Orders")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("ComputersStore.Core.Data.OrderStatus", "OrderStatus")
+                    b.HasOne("ComputersStore.Data.Entities.OrderStatus", "OrderStatus")
                         .WithMany("Orders")
                         .HasForeignKey("OrderStatusId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ComputersStore.Core.Data.PaymentType", "PaymentType")
+                    b.HasOne("ComputersStore.Data.Entities.PaymentType", "PaymentType")
                         .WithMany("Orders")
                         .HasForeignKey("PaymentTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.OrderItem", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.OrderItem", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.Order", "Order")
+                    b.HasOne("ComputersStore.Data.Entities.Order", "Order")
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ComputersStore.Core.Data.Product", "Product")
+                    b.HasOne("ComputersStore.Data.Entities.Product", "Product")
                         .WithMany("OrderItems")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ComputersStore.Core.Data.Product", b =>
+            modelBuilder.Entity("ComputersStore.Data.Entities.Product", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.ProductCategory", "ProductCategory")
+                    b.HasOne("ComputersStore.Data.Entities.ProductCategory", "ProductCategory")
                         .WithMany("Products")
                         .HasForeignKey("ProductCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -583,7 +583,7 @@ namespace ComputersStore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.ApplicationUser", null)
+                    b.HasOne("ComputersStore.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -592,7 +592,7 @@ namespace ComputersStore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.ApplicationUser", null)
+                    b.HasOne("ComputersStore.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -607,7 +607,7 @@ namespace ComputersStore.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ComputersStore.Core.Data.ApplicationUser", null)
+                    b.HasOne("ComputersStore.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -616,7 +616,7 @@ namespace ComputersStore.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("ComputersStore.Core.Data.ApplicationUser", null)
+                    b.HasOne("ComputersStore.Data.Entities.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

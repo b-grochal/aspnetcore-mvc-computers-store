@@ -14,7 +14,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure you want to delete @Model.FirstName @Model.SecondName (@Model.Email) from users?</p>
+                <p>Are you sure you want to delete @Model.FirstName @Model.LastName (@Model.Email) from users?</p>
                 <form asp-action="Delete">
                     <input type="hidden" asp-for="ApplicationUserId" />
                 </form>

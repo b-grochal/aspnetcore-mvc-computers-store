@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Text;
 
 namespace ComputersStore.EmailHelper.Sender.Implementation
-{//string[] Documents = System.IO.Directory.GetFiles("../../Data/"); TODO
+{
     public class EmailSender : IEmailSender
     {
         private readonly EmailConfiguration emailConfiguration;

@@ -1,4 +1,6 @@
 ﻿using ComputersStore.Models.ViewModels.ApplicationUser;
+using ComputersStore.Models.ViewModels.ApplicationUser.Base;
+using ComputersStore.Models.ViewModels.ApplicationUser.Complex;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,9 +12,8 @@ namespace ComputersStore.BusinessServices.Interfaces
     {
         Task<ApplicationUserViewModel> GetApplicationUserById(string applicationUserId);
         Task<ApplicationUserViewModel> GetApplicationUserByEmail(string applicationUserEmail);
-        Task<ApplicationUsersCollectionViewModel> GetUsersCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
-        Task<ApplicationUsersCollectionViewModel> GetAdminsCollection(string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
+        Task<ApplicationUsersCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
         Task DeleteApplicationUser(string applicationUserId);
-        Task<IEnumerable<string>> GetAdminsEmailAddressesCollection();
+        Task<IEnumerable<string>> GetApplicationUsersEmailsCollection(string roleName);
     }
 }

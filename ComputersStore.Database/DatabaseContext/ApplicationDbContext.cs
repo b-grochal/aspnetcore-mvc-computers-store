@@ -5,6 +5,7 @@ using ComputersStore.Data.Entities;
 using ComputersStore.Data.Dictionaries;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ComputersStore.Database.EntityConfiguration;
 
 namespace ComputersStore.Database.DatabaseContext
 {
@@ -30,44 +31,17 @@ namespace ComputersStore.Database.DatabaseContext
         {
 
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Order>()
-            .HasKey(o => o.OrderId);
-
-            modelBuilder.Entity<Product>()
-            .HasKey(p => p.ProductId);
-
-            modelBuilder.Entity<ProductCategory>()
-            .HasKey(p => p.ProductCategoryId);
-
-            modelBuilder.Entity<OrderStatus>()
-            .HasKey(p => p.OrderStatusId);
-
-            modelBuilder.Entity<PaymentType>()
-            .HasKey(p => p.PaymentTypeId);
-
-            modelBuilder.Entity<OrderItem>()
-            .HasKey(orderItem => new { orderItem.OrderId, orderItem.ProductId });
-
-            modelBuilder.Entity<Product>().HasDiscriminator<int>("ProductCategoryDiscriminator")
-                .HasValue<CentralProcessingUnit>(ProductCategoryDictionary.CPU)
-                .HasValue<GraphicsProcessingUnit>(ProductCategoryDictionary.GPU)
-                .HasValue<HardDiskDrive>(ProductCategoryDictionary.HDD)
-                .HasValue<Motherboard>(ProductCategoryDictionary.Motherboard)
-                .HasValue<PowerSupplyUnit>(ProductCategoryDictionary.PSU)
-                .HasValue<RandomAccessMemory>(ProductCategoryDictionary.RAM)
-                .HasValue<SolidStateDrive>(ProductCategoryDictionary.SSD);
-
-            modelBuilder.Entity<Order>()
-                .Property(o => o.TotalCost)
-                .HasColumnType("decimal(18,2)");
-
-            modelBuilder.Entity<Product>()
-                .Property(p => p.Price)
-                .HasColumnType("decimal(18,2)");
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderStatusConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
         }
     }
 }
