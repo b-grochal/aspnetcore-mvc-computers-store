@@ -12,17 +12,26 @@ using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Models.ViewModels.Order;
 using ComputersStore.EmailHelper.Service.Interface;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
+using ComputersStore.Data.Dictionaries;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
+        #region Fields
+
         private readonly IOrderBusinessService orderBusinessService;
         private readonly IOrderStatusBusinessService orderStatusBusinessService;
         private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IEmailService emailService;
         private readonly int ordersPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
 
         public OrdersController(IOrderBusinessService orderBusinessService, IOrderStatusBusinessService orderStatusBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IApplicationUserBusinessService applicationUserBusinessService, IEmailService emailService)
         {
@@ -33,6 +42,12 @@ namespace ComputersStore.WebUI.Controllers
             this.emailService = emailService;
         }
 
+        #endregion Constructors 
+
+        #region Actions
+
+        // GET: Orders/Table
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> Table(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber = 1)
         {
             var orders = await orderBusinessService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
@@ -57,31 +72,8 @@ namespace ComputersStore.WebUI.Controllers
             return View(order);
         }
 
-        //// GET: Orders/Create
-        //public IActionResult Create()
-        //{
-        //    ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id");
-        //    return View();
-        //}
-
-        //// POST: Orders/Create
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        //// more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("OrderId,ApplicationUserId,OrderDate,ShipAddress,ShipCity,ShipPostalCode,ShipCountry,OrderStatus,PaymentType")] Order order)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(order);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    ViewData["ApplicationUserId"] = new SelectList(_context.Set<ApplicationUser>(), "Id", "Id", order.ApplicationUserId);
-        //    return View(order);
-        //}
-
         // GET: Orders/Edit/5
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -103,6 +95,7 @@ namespace ComputersStore.WebUI.Controllers
 
         // POST: Orders/Edit/5
         [HttpPost]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, OrderEditFormViewModel orderEditFormViewModel)
         {
@@ -120,7 +113,8 @@ namespace ComputersStore.WebUI.Controllers
             return View(orderEditFormViewModel);
         }
 
-        //GET: Orders/ChangeStatus/5
+        // GET: Orders/ChangeStatus/5
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> ChangeStatus(int? id)
         {
             if (id == null)
@@ -139,8 +133,9 @@ namespace ComputersStore.WebUI.Controllers
             return PartialView("~/Views/Orders/Modals/_ChangeOrderStatusModal.cshtml" ,order);
         }
 
-        // POST: Orders/Edit/5
+        // POST: Orders/ChangeStatus/5
         [HttpPost]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangeStatus(int id, int orderStatusId)
         {
@@ -149,6 +144,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Orders/Delete/5
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -167,12 +163,17 @@ namespace ComputersStore.WebUI.Controllers
 
         // POST: Orders/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             await orderBusinessService.DeleteOrder(id);
             return RedirectToAction(nameof(Table));
         }
+
+        #endregion Actions
+
+        #region Helpers
 
         private async Task PopulateUpdateFormSelectElements(int? orderStatusId, int? paymentTypeId)
         {
@@ -193,6 +194,8 @@ namespace ComputersStore.WebUI.Controllers
             var updatedOrder = await orderBusinessService.GetOrderDetails(orderId);
             await emailService.SendOrderStatusChangedEmail(updatedOrder.ApplicationUserViewModel.Email, updatedOrder.ApplicationUserViewModel.FirstName, updatedOrder.OrderViewModel.OrderId, updatedOrder.OrderViewModel.OrderStatusName);
         }
+
+        #endregion Helpers
 
     }
 }
