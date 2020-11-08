@@ -100,19 +100,19 @@ namespace ComputersStore.Models.Mappings
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
 
             CreateMap<CentralProcessingUnit, CentralProcessingUnitEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<GraphicsProcessingUnit, GraphicsProcessingUnitEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<HardDiskDrive, HardDiskDriveEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<Motherboard, MotherboardEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<PowerSupplyUnit, PowerSupplyUnitEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<RandomAccessMemory, RandomAccessMemoryEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
             CreateMap<SolidStateDrive, SolidStateDriveEditFormViewModel>()
-                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom<OldProductImageResolver>());
         }
     }
 }

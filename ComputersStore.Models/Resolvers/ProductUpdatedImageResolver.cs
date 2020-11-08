@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.Product.Base;
+using System;
 using System.IO;
 
 namespace ComputersStore.Models.Resolvers
@@ -11,13 +12,15 @@ namespace ComputersStore.Models.Resolvers
         {
             if(source.IsImageUpdated && source.NewImageFile != null)
             {
-                MemoryStream ms = new MemoryStream();
-                source.NewImageFile.CopyTo(ms);
-                return ms.ToArray();
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    source.NewImageFile.CopyTo(ms);
+                    return ms.ToArray();
+                };
             }
             else
             {
-                return source.OldImage;
+                return Convert.FromBase64String(source.OldImage);
             }
         }
     }
