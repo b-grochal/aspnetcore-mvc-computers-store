@@ -8,6 +8,7 @@ using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
 using ComputersStore.Models.ViewModels.Account.Base;
 using ComputersStore.Models.ViewModels.Emails;
+using ComputersStore.Models.ViewModels.Emails.Base;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -210,12 +211,19 @@ namespace ComputersStore.Controllers
                 var result = await accountBusinessService.ChangePassword(model, applicationUserId);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(nameof(ChangePasswordConfirmation));
                 }
                 AddErrors(result);
                 return View(model);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ChangePassword));
+        }
+
+        // GET: Account/ChangePassword
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
+        public IActionResult ChangePasswordConfirmation()
+        {
+            return View();
         }
 
         // GET: Account/UpdateAccountData
@@ -247,7 +255,7 @@ namespace ComputersStore.Controllers
                 AddErrors(result);
                 return View(model);
             }
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(UpdateAccountDataConfirmation));
         }
 
         // GET: Account/UpdateAccountDataConfirmation
@@ -329,7 +337,7 @@ namespace ComputersStore.Controllers
         private async Task SendCustomerQuestionEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
             var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
-            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection();
+            var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection(ApplicationUserRoleDictionary.Admin);
             await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
 

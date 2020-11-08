@@ -7,6 +7,7 @@ using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Dictionaries;
 using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.ShoppingCart;
+using ComputersStore.Models.ViewModels.ShoppingCart.Base;
 using ComputersStore.WebUI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,10 +29,11 @@ namespace ComputersStore.WebUI.Controllers
 
         #region Constructors
 
-        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IEmailService emailService)
+        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IApplicationUserBusinessService applicationUserBusinessService, IEmailService emailService)
         {
             this.shoppingCartBusinessService = shoppingCartBusinessService;
             this.paymentTypeBusinessService = paymentTypeBusinessService;
+            this.applicationUserBusinessService = applicationUserBusinessService;
             this.emailService = emailService;
         }
 

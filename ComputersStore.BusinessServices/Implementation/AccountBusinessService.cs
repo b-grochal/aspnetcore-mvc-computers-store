@@ -4,6 +4,7 @@ using ComputersStore.Data.Entities;
 using ComputersStore.EmailHelper.Service.Implementation;
 using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.Account;
+using ComputersStore.Models.ViewModels.Account.Base;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;

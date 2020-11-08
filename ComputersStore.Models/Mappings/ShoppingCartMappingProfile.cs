@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
 using ComputersStore.Data.Dictionaries;
-using ComputersStore.Models.ViewModels.ShoppingCart;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using ComputersStore.Models.ViewModels.ShoppingCart.Base;
 
 namespace ComputersStore.Models.Mappings
 {

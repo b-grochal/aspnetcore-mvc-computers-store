@@ -1,8 +1,5 @@
-﻿using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.ApplicationUser;
-using System;
+﻿using ComputersStore.Models.ViewModels.ApplicationUser.Base;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Order.Base
 {

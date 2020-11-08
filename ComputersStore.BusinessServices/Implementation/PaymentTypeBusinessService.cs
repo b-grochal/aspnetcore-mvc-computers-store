@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.ViewModels.PaymentType;
+using ComputersStore.Models.ViewModels.PaymentType.Base;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation

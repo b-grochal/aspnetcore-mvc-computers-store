@@ -1,8 +1,5 @@
-﻿using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.Order;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ComputersStore.Models.ViewModels.Order.Base;
+using ComputersStore.Models.ViewModels.Order.Complex;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces

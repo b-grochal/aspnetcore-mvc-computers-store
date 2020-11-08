@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product.Specific
+namespace ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit
 {
     public class GraphicsProcessingUnitDetailsViewModel : ProductDetailsViewModel
     {

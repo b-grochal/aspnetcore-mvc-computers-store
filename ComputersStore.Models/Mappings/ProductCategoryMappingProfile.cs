@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.ProductCategory;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ComputersStore.Models.ViewModels.ProductCategory.Base;
 
 namespace ComputersStore.Models.Mappings
 {

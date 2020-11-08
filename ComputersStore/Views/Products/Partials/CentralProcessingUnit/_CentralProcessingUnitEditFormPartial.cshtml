@@ -2,8 +2,9 @@
 
 <form asp-controller="Products" asp-action="Edit" enctype="multipart/form-data">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input asp-for="ProductId" type="hidden" />
+    <input asp-for="ProductId" hidden />
     <input asp-for="ProductCategoryId" hidden>
+    <input asp-for="OldImage" hidden>
     <div class="form-row">
         <div class="form-group col-md-4">
             <label asp-for="Name" class="control-label"></label>
@@ -70,9 +71,9 @@
             <span asp-validation-for="IsImageUpdated" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <label asp-for="ImageFile" class="control-label"></label>
-            <input asp-for="ImageFile" type="file" class="form-control-file file-input-with-green-outline-on-focus" disabled>
-            <span asp-validation-for="ImageFile" class="text-danger"></span>
+            <label asp-for="NewImageFile" class="control-label"></label>
+            <input asp-for="NewImageFile" type="file" class="form-control-file file-input-with-green-outline-on-focus" disabled>
+            <span asp-validation-for="NewImageFile" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group d-flex justify-content-end">
