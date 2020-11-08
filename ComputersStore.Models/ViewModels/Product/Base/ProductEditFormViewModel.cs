@@ -40,6 +40,6 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         [AllowedExtensions(new string[] { ".jpg" })]
         public IFormFile NewImageFile { get; set; }
 
-        public byte[] OldImage { get; set; }
+        public string OldImage { get; set; }
     }
 }
