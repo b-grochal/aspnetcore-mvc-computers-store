@@ -46,7 +46,6 @@ namespace ComputersStore.Controllers
         #region Actions
 
         // GET: /Account/Login
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult Login()
         {
@@ -76,7 +75,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/Register
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {
@@ -112,7 +110,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ConfirmEmail
-        [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string applicationUserId, string code)
         {
@@ -125,7 +122,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ForgotPassword
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
@@ -152,7 +148,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ForgotPasswordConfirmation
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
@@ -160,7 +155,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ResetPassword
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
@@ -187,7 +181,6 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ResetPasswordConfirmation
-        [HttpGet]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
@@ -195,8 +188,7 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/ChangePassword
-        [HttpGet]
-        [Authorize(Roles="Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult ChangePassword()
         {
             return View();
@@ -204,7 +196,7 @@ namespace ComputersStore.Controllers
 
         // POST: /Account/ChangePassword
         [HttpPost]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -227,8 +219,7 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/UpdateAccountData
-        [HttpGet]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> UpdateAccountData()
         {
             var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentUserId());
@@ -237,7 +228,7 @@ namespace ComputersStore.Controllers
 
         // POST: /Account/UpdateAccountData
         [HttpPost]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateAccountData(AccountDataViewModel model)
         {
@@ -260,16 +251,14 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/UpdateAccountDataConfirmation
-        [HttpGet]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult UpdateAccountDataConfirmation()
         {
             return View();
         }
 
         // GET: /Account/Orders
-        [HttpGet("Account/Orders")]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
         {
             var orders = await orderBusinessService.GetApplicationUserOrders(GetCurrentUserId(), pageNumber, ordersPerPage, ordersPerPage);
@@ -277,8 +266,7 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/AskQuestion
-        [HttpGet]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult AskQuestion()
         {
             return View();
@@ -286,7 +274,7 @@ namespace ComputersStore.Controllers
 
         // POST: /Account/AskQuestion
         [HttpPost]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AskQuestion(EmailMessageFormViewModel emailMessageFormViewModel)
         {
@@ -299,8 +287,7 @@ namespace ComputersStore.Controllers
         }
 
         // GET: /Account/AskQuestionConfirmation
-        [HttpGet]
-        [Authorize(Roles = "Customer")]
+        [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult AskQuestionConfirmation()
         {
             return View();
