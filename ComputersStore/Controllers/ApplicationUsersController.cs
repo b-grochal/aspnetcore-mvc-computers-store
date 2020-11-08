@@ -30,14 +30,14 @@ namespace ComputersStore.WebUI.Controllers
 
         #region Actions
 
-        // GET: /ApplicationUsers/Customers
+        // GET: ApplicationUsers/Customers
         public async Task<IActionResult> Customers(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
             var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Customer, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
             return View(usersCollectionViewModel);
         }
 
-        // GET: /ApplicationUsers/Admins
+        // GET: ApplicationUsers/Admins
         public async Task<IActionResult> Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
             var adminsCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Admin, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);

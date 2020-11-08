@@ -45,14 +45,14 @@ namespace ComputersStore.Controllers
 
         #region Actions
 
-        // GET: /Account/Login
+        // GET: Account/Login
         [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
-        // POST: /Account/Login
+        // POST: Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -74,14 +74,14 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        // GET: /Account/Register
+        // GET: Account/Register
         [AllowAnonymous]
         public IActionResult Register()
         {
             return View();
         }
 
-        // POST: /Account/Register
+        // POST: Account/Register
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -100,7 +100,7 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        // POST: /Account/LogOff
+        // POST: Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
@@ -109,7 +109,7 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
-        // GET: /Account/ConfirmEmail
+        // GET: Account/ConfirmEmail
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string applicationUserId, string code)
         {
@@ -121,14 +121,14 @@ namespace ComputersStore.Controllers
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
-        // GET: /Account/ForgotPassword
+        // GET: Account/ForgotPassword
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
             return View();
         }
 
-        // POST: /Account/ForgotPassword
+        // POST: Account/ForgotPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -147,21 +147,21 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
-        // GET: /Account/ForgotPasswordConfirmation
+        // GET: Account/ForgotPasswordConfirmation
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
             return View();
         }
 
-        // GET: /Account/ResetPassword
+        // GET: Account/ResetPassword
         [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
             return code == null ? View("Error") : View();
         }
 
-        // POST: /Account/ResetPassword
+        // POST: Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -180,21 +180,21 @@ namespace ComputersStore.Controllers
             return View();
         }
 
-        // GET: /Account/ResetPasswordConfirmation
+        // GET: Account/ResetPasswordConfirmation
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
             return View();
         }
 
-        // GET: /Account/ChangePassword
+        // GET: Account/ChangePassword
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult ChangePassword()
         {
             return View();
         }
 
-        // POST: /Account/ChangePassword
+        // POST: Account/ChangePassword
         [HttpPost]
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
@@ -218,7 +218,7 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Account/UpdateAccountData
+        // GET: Account/UpdateAccountData
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> UpdateAccountData()
         {
@@ -226,7 +226,7 @@ namespace ComputersStore.Controllers
             return View(accountData);
         }
 
-        // POST: /Account/UpdateAccountData
+        // POST: Account/UpdateAccountData
         [HttpPost]
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
@@ -250,14 +250,14 @@ namespace ComputersStore.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: /Account/UpdateAccountDataConfirmation
+        // GET: Account/UpdateAccountDataConfirmation
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult UpdateAccountDataConfirmation()
         {
             return View();
         }
 
-        // GET: /Account/Orders
+        // GET: Account/Orders
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
         {
@@ -265,14 +265,14 @@ namespace ComputersStore.Controllers
             return View(orders);
         }
 
-        // GET: /Account/AskQuestion
+        // GET: Account/AskQuestion
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult AskQuestion()
         {
             return View();
         }
 
-        // POST: /Account/AskQuestion
+        // POST: Account/AskQuestion
         [HttpPost]
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         [ValidateAntiForgeryToken]
@@ -286,7 +286,7 @@ namespace ComputersStore.Controllers
             return View(emailMessageFormViewModel);
         }
 
-        // GET: /Account/AskQuestionConfirmation
+        // GET: Account/AskQuestionConfirmation
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public IActionResult AskQuestionConfirmation()
         {

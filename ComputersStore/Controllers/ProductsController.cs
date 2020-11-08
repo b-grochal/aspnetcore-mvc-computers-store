@@ -169,6 +169,7 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction(nameof(List));
         }
 
+        // POST: Products/SearchProducts
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
