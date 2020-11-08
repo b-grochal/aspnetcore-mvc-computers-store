@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.SearchCriteria;
-using ComputersStore.Models.ViewModels.Newsletter;
+using ComputersStore.Models.SearchParams.Newsletter;
+using ComputersStore.Models.ViewModels.Newsletter.Base;
+using ComputersStore.Models.ViewModels.Newsletter.Complex;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation

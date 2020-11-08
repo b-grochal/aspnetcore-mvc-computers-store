@@ -12,14 +12,25 @@ using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Models.ViewModels.Newsletter;
 using ComputersStore.Models.ViewModels.Emails;
 using ComputersStore.EmailHelper.Service.Interface;
+using Microsoft.AspNetCore.Authorization;
+using ComputersStore.Data.Dictionaries;
+using ComputersStore.Models.ViewModels.Newsletter.Base;
+using ComputersStore.Models.ViewModels.Emails.Base;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
     public class NewslettersController : Controller
     {
+        #region Fields
+
         private readonly INewsletterBusinessService newsletterBusinessService;
         private readonly IEmailService emailService;
         private readonly int newslettersPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
 
         public NewslettersController(INewsletterBusinessService newsletterBusinessService, IEmailService emailService)
         {
@@ -27,13 +38,20 @@ namespace ComputersStore.WebUI.Controllers
             this.emailService = emailService;
         }
 
+        #endregion Constructors 
+
+        #region Actions
+
+        // GET: Newsletters/Table
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
         {
             var newsletters = await newsletterBusinessService.GetNewslletersCollection(newsletterId, newsletterEmail, pageNumber, newslettersPerPage);
             return View(newsletters);
         }
 
+        // POST: Newsletters/Create
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(NewsletterSignUpFormViewModel newsletter)
         {
@@ -90,16 +108,23 @@ namespace ComputersStore.WebUI.Controllers
             return View(emailMessageFormViewModel);
         }
 
+        // GET: Newsletter/SendNewsletterConfiration
         [HttpGet]
         public IActionResult SendNewsletterConfirmation()
         {
             return View();
         }
 
+        #endregion Actions
+
+        #region Helpers
+
         private async Task SendNewsletterEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
             var newslettersEmailsCollection = await newsletterBusinessService.GetNewlettersEmailsCollection();
             await emailService.SendNewsletterEmail(newslettersEmailsCollection, emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
+
+        #endregion Helpers
     }
 }

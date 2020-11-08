@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 
 namespace ComputersStore.Database.DbInitializer
 {
@@ -244,8 +245,8 @@ namespace ComputersStore.Database.DbInitializer
         {
             if (!roleManager.Roles.Any())
             {
-                roleManager.CreateAsync(new IdentityRole(UserRoles.Admin.ToString())).Wait();
-                roleManager.CreateAsync(new IdentityRole(UserRoles.User.ToString())).Wait();
+                roleManager.CreateAsync(new IdentityRole(ApplicationUserRoleDictionary.Admin)).Wait();
+                roleManager.CreateAsync(new IdentityRole(ApplicationUserRoleDictionary.Customer)).Wait();
             }
         }
 
@@ -264,8 +265,8 @@ namespace ComputersStore.Database.DbInitializer
                     user.PasswordHash = userManager.PasswordHasher.HashPassword(user, "P@ssw0rd");
                     userManager.CreateAsync(user).Wait();
                 }
-                userManager.AddToRoleAsync(applicationUsers.Find(x => x.Email.Equals("michael@scott.com")), UserRoles.Admin.ToString()).Wait();
-                userManager.AddToRoleAsync(applicationUsers.Find(x => x.Email.Equals("dwight@shrute.com")), UserRoles.User.ToString()).Wait();
+                userManager.AddToRoleAsync(applicationUsers.Find(x => x.Email.Equals("michael@scott.com")), ApplicationUserRoleDictionary.Admin).Wait();
+                userManager.AddToRoleAsync(applicationUsers.Find(x => x.Email.Equals("dwight@shrute.com")), ApplicationUserRoleDictionary.Customer).Wait();
             }
         }
 
@@ -281,7 +282,18 @@ namespace ComputersStore.Database.DbInitializer
                         new OrderStatus{OrderStatusId = OrderStatusDictionary.Realized, Name="Realized"}
                 };
                 orderItems.ForEach(x => applicationDbContext.OrderStatuses.Add(x));
-                applicationDbContext.SaveChanges();
+
+                applicationDbContext.Database.OpenConnection();
+                try
+                {
+                    applicationDbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OrderStatuses ON");
+                    applicationDbContext.SaveChanges();
+                    applicationDbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.OrderStatuses OFF");
+                }
+                finally
+                {
+                    applicationDbContext.Database.CloseConnection();
+                }
             }
         }
 
@@ -289,6 +301,7 @@ namespace ComputersStore.Database.DbInitializer
         {
             if (!applicationDbContext.ProductCategories.Any())
             {
+
                 var orderItems = new List<ProductCategory>
                 {
                         new ProductCategory{ProductCategoryId=ProductCategoryDictionary.CPU, Name="CPU"},
@@ -300,7 +313,18 @@ namespace ComputersStore.Database.DbInitializer
                         new ProductCategory{ProductCategoryId=ProductCategoryDictionary.SSD, Name="SSD"}
                 };
                 orderItems.ForEach(x => applicationDbContext.ProductCategories.Add(x));
-                applicationDbContext.SaveChanges();
+
+                applicationDbContext.Database.OpenConnection();
+                try
+                {
+                    applicationDbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.ProductCategories ON");
+                    applicationDbContext.SaveChanges();
+                    applicationDbContext.Database.ExecuteSqlRaw("SET IDENTITY_INSERT dbo.ProductCategories OFF");
+                }
+                finally
+                {
+                    applicationDbContext.Database.CloseConnection();
+                }
             }
         }
 

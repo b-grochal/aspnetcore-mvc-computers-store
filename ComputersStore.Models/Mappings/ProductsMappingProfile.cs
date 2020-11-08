@@ -2,9 +2,7 @@
 using ComputersStore.Data.Entities;
 using ComputersStore.Models.Converters;
 using ComputersStore.Models.Resolvers;
-using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Product;
-using ComputersStore.Models.ViewModels.Product.Specific;
+using ComputersStore.Models.ViewModels.Product.Base;
 using ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive;
@@ -13,6 +11,7 @@ using ComputersStore.Models.ViewModels.Product.Specific.PowerSupplyUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.RandomAccessMemory;
 using ComputersStore.Models.ViewModels.Product.Specific.SolidStateDrive;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -100,13 +99,20 @@ namespace ComputersStore.Models.Mappings
             CreateMap<SolidStateDriveEditFormViewModel, SolidStateDrive>()
                 .ForMember(dest => dest.Image, opt => opt.MapFrom<ProductUpdatedImageResolver>());
 
-            CreateMap<CentralProcessingUnit, CentralProcessingUnitEditFormViewModel>();
-            CreateMap<GraphicsProcessingUnit, GraphicsProcessingUnitEditFormViewModel>();
-            CreateMap<HardDiskDrive, HardDiskDriveEditFormViewModel>();
-            CreateMap<Motherboard, MotherboardEditFormViewModel>();
-            CreateMap<PowerSupplyUnit, PowerSupplyUnitEditFormViewModel>();
-            CreateMap<RandomAccessMemory, RandomAccessMemoryEditFormViewModel>();
-            CreateMap<SolidStateDrive, SolidStateDriveEditFormViewModel>();
+            CreateMap<CentralProcessingUnit, CentralProcessingUnitEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<GraphicsProcessingUnit, GraphicsProcessingUnitEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<HardDiskDrive, HardDiskDriveEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<Motherboard, MotherboardEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<PowerSupplyUnit, PowerSupplyUnitEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<RandomAccessMemory, RandomAccessMemoryEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
+            CreateMap<SolidStateDrive, SolidStateDriveEditFormViewModel>()
+                .ForMember(dest => dest.OldImage, opt => opt.MapFrom(src => src.Image));
         }
     }
 }

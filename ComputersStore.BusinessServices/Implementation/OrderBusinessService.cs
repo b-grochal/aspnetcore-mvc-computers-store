@@ -1,15 +1,13 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Data.Entities;
-using ComputersStore.Models.SearchCriteria;
-using ComputersStore.Models.ViewModels.ApplicationUser;
-using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.Models.SearchParams.Order;
+using ComputersStore.Models.ViewModels.ApplicationUser.Base;
+using ComputersStore.Models.ViewModels.Order.Base;
+using ComputersStore.Models.ViewModels.Order.Complex;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation
@@ -23,11 +21,6 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             this.orderService = orderService;
             this.mapper = mapper;
-        }
-
-        public async Task CreateOrder(Order order)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task DeleteOrder(int orderId)
@@ -45,7 +38,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<OrderDetailsViewModel> GetOrderDetails(int orderId)
         {
             var order = await orderService.GetOrder(orderId);
-            var result = new OrderDetailsViewModel //TODO mapper do tworzenia viewmodelu
+            var result = new OrderDetailsViewModel
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),
@@ -74,7 +67,7 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = mappedOrders.Count()
                 },
-                ordersTableSearchCriteria = new OrdersTableSearchCriteria
+                ordersTableSearchCriteria = new OrdersTableSearchParams
                 {
                     OrderId = orderId,
                     OrderStatusId = orderStatusId,

@@ -15,6 +15,7 @@ namespace ComputersStore.Services.Implementation
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext applicationDbContext;
+
         public ProductService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
@@ -36,11 +37,6 @@ namespace ComputersStore.Services.Implementation
         public async Task<Product> GetProduct(int productId)
         {
             return await applicationDbContext.Products.FindAsync(productId);
-        }
-
-        public async Task<IEnumerable<Product>> GetProductsCollection()
-        {
-            return await applicationDbContext.Products.ToListAsync();
         }
 
         public int GetProductsCollectionCount(int productCategoryId)
@@ -83,7 +79,7 @@ namespace ComputersStore.Services.Implementation
             await applicationDbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsCollectionById(IEnumerable<int> productsId)
+        public async Task<IEnumerable<Product>> GetProductsCollectionByIds(IEnumerable<int> productsId)
         {
             return await applicationDbContext.Products.Where(p => productsId.Contains(p.ProductId)).ToListAsync(); 
         }

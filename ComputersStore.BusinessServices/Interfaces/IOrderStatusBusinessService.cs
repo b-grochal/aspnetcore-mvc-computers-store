@@ -1,7 +1,5 @@
-﻿using ComputersStore.Models.ViewModels.OrderStatus;
-using System;
+﻿using ComputersStore.Models.ViewModels.OrderStatus.Base;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces

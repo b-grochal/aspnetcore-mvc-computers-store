@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.OrderStatus;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ComputersStore.Models.ViewModels.OrderStatus.Base;
 
 namespace ComputersStore.Models.Mappings
 {

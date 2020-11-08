@@ -39,7 +39,7 @@ namespace ComputersStore.Services.Implementation
             var applicationUser = await userManager.FindByEmailAsync(applicationUserEmail);
             if(applicationUser == null)
             {
-                return IdentityResult.Failed(); // TODO: Dodać info o errorze
+                return IdentityResult.Failed();
             }
             return await userManager.ResetPasswordAsync(applicationUser, code, password);
         }
@@ -62,18 +62,6 @@ namespace ComputersStore.Services.Implementation
             var applicationUser = await userManager.FindByIdAsync(applicationUserId);
             var token = await userManager.GeneratePasswordResetTokenAsync(applicationUser);
             return token;
-        }
-
-        
-
-        public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)
-        {
-            return await userManager.FindByIdAsync(applicationUserId);
-        }
-
-        public async Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail)
-        {
-            return await userManager.FindByEmailAsync(applicationUserEmail);
         }
 
         public async Task<IdentityResult> UpdateAccountData(ApplicationUser applicationUser)

@@ -1,7 +1,6 @@
-﻿using ComputersStore.Models.ViewModels.Newsletter;
-using System;
+﻿using ComputersStore.Models.ViewModels.Newsletter.Base;
+using ComputersStore.Models.ViewModels.Newsletter.Complex;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces

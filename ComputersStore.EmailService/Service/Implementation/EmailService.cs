@@ -14,6 +14,7 @@ namespace ComputersStore.EmailHelper.Service.Implementation
     {
         private readonly IEmailSender emailSender;
         private readonly IEmailMessageFactory emailMessageFactory;
+
         public EmailService(IEmailSender emailSender, IEmailMessageFactory emailMessageFactory)
         {
             this.emailSender = emailSender;

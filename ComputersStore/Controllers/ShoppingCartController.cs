@@ -4,8 +4,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.Data.Dictionaries;
 using ComputersStore.EmailHelper.Service.Interface;
 using ComputersStore.Models.ViewModels.ShoppingCart;
+using ComputersStore.Models.ViewModels.ShoppingCart.Base;
 using ComputersStore.WebUI.Helpers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,26 +15,33 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ComputersStore.WebUI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
     public class ShoppingCartController : Controller
     {
+        #region Fields
+
         private readonly IShoppingCartBusinessService shoppingCartBusinessService;
         private readonly IPaymentTypeBusinessService paymentTypeBusinessService;
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IEmailService emailService;
 
-        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IEmailService emailService)
+        #endregion Fields
+
+        #region Constructors
+
+        public ShoppingCartController(IShoppingCartBusinessService shoppingCartBusinessService, IPaymentTypeBusinessService paymentTypeBusinessService, IApplicationUserBusinessService applicationUserBusinessService, IEmailService emailService)
         {
             this.shoppingCartBusinessService = shoppingCartBusinessService;
             this.paymentTypeBusinessService = paymentTypeBusinessService;
+            this.applicationUserBusinessService = applicationUserBusinessService;
             this.emailService = emailService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+        #endregion Constructors
 
+        #region Actions
+
+        // GET: ShoppingCart/Summary
         public async Task<IActionResult> Summary()
         {
             var shoppingCart = GetShoppingCart();
@@ -40,7 +49,10 @@ namespace ComputersStore.WebUI.Controllers
             return View(result);
         }
 
-        public IActionResult AddProductToShoppingCart(int productId, string returnUrl, int quantity)
+        // POST: ShoppingCart/AddProductToShoppingCart
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddProductToShoppingCart(int productId, int quantity)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
             shoppingCart.AddItem(productId, quantity);
@@ -48,6 +60,9 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction(nameof(Summary));
         }
 
+        // POST: ShoppingCart/RemoveProductFromShoppingCart
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult RemoveProductFromShoppingCart(int productId)
         {
             ShoppingCart shoppingCart = GetShoppingCart();
@@ -56,12 +71,14 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction("Summary");
         }
 
+        // GET: ShoppingCart/SubmitOrder
         public async Task<IActionResult> SubmitOrder()
         {
             await PopulateUpdateFormSelectElements();
             return View();
         }
 
+        // POST: ShoppingCart/SubmitOrder
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SubmitOrder(SubmitOrderDetailsViewModel submitOrderDetailsViewModel)
@@ -71,6 +88,10 @@ namespace ComputersStore.WebUI.Controllers
             await SendNewOrderConfirmationEmail(newOrderId);
             return View("SubmitOrderSummary");
         }
+
+        #endregion Actions
+
+        #region Helpers
 
         private ShoppingCart GetShoppingCart()
         {
@@ -99,5 +120,7 @@ namespace ComputersStore.WebUI.Controllers
             var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
             await emailService.SendNewOrderAcceptanceConfirmationEmail(customer.Email, customer.FirstName, newOrderId);
         }
+
+        #endregion Helpers
     }
 }

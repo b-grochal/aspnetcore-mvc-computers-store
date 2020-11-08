@@ -1,9 +1,6 @@
-﻿using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Product;
-using System;
+﻿using ComputersStore.Models.ViewModels.Product.Base;
+using ComputersStore.Models.ViewModels.Product.Complex;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces
@@ -11,7 +8,6 @@ namespace ComputersStore.BusinessServices.Interfaces
     public interface IProductBusinessService
     {
         Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
-        Task<IEnumerable<ProductDetailsViewModel>> GetProductsDetailCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<ProductDetailsViewModel> GetProductDetails(int productId);
         Task<ProductEditFormViewModel> GetProductForUpdate(int productId);
         Task CreateProduct(ProductCreateFormViewModel product);

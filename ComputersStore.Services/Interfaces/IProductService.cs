@@ -8,7 +8,7 @@ namespace ComputersStore.Services.Interfaces
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetProductsCollectionById(IEnumerable<int> productsId);
+        Task<IEnumerable<Product>> GetProductsCollectionByIds(IEnumerable<int> productsId);
         Task<IEnumerable<Product>> GetProductsCollection(int productCategoryId, string sortOrder, int pageNumber, int pageSize);
         Task<IEnumerable<Product>> GetProductsCollection(int? productCategoryId, string productName, bool? isRecommended);
         Task<Product> GetProduct(int productId);

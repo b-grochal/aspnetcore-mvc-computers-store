@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace ComputersStore.Models.ViewModels.Product
+namespace ComputersStore.Models.ViewModels.Product.Base
 {
     public abstract class ProductEditFormViewModel
     {
@@ -31,9 +31,11 @@ namespace ComputersStore.Models.ViewModels.Product
         [Display(Name="Update image?")]
         public bool IsImageUpdated { get; set; }
 
-        [RequiredIfTrueAttribute(nameof(IsImageUpdated), ErrorMessage="New image is required.")]
+        [RequiredIfTrue(nameof(IsImageUpdated), ErrorMessage="New image is required.")]
         [MaxFileSize(50 * 1024)]
         [AllowedExtensions(new string[] { ".jpg" })]
-        public IFormFile ImageFile { get; set; }
+        public IFormFile NewImageFile { get; set; }
+
+        public byte[] OldImage { get; set; }
     }
 }
