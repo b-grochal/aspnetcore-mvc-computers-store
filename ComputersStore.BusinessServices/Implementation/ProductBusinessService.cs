@@ -154,32 +154,25 @@ namespace ComputersStore.BusinessServices.Implementation
 
         private Product MapNewProductViewModelToSpecificProduct(ProductCreateFormViewModel newProduct)
         {
-            Product result = null;
             switch (newProduct.ProductCategoryId)
             {
                 case ProductCategoryDictionary.CPU:
-                    result = mapper.Map<CentralProcessingUnit>(newProduct);
-                    break;
+                    return mapper.Map<CentralProcessingUnit>(newProduct);
                 case ProductCategoryDictionary.GPU:
-                    result = mapper.Map<GraphicsProcessingUnit>(newProduct);
-                    break;
+                    return mapper.Map<GraphicsProcessingUnit>(newProduct);
                 case ProductCategoryDictionary.HDD:
-                    result = mapper.Map<HardDiskDrive>(newProduct);
-                    break;
+                    return mapper.Map<HardDiskDrive>(newProduct);
                 case ProductCategoryDictionary.Motherboard:
-                    result = mapper.Map<Motherboard>(newProduct);
-                    break;
+                    return mapper.Map<Motherboard>(newProduct);
                 case ProductCategoryDictionary.PSU:
-                    result = mapper.Map<PowerSupplyUnit>(newProduct);
-                    break;
+                    return mapper.Map<PowerSupplyUnit>(newProduct);
                 case ProductCategoryDictionary.RAM:
-                    result = mapper.Map<RandomAccessMemory>(newProduct);
-                    break;
+                    return mapper.Map<RandomAccessMemory>(newProduct);
                 case ProductCategoryDictionary.SSD:
-                    result = mapper.Map<SolidStateDrive>(newProduct);
-                    break;
+                    return mapper.Map<SolidStateDrive>(newProduct);
+                default:
+                    return null;
             }
-            return result;
         }
 
         private ProductDetailsViewModel MapProductToSpecificDetailsViewModel(Product product)
@@ -230,32 +223,26 @@ namespace ComputersStore.BusinessServices.Implementation
 
         private Product MapProductEditFormViewModelToConcreteProduct(ProductEditFormViewModel productDetailsViewModel)
         {
-            Product result = null;
             switch (productDetailsViewModel.ProductCategoryId)
             {
                 case ProductCategoryDictionary.CPU:
-                    result = mapper.Map<CentralProcessingUnit>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<CentralProcessingUnit>(productDetailsViewModel);
                 case ProductCategoryDictionary.GPU:
-                    result = mapper.Map<GraphicsProcessingUnit>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<GraphicsProcessingUnit>(productDetailsViewModel);
                 case ProductCategoryDictionary.HDD:
-                    result = mapper.Map<HardDiskDrive>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<HardDiskDrive>(productDetailsViewModel);
                 case ProductCategoryDictionary.Motherboard:
-                    result = mapper.Map<Motherboard>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<Motherboard>(productDetailsViewModel);
                 case ProductCategoryDictionary.PSU:
-                    result = mapper.Map<PowerSupplyUnit>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<PowerSupplyUnit>(productDetailsViewModel);
                 case ProductCategoryDictionary.RAM:
-                    result = mapper.Map<RandomAccessMemory>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<RandomAccessMemory>(productDetailsViewModel);
                 case ProductCategoryDictionary.SSD:
-                    result = mapper.Map<SolidStateDrive>(productDetailsViewModel);
-                    break;
+                    return mapper.Map<SolidStateDrive>(productDetailsViewModel);
+                default:
+                    return null;
+
             }
-            return result;
         }
     }
 }
