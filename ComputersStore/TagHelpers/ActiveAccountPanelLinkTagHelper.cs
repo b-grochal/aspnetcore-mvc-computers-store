@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ComputersStore.WebUI.Infrastructure
+namespace ComputersStore.WebUI.TagHelpers
 {
     [HtmlTargetElement("a", Attributes = "account-panel-link")]
     public class ActiveAccountPanelLinkTagHelper : TagHelper
