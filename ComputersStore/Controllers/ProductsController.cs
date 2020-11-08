@@ -140,7 +140,7 @@ namespace ComputersStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await productBusinessService.UpdateProduct(productsDetailsViewModel);
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(Table));
             }
             return View(productsDetailsViewModel);
         }
