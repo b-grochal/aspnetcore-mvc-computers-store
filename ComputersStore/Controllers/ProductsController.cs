@@ -12,14 +12,22 @@ using ComputersStore.Database.DatabaseContext;
 using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Models.ViewModels.Other;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ComputersStore.WebUI.Controllers
 {
+    [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
     public class ProductsController : Controller
     {
+        #region Fields
+
         private readonly IProductBusinessService productBusinessService;
         private readonly IProductCategoryBusinessService productCategoryBusinessService;
         private readonly int productsPerPage = 5;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ProductsController(IProductBusinessService productBusinessService, IProductCategoryBusinessService productCategoryBusinessService)
         {
@@ -27,7 +35,13 @@ namespace ComputersStore.WebUI.Controllers
             this.productCategoryBusinessService = productCategoryBusinessService;
         }
 
-        public async Task<ActionResult> List(int productCategoryId = ProductCategoryDictionary.CPU, int pageNumber = 1, string sortOrder = null)
+        #endregion Constructors
+
+        #region Actions
+
+        // GET: Products/List
+        [AllowAnonymous]
+        public async Task<ActionResult> List(int productCategoryId, int pageNumber = 1, string sortOrder = null)
         {
             var products = await productBusinessService.GetProductsCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
             var productsListViewModel = new ProductsListViewModel
@@ -45,12 +59,14 @@ namespace ComputersStore.WebUI.Controllers
             return View(productsListViewModel);
         }
 
+        // GET: Products/ChooseNewProductCategory
         public async Task<IActionResult> ChooseNewProductCategory()
         {
             await PassProductsCategoriesSelectListToView(null);
             return View();
         }
 
+        // POST: Products/ChooseNewProductCategory
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChooseNewProductCategory(NewProductCategoryFormViewModel productCategoryFormViewModel)
@@ -58,6 +74,7 @@ namespace ComputersStore.WebUI.Controllers
             return RedirectToAction(nameof(Create), new { productCategoryId = productCategoryFormViewModel.ProductCategoryId });
         }
 
+        // GET: Products/Table
         public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)//TODO: W parametrach najpierw productName a później reszta
         {
             var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
@@ -66,6 +83,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // GET: Products/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var productDetailsViewModel = await productBusinessService.GetProductDetails(id);
@@ -84,9 +102,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // POST: Products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[Bind("Name,Description,Price,NumberOfCores,NumberOfThreads,ClockSpeed,TDP,Socket,Architecture,ManufacturingProcess,ImageFile,ProductCategory")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ProductCreateFormViewModel newProductViewModel)
@@ -111,8 +126,6 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         // POST: Products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ProductEditFormViewModel productsDetailsViewModel)
@@ -157,6 +170,7 @@ namespace ComputersStore.WebUI.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SearchProducts(string searchString)
         {
@@ -164,10 +178,16 @@ namespace ComputersStore.WebUI.Controllers
             return View(searchedProductsCollectionViewModel);
         }
 
+        #endregion Actions
+
+        #region Helpers
+
         public async Task PassProductsCategoriesSelectListToView(int? productCategory)
         {
             var productCategories = await productCategoryBusinessService.GetProductsCategoriesCollection();
             ViewData["ProductsCategories"] = new SelectList(productCategories, "ProductCategoryId", "Name", productCategory);
         }
+
+        #endregion Helpers
     }
 }
