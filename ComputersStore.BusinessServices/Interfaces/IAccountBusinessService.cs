@@ -1,8 +1,5 @@
-﻿using ComputersStore.Models.ViewModels.Account;
+﻿using ComputersStore.Models.ViewModels.Account.Base;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Interfaces

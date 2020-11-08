@@ -2,16 +2,8 @@
 @using ComputersStore.Models
 @using ComputersStore.Data.Entities;
 @using ComputersStore.Data.Dictionaries;
-@using ComputersStore.Models.ViewModels.Product
-@using ComputersStore.Models.ViewModels.Product.Specific
-@using ComputersStore.Models.ViewModels.Newsletter
-@using ComputersStore.Models.ViewModels.Order
-@using ComputersStore.Models.ViewModels.Account
-@using ComputersStore.Models.ViewModels.ShoppingCart
-@using ComputersStore.Models.ViewModels.ApplicationUser
-@using ComputersStore.Models.ViewModels.Emails
-@using Microsoft.AspNetCore.Identity
-@using ComputersStore.WebUI.Helpers
+@using ComputersStore.Models.ViewModels.Product.Base
+@using ComputersStore.Models.ViewModels.Product.Complex
 @using ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit
 @using ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit
 @using ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive
@@ -19,5 +11,16 @@
 @using ComputersStore.Models.ViewModels.Product.Specific.PowerSupplyUnit
 @using ComputersStore.Models.ViewModels.Product.Specific.RandomAccessMemory
 @using ComputersStore.Models.ViewModels.Product.Specific.SolidStateDrive
+@using ComputersStore.Models.ViewModels.Newsletter.Base
+@using ComputersStore.Models.ViewModels.Newsletter.Complex
+@using ComputersStore.Models.ViewModels.Order.Base
+@using ComputersStore.Models.ViewModels.Order.Complex
+@using ComputersStore.Models.ViewModels.Account.Base
+@using ComputersStore.Models.ViewModels.ShoppingCart.Base
+@using ComputersStore.Models.ViewModels.ApplicationUser.Base
+@using ComputersStore.Models.ViewModels.ApplicationUser.Complex
+@using ComputersStore.Models.ViewModels.Emails.Base
+@using Microsoft.AspNetCore.Identity
+@using ComputersStore.WebUI.Helpers
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @addTagHelper *, ComputersStore.WebUI

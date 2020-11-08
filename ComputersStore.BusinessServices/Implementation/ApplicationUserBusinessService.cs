@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.SearchParams.ApplicationUser;
-using ComputersStore.Models.ViewModels.ApplicationUser;
+using ComputersStore.Models.ViewModels.ApplicationUser.Base;
+using ComputersStore.Models.ViewModels.ApplicationUser.Complex;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation

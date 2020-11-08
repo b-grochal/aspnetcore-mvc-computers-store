@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.Product;
-using System;
-using System.Collections.Generic;
+using ComputersStore.Models.ViewModels.Product.Base;
 using System.IO;
-using System.Text;
 
 namespace ComputersStore.Models.Resolvers
 {

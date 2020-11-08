@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using ComputersStore.Data.Entities;
 using ComputersStore.Models.ViewModels.Order;
+using ComputersStore.Models.ViewModels.Order.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;

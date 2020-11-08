@@ -14,6 +14,8 @@ using ComputersStore.Models.ViewModels.Emails;
 using ComputersStore.EmailHelper.Service.Interface;
 using Microsoft.AspNetCore.Authorization;
 using ComputersStore.Data.Dictionaries;
+using ComputersStore.Models.ViewModels.Newsletter.Base;
+using ComputersStore.Models.ViewModels.Emails.Base;
 
 namespace ComputersStore.WebUI.Controllers
 {

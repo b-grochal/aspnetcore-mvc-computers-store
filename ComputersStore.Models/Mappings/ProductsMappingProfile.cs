@@ -2,9 +2,7 @@
 using ComputersStore.Data.Entities;
 using ComputersStore.Models.Converters;
 using ComputersStore.Models.Resolvers;
-using ComputersStore.Models.ViewModels;
-using ComputersStore.Models.ViewModels.Product;
-using ComputersStore.Models.ViewModels.Product.Specific;
+using ComputersStore.Models.ViewModels.Product.Base;
 using ComputersStore.Models.ViewModels.Product.Specific.CentralProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.GraphicsProcessingUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.HardDiskDrive;

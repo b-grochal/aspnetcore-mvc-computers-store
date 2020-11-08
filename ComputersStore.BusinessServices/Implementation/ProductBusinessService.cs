@@ -20,6 +20,8 @@ using ComputersStore.Models.ViewModels.Product.Specific.Motherboard;
 using ComputersStore.Models.ViewModels.Product.Specific.PowerSupplyUnit;
 using ComputersStore.Models.ViewModels.Product.Specific.RandomAccessMemory;
 using ComputersStore.Models.ViewModels.Product.Specific.SolidStateDrive;
+using ComputersStore.Models.ViewModels.Product.Complex;
+using ComputersStore.Models.ViewModels.Product.Base;
 
 namespace ComputersStore.BusinessServices.Implementation
 {
@@ -74,10 +76,6 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task UpdateProduct(ProductEditFormViewModel updatedProduct)
         {
             var product = MapProductEditFormViewModelToConcreteProduct(updatedProduct);
-            if(product.Image == null)
-            {
-                product.Image = await GetProductImage(product.ProductId);
-            }
             await productService.UpdateProduct(product);
         }
 
@@ -131,118 +129,77 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public ProductCreateFormViewModel PrepareNewEmptyProduct(int productCategoryId)
         {
-            switch (productCategoryId)
+            return productCategoryId switch
             {
-                case ProductCategoryDictionary.CPU:
-                    return new CentralProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.GPU:
-                    return new GraphicsProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.HDD:
-                    return new HardDiskDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.Motherboard:
-                    return new MotherboardCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.PSU:
-                    return new PowerSupplyUnitCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.RAM:
-                    return new RandomAccessMemoryCreateFormViewModel { ProductCategoryId = productCategoryId };
-                case ProductCategoryDictionary.SSD:
-                    return new SolidStateDriveCreateFormViewModel { ProductCategoryId = productCategoryId };
-                default:
-                    return null;
-            }
+                ProductCategoryDictionary.CPU => new CentralProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.GPU => new GraphicsProcessingUnitCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.HDD => new HardDiskDriveCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.Motherboard => new MotherboardCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.PSU => new PowerSupplyUnitCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.RAM => new RandomAccessMemoryCreateFormViewModel { ProductCategoryId = productCategoryId },
+                ProductCategoryDictionary.SSD => new SolidStateDriveCreateFormViewModel { ProductCategoryId = productCategoryId },
+                _ => null,
+            };
         }
 
         private Product MapNewProductViewModelToSpecificProduct(ProductCreateFormViewModel newProduct)
         {
-            switch (newProduct.ProductCategoryId)
+            return newProduct.ProductCategoryId switch
             {
-                case ProductCategoryDictionary.CPU:
-                    return mapper.Map<CentralProcessingUnit>(newProduct);
-                case ProductCategoryDictionary.GPU:
-                    return mapper.Map<GraphicsProcessingUnit>(newProduct);
-                case ProductCategoryDictionary.HDD:
-                    return mapper.Map<HardDiskDrive>(newProduct);
-                case ProductCategoryDictionary.Motherboard:
-                    return mapper.Map<Motherboard>(newProduct);
-                case ProductCategoryDictionary.PSU:
-                    return mapper.Map<PowerSupplyUnit>(newProduct);
-                case ProductCategoryDictionary.RAM:
-                    return mapper.Map<RandomAccessMemory>(newProduct);
-                case ProductCategoryDictionary.SSD:
-                    return mapper.Map<SolidStateDrive>(newProduct);
-                default:
-                    return null;
-            }
+                ProductCategoryDictionary.CPU => mapper.Map<CentralProcessingUnit>(newProduct),
+                ProductCategoryDictionary.GPU => mapper.Map<GraphicsProcessingUnit>(newProduct),
+                ProductCategoryDictionary.HDD => mapper.Map<HardDiskDrive>(newProduct),
+                ProductCategoryDictionary.Motherboard => mapper.Map<Motherboard>(newProduct),
+                ProductCategoryDictionary.PSU => mapper.Map<PowerSupplyUnit>(newProduct),
+                ProductCategoryDictionary.RAM => mapper.Map<RandomAccessMemory>(newProduct),
+                ProductCategoryDictionary.SSD => mapper.Map<SolidStateDrive>(newProduct),
+                _ => null,
+            };
         }
 
         private ProductDetailsViewModel MapProductToSpecificDetailsViewModel(Product product)
         {
-            switch (product.ProductCategoryId)
+            return product.ProductCategoryId switch
             {
-                case ProductCategoryDictionary.CPU:
-                    return mapper.Map<CentralProcessingUnitDetailsViewModel>(product);
-                case ProductCategoryDictionary.GPU:
-                    return mapper.Map<GraphicsProcessingUnitDetailsViewModel>(product);
-                case ProductCategoryDictionary.HDD:
-                    return mapper.Map<HardDiskDriveDetailsViewModel>(product);
-                case ProductCategoryDictionary.Motherboard:
-                    return mapper.Map<MotherboardDetailsViewModel>(product);
-                case ProductCategoryDictionary.PSU:
-                    return mapper.Map<PowerSupplyUnitDetailsViewModel>(product);
-                case ProductCategoryDictionary.RAM:
-                    return mapper.Map<RandomAccessMemoryDetailsViewModel>(product);
-                case ProductCategoryDictionary.SSD:
-                    return mapper.Map<SolidStateDriveDetailsViewModel>(product);
-                default:
-                    return null;
-            }
+                ProductCategoryDictionary.CPU => mapper.Map<CentralProcessingUnitDetailsViewModel>(product),
+                ProductCategoryDictionary.GPU => mapper.Map<GraphicsProcessingUnitDetailsViewModel>(product),
+                ProductCategoryDictionary.HDD => mapper.Map<HardDiskDriveDetailsViewModel>(product),
+                ProductCategoryDictionary.Motherboard => mapper.Map<MotherboardDetailsViewModel>(product),
+                ProductCategoryDictionary.PSU => mapper.Map<PowerSupplyUnitDetailsViewModel>(product),
+                ProductCategoryDictionary.RAM => mapper.Map<RandomAccessMemoryDetailsViewModel>(product),
+                ProductCategoryDictionary.SSD => mapper.Map<SolidStateDriveDetailsViewModel>(product),
+                _ => null,
+            };
         }
 
         private ProductEditFormViewModel MapProductToSpceificEditFormViewModel(Product product)
         {
-            switch (product.ProductCategoryId)
+            return product.ProductCategoryId switch
             {
-                case ProductCategoryDictionary.CPU:
-                    return mapper.Map<CentralProcessingUnitEditFormViewModel>(product);
-                case ProductCategoryDictionary.GPU:
-                    return mapper.Map<GraphicsProcessingUnitEditFormViewModel>(product);
-                case ProductCategoryDictionary.HDD:
-                    return mapper.Map<HardDiskDriveEditFormViewModel>(product);
-                case ProductCategoryDictionary.Motherboard:
-                    return mapper.Map<MotherboardEditFormViewModel>(product);
-                case ProductCategoryDictionary.PSU:
-                    return mapper.Map<PowerSupplyUnitEditFormViewModel>(product);
-                case ProductCategoryDictionary.RAM:
-                    return mapper.Map<RandomAccessMemoryEditFormViewModel>(product);
-                case ProductCategoryDictionary.SSD:
-                    return mapper.Map<SolidStateDriveEditFormViewModel>(product);
-                default:
-                    return null;
-            }
+                ProductCategoryDictionary.CPU => mapper.Map<CentralProcessingUnitEditFormViewModel>(product),
+                ProductCategoryDictionary.GPU => mapper.Map<GraphicsProcessingUnitEditFormViewModel>(product),
+                ProductCategoryDictionary.HDD => mapper.Map<HardDiskDriveEditFormViewModel>(product),
+                ProductCategoryDictionary.Motherboard => mapper.Map<MotherboardEditFormViewModel>(product),
+                ProductCategoryDictionary.PSU => mapper.Map<PowerSupplyUnitEditFormViewModel>(product),
+                ProductCategoryDictionary.RAM => mapper.Map<RandomAccessMemoryEditFormViewModel>(product),
+                ProductCategoryDictionary.SSD => mapper.Map<SolidStateDriveEditFormViewModel>(product),
+                _ => null,
+            };
         }
 
         private Product MapProductEditFormViewModelToConcreteProduct(ProductEditFormViewModel productDetailsViewModel)
         {
-            switch (productDetailsViewModel.ProductCategoryId)
+            return productDetailsViewModel.ProductCategoryId switch
             {
-                case ProductCategoryDictionary.CPU:
-                    return mapper.Map<CentralProcessingUnit>(productDetailsViewModel);
-                case ProductCategoryDictionary.GPU:
-                    return mapper.Map<GraphicsProcessingUnit>(productDetailsViewModel);
-                case ProductCategoryDictionary.HDD:
-                    return mapper.Map<HardDiskDrive>(productDetailsViewModel);
-                case ProductCategoryDictionary.Motherboard:
-                    return mapper.Map<Motherboard>(productDetailsViewModel);
-                case ProductCategoryDictionary.PSU:
-                    return mapper.Map<PowerSupplyUnit>(productDetailsViewModel);
-                case ProductCategoryDictionary.RAM:
-                    return mapper.Map<RandomAccessMemory>(productDetailsViewModel);
-                case ProductCategoryDictionary.SSD:
-                    return mapper.Map<SolidStateDrive>(productDetailsViewModel);
-                default:
-                    return null;
-
-            }
+                ProductCategoryDictionary.CPU => mapper.Map<CentralProcessingUnit>(productDetailsViewModel),
+                ProductCategoryDictionary.GPU => mapper.Map<GraphicsProcessingUnit>(productDetailsViewModel),
+                ProductCategoryDictionary.HDD => mapper.Map<HardDiskDrive>(productDetailsViewModel),
+                ProductCategoryDictionary.Motherboard => mapper.Map<Motherboard>(productDetailsViewModel),
+                ProductCategoryDictionary.PSU => mapper.Map<PowerSupplyUnit>(productDetailsViewModel),
+                ProductCategoryDictionary.RAM => mapper.Map<RandomAccessMemory>(productDetailsViewModel),
+                ProductCategoryDictionary.SSD => mapper.Map<SolidStateDrive>(productDetailsViewModel),
+                _ => null,
+            };
         }
     }
 }

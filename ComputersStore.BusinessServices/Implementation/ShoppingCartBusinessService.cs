@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.ViewModels.ShoppingCart;
+using ComputersStore.Models.ViewModels.ShoppingCart.Base;
 using ComputersStore.Services.Interfaces;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ComputersStore.BusinessServices.Implementation

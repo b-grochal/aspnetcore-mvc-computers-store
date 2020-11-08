@@ -13,6 +13,8 @@ using ComputersStore.Data.Dictionaries;
 using ComputersStore.Models.ViewModels.Product;
 using ComputersStore.Models.ViewModels.Other;
 using Microsoft.AspNetCore.Authorization;
+using ComputersStore.Models.ViewModels.Product.Base;
+using ComputersStore.Models.ViewModels.Product.Complex;
 
 namespace ComputersStore.WebUI.Controllers
 {
@@ -69,7 +71,7 @@ namespace ComputersStore.WebUI.Controllers
         // POST: Products/ChooseNewProductCategory
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChooseNewProductCategory(NewProductCategoryFormViewModel productCategoryFormViewModel)
+        public IActionResult ChooseNewProductCategory(NewProductCategoryFormViewModel productCategoryFormViewModel)
         {
             return RedirectToAction(nameof(Create), new { productCategoryId = productCategoryFormViewModel.ProductCategoryId });
         }
