@@ -22,7 +22,6 @@
         {
             <form asp-action="AddProductToShoppingCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post" class="form-inline">
                 <input type="hidden" name="ProductId" asp-for="ProductId" />
-                <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
                 <select class="form-control form-control mr-2 input-with-green-outline-on-focus" name="Quantity">
                     <option value="1">1</option>
                     <option value="2">2</option>
