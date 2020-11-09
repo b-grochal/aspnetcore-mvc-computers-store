@@ -1,7 +1,7 @@
-﻿<nav class="navbar navbar-dark p-0 d-none d-sm-flex" fixed-top-nav>
+﻿<nav class="navbar navbar-dark p-0 d-none d-lg-flex" fixed-top-nav>
     <div class="container-fluid d-flex flex-column p-0">
         <div class="row w-100 bg-black px-2 py-3">
-            <div class="col-2 d-flex justify-content-start align-items-center">
+            <div class="col-3 col-xl-2 d-flex justify-content-start align-items-center">
                 <form class="form-group w-100 m-0" asp-controller="Products" asp-action="SearchProducts" method="post">
                     <div class="input-group navbar-search-products-input-group pb-1">
                         <input class="form-control w-75 navbar-search-product-input shadow-none px-0 text-white" placeholder="Search" aria-label="Search" name="SearchString">
@@ -11,10 +11,10 @@
                     </div>
                 </form>
             </div>
-            <div class="col-8 d-flex justify-content-center align-items-center">
+            <div class="col-6 col-xl-8 d-flex justify-content-center align-items-center">
                 <a class="h1 text-white text-decoration-none" asp-controller="Home" asp-action="Index">ComputersStore</a>
             </div>
-            <div class="col-2 d-flex justify-content-end align-items-center">
+            <div class="col-3 col-xl-2 d-flex justify-content-end align-items-center">
                 <partial name="~/Views/Shared/Partials/_DesktopNavbarLinksPartial.cshtml" />
             </div>
         </div>
