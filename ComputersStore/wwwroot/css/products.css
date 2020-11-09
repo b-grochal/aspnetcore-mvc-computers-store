@@ -52,3 +52,13 @@
     margin-left: 15px;
   }
 }
+
+@media (min-width: 992px) {
+  .recommended-product-card-title {
+    line-height: 1.3rem;
+    height: 2.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
