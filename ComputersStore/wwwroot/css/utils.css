@@ -99,3 +99,11 @@ bg-green {
         height: 100% !important;
     }
 }
+
+@media (min-width: 992px) {
+    .w-lg-50 {
+        width: 50% !important;
+    }
+}
+
+
