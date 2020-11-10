@@ -88,3 +88,10 @@ body {
 .table td {
     vertical-align: middle !important;
 }
+
+.table-actions-btns-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
