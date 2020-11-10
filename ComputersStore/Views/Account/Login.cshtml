@@ -8,8 +8,8 @@
     Layout = "~/Views/Shared/Layouts/_AuthenticationLayout.cshtml";
 }
 
-<div class="row h-100">
-    <div class="col-6 d-flex justify-content-center login-column">
+<div class="row h-sm-100">
+    <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center align-items-sm-stretch login-column">
         <div class="w-50">
             <form asp-controller="Account" asp-action="Login" method="post" role="form">
                 <h4 class="text-center mb-5">Are you a user?</h4>
@@ -37,7 +37,7 @@
             </form>
         </div>
     </div>
-    <div class="col-6 bg-light-ashen d-flex justify-content-center registration-column">
+    <div class="col-12 col-sm-6 align-items-center align-items-sm-stretch bg-light-ashen d-flex justify-content-center registration-column">
         <div class="w-50">
             <h4 class="text-center text-black mb-5">Is this your first visit?</h4>
             <button class="btn create-account-btn w-100">Create account</button>
