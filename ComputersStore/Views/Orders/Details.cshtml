@@ -1,13 +1,13 @@
 ﻿@model OrderDetailsViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Elo";
 }
 
 <h3>Order details</h3>
 <hr />
 <div class="row">
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <div class="row">
             <div class="col-6 font-weight-bold">
                 @Html.DisplayNameFor(model => model.OrderViewModel.OrderId)
@@ -41,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-12 col-md-6">
         <div class="row">
             <div class="col-6 font-weight-bold">
                 @Html.DisplayNameFor(model => model.ApplicationUserViewModel.FirstName)
@@ -79,34 +79,34 @@
 <div class="row">
     <div class="col-12">
         <div class="row">
-            <div class="col-3 font-weight-bold">
+            <div class="col-6 col-md-3 font-weight-bold">
                 @Html.DisplayNameFor(model => model.OrderViewModel.ShipCountry)
             </div>
-            <div class="col-9">
+            <div class="col-6 col-md-9">
                 @Html.DisplayFor(model => model.OrderViewModel.ShipCountry)
             </div>
         </div>
         <div class="row">
-            <div class="col-3 font-weight-bold">
+            <div class="col-6 col-md-3 font-weight-bold">
                 @Html.DisplayNameFor(model => model.OrderViewModel.ShipCity)
             </div>
-            <div class="col-9">
+            <div class="col-6 col-md-9">
                 @Html.DisplayFor(model => model.OrderViewModel.ShipCity)
             </div>
         </div>
         <div class="row">
-            <div class="col-3 font-weight-bold">
+            <div class="col-6 col-md-3 font-weight-bold">
                 @Html.DisplayNameFor(model => model.OrderViewModel.ShipPostalCode)
             </div>
-            <div class="col-9">
+            <div class="col-6 col-md-9">
                 @Html.DisplayFor(model => model.OrderViewModel.ShipPostalCode)
             </div>
         </div>
         <div class="row">
-            <div class="col-3 font-weight-bold">
+            <div class="col-6 col-md-3 font-weight-bold">
                 @Html.DisplayNameFor(model => model.OrderViewModel.ShipAddress)
             </div>
-            <div class="col-9">
+            <div class="col-6 col-md-9">
                 @Html.DisplayNameFor(model => model.OrderViewModel.ShipAddress)
             </div>
         </div>
@@ -151,6 +151,6 @@
     </div>
 </div>
 <div class="d-flex justify-content-end">
-    <a class="btn btn-green" asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderViewModel.OrderId">Edit</a>
-    <a class="btn btn-green ml-2" asp-controller="Orders" asp-action="Index">Back</a>
+    <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderViewModel.OrderId">Edit</a>
+    <a class="btn btn-green ml-2 input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Index">Back</a>
 </div>
