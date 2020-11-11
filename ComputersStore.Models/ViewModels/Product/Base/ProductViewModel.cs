@@ -11,6 +11,8 @@ namespace ComputersStore.Models.ViewModels.Product.Base
         public int ProductId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
         public bool IsRecommended { get; set; }
         public string ImageDataUrl { get; set; }

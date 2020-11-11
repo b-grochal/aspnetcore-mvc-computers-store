@@ -61,7 +61,13 @@ body {
     -ms-flex-direction: column;
     flex-direction: column;
     height: 100vh;
-    padding-top: 12rem; /* TODO dodać media queries zmiejszające padding dla urządzeń mobilnych*/
+    padding-top: 12rem;
+}
+
+@media (max-width: 992px) {
+    body {
+        padding-top: 5rem;
+    }
 }
 
 .admin-panel-body {
@@ -81,4 +87,11 @@ body {
 
 .table td {
     vertical-align: middle !important;
+}
+
+.table-actions-btns-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
 }

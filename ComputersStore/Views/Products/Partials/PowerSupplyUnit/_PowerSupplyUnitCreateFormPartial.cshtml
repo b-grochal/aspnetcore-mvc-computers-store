@@ -4,34 +4,34 @@
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input asp-for="ProductCategoryId" hidden>
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="Name" class="control-label"></label>
             <input asp-for="Name" class="form-control input-with-green-outline-on-focus" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="Description" class="control-label"></label>
             <input asp-for="Description" class="form-control input-with-green-outline-on-focus" />
             <span asp-validation-for="Description" class="text-danger"></span>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="Price" class="control-label"></label>
             <input asp-for="Price" class="form-control input-with-green-outline-on-focus" />
             <span asp-validation-for="Price" class="text-danger"></span>
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="Size" class="control-label"></label>
             <input asp-for="Size" class="form-control input-with-green-outline-on-focus">
             <span asp-validation-for="Size" class="text-danger"></span>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="Wattage" class="control-label"></label>
             <input asp-for="Wattage" class="form-control input-with-green-outline-on-focus">
             <span asp-validation-for="Wattage" class="text-danger"></span>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="IsRecommended" class="control-label"></label>
             <select asp-for="IsRecommended" class="form-control input-with-green-outline-on-focus">
                 <option value="false" selected>No</option>
@@ -41,14 +41,14 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-12 col-md-4">
             <label asp-for="ImageFile" class="control-label"></label>
             <input asp-for="ImageFile" type="file" class="form-control-file file-input-with-green-outline-on-focus">
             <span asp-validation-for="ImageFile" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group d-flex justify-content-end">
-        <input type="submit" value="Save" class="btn btn-green" />
-        <a class="btn btn-green ml-2" asp-controller="Products" asp-action="Create">Cancel</a>
+        <input type="submit" value="Save" class="btn btn-green input-with-green-outline-on-focus" />
+        <a class="btn btn-green ml-2 input-with-green-outline-on-focus" asp-controller="Products" asp-action="Create">Cancel</a>
     </div>
 </form>
