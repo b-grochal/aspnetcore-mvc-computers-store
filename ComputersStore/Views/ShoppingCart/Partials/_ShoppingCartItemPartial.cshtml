@@ -1,16 +1,16 @@
 ﻿@model ShoppingCartItemViewModel
 
 <div class="row border-bottom mb-1 no-gutters">
-    <div class="col-6 d-flex justify-content-start align-items-center">
-        <p class="m-0">@Model.ProductName</p>
+    <div class="col-12 col-md-6 d-flex justify-content-start align-items-center">
+        <p class="m-0 font-weight-bold">@Html.DisplayFor(model => model.ProductName)</p>
     </div>
-    <div class="col-2 d-flex justify-content-start align-items-center">
-        <p class="m-0">Quantity: @Model.Quantity</p>
+    <div class="col-12 col-md-2 d-flex justify-content-start align-items-center">
+        <p class="m-0">@Html.DisplayNameFor(model => model.Quantity): @Html.DisplayFor(model => model.Quantity)</p>
     </div>
-    <div class="col-2 d-flex justify-content-start align-items-center">
-        <p class="m-0">Price: @Model.ProductPrice</p>
+    <div class="col-12 col-md-2 d-flex justify-content-start align-items-center">
+        <p class="m-0">@Html.DisplayNameFor(model => model.ProductPrice): @Html.DisplayFor(model => model.ProductPrice)</p>
     </div>
-    <div class="col-2 d-flex justify-content-end align-items-center">
+    <div class="col-12 col-md-2 d-flex justify-content-end align-items-center">
         <form asp-controller="ShoppingCart" asp-action="RemoveProductFromShoppingCart" type="post">
             <input hidden asp-for="ProductId" />
             <button type="submit" class="btn btn-sm btn-green mb-1">Remove</button>
