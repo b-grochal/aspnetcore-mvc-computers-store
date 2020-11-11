@@ -4,9 +4,24 @@
     border-color: #eaeaea;
 }
 
+.account-panel-list-item {
+    margin-bottom: 5px;
+}
+
+@media (min-width: 768px) {
+    .account-panel-list-item {
+        margin-bottom: 0px;
+    }
+}
+
 .account-panel-link {
     color: #919191;
     text-decoration: none;
+    display: block;
+    padding: 0.25rem 0.5rem;
+    border: 1px #eaeaea solid;
+    border-radius: 0.2rem;
+    text-align: center;
 }
 
 .account-panel-link:hover {
@@ -14,6 +29,33 @@
     text-decoration: none;
 }
 
+@media (min-width: 768px) {
+    .account-panel-link {
+        padding: 0 0;
+        border: none;
+        text-align: left;
+    }
+}
+
 .active-account-panel-link {
     color: #28a745 !important;
 }
+
+.account-navbar-panel-link {
+    color: #919191;
+    text-decoration: none;
+}
+
+.account-navbar-panel-link:hover {
+    color: #28a745;
+    text-decoration: none;
+}
+
+.account-panel-logout-btn {
+    font-size: 1rem;
+}
+
+.account-navbar-panel-link-icon {
+    width: 21px;
+}
+

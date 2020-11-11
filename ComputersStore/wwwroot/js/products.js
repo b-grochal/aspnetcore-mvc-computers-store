@@ -1,8 +1,8 @@
 ﻿function enableImageInputOnSelectChange(selectBox) {
     if (selectBox.value === "true") {
-        document.getElementById("ImageFile").disabled = false;
+        document.getElementById("NewImageFile").disabled = false;
     } else {
-        document.getElementById("ImageFile").disabled = true;
+        document.getElementById("NewImageFile").disabled = true;
     }
 }
 

@@ -5,10 +5,10 @@
 }
 
 <div class="row">
-    <div class="col-4">
-        <img class="img-fluid product-details-img" src="@Model.ImageDataUrl" /> @*TODO: Czy można wywalić stąd klasę img-fluid?*@
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <img class="img-fluid product-details-img" src="@Model.ImageDataUrl" />
     </div>
-    <div class="col-8 d-flex flex-column justify-content-between">
+    <div class="col-12 col-md-8 d-flex flex-column justify-content-between">
         <div>
             <h2>@Html.DisplayFor(model => model.Name)</h2>
             <p>@Model.Description</p>
@@ -22,19 +22,21 @@
         {
             <form asp-action="AddProductToShoppingCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post" class="form-inline">
                 <input type="hidden" name="ProductId" asp-for="ProductId" />
-                <select class="form-control form-control mr-2 input-with-green-outline-on-focus" name="Quantity">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                </select>
-                <button class="btn btn-green" type="submit">Add to cart</button>
+                <div class="form-group d-flex">
+                    <select class="form-control form-control mr-2 input-with-green-outline-on-focus" name="Quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <button class="btn btn-green text-nowrap input-with-green-outline-on-focus" type="submit">Add to cart</button>
+                </div>
             </form>
         }
     </div>

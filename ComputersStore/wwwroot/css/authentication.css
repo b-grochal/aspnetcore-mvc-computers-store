@@ -63,7 +63,14 @@
 }
 
 .login-column {
-    padding-top: 8rem;
+    padding-top: 0;
+    height: 100vh;
+}
+
+@media (min-width: 576px) {
+    .login-column {
+        padding-top: 8rem;
+    }
 }
 
 .create-account-btn {
@@ -79,5 +86,12 @@
 }
 
 .registration-column {
-    padding-top: 8rem;
+    padding-top: 0;
+    height: 100vh;
+}
+
+@media (min-width: 576px) {
+    .registration-column {
+        padding-top: 8rem;
+    }
 }
