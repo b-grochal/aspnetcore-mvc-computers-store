@@ -9,7 +9,7 @@
         <form asp-controller="Products" asp-action="List" class="productsSortingForm">
             <input name="ProductCategoryId" value="@Model.ProductCategoryId" hidden/>
             <input name="PageNumber" value="@Model.PaginationViewModel.CurrentPage" hidden/>
-            <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
+            <select class="form-control input-with-green-outline-on-focus w-auto" asp-for="@Model.SortOrder" onchange="submitProductsSortingForm()">
                 <option value="">Default sorting</option>
                 <option value="Price ASC">Price ascending</option>
                 <option value="Price DSC">Price descending</option>
