@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComputersStore.Models.Attributes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -12,7 +13,7 @@ namespace ComputersStore.Models.ViewModels.Newsletter.Base
         [Display(Name = "Email address")]
         public string Email { get; set; }
 
-        [Required(ErrorMessage = "You have to accept our terms of newsletter service.")]
+        [IsTrue(ValidationFailMessage = "You have to accept terms of newsletter.")]
         public bool AreTermsOfNewsletterAccepted { get; set; }
     }
 }
