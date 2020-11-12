@@ -9,7 +9,7 @@ namespace ComputersStore.BusinessServices.Interfaces
     {
         Task CreateNewsletter(NewsletterSignUpFormViewModel newsletterSignUpFormViewModel);
         Task DeleteNewsletter(int newsletterId);
-        Task<NewslettersTableViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
+        Task<NewslettersFilteredCollectionViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
         Task<NewsletterViewModel> GetNewsletter(int newsletterId);
         Task<IEnumerable<string>> GetNewlettersEmailsCollection();
     }

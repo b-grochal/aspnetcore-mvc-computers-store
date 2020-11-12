@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.SearchParams.Order;
 using ComputersStore.Models.ViewModels.ApplicationUser.Base;
 using ComputersStore.Models.ViewModels.Order.Base;
 using ComputersStore.Models.ViewModels.Order.Complex;
@@ -47,18 +46,18 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrderEditFormViewModel> GetOrderEditFormData(int orderId)
+        public async Task<OrderEditFormViewModel> GetOrderEditData(int orderId)
         {
             var order = await orderService.GetOrder(orderId);
             var result = mapper.Map<OrderEditFormViewModel>(order);
             return result;
         }
 
-        public async Task<OrderListViewModel> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersFilteredCollectionViewModel> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
         {
             var orders = await orderService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, pageSize);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
-            var result = new OrderListViewModel
+            var result = new OrdersFilteredCollectionViewModel
             {
                 Orders = mappedOrders,
                 PaginationViewModel = new PaginationViewModel
@@ -67,22 +66,19 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = mappedOrders.Count()
                 },
-                ordersTableSearchCriteria = new OrdersTableSearchParams
-                {
-                    OrderId = orderId,
-                    OrderStatusId = orderStatusId,
-                    PaymentTypeId = paymentTypeId,
-                    ApplicationUserEmail = applicationUserEmail
-                }
+                OrderId = orderId,
+                OrderStatusId = orderStatusId,
+                PaymentTypeId = paymentTypeId,
+                ApplicationUserEmail = applicationUserEmail
             };
             return result;
         }
 
-        public async Task<OrderListViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersFilteredCollectionViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage)
         {
             var orders = await orderService.GetApplicationUserOrdersCollection(applicationUserId);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
-            var result = new OrderListViewModel
+            var result = new OrdersFilteredCollectionViewModel
             {
                 Orders = mappedOrders,
                 PaginationViewModel = new PaginationViewModel

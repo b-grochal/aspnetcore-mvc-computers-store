@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Complex
 {
-    public class SearchedProductsListViewModel
+    public class ProductsSearchedCollectionViewModel
     {
         public IEnumerable<ProductViewModel> Products { get; set; }
         public string SearchString { get; set; }
