@@ -18,9 +18,15 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class AccountBusinessService : IAccountBusinessService
     {
+        #region Fields
+
         private readonly IAccountService accountService;
         private readonly IApplicationUserService applicationUserService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public AccountBusinessService(IAccountService accountService, IApplicationUserService applicationUserService, IMapper mapper)
         {
@@ -28,6 +34,10 @@ namespace ComputersStore.BusinessServices.Implementation
             this.applicationUserService = applicationUserService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<IdentityResult> ChangePassword(ChangePasswordViewModel changePasswordViewModel, string applicationUserId)
         {
@@ -81,5 +91,7 @@ namespace ComputersStore.BusinessServices.Implementation
             var updatedApplicationUser = mapper.Map(accountDataViewModel, applicationUser);
             return await accountService.UpdateAccountData(updatedApplicationUser);
         }
+
+        #endregion Public methods
     }
 }

@@ -11,14 +11,24 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class ApplicationUserBusinessService : IApplicationUserBusinessService
     {
+        #region Fields
+
         private readonly IApplicationUserService applicationUserService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ApplicationUserBusinessService(IApplicationUserService applicationUserService, IMapper mapper)
         {
             this.applicationUserService = applicationUserService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<ApplicationUserViewModel> GetApplicationUserByEmail(string applicationUserEmail)
         {
@@ -63,5 +73,7 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             return await applicationUserService.GetApplicationUsersEmailsCollection(roleName);
         }
+
+        #endregion Public methods
     }
 }
