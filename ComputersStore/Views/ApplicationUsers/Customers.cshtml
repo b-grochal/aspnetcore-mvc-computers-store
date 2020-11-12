@@ -1,4 +1,4 @@
-﻿@model ApplicationUsersCollectionViewModel
+﻿@model ApplicationUsersFilteredCollectionViewModel
 @{
     ViewData["Title"] = "Table";
 }
@@ -14,18 +14,18 @@
         <form asp-controller="ApplicationUsers" asp-action="Customers">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="FirstName" class="form-control input-with-green-outline-on-focus" placeholder="First name" value="@Model.applicationUserSearchCriteria.FirstName" />
+                    <input name="FirstName" class="form-control input-with-green-outline-on-focus" placeholder="First name" value="@Model.FirstNameFilteringParameter" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="LastName" class="form-control input-with-green-outline-on-focus" placeholder="Last name" value="@Model.applicationUserSearchCriteria.LastName" />
+                    <input name="LastName" class="form-control input-with-green-outline-on-focus" placeholder="Last name" value="@Model.LastNameFilteringParameter" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="Email" class="form-control input-with-green-outline-on-focus" placeholder="Email" value="@Model.applicationUserSearchCriteria.Email" />
+                    <input name="Email" class="form-control input-with-green-outline-on-focus" placeholder="Email" value="@Model.EmailFilteringParameter" />
                 </div>
             </div>
             <div class="form-row mt-0 mt-md-2">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="PhoneNumber" class="form-control input-with-green-outline-on-focus" placeholder="Phone number" value="@Model.applicationUserSearchCriteria.PhoneNumber" />
+                    <input name="PhoneNumber" class="form-control input-with-green-outline-on-focus" placeholder="Phone number" value="@Model.PhoneNumberFilteringParameter" />
                 </div>
                 <div class="form-group col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
                     <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var applicationUser in Model.applicationUsers)
+                    @foreach (var applicationUser in Model.ApplicationUsers)
                     {
                         <tr>
                             <td scope="col">@applicationUser.FirstName</td>
@@ -81,9 +81,9 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-firstName="@Model.applicationUserSearchCriteria.FirstName"
-                              page-url-lastName="@Model.applicationUserSearchCriteria.LastName" page-url-email="@Model.applicationUserSearchCriteria.Email"
-                              page-url-phoneNumber="@Model.applicationUserSearchCriteria.PhoneNumber">
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-firstName="@Model.FirstNameFilteringParameter"
+                              page-url-lastName="@Model.LastNameFilteringParameter" page-url-email="@Model.EmailFilteringParameter"
+                              page-url-phoneNumber="@Model.PhoneNumberFilteringParameter">
             </pagination-links>
         }
     </div>

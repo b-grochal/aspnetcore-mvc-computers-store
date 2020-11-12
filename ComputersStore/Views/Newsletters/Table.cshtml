@@ -1,4 +1,4 @@
-﻿@model NewslettersTableViewModel
+﻿@model NewslettersFilteredCollectionViewModel
 @{
     ViewData["Title"] = "Table";
 }
@@ -14,10 +14,10 @@
         <form asp-controller="Newsletters" asp-action="Table">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="NewsletterId" class="form-control input-with-green-outline-on-focus" placeholder="Id" type="number" value="@Model.newslettersCollectionSearchCritera.NewsletterId" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Id" asp-for="@Model.NewsletterId" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input name="NewsletterEmail" class="form-control input-with-green-outline-on-focus" placeholder="Email" value="@Model.newslettersCollectionSearchCritera.NewsletterEmail" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Email" asp-for="@Model.NewsletterEmail" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-end align-items-center mb-2 mb-md-0">
                     <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
@@ -68,8 +68,8 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-newsletterId="@Model.newslettersCollectionSearchCritera.NewsletterId" 
-                              page-url-newsletterEmail="@Model.newslettersCollectionSearchCritera.NewsletterEmail">
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-newsletterId="@Model.NewsletterId" 
+                              page-url-newsletterEmail="@Model.NewsletterEmail">
             </pagination-links>
         }
     </div>

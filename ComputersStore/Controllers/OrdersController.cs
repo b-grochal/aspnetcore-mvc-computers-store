@@ -82,7 +82,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            var order = await orderBusinessService.GetOrderEditFormData(id.Value);
+            var order = await orderBusinessService.GetOrderEditData(id.Value);
             
             if (order == null)
             {

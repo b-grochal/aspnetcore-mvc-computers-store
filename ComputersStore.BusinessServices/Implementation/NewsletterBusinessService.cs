@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
-using ComputersStore.Models.SearchParams.Newsletter;
 using ComputersStore.Models.ViewModels.Newsletter.Base;
 using ComputersStore.Models.ViewModels.Newsletter.Complex;
 using ComputersStore.Models.ViewModels.Other;
@@ -45,11 +44,11 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<NewslettersTableViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
+        public async Task<NewslettersFilteredCollectionViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
         {
             var newsletters = await newsletterService.GetNewslettersCollection(newsletterId, newsletterEmail, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<NewsletterViewModel>>(newsletters);
-            return new NewslettersTableViewModel
+            return new NewslettersFilteredCollectionViewModel
             {
                 Newsletters = result,
                 PaginationViewModel = new PaginationViewModel
@@ -58,11 +57,8 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = newsletterService.GetNewslettersCollectionCount()
                 },
-                newslettersCollectionSearchCritera = new NewslettersCollectionSearchCriteria
-                {
-                    NewsletterId = newsletterId,
-                    NewsletterEmail = newsletterEmail
-                }
+                NewsletterId = newsletterId,
+                NewsletterEmail = newsletterEmail
             };
         }
 
