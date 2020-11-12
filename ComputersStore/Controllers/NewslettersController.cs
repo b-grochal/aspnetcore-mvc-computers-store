@@ -49,18 +49,32 @@ namespace ComputersStore.WebUI.Controllers
             return View(newsletters);
         }
 
-        // POST: Newsletters/Create
+        // GET: Newsletters/SignUpForNewsletter
+        [AllowAnonymous]
+        public IActionResult SignUpForNewsletter()
+        {
+            return View();
+        }
+
+        // POST: Newsletters/SignUpForNewsletter
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(NewsletterSignUpFormViewModel newsletter)
+        public async Task<IActionResult> SignUpForNewsletter(NewsletterSignUpFormViewModel newsletter)
         {
             if (ModelState.IsValid)
             {
                 await newsletterBusinessService.CreateNewsletter(newsletter);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(nameof(SignUpForNewsletterConfirmation));
             }
-            return RedirectToAction("Index", "Home");
+            return View(newsletter);
+        }
+
+        // GET: Newsletters/SignUpForNewsletterConfirmation
+        [AllowAnonymous]
+        public IActionResult SignUpForNewsletterConfirmation()
+        {
+            return View();
         }
 
         // GET: Newsletters/Delete/5
