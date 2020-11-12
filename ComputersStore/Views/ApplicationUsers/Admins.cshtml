@@ -14,22 +14,22 @@
         <form asp-controller="ApplicationUsers" asp-action="Admins">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input class="form-control input-with-green-outline-on-focus" placeholder="First name" asp-for="FirstNameFilteringParameter" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="First name" asp-for="FirstName" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input class="form-control input-with-green-outline-on-focus" placeholder="Last name" asp-for="LastNameFilteringParameter" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Last name" asp-for="LastName" />
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input class="form-control input-with-green-outline-on-focus" placeholder="Email" asp-for="EmailFilteringParameter" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Email" asp-for="Email" />
                 </div>
             </div>
             <div class="form-row mt-0 mt-md-2">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
-                    <input class="form-control input-with-green-outline-on-focus" placeholder="Phone number" asp-for="LastNameFilteringParameter" />
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Phone number" asp-for="PhoneNumber" />
                 </div>
                 <div class="form-group col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
                     <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
-                    <input type="reset" value="Clear" class="btn btn-green input-with-green-outline-on-focus">
+                    <input onclick="resetApplicationUsersFilteringForm(event)" type="reset" value="Clear" class="btn btn-green input-with-green-outline-on-focus">
                 </div>
             </div>
         </form>
@@ -82,9 +82,9 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-firstName="@Model.FirstNameFilteringParameter"
-                              page-url-lastName="@Model.LastNameFilteringParameter" page-url-email="@Model.EmailFilteringParameter" 
-                              page-url-phoneNumber="@Model.PhoneNumberFilteringParameter">
+                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-firstName="@Model.FirstName"
+                              page-url-lastName="@Model.LastName" page-url-email="@Model.Email" 
+                              page-url-phoneNumber="@Model.PhoneNumber">
             </pagination-links>
         }
     </div>
