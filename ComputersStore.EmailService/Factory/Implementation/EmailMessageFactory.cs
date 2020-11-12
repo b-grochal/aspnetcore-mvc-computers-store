@@ -18,11 +18,22 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
 {
     public class EmailMessageFactory : IEmailMessageFactory
     {
+        #region Fields
+
         private readonly IRazorViewToStringRenderer razorViewToStringRenderer;
+
+        #endregion Fields
+
+        #region Constructors
+
         public EmailMessageFactory(IRazorViewToStringRenderer razorViewToStringRenderer)
         {
             this.razorViewToStringRenderer = razorViewToStringRenderer;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<Message> GenerateConfirmAccoutEmailMessage(string toEmailAdress, string customerFirstName, string confirmAccountUrl)
         {
@@ -71,5 +82,7 @@ namespace ComputersStore.EmailHelper.Factory.Implementation
             var resetPasswordEmailMessage = new Message(new string[] { toEmailAdress }, "Reset password.", emailBody);
             return resetPasswordEmailMessage;
         }
+
+        #endregion Public methods
     }
 }

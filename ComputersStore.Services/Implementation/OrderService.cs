@@ -13,12 +13,22 @@ namespace ComputersStore.Services.Implementation
 {
     public class OrderService : IOrderService
     {
+        #region Fields
+
         private readonly ApplicationDbContext applicationDbContext;
+
+        #endregion Fields
+
+        #region Constructors
 
         public OrderService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<int> CreateOrder(Order order)
         {
@@ -70,5 +80,7 @@ namespace ComputersStore.Services.Implementation
             order.OrderStatusId = newOrderStatusId;
             await applicationDbContext.SaveChangesAsync();
         }
+
+        #endregion Public methods
     }
 }

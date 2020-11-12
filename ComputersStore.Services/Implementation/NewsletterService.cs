@@ -13,12 +13,22 @@ namespace ComputersStore.Services.Implementation
 {
     public class NewsletterService : INewsletterService
     {
+        #region Fields
+
         private readonly ApplicationDbContext applicationDbContext;
+
+        #endregion Fields
+
+        #region Constructors
 
         public NewsletterService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task CreateNewsletter(Newsletter newsletter)
         {
@@ -60,5 +70,7 @@ namespace ComputersStore.Services.Implementation
                 .Select(n => n.Email)
                 .ToListAsync();
         }
+
+        #endregion Public methods
     }
 }

@@ -11,17 +11,32 @@ namespace ComputersStore.EmailHelper.Sender.Implementation
 {
     public class EmailSender : IEmailSender
     {
+        #region Fields
+
         private readonly EmailConfiguration emailConfiguration;
+
+        #endregion Fields
+
+        #region Constructors
+
         public EmailSender(EmailConfiguration emailConfiguration)
         {
             this.emailConfiguration = emailConfiguration;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public void SendEmail(Message message)
         {
             var emailMessage = CreateEmailMessage(message);
             Send(emailMessage);
         }
+
+        #endregion Public methods
+
+        #region Private methods
 
         private MimeMessage CreateEmailMessage(Message message)
         {
@@ -58,5 +73,7 @@ namespace ComputersStore.EmailHelper.Sender.Implementation
                 }
             }
         }
+
+        #endregion Private methods
     }
 }
