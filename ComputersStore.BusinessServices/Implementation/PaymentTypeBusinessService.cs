@@ -9,8 +9,14 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class PaymentTypeBusinessService : IPaymentTypeBusinessService
     {
+        #region Fields
+
         private readonly IPaymentTypeService paymentTypeService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public PaymentTypeBusinessService(IPaymentTypeService paymentTypeService, IMapper mapper)
         {
@@ -18,11 +24,17 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
+        #endregion Constructors
+
+        #region Public methods
+
         public async Task<IEnumerable<PaymentTypeViewModel>> GetPaymentTypesCollection()
         {
             var paymentTypes = await paymentTypeService.GetPaymentTypesCollection();
             var result = mapper.Map<IEnumerable<PaymentTypeViewModel>>(paymentTypes);
             return result;
         }
+
+        #endregion Public methods
     }
 }

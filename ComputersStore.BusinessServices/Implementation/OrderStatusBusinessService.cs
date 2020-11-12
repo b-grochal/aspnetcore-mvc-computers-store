@@ -9,8 +9,14 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class OrderStatusBusinessService : IOrderStatusBusinessService
     {
+        #region Fields
+
         private readonly IOrderStatusService orderStatusService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public OrderStatusBusinessService(IOrderStatusService orderStatusService, IMapper mapper)
         {
@@ -18,11 +24,17 @@ namespace ComputersStore.BusinessServices.Implementation
             this.mapper = mapper;
         }
 
+        #endregion Constructors
+
+        #region Public methods
+
         public async Task<IEnumerable<OrderStatusViewModel>> GetOrderStatusesCollection()
         {
             var orderStatuses = await orderStatusService.GetOrderStatusesCollection();
             var result = mapper.Map<IEnumerable<OrderStatusViewModel>>(orderStatuses);
             return result;
         }
+
+        #endregion Public methods
     }
 }
