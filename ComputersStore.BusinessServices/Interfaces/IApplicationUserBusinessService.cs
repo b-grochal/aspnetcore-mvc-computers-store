@@ -12,7 +12,7 @@ namespace ComputersStore.BusinessServices.Interfaces
     {
         Task<ApplicationUserViewModel> GetApplicationUserById(string applicationUserId);
         Task<ApplicationUserViewModel> GetApplicationUserByEmail(string applicationUserEmail);
-        Task<ApplicationUsersCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
+        Task<ApplicationUsersFilteredCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
         Task DeleteApplicationUser(string applicationUserId);
         Task<IEnumerable<string>> GetApplicationUsersEmailsCollection(string roleName);
     }

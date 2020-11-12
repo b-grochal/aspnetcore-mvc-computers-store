@@ -9,7 +9,7 @@ namespace ComputersStore.BusinessServices.Interfaces
     {
         Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<ProductDetailsViewModel> GetProductDetails(int productId);
-        Task<ProductEditFormViewModel> GetProductForUpdate(int productId);
+        Task<ProductEditFormViewModel> GetProductEditData(int productId);
         Task CreateProduct(ProductCreateFormViewModel product);
         Task UpdateProduct(ProductEditFormViewModel product);
         Task DeleteProduct(int productId);
@@ -17,7 +17,7 @@ namespace ComputersStore.BusinessServices.Interfaces
         int GetProductsCollectionCount(int productCategoryId);
         Task<IEnumerable<ProductViewModel>> GetRecommendedProductsCollection(int numberOfProducts);
         Task<ProductViewModel> GetProduct(int productId);
-        Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString);
-        Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize);
+        Task<ProductsSearchedCollectionViewModel> GetProductsSearchedCollection(string searchString);
+        Task<ProductsFilteredCollectionViewModel> GetProductsFilteredCollection(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize);
     }
 }

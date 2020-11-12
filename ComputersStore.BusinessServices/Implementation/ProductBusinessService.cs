@@ -2,7 +2,6 @@
 using ComputersStore.BusinessServices.Interfaces;
 using ComputersStore.Data.Entities;
 using ComputersStore.Data.Dictionaries;
-using ComputersStore.Models.SearchParams.Product;
 using ComputersStore.Models.ViewModels;
 using ComputersStore.Models.ViewModels.Other;
 using ComputersStore.Models.ViewModels.Product;
@@ -39,7 +38,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task CreateProduct(ProductCreateFormViewModel newProductViewModel)
         {
             var product = MapNewProductViewModelToSpecificProduct(newProductViewModel);
-            await productService.CreateProduct(product); 
+            await productService.CreateProduct(product);
         }
 
         public async Task DeleteProduct(int productId)
@@ -66,7 +65,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ProductEditFormViewModel> GetProductForUpdate(int productId)
+        public async Task<ProductEditFormViewModel> GetProductEditData(int productId)
         {
             var product = await productService.GetProduct(productId);
             var result = MapProductToSpceificEditFormViewModel(product);
@@ -93,10 +92,10 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<SearchedProductsListViewModel> GetSearchedProductsCollection(string searchString)
+        public async Task<ProductsSearchedCollectionViewModel> GetProductsSearchedCollection(string searchString)
         {
             var searchedProducts = await productService.GetSearchedProductsCollection(searchString);
-            var result = new SearchedProductsListViewModel
+            var result = new ProductsSearchedCollectionViewModel
             {
                 Products = mapper.Map<IEnumerable<ProductViewModel>>(searchedProducts),
                 SearchString = searchString
@@ -104,11 +103,11 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ProductsTableViewModel> GetProductsCollectionForTable(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
+        public async Task<ProductsFilteredCollectionViewModel> GetProductsFilteredCollection(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
         {
             var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended);
             var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products.Skip((pageNumber - 1) * pageSize).Take(pageSize));
-            return new ProductsTableViewModel
+            return new ProductsFilteredCollectionViewModel
             {
                 Products = mappedProducts,
                 PaginationViewModel = new PaginationViewModel
@@ -117,13 +116,9 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = products.Count()
                 },
-                ProductsTableSearchCriteria = new ProductsTableSearchParams
-                {
-                    ProductCategoryId = productCategoryId,
-                    ProductName = productName,
-                    IsRecommended = isRecommended
-                }
-
+                ProductCategoryId = productCategoryId,
+                ProductName = productName,
+                IsRecommended = isRecommended
             };
         }
 

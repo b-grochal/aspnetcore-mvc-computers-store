@@ -7,7 +7,7 @@ using System.Text;
 
 namespace ComputersStore.Models.ViewModels.Product.Complex
 {
-    public class ProductsListViewModel
+    public class ProductsCollectionViewModel
     {
         public IEnumerable<ProductViewModel> Products { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }

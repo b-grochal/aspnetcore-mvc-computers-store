@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ComputersStore.BusinessServices.Interfaces;
-using ComputersStore.Models.SearchParams.ApplicationUser;
 using ComputersStore.Models.ViewModels.ApplicationUser.Base;
 using ComputersStore.Models.ViewModels.ApplicationUser.Complex;
 using ComputersStore.Models.ViewModels.Other;
@@ -35,26 +34,23 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ApplicationUsersCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        public async Task<ApplicationUsersFilteredCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
         {
             var applicationUsers = await applicationUserService.GetApplicationUsersCollection(roleName, firstName, lastName, email, phoneNumber, pageNumber, pageSize);
             var applicationUsersViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(applicationUsers);
-            return new ApplicationUsersCollectionViewModel
+            return new ApplicationUsersFilteredCollectionViewModel
             {
-                applicationUsers = applicationUsersViewModels,
+                ApplicationUsers = applicationUsersViewModels,
                 PaginationViewModel = new PaginationViewModel
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
                     TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName)
                 },
-                applicationUserSearchCriteria = new ApplicationUsersTableSearchParams
-                {
-                    FirstName = firstName,
-                    LastName = lastName,
-                    Email = email,
-                    PhoneNumber = phoneNumber
-                }
+                FirstNameFilteringParameter = firstName,
+                LastNameFilteringParameter = lastName,
+                EmailFilteringParameter = email,
+                PhoneNumberFilteringParameter = phoneNumber
             };
         }
 
