@@ -14,15 +14,15 @@
         <form asp-controller="Products" asp-action="Table">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <input class="form-control" placeholder="Order Id" asp-for="@Model.ProductName"/>
+                    <input class="form-control" placeholder="Name" asp-for="ProductName"/>
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.ProductCategoryId" asp-items="ViewBag.ProductsCategories">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="ProductCategoryId" asp-items="ViewBag.ProductsCategories">
                         <option value="null">All categories</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.IsRecommended">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="IsRecommended">
                         <option value="null">All products</option>
                         <option value="true">Recommended</option>
                         <option value="false">Not recommended</option>
@@ -31,8 +31,8 @@
             </div>
             <div class="form-row mt-2">
                 <div class="form-group col-md-12 d-flex justify-content-end align-items-center mb-0">
-                    <input type="submit" value="Search" class="btn btn-green mr-2" />
-                    <input type="reset" value="Clear" class="btn btn-green">
+                    <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
+                    <input type="reset" onclick="resetProductsFilteringForm(event)" value="Clear" class="btn btn-green input-with-green-outline-on-focus">
                 </div>
             </div>
         </form>

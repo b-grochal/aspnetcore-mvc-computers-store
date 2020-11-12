@@ -9,3 +9,10 @@
 function submitProductsSortingForm() {
     $(".productsSortingForm").submit();
 }
+
+function resetProductsFilteringForm(e) {
+    e.preventDefault();
+    document.getElementById("ProductName").value = "";
+    document.getElementById("ProductCategoryId").selectedIndex = 0;
+    document.getElementById("IsRecommended").selectedIndex = 0;
+}

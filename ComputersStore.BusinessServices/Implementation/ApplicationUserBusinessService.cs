@@ -57,10 +57,10 @@ namespace ComputersStore.BusinessServices.Implementation
                     ItemsPerPage = pageSize,
                     TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName)
                 },
-                FirstNameFilteringParameter = firstName,
-                LastNameFilteringParameter = lastName,
-                EmailFilteringParameter = email,
-                PhoneNumberFilteringParameter = phoneNumber
+                FirstName = firstName,
+                LastName = lastName,
+                Email = email,
+                PhoneNumber = phoneNumber
             };
         }
 
