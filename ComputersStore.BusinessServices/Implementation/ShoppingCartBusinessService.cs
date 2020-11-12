@@ -11,9 +11,15 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class ShoppingCartBusinessService : IShoppingCartBusinessService
     {
+        #region Fields
+
         private readonly IProductService productsService;
         private readonly IOrderService orderService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ShoppingCartBusinessService(IProductService productsService, IOrderService orderService, IMapper mapper)
         {
@@ -21,6 +27,10 @@ namespace ComputersStore.BusinessServices.Implementation
             this.orderService = orderService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<IEnumerable<ShoppingCartItemViewModel>> GetProductsForShoppingCart(ShoppingCart shoppingCart)
         {
@@ -39,6 +49,10 @@ namespace ComputersStore.BusinessServices.Implementation
             return await orderService.CreateOrder(order);
         }
 
+        #endregion Public methods
+
+        #region Private methods
+
         private IEnumerable<ShoppingCartItemViewModel> UpdateShoppingCartItemsQuantities(IEnumerable<ShoppingCartItemViewModel> shoppingCartItemViewModels, IEnumerable<ShoppingCartItem> shoppingCartItems)
         {
             for(int i = 0; i < shoppingCartItemViewModels.Count(); i++)
@@ -47,5 +61,7 @@ namespace ComputersStore.BusinessServices.Implementation
             }
             return shoppingCartItemViewModels;
         }
+
+        #endregion Private methods
     }
 }

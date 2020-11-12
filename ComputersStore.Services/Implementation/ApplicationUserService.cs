@@ -15,12 +15,22 @@ namespace ComputersStore.Services.Implementation
 {
     public class ApplicationUserService : IApplicationUserService
     {
+        #region Fields
+
         private readonly UserManager<ApplicationUser> userManager;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ApplicationUserService(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task DeleteApplicationUser(string applicationUserId)
         {
@@ -61,5 +71,7 @@ namespace ComputersStore.Services.Implementation
             var admins = await userManager.GetUsersInRoleAsync(roleName);
             return admins.Select(a => a.Email);
         }
+
+        #endregion Public methods
     }
 }

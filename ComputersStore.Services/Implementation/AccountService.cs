@@ -10,12 +10,22 @@ namespace ComputersStore.Services.Implementation
 {
     public class AccountService : IAccountService
     {
+        #region Fields
+
         private readonly UserManager<ApplicationUser> userManager;
-        
+
+        #endregion Fields
+
+        #region Constructors
+
         public AccountService(UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task<IdentityResult> Register(ApplicationUser applicationUser)
         {
@@ -68,5 +78,7 @@ namespace ComputersStore.Services.Implementation
         {
             return await userManager.UpdateAsync(applicationUser);
         }
+
+        #endregion Public methods
     }
 }

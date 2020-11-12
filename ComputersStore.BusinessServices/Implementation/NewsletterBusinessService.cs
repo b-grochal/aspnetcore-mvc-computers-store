@@ -12,14 +12,24 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class NewsletterBusinessService : INewsletterBusinessService
     {
+        #region Fields
+
         private readonly INewsletterService newsletterService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public NewsletterBusinessService(INewsletterService newsletterService, IMapper mapper)
         {
             this.newsletterService = newsletterService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task CreateNewsletter(NewsletterSignUpFormViewModel newsletterSignUpFormViewModel)
         {
@@ -61,6 +71,8 @@ namespace ComputersStore.BusinessServices.Implementation
                 NewsletterEmail = newsletterEmail
             };
         }
+
+        #endregion Public methods
 
     }
 }

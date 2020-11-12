@@ -12,14 +12,24 @@ namespace ComputersStore.EmailHelper.Service.Implementation
 {
     public class EmailService : IEmailService
     {
+        #region Fields
+
         private readonly IEmailSender emailSender;
         private readonly IEmailMessageFactory emailMessageFactory;
+
+        #endregion Fields
+
+        #region Constructors
 
         public EmailService(IEmailSender emailSender, IEmailMessageFactory emailMessageFactory)
         {
             this.emailSender = emailSender;
             this.emailMessageFactory = emailMessageFactory;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task SendConfirmAccountEmail(string toEmailAddress, string customerFirstName, string confirmAccountEmailUrl)
         {
@@ -56,5 +66,7 @@ namespace ComputersStore.EmailHelper.Service.Implementation
             var confirmEmailAccountMessage = await emailMessageFactory.GenerateResetPasswordEmailMessage(toEmailAddress, customerFirstName, resetPasswordUrl);
             emailSender.SendEmail(confirmEmailAccountMessage);
         }
+
+        #endregion Public methods
     }
 }
