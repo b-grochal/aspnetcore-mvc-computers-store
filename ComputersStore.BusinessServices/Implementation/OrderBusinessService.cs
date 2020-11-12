@@ -13,14 +13,24 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class OrderBusinessService : IOrderBusinessService
     {
+        #region Fields
+
         private readonly IOrderService orderService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public OrderBusinessService(IOrderService orderService, IMapper mapper)
         {
             this.orderService = orderService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task DeleteOrder(int orderId)
         {
@@ -102,5 +112,7 @@ namespace ComputersStore.BusinessServices.Implementation
         {
             await orderService.UpdateOrderStatus(orderId, newOrderStatusId);
         }
+
+        #endregion Public methods
     }
 }

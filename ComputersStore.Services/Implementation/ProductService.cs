@@ -14,12 +14,22 @@ namespace ComputersStore.Services.Implementation
 {
     public class ProductService : IProductService
     {
+        #region Fields
+
         private readonly ApplicationDbContext applicationDbContext;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ProductService(ApplicationDbContext applicationDbContext)
         {
             this.applicationDbContext = applicationDbContext;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task CreateProduct(Product product)
         {
@@ -97,5 +107,7 @@ namespace ComputersStore.Services.Implementation
                 .Where(p => isRecommended == null || p.IsRecommended == isRecommended)
                 .ToListAsync();
         }
+
+        #endregion Public methods
     }
 }

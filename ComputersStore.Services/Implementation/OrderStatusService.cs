@@ -12,16 +12,28 @@ namespace ComputersStore.Services.Implementation
 {
     public class OrderStatusService : IOrderStatusService
     {
+        #region Fields
+
         private readonly ApplicationDbContext applicatioDbContext;
+
+        #endregion Fields
+
+        #region Constructors
 
         public OrderStatusService(ApplicationDbContext applicatioDbContext)
         {
             this.applicatioDbContext = applicatioDbContext;
         }
 
+        #endregion Constructors
+
+        #region Public methods
+
         public async Task<IEnumerable<OrderStatus>> GetOrderStatusesCollection()
         {
              return await applicatioDbContext.OrderStatuses.ToListAsync();
         }
+
+        #endregion Public methods
     }
 }

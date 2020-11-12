@@ -26,14 +26,24 @@ namespace ComputersStore.BusinessServices.Implementation
 {
     public class ProductBusinessService : IProductBusinessService
     {
+        #region Fields
+
         private readonly IProductService productService;
         private readonly IMapper mapper;
+
+        #endregion Fields
+
+        #region Constructors
 
         public ProductBusinessService(IProductService productService, IMapper mapper)
         {
             this.productService = productService;
             this.mapper = mapper;
         }
+
+        #endregion Constructors
+
+        #region Public methods
 
         public async Task CreateProduct(ProductCreateFormViewModel newProductViewModel)
         {
@@ -137,6 +147,10 @@ namespace ComputersStore.BusinessServices.Implementation
             };
         }
 
+        #endregion Public methods
+
+        #region Private methods
+
         private Product MapNewProductViewModelToSpecificProduct(ProductCreateFormViewModel newProduct)
         {
             return newProduct.ProductCategoryId switch
@@ -196,5 +210,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 _ => null,
             };
         }
+
+        #endregion Private methods
     }
 }
