@@ -10,9 +10,9 @@ namespace ComputersStore.Models.ViewModels.ApplicationUser.Complex
     {
         public IEnumerable<ApplicationUserViewModel> ApplicationUsers { get; set; }
         public PaginationViewModel PaginationViewModel { get; set; }
-        public string FirstNameFilteringParameter { get; set; }
-        public string LastNameFilteringParameter { get; set; }
-        public string EmailFilteringParameter { get; set; }
-        public string PhoneNumberFilteringParameter { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
 }
 }
