@@ -1,4 +1,4 @@
-﻿@model ProductsTableViewModel
+﻿@model ProductsFilteredCollectionViewModel
 @{
     ViewData["Title"] = "Table";
 }
@@ -14,15 +14,15 @@
         <form asp-controller="Products" asp-action="Table">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <input name="ProductName" class="form-control" placeholder="Order Id" value="@Model.ProductsTableSearchCriteria.ProductName" type="number" />
+                    <input class="form-control" placeholder="Order Id" asp-for="@Model.ProductName"/>
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <select class="form-control input-with-green-outline-on-focus" name="ProductCategoryId" asp-for="@Model.ProductsTableSearchCriteria.ProductCategoryId" asp-items="ViewBag.ProductsCategories">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.ProductCategoryId" asp-items="ViewBag.ProductsCategories">
                         <option value="null">All categories</option>
                     </select>
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <select class="form-control input-with-green-outline-on-focus" name="IsRecommended">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="@Model.IsRecommended">
                         <option value="null">All products</option>
                         <option value="true">Recommended</option>
                         <option value="false">Not recommended</option>
@@ -81,8 +81,8 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-productName="@Model.ProductsTableSearchCriteria.ProductName"
-                              page-url-productCategoryId="@Model.ProductsTableSearchCriteria.ProductCategoryId" page-url-isRecommended="@Model.ProductsTableSearchCriteria.IsRecommended">
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-productName="@Model.ProductName"
+                              page-url-productCategoryId="@Model.ProductCategoryId" page-url-isRecommended="@Model.IsRecommended">
             </pagination-links>
         }
     </div>

@@ -46,7 +46,7 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<ActionResult> List(int productCategoryId, int pageNumber = 1, string sortOrder = null)
         {
             var products = await productBusinessService.GetProductsCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
-            var productsListViewModel = new ProductsListViewModel
+            var productsListViewModel = new ProductsCollectionViewModel
             {
                 Products = products,
                 PaginationViewModel = new PaginationViewModel
@@ -79,7 +79,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Table
         public async Task<IActionResult> Table(int? productCategoryId, string productName, bool? isRecommended, int pageNumber = 1)
         {
-            var productsTableViewModel = await productBusinessService.GetProductsCollectionForTable(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
+            var productsTableViewModel = await productBusinessService.GetProductsFilteredCollection(productCategoryId, productName, isRecommended, pageNumber, productsPerPage);
             await PassProductsCategoriesSelectListToView(productCategoryId);
             return View(productsTableViewModel);
         }
@@ -119,7 +119,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var productEditFormViewModel = await productBusinessService.GetProductForUpdate(id);
+            var productEditFormViewModel = await productBusinessService.GetProductEditData(id);
             if (productEditFormViewModel == null)
             {
                 return NotFound();
@@ -177,7 +177,7 @@ namespace ComputersStore.WebUI.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SearchProducts(string searchString)
         {
-            var searchedProductsCollectionViewModel = await productBusinessService.GetSearchedProductsCollection(searchString);
+            var searchedProductsCollectionViewModel = await productBusinessService.GetProductsSearchedCollection(searchString);
             return View(searchedProductsCollectionViewModel);
         }
 
