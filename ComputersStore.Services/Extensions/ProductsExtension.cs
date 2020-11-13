@@ -20,5 +20,11 @@ namespace ComputersStore.Services.Extensions
                     return source.OrderBy(p => p.ProductId);
             }
         }
+
+        public static IEnumerable<Product> Randomize(this IEnumerable<Product> source)
+        {
+            Random rnd = new Random();
+            return source.OrderBy((item) => rnd.Next());
+        }
     }
 }
