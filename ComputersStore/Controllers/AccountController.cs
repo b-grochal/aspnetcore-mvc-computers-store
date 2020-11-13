@@ -301,6 +301,11 @@ namespace ComputersStore.Controllers
             return View();
         }
 
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+
         #endregion Actions
 
         #region Helpers
