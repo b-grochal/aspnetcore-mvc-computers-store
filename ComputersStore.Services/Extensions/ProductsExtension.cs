@@ -10,15 +10,18 @@ namespace ComputersStore.Services.Extensions
     {
         public static IQueryable<Product> Sort(this IQueryable<Product> source, string sortOrder)
         {
-            switch(sortOrder)
+            return sortOrder switch
             {
-                case "Price ASC":
-                    return source.OrderBy(p => p.Price);
-                case "Price DSC":
-                    return source.OrderByDescending(p => p.Price);
-                default:
-                    return source.OrderBy(p => p.ProductId);
-            }
+                "Price ASC" => source.OrderBy(p => p.Price),
+                "Price DSC" => source.OrderByDescending(p => p.Price),
+                _ => source.OrderBy(p => p.ProductId),
+            };
+        }
+
+        public static IEnumerable<Product> Randomize(this IEnumerable<Product> source)
+        {
+            Random rnd = new Random();
+            return source.OrderBy((item) => rnd.Next());
         }
     }
 }

@@ -77,10 +77,13 @@ namespace ComputersStore.Services.Implementation
 
         public async Task<IEnumerable<Product>> GetRecommendedProductsCollection(int numberOfProducts)
         {
-            return await applicationDbContext.Products
+            var recommendedProducts = await applicationDbContext.Products
                 .Where(x => x.IsRecommended == true)
-                .Take(numberOfProducts)
                 .ToListAsync();
+
+            return recommendedProducts
+                .Randomize()
+                .Take(numberOfProducts);
         }
 
         public async Task UpdateProduct(Product product)
