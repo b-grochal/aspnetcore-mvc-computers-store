@@ -130,7 +130,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            //await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
+            await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
             return PartialView("~/Views/Orders/Modals/_ChangeOrderStatusModal.cshtml" ,order);
         }
 
@@ -141,6 +141,7 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> ChangeStatus(int id, int orderStatusId)
         {
             await orderBusinessService.UpdateOrderStatus(id, orderStatusId);
+            await SendOrderStatusChangedEmail(id);
             return Json( new { success = true });
         }
 

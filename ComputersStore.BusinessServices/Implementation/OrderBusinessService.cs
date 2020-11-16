@@ -51,7 +51,7 @@ namespace ComputersStore.BusinessServices.Implementation
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),
-                OrderItemsViewModel = mapper.Map<OrderItemViewModel[]>(order.OrderItems)
+                OrderItemsViewModel = mapper.Map<IEnumerable<OrderItemViewModel>>(order.OrderItems)
             };
             return result;
         }
@@ -86,7 +86,7 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<OrdersFilteredCollectionViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage)
         {
-            var orders = await orderService.GetApplicationUserOrdersCollection(applicationUserId);
+            var orders = await orderService.GetOrdersCollection(applicationUserId);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
             var result = new OrdersFilteredCollectionViewModel
             {

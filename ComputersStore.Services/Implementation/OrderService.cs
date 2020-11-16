@@ -61,7 +61,7 @@ namespace ComputersStore.Services.Implementation
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Order>> GetApplicationUserOrdersCollection(string applicationUserId)
+        public async Task<IEnumerable<Order>> GetOrdersCollection(string applicationUserId)
         {
             return await applicationDbContext.Orders
                 .Where(o => o.ApplicationUserId == applicationUserId)
