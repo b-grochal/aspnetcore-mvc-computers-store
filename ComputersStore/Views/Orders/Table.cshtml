@@ -33,8 +33,8 @@
                     <input class="form-control input-with-green-outline-on-focus" placeholder="Customer email" asp-for="ApplicationUserEmail" />
                 </div>
                 <div class="form-group col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
-                    <input type="submit" value="Search" class="btn btn-green mr-2" />
-                    <input onclick="resetOrdersFilteringForm(event)" type="reset" value="Clear" class="btn btn-green" >
+                    <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
+                    <input onclick="resetOrdersFilteringForm(event)" type="reset" value="Clear" class="btn btn-green input-with-green-outline-on-focus" >
                 </div>
             </div>
         </form>
@@ -94,7 +94,7 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-orderId="@Model.OrderId"
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-orderId="@Model.OrderId"
                               page-url-orderStatusId="@Model.OrderStatusId" page-url-paymentTypeId="@Model.PaymentTypeId"
                               page-url-applicationUserEmail="@Model.ApplicationUserEmail">
             </pagination-links>
