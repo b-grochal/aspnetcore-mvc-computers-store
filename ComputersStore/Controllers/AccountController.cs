@@ -27,7 +27,6 @@ namespace ComputersStore.Controllers
         private readonly IApplicationUserBusinessService applicationUserBusinessService;
         private readonly IOrderBusinessService orderBusinessService;
         private readonly IEmailService emailMessagesService;
-        private readonly int ordersPerPage = 5;
 
         #endregion Fields
 
@@ -267,7 +266,7 @@ namespace ComputersStore.Controllers
 
         // GET: Account/Orders
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
-        public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
+        public async Task<IActionResult> ApplicationUserOrders()
         {
             var orders = await orderBusinessService.GetOrdersCollection(GetCurrentApplicationUserId());
             return View(orders);
