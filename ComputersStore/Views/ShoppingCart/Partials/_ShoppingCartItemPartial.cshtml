@@ -12,7 +12,7 @@
     </div>
     <div class="col-12 col-md-2 d-flex justify-content-end align-items-center">
         <form asp-controller="ShoppingCart" asp-action="RemoveProductFromShoppingCart" type="post">
-            <input hidden name="ProductId" value="@Model.ProductId"/>
+            <input hidden asp-for="ProductId"/>
             <button type="submit" class="btn btn-sm btn-green mb-1 input-with-green-outline-on-focus">Remove</button>
         </form>
     </div>
