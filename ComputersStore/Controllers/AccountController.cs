@@ -344,7 +344,7 @@ namespace ComputersStore.Controllers
         {
             var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
             var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection(ApplicationUserRoleDictionary.Admin);
-            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName}", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
+            await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName} ({customer.Email})", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
 
         #endregion Helpers
