@@ -84,19 +84,13 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrdersFilteredCollectionViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersCollectionViewModel> GetOrdersCollection(string applicationUserId)
         {
             var orders = await orderService.GetOrdersCollection(applicationUserId);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
-            var result = new OrdersFilteredCollectionViewModel
+            var result = new OrdersCollectionViewModel
             {
-                Orders = mappedOrders,
-                PaginationViewModel = new PaginationViewModel
-                {
-                    CurrentPage = pageNumber,
-                    ItemsPerPage = ordersPerPage,
-                    TotalItems = mappedOrders.Count()
-                }
+                Orders = mappedOrders
             };
             return result;
         }
