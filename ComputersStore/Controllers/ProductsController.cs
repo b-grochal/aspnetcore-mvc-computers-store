@@ -45,20 +45,8 @@ namespace ComputersStore.WebUI.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> List(int productCategoryId, int pageNumber = 1, string sortOrder = null)
         {
-            var products = await productBusinessService.GetProductsCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
-            var productsListViewModel = new ProductsCollectionViewModel
-            {
-                Products = products,
-                PaginationViewModel = new PaginationViewModel
-                {
-                    CurrentPage = pageNumber,
-                    ItemsPerPage = productsPerPage,
-                    TotalItems = productBusinessService.GetProductsCollectionCount(productCategoryId),
-                },
-                ProductCategoryId = productCategoryId,
-                SortOrder = sortOrder
-            };
-            return View(productsListViewModel);
+            var productsCollectionViewModel = await productBusinessService.GetProductsCollection(productCategoryId, sortOrder, pageNumber, productsPerPage);
+            return View(productsCollectionViewModel);
         }
 
         // GET: Products/ChooseNewProductCategory
