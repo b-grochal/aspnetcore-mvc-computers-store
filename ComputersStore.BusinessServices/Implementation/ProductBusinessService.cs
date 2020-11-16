@@ -56,11 +56,22 @@ namespace ComputersStore.BusinessServices.Implementation
             await productService.DeleteProduct(productId);
         }
 
-        public async Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
+        public async Task<ProductsCollectionViewModel> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize)
         {
             var products = await productService.GetProductsCollection(productCategroryId, sortOrder, pageNumber, pageSize);
-            var result = mapper.Map<IEnumerable<ProductViewModel>>(products);
-            return result;
+            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
+            return new ProductsCollectionViewModel
+            {
+                Products = mappedProducts,
+                PaginationViewModel = new PaginationViewModel
+                {
+                    CurrentPage = pageNumber,
+                    ItemsPerPage = pageSize,
+                    TotalItems = productService.GetProductsCollectionCount(productCategroryId)
+                },
+                SortOrder = sortOrder,
+                ProductCategoryId = productCategroryId
+            };
         }
 
         public int GetProductsCollectionCount(int productCategoryId)

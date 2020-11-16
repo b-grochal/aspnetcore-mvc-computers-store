@@ -7,7 +7,7 @@ namespace ComputersStore.BusinessServices.Interfaces
 {
     public interface IProductBusinessService
     {
-        Task<IEnumerable<ProductViewModel>> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
+        Task<ProductsCollectionViewModel> GetProductsCollection(int productCategroryId, string sortOrder, int pageNumber, int pageSize);
         Task<ProductDetailsViewModel> GetProductDetails(int productId);
         Task<ProductEditFormViewModel> GetProductEditData(int productId);
         Task CreateProduct(ProductCreateFormViewModel product);
