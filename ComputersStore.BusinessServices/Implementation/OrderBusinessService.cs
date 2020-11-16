@@ -74,7 +74,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = mappedOrders.Count()
+                    TotalItems = await orderService.GetOrdersCollectionCount(orderId, orderStatusId, paymentTypeId, applicationUserEmail)
                 },
                 OrderId = orderId,
                 OrderStatusId = orderStatusId,

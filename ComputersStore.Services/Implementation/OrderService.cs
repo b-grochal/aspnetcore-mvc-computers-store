@@ -68,6 +68,16 @@ namespace ComputersStore.Services.Implementation
                 .ToListAsync();
         }
 
+        public async Task<int> GetOrdersCollectionCount(int? orderId, int? orderStatusId, int? paymentTypeId, string userEmail)
+        {
+            return await applicationDbContext.Orders
+              .Where(o => orderId == null || o.OrderId == orderId)
+              .Where(o => orderStatusId == null || o.OrderStatusId == orderStatusId)
+              .Where(o => paymentTypeId == null || o.PaymentTypeId == paymentTypeId)
+              .Where(o => userEmail == null || o.ApplicationUser.Email == userEmail)
+              .CountAsync();
+        }
+
         public async Task UpdateOrder(Order order)
         {
             applicationDbContext.Orders.Update(order);
