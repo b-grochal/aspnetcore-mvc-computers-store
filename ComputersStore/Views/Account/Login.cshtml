@@ -27,7 +27,6 @@
                     <div class="custom-control custom-checkbox">
                         <input class="custom-control-input custom-control-input-green" asp-for="RememberMe" />
                         <label class="custom-control-label" asp-for="RememberMe">
-
                             @Html.DisplayNameFor(m => m.RememberMe)
                         </label>
                     </div>
@@ -42,7 +41,7 @@
     <div class="col-12 col-sm-6 align-items-center align-items-sm-stretch bg-light-ashen d-flex justify-content-center registration-column">
         <div class="w-50">
             <h4 class="text-center text-black mb-5">Is this your first visit?</h4>
-            <button class="btn create-account-btn w-100 input-with-green-outline-on-focus">Create account</button>
+            <a class="btn create-account-btn w-100 input-with-green-outline-on-focus" asp-controller="Account" asp-action="Register">Create account</a>
         </div>
     </div>
 </div>
