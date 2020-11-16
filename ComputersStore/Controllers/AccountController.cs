@@ -205,7 +205,7 @@ namespace ComputersStore.Controllers
             {
                 return View(model);
             }
-            var applicationUserId = GetCurrentUserId();
+            var applicationUserId = GetCurrentApplicationUserId();
             if (applicationUserId != null)
             {
                 var result = await accountBusinessService.ChangePassword(model, applicationUserId);
@@ -230,7 +230,7 @@ namespace ComputersStore.Controllers
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> UpdateAccountData()
         {
-            var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentUserId());
+            var accountData = await accountBusinessService.GetApplicationUserAccountData(GetCurrentApplicationUserId());
             return View(accountData);
         }
 
@@ -244,7 +244,7 @@ namespace ComputersStore.Controllers
             {
                 return View(model);
             }
-            var applicationUserId = GetCurrentUserId();
+            var applicationUserId = GetCurrentApplicationUserId();
             if (applicationUserId != null)
             {
                 var result = await accountBusinessService.UpdateAccountData(model, applicationUserId);
@@ -269,7 +269,7 @@ namespace ComputersStore.Controllers
         [Authorize(Roles = ApplicationUserRoleDictionary.Customer)]
         public async Task<IActionResult> ApplicationUserOrders(int pageNumber = 1)
         {
-            var orders = await orderBusinessService.GetApplicationUserOrders(GetCurrentUserId(), pageNumber, ordersPerPage, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersCollection(GetCurrentApplicationUserId());
             return View(orders);
         }
 
@@ -319,7 +319,7 @@ namespace ComputersStore.Controllers
             }
         }
 
-        private string GetCurrentUserId()
+        private string GetCurrentApplicationUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier);
         }
@@ -342,7 +342,7 @@ namespace ComputersStore.Controllers
 
         private async Task SendCustomerQuestionEmail(EmailMessageFormViewModel emailMessageFormViewModel)
         {
-            var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentUserId());
+            var customer = await applicationUserBusinessService.GetApplicationUserById(GetCurrentApplicationUserId());
             var adminsEmailAddressesCollection = await applicationUserBusinessService.GetApplicationUsersEmailsCollection(ApplicationUserRoleDictionary.Admin);
             await emailMessagesService.SendCustomerQuestionEmail(adminsEmailAddressesCollection, $"{customer.FirstName} {customer.LastName} ({customer.Email})", emailMessageFormViewModel.Title, emailMessageFormViewModel.Content);
         }
