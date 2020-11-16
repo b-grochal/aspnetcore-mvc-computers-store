@@ -1,4 +1,5 @@
-﻿using ComputersStore.Data.Entities;
+﻿using ComputersStore.Data.Dictionaries;
+using ComputersStore.Data.Entities;
 using ComputersStore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -27,9 +28,15 @@ namespace ComputersStore.Services.Implementation
 
         #region Public methods
 
-        public async Task<IdentityResult> Register(ApplicationUser applicationUser)
+        public async Task<IdentityResult> Register(ApplicationUser applicationUser, string password)
         {
-            return await userManager.CreateAsync(applicationUser); 
+            applicationUser.PasswordHash = userManager.PasswordHasher.HashPassword(applicationUser, password);
+            var identityResult =  await userManager.CreateAsync(applicationUser);
+            if (identityResult.Succeeded)
+            {
+                await userManager.AddToRoleAsync(applicationUser, ApplicationUserRoleDictionary.Customer);
+            }
+            return identityResult;
         }
 
         public async Task<IdentityResult> ConfirmEmail(string applicationUserId, string code)

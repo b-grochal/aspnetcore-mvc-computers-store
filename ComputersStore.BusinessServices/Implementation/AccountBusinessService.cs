@@ -57,7 +57,7 @@ namespace ComputersStore.BusinessServices.Implementation
         public async Task<IdentityResult> Register(RegisterViewModel registerViewModel)
         {
             var applicationUser = mapper.Map<ApplicationUser>(registerViewModel);
-            var result = await accountService.Register(applicationUser);
+            var result = await accountService.Register(applicationUser, registerViewModel.Password);
             return result; 
         }
 
