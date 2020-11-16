@@ -63,7 +63,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrdersFilteredCollectionViewModel> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersFilteredCollectionViewModel> GetOrdersFilteredCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
         {
             var orders = await orderService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, pageSize);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);

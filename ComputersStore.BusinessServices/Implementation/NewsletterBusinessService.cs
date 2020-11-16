@@ -54,7 +54,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<NewslettersFilteredCollectionViewModel> GetNewslletersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
+        public async Task<NewslettersFilteredCollectionViewModel> GetNewslletersFilteredCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize)
         {
             var newsletters = await newsletterService.GetNewslettersCollection(newsletterId, newsletterEmail, pageNumber, pageSize);
             var result = mapper.Map<IEnumerable<NewsletterViewModel>>(newsletters);

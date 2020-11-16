@@ -44,7 +44,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<ApplicationUsersFilteredCollectionViewModel> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
+        public async Task<ApplicationUsersFilteredCollectionViewModel> GetApplicationUsersFilteredCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize)
         {
             var applicationUsers = await applicationUserService.GetApplicationUsersCollection(roleName, firstName, lastName, email, phoneNumber, pageNumber, pageSize);
             var applicationUsersViewModels = mapper.Map<IEnumerable<ApplicationUserViewModel>>(applicationUsers);
