@@ -13,7 +13,7 @@ namespace ComputersStore.Services.Interfaces
         Task<int> CreateOrder(Order order);
         Task UpdateOrder(Order order);
         Task DeleteOrder(int orderId);
-        Task<IEnumerable<Order>> GetApplicationUserOrdersCollection(string applicationUserId);
+        Task<IEnumerable<Order>> GetOrdersCollection(string applicationUserId);
         Task UpdateOrderStatus(int orderId, int newOrderStatusId);
     }
 }
