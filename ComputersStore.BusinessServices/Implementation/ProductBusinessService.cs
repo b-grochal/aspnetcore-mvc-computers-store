@@ -67,16 +67,11 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = productService.GetProductsCollectionCount(productCategroryId)
+                    TotalItems = await productService.GetProductsCollectionCount(productCategroryId)
                 },
                 SortOrder = sortOrder,
                 ProductCategoryId = productCategroryId
             };
-        }
-
-        public int GetProductsCollectionCount(int productCategoryId)
-        {
-            return productService.GetProductsCollectionCount(productCategoryId);
         }
 
         public async Task<ProductDetailsViewModel> GetProductDetails(int productId)
@@ -115,19 +110,18 @@ namespace ComputersStore.BusinessServices.Implementation
 
         public async Task<ProductsSearchedCollectionViewModel> GetProductsSearchedCollection(string searchString)
         {
-            var searchedProducts = await productService.GetSearchedProductsCollection(searchString);
-            var result = new ProductsSearchedCollectionViewModel
+            var searchedProducts = await productService.GetProductsCollection(searchString);
+            return new ProductsSearchedCollectionViewModel
             {
                 Products = mapper.Map<IEnumerable<ProductViewModel>>(searchedProducts),
                 SearchString = searchString
             };
-            return result;
         }
 
         public async Task<ProductsFilteredCollectionViewModel> GetProductsFilteredCollection(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
         {
-            var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended);
-            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products.Skip((pageNumber - 1) * pageSize).Take(pageSize));
+            var products = await productService.GetProductsCollection(productCategoryId, productName, isRecommended, pageNumber, pageSize);
+            var mappedProducts = mapper.Map<IEnumerable<ProductViewModel>>(products);
             return new ProductsFilteredCollectionViewModel
             {
                 Products = mappedProducts,
@@ -135,7 +129,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = products.Count()
+                    TotalItems = await productService.GetProductsCollectionCount(productCategoryId, productName, isRecommended)
                 },
                 ProductCategoryId = productCategoryId,
                 ProductName = productName,
