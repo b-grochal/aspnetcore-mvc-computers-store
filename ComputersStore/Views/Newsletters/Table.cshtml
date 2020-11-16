@@ -68,7 +68,7 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-newsletterId="@Model.NewsletterId" 
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-newsletterId="@Model.NewsletterId" 
                               page-url-newsletterEmail="@Model.NewsletterEmail">
             </pagination-links>
         }

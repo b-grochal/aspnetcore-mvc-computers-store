@@ -111,7 +111,7 @@ namespace ComputersStore.WebUI.Controllers
             if (ModelState.IsValid)
             {
                 await productBusinessService.CreateProduct(newProductViewModel);
-                return RedirectToAction(nameof(List));
+                return RedirectToAction(nameof(Table));
             }
             return View(newProductViewModel);
         }

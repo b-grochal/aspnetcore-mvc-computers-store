@@ -12,7 +12,7 @@ namespace ComputersStore.Services.Interfaces
         Task DeleteNewsletter(int newsletterId);
         Task<IEnumerable<Newsletter>> GetNewslettersCollection(int? newsletterId, string newsletterEmail, int pageNumber, int pageSize);
         Task<Newsletter> GetNewsletter(int newsletterId);
-        int GetNewslettersCollectionCount();
+        int GetNewslettersCollectionCount(int? newsletterId, string newsletterEmail);
         Task<IEnumerable<string>> GetNewslettersEmailsCollection();
     }
 }

@@ -58,9 +58,11 @@ namespace ComputersStore.Services.Implementation
                 .ToListAsync();
         }
 
-        public int GetNewslettersCollectionCount()
+        public int GetNewslettersCollectionCount(int? newsletterId, string newsletterEmail)
         {
             return applicationDbContext.Newsletters
+                .Where(n => newsletterId == null || n.NewsletterId == newsletterId)
+                .Where(n => newsletterEmail == null || n.Email == newsletterEmail)
                 .Count();
         }
 

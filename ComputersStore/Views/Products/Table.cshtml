@@ -14,7 +14,7 @@
         <form asp-controller="Products" asp-action="Table">
             <div class="form-row">
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
-                    <input class="form-control" placeholder="Name" asp-for="ProductName"/>
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Name" asp-for="ProductName"/>
                 </div>
                 <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-0">
                     <select class="form-control input-with-green-outline-on-focus" asp-for="ProductCategoryId" asp-items="ViewBag.ProductsCategories">
@@ -59,9 +59,9 @@
                             <td scope="col">@product.Price</td>
                             <td scope="col">@product.IsRecommended</td>
                             <td scope="col" class="text-right">
-                                <a class="btn btn-sm btn-green mr-2" asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">Details</a>
-                                <a class="btn btn-sm btn-green mr-2" asp-controller="Products" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
-                                <btn class="btn btn-sm btn-green modalButton"
+                                <a class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus" asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId">Details</a>
+                                <a class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus" asp-controller="Products" asp-action="Edit" asp-route-id="@product.ProductId">Edit</a>
+                                <btn class="btn btn-sm btn-green modalButton input-with-green-outline-on-focus"
                                      type="button"
                                      data-toggle="ajax-modal"
                                      data-target="#deleteProduct"

@@ -65,7 +65,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = newsletterService.GetNewslettersCollectionCount()
+                    TotalItems = newsletterService.GetNewslettersCollectionCount(newsletterId, newsletterEmail)
                 },
                 NewsletterId = newsletterId,
                 NewsletterEmail = newsletterEmail
