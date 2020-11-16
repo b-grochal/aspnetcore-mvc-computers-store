@@ -60,10 +60,15 @@ namespace ComputersStore.Services.Implementation
                 .Take(pageSize);
         }
 
-        public async Task<int> GetApplicationUsersCollectionCount(string roleName)
+        public async Task<int> GetApplicationUsersCollectionCount(string roleName, string firstName, string lastName, string email, string phoneNumber)
         {
             var users = await userManager.GetUsersInRoleAsync(roleName);
-            return users.Count();
+            return users
+                .Where(u => firstName == null || u.FirstName == firstName)
+                .Where(u => lastName == null || u.LastName == lastName)
+                .Where(u => email == null || u.Email == email)
+                .Where(u => phoneNumber == null || u.PhoneNumber == phoneNumber)
+                .Count();
         }
 
         public async Task<IEnumerable<string>> GetApplicationUsersEmailsCollection(string roleName)

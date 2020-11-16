@@ -13,7 +13,7 @@ namespace ComputersStore.Services.Interfaces
         Task<ApplicationUser> GetApplicationUserById(string applicationUserId);
         Task<ApplicationUser> GetApplicationUserByEmail(string applicationUserEmail);
         Task<IEnumerable<ApplicationUser>> GetApplicationUsersCollection(string roleName, string firstName, string lastName, string email, string phoneNumber, int pageNumber, int pageSize);
-        Task<int> GetApplicationUsersCollectionCount(string roleName);
+        Task<int> GetApplicationUsersCollectionCount(string roleName, string firstName, string lastName, string email, string phoneNumber);
         Task<IEnumerable<string>> GetApplicationUsersEmailsCollection(string roleName); 
     }
 }

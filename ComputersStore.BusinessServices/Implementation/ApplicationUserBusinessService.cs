@@ -55,7 +55,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName)
+                    TotalItems = await applicationUserService.GetApplicationUsersCollectionCount(roleName, firstName, lastName, email, phoneNumber)
                 },
                 FirstName = firstName,
                 LastName = lastName,
