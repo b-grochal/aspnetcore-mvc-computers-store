@@ -59,8 +59,8 @@
                             <td scope="col">@applicationUser.PhoneNumber</td>
                             <td scope="col" class="text-right">
                                 <div class="table-actions-btns-container">
-                                    <a class="btn btn-sm btn-green mr-2" asp-controller="ApplicationUsers" asp-action="Details" asp-route-id="@applicationUser.ApplicationUserId">Details</a>
-                                    <btn class="btn btn-sm btn-green modalButton"
+                                    <a class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus" asp-controller="ApplicationUsers" asp-action="Details" asp-route-id="@applicationUser.ApplicationUserId">Details</a>
+                                    <btn class="btn btn-sm btn-green modalButton input-with-green-outline-on-focus"
                                          type="button"
                                          data-toggle="ajax-modal"
                                          data-target="#deleteApplicationUser"
@@ -82,7 +82,7 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-firstName="@Model.FirstName"
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-firstName="@Model.FirstName"
                               page-url-lastName="@Model.LastName" page-url-email="@Model.Email" 
                               page-url-phoneNumber="@Model.PhoneNumber">
             </pagination-links>
