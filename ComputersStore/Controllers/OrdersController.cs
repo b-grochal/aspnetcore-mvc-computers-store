@@ -51,7 +51,7 @@ namespace ComputersStore.WebUI.Controllers
         [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> Table(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber = 1)
         {
-            var orders = await orderBusinessService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersFilteredCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
             await PopulateUpdateFormSelectElements(orderStatusId, paymentTypeId);
             return View(orders);
         }
