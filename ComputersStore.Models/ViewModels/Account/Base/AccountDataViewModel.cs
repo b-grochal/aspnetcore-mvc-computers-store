@@ -13,7 +13,7 @@ namespace ComputersStore.Models.ViewModels.Account.Base
         
         [Required]
         [Display(Name = "Last name")]
-        public string SecondName { get; set; }
+        public string LastName { get; set; }
         
         [Required]
         [EmailAddress]
