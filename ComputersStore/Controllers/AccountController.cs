@@ -93,7 +93,7 @@ namespace ComputersStore.Controllers
                 if (result.Succeeded)
                 {
                     await SendAccountConfirmationEmail(model.Email);
-                    return RedirectToAction(nameof(Login));
+                    return RedirectToAction(nameof(RegisterConfirmation));
                 }
                 AddErrors(result);
             }
