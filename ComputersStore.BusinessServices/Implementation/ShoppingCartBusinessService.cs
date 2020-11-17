@@ -38,7 +38,7 @@ namespace ComputersStore.BusinessServices.Implementation
             
             return new ShoppingCartViewModel
             {
-                shoppingCartItems = await PrepareShoppingCartItemsData(shoppingCart.GetShoppingCartItems())
+                ShoppingCartItems = await PrepareShoppingCartItemsData(shoppingCart.GetShoppingCartItems())
             };
         }
 

@@ -1,21 +1,21 @@
-﻿@model IEnumerable<ShoppingCartItemViewModel>
+﻿@model ShoppingCartViewModel
 @{
     ViewData["Title"] = "Shopping cart summary";
 }
 
-@if (Model.Count() > 0)
+@if (Model.ShoppingCartItems.Count() > 0)
 {
     <h3 class="mb-4">Your shopping cart:</h3>
     <div class="row no-gutters mb-2">
         <div class="col">
-            @foreach (var shoppingCartItem in Model)
+            @foreach (var shoppingCartItem in Model.ShoppingCartItems)
             {
                 <partial name="~/Views/ShoppingCart/Partials/_ShoppingCartItemPartial.cshtml" model="shoppingCartItem" />
             }
         </div>
     </div>
     <div class="row d-flex justify-content-end no-gutters mb-2">
-        <p class="mb-0"><span class="font-weight-bold">Total cost:</span> @Model.Sum(x => x.ProductPrice * x.Quantity)</p>
+        <p class="mb-0"><span class="font-weight-bold">Total cost:</span> @Html.DisplayFor(m => m.ShoppingCartTotalCost)</p>
     </div>
     <div class="row d-flex justify-content-end no-gutters">
         <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="ShoppingCart" asp-action="SubmitOrder">Submit order</a>
