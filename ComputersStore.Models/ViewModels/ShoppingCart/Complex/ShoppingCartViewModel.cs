@@ -9,13 +9,13 @@ namespace ComputersStore.Models.ViewModels.ShoppingCart.Complex
 {
     public class ShoppingCartViewModel
     {
-        public IEnumerable<ShoppingCartItemViewModel> shoppingCartItems { get; set; }
+        public IEnumerable<ShoppingCartItemViewModel> ShoppingCartItems { get; set; }
 
         [DataType(DataType.Currency)]
         public decimal ShoppingCartTotalCost 
         {   get
             {
-                return shoppingCartItems.Sum(x => x.ProductPrice * x.Quantity);
+                return ShoppingCartItems.Sum(x => x.ProductPrice * x.Quantity);
             }
         }
     }

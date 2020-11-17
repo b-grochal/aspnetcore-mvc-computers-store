@@ -48,7 +48,11 @@ namespace ComputersStore.Services.Implementation
         public async Task<bool> IsEmailConfirmed(string applicationUserEmail)
         {
             var applicationUser = await userManager.FindByEmailAsync(applicationUserEmail);
-            return (applicationUser == null || !(await userManager.IsEmailConfirmedAsync(applicationUser)));
+            if(applicationUser != null)
+            {
+                return await userManager.IsEmailConfirmedAsync(applicationUser);
+            }
+            return false;
         }
 
         public async Task<IdentityResult> ResetPassword(string applicationUserEmail, string code, string password)

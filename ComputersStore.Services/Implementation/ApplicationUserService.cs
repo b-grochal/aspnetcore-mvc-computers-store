@@ -35,10 +35,7 @@ namespace ComputersStore.Services.Implementation
         public async Task DeleteApplicationUser(string applicationUserId)
         {
             var applicationUser = await userManager.FindByIdAsync(applicationUserId);
-            if(applicationUser != null)
-            {
-                var result = await userManager.DeleteAsync(applicationUser);
-            }
+            await userManager.DeleteAsync(applicationUser);
         }
 
         public async Task<ApplicationUser> GetApplicationUserById(string applicationUserId)

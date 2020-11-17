@@ -11,8 +11,8 @@
     <div class="col-12 col-md-8 d-flex flex-column justify-content-between">
         <div>
             <h2>@Html.DisplayFor(model => model.Name)</h2>
-            <p>@Model.Description</p>
-            <p>@Model.Price</p>
+            <p>@Html.DisplayFor(model => model.Description)</p>
+            <p>@Html.DisplayFor(model => model.Price)</p>
         </div>
         @if (User.IsInRole("Admin"))
         {
