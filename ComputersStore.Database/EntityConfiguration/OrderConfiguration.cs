@@ -15,6 +15,11 @@ namespace ComputersStore.Database.EntityConfiguration
 
             builder.Property(o => o.TotalCost)
                 .HasColumnType("decimal(18,2)");
+
+            builder.HasOne(o => o.ApplicationUser)
+                .WithMany(a => a.Orders)
+                .HasForeignKey(o => o.ApplicationUserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
