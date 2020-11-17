@@ -51,7 +51,7 @@ namespace ComputersStore.WebUI.Controllers
         [Authorize(Roles = ApplicationUserRoleDictionary.Admin)]
         public async Task<IActionResult> Table(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber = 1)
         {
-            var orders = await orderBusinessService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
+            var orders = await orderBusinessService.GetOrdersFilteredCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, ordersPerPage, ordersPerPage);
             await PopulateUpdateFormSelectElements(orderStatusId, paymentTypeId);
             return View(orders);
         }
@@ -130,7 +130,7 @@ namespace ComputersStore.WebUI.Controllers
                 return NotFound();
             }
 
-            //await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
+            await PopulateChangeOrdersStatusFormSelectElements(order.OrderStatusId);
             return PartialView("~/Views/Orders/Modals/_ChangeOrderStatusModal.cshtml" ,order);
         }
 
@@ -141,6 +141,7 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> ChangeStatus(int id, int orderStatusId)
         {
             await orderBusinessService.UpdateOrderStatus(id, orderStatusId);
+            await SendOrderStatusChangedEmail(id);
             return Json( new { success = true });
         }
 

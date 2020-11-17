@@ -9,7 +9,7 @@ namespace ComputersStore.Services.Interfaces
 {
     public interface IAccountService
     {
-        Task<IdentityResult> Register(ApplicationUser applicationUser);
+        Task<IdentityResult> Register(ApplicationUser applicationUser, string password);
         Task<IdentityResult> ConfirmEmail(string applicationUserId, string code);
         Task<bool> IsEmailConfirmed(string applicationUserEmail);
         Task<IdentityResult> ResetPassword(string applicationUserEmail, string code, string password);

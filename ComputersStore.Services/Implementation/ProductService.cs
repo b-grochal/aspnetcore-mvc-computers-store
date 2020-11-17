@@ -49,11 +49,11 @@ namespace ComputersStore.Services.Implementation
             return await applicationDbContext.Products.FindAsync(productId);
         }
 
-        public int GetProductsCollectionCount(int productCategoryId)
+        public async Task<int> GetProductsCollectionCount(int productCategoryId)
         {
-            return applicationDbContext.Products
+            return await applicationDbContext.Products
                 .Where(p => p.ProductCategoryId == productCategoryId)
-                .Count();
+                .CountAsync();
         }
 
         public async Task<int> GetProductsCollectionCount(int? productCategoryId, string productName, bool? isRecommended)
@@ -92,22 +92,24 @@ namespace ComputersStore.Services.Implementation
             await applicationDbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsCollectionByIds(IEnumerable<int> productsId)
+        public async Task<IEnumerable<Product>> GetProductsCollection(IEnumerable<int> productsId)
         {
             return await applicationDbContext.Products.Where(p => productsId.Contains(p.ProductId)).ToListAsync(); 
         }
 
-        public async Task<IEnumerable<Product>> GetSearchedProductsCollection(string searchString)
+        public async Task<IEnumerable<Product>> GetProductsCollection(string searchString)
         {
             return await applicationDbContext.Products.Where(p => p.Name.ToLower().Contains(searchString.ToLower())).ToListAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsCollection(int? productCategoryId, string productName, bool? isRecommended)
+        public async Task<IEnumerable<Product>> GetProductsCollection(int? productCategoryId, string productName, bool? isRecommended, int pageNumber, int pageSize)
         {
             return await applicationDbContext.Products
                 .Where(p => productCategoryId == null || p.ProductCategoryId == productCategoryId)
                 .Where(p => productName == null || p.Name.Contains(productName))
                 .Where(p => isRecommended == null || p.IsRecommended == isRecommended)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 

@@ -45,8 +45,8 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> Summary()
         {
             var shoppingCart = GetShoppingCart();
-            var result = await shoppingCartBusinessService.GetProductsForShoppingCart(shoppingCart);
-            return View(result);
+            var shoppingCartViewModel = await shoppingCartBusinessService.PrepareShoppingCardData(shoppingCart);
+            return View(shoppingCartViewModel);
         }
 
         // POST: ShoppingCart/AddProductToShoppingCart
@@ -86,6 +86,7 @@ namespace ComputersStore.WebUI.Controllers
             var shoppingCart = GetShoppingCart();
             var newOrderId = await shoppingCartBusinessService.SubmitOrder(GetCurrentUserId(), shoppingCart, submitOrderDetailsViewModel);
             await SendNewOrderConfirmationEmail(newOrderId);
+            RemoveShoppingCart();
             return View("SubmitOrderSummary");
         }
 
@@ -102,6 +103,11 @@ namespace ComputersStore.WebUI.Controllers
         private void SaveShoppingCart(ShoppingCart shoppingCart)
         {
             HttpContext.Session.SetJson("ShoppingCart", shoppingCart);
+        }
+
+        private void RemoveShoppingCart()
+        {
+            HttpContext.Session.Remove("ShoppingCart");
         }
 
         private async Task PopulateUpdateFormSelectElements()

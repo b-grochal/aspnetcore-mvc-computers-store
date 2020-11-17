@@ -30,37 +30,45 @@
 <hr class="my-2" />
 <div class="row">
     <div class="col-12">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" class="text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var newsletter in Model.Newsletters)
-                    {
+        @if (Model.Newsletters.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
                         <tr>
-                            <td scope="col">@newsletter.NewsletterId</td>
-                            <td scope="col">@newsletter.Email</td>
-                            <td scope="col" class="text-right">
-                                <div class="table-actions-btns-container">
-                                    <btn class="btn btn-sm btn-green modalButton"
-                                         type="button"
-                                         data-toggle="ajax-modal"
-                                         data-target="#deleteNewsletter"
-                                         data-url="@Url.Action("Delete", "Newsletters", new { id = newsletter.NewsletterId })">
-                                        Delete
-                                    </btn>
-                                </div>
-                            </td>
+                            <th scope="col">Id</th>
+                            <th scope="col">Email</th>
+                            <th scope="col" class="text-right">Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var newsletter in Model.Newsletters)
+                        {
+                            <tr>
+                                <td scope="col">@newsletter.NewsletterId</td>
+                                <td scope="col">@newsletter.Email</td>
+                                <td scope="col" class="text-right">
+                                    <div class="table-actions-btns-container">
+                                        <btn class="btn btn-sm btn-green modalButton"
+                                             type="button"
+                                             data-toggle="ajax-modal"
+                                             data-target="#deleteNewsletter"
+                                             data-url="@Url.Action("Delete", "Newsletters", new { id = newsletter.NewsletterId })">
+                                            Delete
+                                        </btn>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-center">No newsletters found</p>
+        }
+
     </div>
 </div>
 <div class="row">
@@ -68,7 +76,7 @@
         @if (Model.PaginationViewModel.TotalPages > 1)
         {
             <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
-                              page-class="btn" page-class-normal="btn-black" page-class-selected="btn-green" page-url-newsletterId="@Model.NewsletterId" 
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-newsletterId="@Model.NewsletterId" 
                               page-url-newsletterEmail="@Model.NewsletterEmail">
             </pagination-links>
         }
