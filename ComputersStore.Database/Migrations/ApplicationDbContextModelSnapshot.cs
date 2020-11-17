@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace ComputersStore.Data.Migrations
+namespace ComputersStore.Database.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -533,7 +533,8 @@ namespace ComputersStore.Data.Migrations
                 {
                     b.HasOne("ComputersStore.Data.Entities.ApplicationUser", "ApplicationUser")
                         .WithMany("Orders")
-                        .HasForeignKey("ApplicationUserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ComputersStore.Data.Entities.OrderStatus", "OrderStatus")
                         .WithMany("Orders")

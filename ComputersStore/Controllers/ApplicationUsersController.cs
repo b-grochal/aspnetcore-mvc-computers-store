@@ -33,14 +33,14 @@ namespace ComputersStore.WebUI.Controllers
         // GET: ApplicationUsers/Customers
         public async Task<IActionResult> Customers(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Customer, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
+            var usersCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersFilteredCollection(ApplicationUserRoleDictionary.Customer, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
             return View(usersCollectionViewModel);
         }
 
         // GET: ApplicationUsers/Admins
         public async Task<IActionResult> Admins(string firstName, string lastName, string email, string phoneNumber, int pageNumber = 1)
         {
-            var adminsCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersCollection(ApplicationUserRoleDictionary.Admin, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
+            var adminsCollectionViewModel = await applicationUserBusinessService.GetApplicationUsersFilteredCollection(ApplicationUserRoleDictionary.Admin, firstName, lastName, email, phoneNumber, pageNumber, applicationUserPerPage);
             return View(adminsCollectionViewModel);
         }
 

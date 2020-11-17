@@ -40,6 +40,14 @@
                 @Html.DisplayFor(model => model.OrderViewModel.OrderStatusName)
             </div>
         </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.TotalCost)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.TotalCost)
+            </div>
+        </div>
     </div>
     <div class="col-12 col-md-6">
         <div class="row">
@@ -151,6 +159,9 @@
     </div>
 </div>
 <div class="d-flex justify-content-end">
-    <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderViewModel.OrderId">Edit</a>
-    <a class="btn btn-green ml-2 input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Index">Back</a>
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderViewModel.OrderId">Edit</a>
+    }
+    <a class="btn btn-green ml-2 input-with-green-outline-on-focus" href="javascript:history.go(-1)">Back</a>
 </div>

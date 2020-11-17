@@ -1,32 +1,40 @@
-﻿@model OrdersFilteredCollectionViewModel
+﻿@model OrdersCollectionViewModel
 @{
     ViewData["Title"] = "My orders";
     Layout = "~/Views/Shared/Layouts/_AccountPanelLayout.cshtml";
 }
 
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Creation date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Cost</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var order in Model.Orders)
-            {
+@if (Model.Orders.Count() != 0)
+{
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
                 <tr>
-                    <td scope="col"><a asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-green">@order.OrderId</a></td>
-                    <td scope="col">@order.OrderDate</td>
-                    <td scope="col">@order.OrderStatusName</td>
-                    <td scope="col">XXX</td>
+                    <th scope="col">Id</th>
+                    <th scope="col">Creation date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Cost</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td scope="col"><a asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-green input-with-green-outline-on-focus">@order.OrderId</a></td>
+                        <td scope="col">@Html.DisplayFor(o => order.OrderDate)</td>
+                        <td scope="col">@Html.DisplayFor(o => order.OrderStatusName)</td>
+                        <td scope="col">@Html.DisplayFor(o => order.TotalCost)</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+} 
+else
+{
+    <p>You don't have any orders.</p>
+}
+
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

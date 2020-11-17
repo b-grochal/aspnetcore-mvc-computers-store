@@ -45,7 +45,7 @@ namespace ComputersStore.WebUI.Controllers
         // GET: Newsletters/Table
         public async Task<IActionResult> Table(int? newsletterId, string newsletterEmail, int pageNumber = 1)
         {
-            var newsletters = await newsletterBusinessService.GetNewslletersCollection(newsletterId, newsletterEmail, pageNumber, newslettersPerPage);
+            var newsletters = await newsletterBusinessService.GetNewslletersFilteredCollection(newsletterId, newsletterEmail, pageNumber, newslettersPerPage);
             return View(newsletters);
         }
 

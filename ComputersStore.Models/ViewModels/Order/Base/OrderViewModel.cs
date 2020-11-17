@@ -25,6 +25,8 @@ namespace ComputersStore.Models.ViewModels.Order.Base
 
         [Display(Name = "Country")]
         public string ShipCountry { get; set; }
+
+        public int OrderStatusId { get; set; }
         
         [Display(Name = "Status")]
         public string OrderStatusName { get; set; }
@@ -34,5 +36,9 @@ namespace ComputersStore.Models.ViewModels.Order.Base
         
         [Display(Name = "Customer")]
         public string ApplicationUserEmail { get; set; }
+
+        [Display(Name = "Total cost")]
+        [DataType(DataType.Currency)]
+        public decimal TotalCost { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace ComputersStore.BusinessServices.Implementation
             {
                 OrderViewModel = mapper.Map<OrderViewModel>(order),
                 ApplicationUserViewModel = mapper.Map<ApplicationUserViewModel>(order.ApplicationUser),
-                OrderItemsViewModel = mapper.Map<OrderItemViewModel[]>(order.OrderItems)
+                OrderItemsViewModel = mapper.Map<IEnumerable<OrderItemViewModel>>(order.OrderItems)
             };
             return result;
         }
@@ -63,7 +63,7 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrdersFilteredCollectionViewModel> GetOrdersCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersFilteredCollectionViewModel> GetOrdersFilteredCollection(int? orderId, int? orderStatusId, int? paymentTypeId, string applicationUserEmail, int pageNumber, int pageSize, int ordersPerPage)
         {
             var orders = await orderService.GetOrdersCollection(orderId, orderStatusId, paymentTypeId, applicationUserEmail, pageNumber, pageSize);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
@@ -74,7 +74,7 @@ namespace ComputersStore.BusinessServices.Implementation
                 {
                     CurrentPage = pageNumber,
                     ItemsPerPage = pageSize,
-                    TotalItems = mappedOrders.Count()
+                    TotalItems = await orderService.GetOrdersCollectionCount(orderId, orderStatusId, paymentTypeId, applicationUserEmail)
                 },
                 OrderId = orderId,
                 OrderStatusId = orderStatusId,
@@ -84,19 +84,13 @@ namespace ComputersStore.BusinessServices.Implementation
             return result;
         }
 
-        public async Task<OrdersFilteredCollectionViewModel> GetApplicationUserOrders(string applicationUserId, int pageNumber, int pageSize, int ordersPerPage)
+        public async Task<OrdersCollectionViewModel> GetOrdersCollection(string applicationUserId)
         {
-            var orders = await orderService.GetApplicationUserOrdersCollection(applicationUserId);
+            var orders = await orderService.GetOrdersCollection(applicationUserId);
             var mappedOrders = mapper.Map<IEnumerable<OrderViewModel>>(orders);
-            var result = new OrdersFilteredCollectionViewModel
+            var result = new OrdersCollectionViewModel
             {
-                Orders = mappedOrders,
-                PaginationViewModel = new PaginationViewModel
-                {
-                    CurrentPage = pageNumber,
-                    ItemsPerPage = ordersPerPage,
-                    TotalItems = mappedOrders.Count()
-                }
+                Orders = mappedOrders
             };
             return result;
         }
