@@ -100,6 +100,13 @@ namespace ComputersStore.Controllers
             return View(model);
         }
 
+        // GET: Account/RegisterConfirmation
+        [AllowAnonymous]
+        public IActionResult RegisterConfirmation()
+        {
+            return View();
+        }
+
         // POST: Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
