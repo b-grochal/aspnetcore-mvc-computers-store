@@ -60,7 +60,7 @@ namespace ComputersStore.Services.Implementation
         {
             return await applicationDbContext.Products
                 .Where(p => productCategoryId == null || p.ProductCategoryId == productCategoryId)
-                .Where(p => productName == null || p.Name == productName)
+                .Where(p => productName == null || p.Name.Contains(productName))
                 .Where(p => isRecommended == null || p.IsRecommended == isRecommended)
                 .CountAsync();
         }
