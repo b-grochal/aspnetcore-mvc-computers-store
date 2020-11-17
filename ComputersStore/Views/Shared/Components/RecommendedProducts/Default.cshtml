@@ -9,7 +9,7 @@
             <div class="card-body d-flex flex-column justify-content-between">
                 <h5 class="card-title recommended-product-card-title">@Html.DisplayFor(m => product.Name)</h5>
                 <p class="card-text">@Html.DisplayFor(m => product.Price)</p>
-                <a href="#" class="btn btn-black">Details</a>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-black input-with-green-outline-on-focus">Details</a>
             </div>
         </div>
     }
