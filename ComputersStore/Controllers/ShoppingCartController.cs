@@ -45,8 +45,8 @@ namespace ComputersStore.WebUI.Controllers
         public async Task<IActionResult> Summary()
         {
             var shoppingCart = GetShoppingCart();
-            var result = await shoppingCartBusinessService.GetProductsForShoppingCart(shoppingCart);
-            return View(result);
+            var shoppingCartViewModel = await shoppingCartBusinessService.PrepareShoppingCardData(shoppingCart);
+            return View(shoppingCartViewModel);
         }
 
         // POST: ShoppingCart/AddProductToShoppingCart
