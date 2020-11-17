@@ -30,37 +30,45 @@
 <hr class="my-2" />
 <div class="row">
     <div class="col-12">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" class="text-right">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var newsletter in Model.Newsletters)
-                    {
+        @if (Model.Newsletters.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
                         <tr>
-                            <td scope="col">@newsletter.NewsletterId</td>
-                            <td scope="col">@newsletter.Email</td>
-                            <td scope="col" class="text-right">
-                                <div class="table-actions-btns-container">
-                                    <btn class="btn btn-sm btn-green modalButton"
-                                         type="button"
-                                         data-toggle="ajax-modal"
-                                         data-target="#deleteNewsletter"
-                                         data-url="@Url.Action("Delete", "Newsletters", new { id = newsletter.NewsletterId })">
-                                        Delete
-                                    </btn>
-                                </div>
-                            </td>
+                            <th scope="col">Id</th>
+                            <th scope="col">Email</th>
+                            <th scope="col" class="text-right">Actions</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var newsletter in Model.Newsletters)
+                        {
+                            <tr>
+                                <td scope="col">@newsletter.NewsletterId</td>
+                                <td scope="col">@newsletter.Email</td>
+                                <td scope="col" class="text-right">
+                                    <div class="table-actions-btns-container">
+                                        <btn class="btn btn-sm btn-green modalButton"
+                                             type="button"
+                                             data-toggle="ajax-modal"
+                                             data-target="#deleteNewsletter"
+                                             data-url="@Url.Action("Delete", "Newsletters", new { id = newsletter.NewsletterId })">
+                                            Delete
+                                        </btn>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>No newsletters found</p>
+        }
+
     </div>
 </div>
 <div class="row">
