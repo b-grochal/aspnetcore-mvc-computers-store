@@ -40,7 +40,6 @@ namespace ComputersStore.Models.ViewModels.Order.Base
         [Display(Name = "Country")]
         public string ShipCountry { get; set; }
 
-        [Required]
         [Display(Name = "Customer")]
         public string ApplicationUserEmail { get; set; }
     }
