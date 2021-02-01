@@ -1,0 +1,51 @@
+@using System.Collections.Generic
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Authentication
+@model LoginViewModel
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/Layouts/_AuthenticationLayout.cshtml";
+}
+
+<div class="row h-sm-100">
+    <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center align-items-sm-stretch login-column">
+        <div class="w-50">
+            <form asp-controller="Account" asp-action="Login" method="post" role="form">
+                <h4 class="text-center mb-5">Are you a user?</h4>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    <input asp-for="Email" placeholder="Email" class="form-control login-input" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="Password" placeholder="Password" class="form-control login-input" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="custom-control custom-checkbox">
+                        <input class="custom-control-input custom-control-input-green" asp-for="RememberMe" />
+                        <label class="custom-control-label" asp-for="RememberMe">
+                            @Html.DisplayNameFor(m => m.RememberMe)
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <button type="submit" class="btn btn-green w-100 font-weight-bold input-with-green-outline-on-focus">Log in</button>
+                </div>
+                <a class="forgot-password-link" asp-action="ForgotPassword">Forgot your password?</a>
+            </form>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 align-items-center align-items-sm-stretch bg-light-ashen d-flex justify-content-center registration-column">
+        <div class="w-50">
+            <h4 class="text-center text-black mb-5">Is this your first visit?</h4>
+            <a class="btn create-account-btn w-100 input-with-green-outline-on-focus" asp-controller="Account" asp-action="Register">Create account</a>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

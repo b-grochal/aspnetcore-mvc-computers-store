@@ -1,0 +1,55 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/Layouts/_AuthenticationLayout.cshtml";
+}
+
+<div class="row h-sm-100">
+      <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center align-items-sm-stretch login-column">
+        <div class="w-50">
+            <h4 class="text-center text-black mb-5">Are you a user?</h4>
+            <a class="btn create-account-btn w-100 input-with-green-outline-on-focus" asp-controller="Account" asp-action="Login">Log in</a>
+        </div>
+    </div>
+    <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center align-items-sm-stretch registration-column bg-light-ashen">
+        <div class="w-50">
+            <form asp-controller="Account" asp-action="Register" method="post" role="form">
+                <h4 class="text-center mb-5">Is this your first visit?</h4>
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group mb-4">
+                    <input asp-for="FirstName" placeholder="First name" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="LastName" placeholder="Last name" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="PhoneNumber" placeholder="123-456-789" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="Email" placeholder="Email" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="Password" placeholder="Password" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <input asp-for="ConfirmPassword" placeholder="Confirm password" class="form-control registration-input bg-transparent" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <button type="submit" class="btn btn-green w-100 font-weight-bold input-with-green-outline-on-focus">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+  
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

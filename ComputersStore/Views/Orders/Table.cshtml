@@ -1,0 +1,111 @@
+﻿@model OrdersFilteredCollectionViewModel
+
+@{
+    ViewData["Title"] = "Orders";
+}
+
+<div class="row">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Orders</h3>
+        <button class="btn btn-green input-with-green-outline-on-focus" data-toggle="collapse" data-target="#newslettersTableFilters" aria-expanded="false" aria-controls="newslettersTableFilters">Filter</button>
+    </div>
+</div>
+<div class="row mt-3 collapse" id="newslettersTableFilters">
+    <div class="col-12">
+        <form asp-controller="Orders" asp-action="Table">
+            <div class="form-row">
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Order Id" asp-for="OrderId" />
+                </div>
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="OrderStatusId" asp-items="ViewBag.OrderStatuses">
+                        <option value="null">All statuses</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
+                    <select class="form-control input-with-green-outline-on-focus" asp-for="PaymentTypeId" asp-items="ViewBag.PaymentTypes">
+                        <option value="null">All payments</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mt-0 mt-md-2">
+                <div class="form-group col-md-4 d-flex justify-content-start align-items-center mb-2 mb-md-0">
+                    <input class="form-control input-with-green-outline-on-focus" placeholder="Customer email" asp-for="ApplicationUserEmail" />
+                </div>
+                <div class="form-group col-md-8 d-flex justify-content-end align-items-center mb-2 mb-md-0">
+                    <input type="submit" value="Search" class="btn btn-green mr-2 input-with-green-outline-on-focus" />
+                    <input onclick="resetOrdersFilteringForm(event)" type="reset" value="Clear" class="btn btn-green input-with-green-outline-on-focus" >
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<hr class="my-2" />
+<div class="row">
+    <div class="col-12">
+        @if (Model.Orders.Count() > 0)
+        {
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Order status</th>
+                            <th scope="col">Payment type</th>
+                            <th scope="col">User's email</th>
+                            <th scope="col" class="text-right">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td scope="col">@order.OrderId</td>
+                                <td scope="col">@order.OrderStatusName</td>
+                                <td scope="col">@order.PaymentTypeName</td>
+                                <td scope="col">@order.ApplicationUserEmail</td>
+                                <td scope="col" class="text-right">
+                                    <div class="table-actions-btns-container">
+                                        <a class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Details" asp-route-id="@order.OrderId">Details</a>
+                                        <a class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Edit" asp-route-id="@order.OrderId">Edit</a>
+                                        <btn class="btn btn-sm btn-green mr-2 input-with-green-outline-on-focus text-nowrap"
+                                             type="button"
+                                             data-toggle="ajax-modal"
+                                             data-target="#changeOrderStatus"
+                                             data-url="@Url.Action("ChangeStatus", "Orders", new { id = order.OrderId })">
+                                            Change status
+                                        </btn>
+                                        <btn class="btn btn-sm btn-green modalButton input-with-green-outline-on-focus"
+                                             type="button"
+                                             data-toggle="ajax-modal"
+                                             data-target="#deleteOrder"
+                                             data-url="@Url.Action("Delete", "Orders", new { id = order.OrderId })">
+                                            Delete
+                                        </btn>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p class="text-center">No orders found</p>
+        }
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        @if (Model.PaginationViewModel.TotalPages > 1)
+        {
+            <pagination-links pagination-view-model="@Model.PaginationViewModel" page-action="Table" links-container-class="btn-group float-right m-1" page-classes-enabled="true"
+                              page-class="btn" page-class-normal="btn-secondary" page-class-selected="btn-green-without-hover" page-url-orderId="@Model.OrderId"
+                              page-url-orderStatusId="@Model.OrderStatusId" page-url-paymentTypeId="@Model.PaymentTypeId"
+                              page-url-applicationUserEmail="@Model.ApplicationUserEmail">
+            </pagination-links>
+        }
+    </div>
+</div>

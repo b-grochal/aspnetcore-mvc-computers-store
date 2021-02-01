@@ -1,0 +1,70 @@
+﻿@model ProductDetailsViewModel
+
+@{
+    ViewData["Title"] = "Product details";
+}
+
+<div class="row">
+    <div class="col-12 col-md-4 mb-2 mb-md-0">
+        <img class="img-fluid product-details-img" src="@Model.ImageDataUrl" />
+    </div>
+    <div class="col-12 col-md-8 d-flex flex-column justify-content-between">
+        <div>
+            <h2>@Html.DisplayFor(model => model.Name)</h2>
+            <p>@Html.DisplayFor(model => model.Description)</p>
+            <p>@Html.DisplayFor(model => model.Price)</p>
+        </div>
+        @if (User.IsInRole("Admin"))
+        {
+            <a class="btn btn-green input-with-green-outline-on-focus w-25" asp-controller="Products" asp-action="Edit" asp-route-id="@Model.ProductId">Edit</a>
+        }
+        else
+        {
+            <form asp-action="AddProductToShoppingCart" asp-controller="ShoppingCart" id="@Model.ProductId" method="post" class="form-inline">
+                <input type="hidden" name="ProductId" asp-for="ProductId" />
+                <div class="form-group d-flex">
+                    <select class="form-control form-control mr-2 input-with-green-outline-on-focus" name="Quantity">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <button class="btn btn-green text-nowrap input-with-green-outline-on-focus" type="submit">Add to cart</button>
+                </div>
+            </form>
+        }
+    </div>
+</div>
+<hr />
+<h4>Specification</h4>
+@switch (Model.ProductCategoryId)
+{
+    case ProductCategoryDictionary.CPU:
+        <partial name="~/Views/Products/Partials/CentralProcessingUnit/_CentralProcessingUnitDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.Motherboard:
+        <partial name="~/Views/Products/Partials/Motherboard/_MotherboardDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.RAM:
+        <partial name="~/Views/Products/Partials/RandomAccessMemory/_RandomAccessMemoryDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.GPU:
+        <partial name="~/Views/Products/Partials/GraphicsProcessingUnit/_GraphicsProcessingUnitDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.PSU:
+        <partial name="~/Views/Products/Partials/PowerSupplyUnit/_PowerSupplyUnitDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.HDD:
+        <partial name="~/Views/Products/Partials/HardDiskDrive/_HardDiskDriveDetailsPartial.cshtml" for="@Model" />
+        break;
+    case ProductCategoryDictionary.SSD:
+        <partial name="~/Views/Products/Partials/SolidStateDrive/_SolidStateDriveDetailsPartial.cshtml" for="@Model" />
+        break;
+
+}

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ProductViewModel>
+
+<h4 class="mb-4 text-center">Recommended products</h4>
+<div class="card-deck custom-products-card-deck">
+    @foreach (var product in Model)
+    {
+        <div class="card">
+            <img class="card-img recommended-product-card-img-top p-4 img-fluid" src="@product.ImageDataUrl" alt="Card image cap">
+            <div class="card-body d-flex flex-column justify-content-between">
+                <h5 class="card-title recommended-product-card-title">@Html.DisplayFor(m => product.Name)</h5>
+                <p class="card-text">@Html.DisplayFor(m => product.Price)</p>
+                <a asp-controller="Products" asp-action="Details" asp-route-id="@product.ProductId" class="btn btn-black input-with-green-outline-on-focus">Details</a>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,39 @@
+﻿@model AccountDataViewModel
+
+@{
+    ViewData["Title"] = "Update account data";
+    Layout = "~/Views/Shared/Layouts/_AccountPanelLayout.cshtml";
+}
+
+<form asp-controller="Account" asp-action="UpdateAccountData" class="w-100 w-lg-50" method="post" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control input-with-green-outline-on-focus" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control input-with-green-outline-on-focus" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control input-with-green-outline-on-focus" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PhoneNumber" class="control-label"></label>
+        <input asp-for="PhoneNumber" class="form-control input-with-green-outline-on-focus" />
+        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-green input-with-green-outline-on-focus">Update data</button>
+    </div>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
+

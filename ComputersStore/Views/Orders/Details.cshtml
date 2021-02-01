@@ -1,0 +1,167 @@
+﻿@model OrderDetailsViewModel
+
+@{
+    ViewData["Title"] = "Order details";
+}
+
+<h3>Order details</h3>
+<hr />
+<div class="row">
+    <div class="col-12 col-md-6">
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.OrderId)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.OrderId)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.OrderDate)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.OrderDate)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.PaymentTypeName)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.PaymentTypeName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.OrderStatusName)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.OrderStatusName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.TotalCost)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.OrderViewModel.TotalCost)
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ApplicationUserViewModel.FirstName)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.ApplicationUserViewModel.FirstName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ApplicationUserViewModel.LastName)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.ApplicationUserViewModel.LastName)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ApplicationUserViewModel.Email)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.ApplicationUserViewModel.Email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 font-weight-bold">
+                @Html.DisplayNameFor(model => model.ApplicationUserViewModel.PhoneNumber)
+            </div>
+            <div class="col-6">
+                @Html.DisplayFor(model => model.ApplicationUserViewModel.PhoneNumber)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-6 col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.ShipCountry)
+            </div>
+            <div class="col-6 col-md-9">
+                @Html.DisplayFor(model => model.OrderViewModel.ShipCountry)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.ShipCity)
+            </div>
+            <div class="col-6 col-md-9">
+                @Html.DisplayFor(model => model.OrderViewModel.ShipCity)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.ShipPostalCode)
+            </div>
+            <div class="col-6 col-md-9">
+                @Html.DisplayFor(model => model.OrderViewModel.ShipPostalCode)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.OrderViewModel.ShipAddress)
+            </div>
+            <div class="col-6 col-md-9">
+                @Html.DisplayFor(model => model.OrderViewModel.ShipAddress)
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-3">
+    <div class="col-12">
+        <h5 class="mb-3">Order items</h5>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderItemsViewModel.First().ProductName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderItemsViewModel.First().ProductPrice)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.OrderItemsViewModel.First().Quantity)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var orderItem in Model.OrderItemsViewModel)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => orderItem.ProductName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => orderItem.ProductPrice)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => orderItem.Quantity)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="d-flex justify-content-end">
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="btn btn-green input-with-green-outline-on-focus" asp-controller="Orders" asp-action="Edit" asp-route-id="@Model.OrderViewModel.OrderId">Edit</a>
+    }
+    <a class="btn btn-green ml-2 input-with-green-outline-on-focus" href="javascript:history.go(-1)">Back</a>
+</div>

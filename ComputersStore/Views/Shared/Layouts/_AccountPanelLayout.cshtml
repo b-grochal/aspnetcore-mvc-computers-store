@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ComputersStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    <link rel="stylesheet" href="~/css/site.min.css" />
+</head>
+<body class="bg-white">
+    <header>
+        <partial name="~/Views/Shared/Partials/_DesktopNavbarPartial.cshtml" />
+        <partial name="~/Views/Shared/Partials/_MobileNavbarPartial.cshtml" />
+    </header>
+    <div class="container layout-container">
+        <main role="main" class="pb-3">
+            <h3 class="text-uppercase">My account</h3>
+            <hr class="d-none d-md-block account-panel-horizontal-line" />
+            <div class="row">
+                <div class="col-12 col-md-3">
+                    <partial name="~/Views/Shared/Partials/_AccountPanelLinksPartial.cshtml" />
+                </div>
+                <div class="col-12 col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </main>
+    </div>
+    <footer class="footer bg-light-ashen mt-4">
+        <partial name="~/Views/Shared/Partials/_FooterPartial.cshtml" />
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

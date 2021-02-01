@@ -1,0 +1,27 @@
+﻿@model NewsletterSignUpFormViewModel
+@{
+    ViewData["Title"] = "Sign up for newsletter";
+}
+
+<h3>Sign up for newsletter</h3>
+<hr />
+<div class="row">
+    <div class="col-12 d-flex justify-content-center">
+        <form class="w-75" asp-controller="Newsletters" asp-action="SignUpForNewsletter" method="post">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input asp-for="Email" class="form-control newsletter-email-input shadow-none" placeholder="E-MAIL" />
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-black input-with-green-outline-on-focus">Submit</button>
+                    </div>
+                </div>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="custom-control custom-checkbox custom-checkbox-green">
+                <input type="checkbox" class="custom-control-input custom-control-input-green" id="exampleCheck1" asp-for="AreTermsOfNewsletterAccepted">
+                <label class="custom-control-label" for="exampleCheck1">I accept <a class="newsletter-terms-link" asp-action="NewsletterTerms">the terms</a> of newsletter.</label>
+                <span asp-validation-for="AreTermsOfNewsletterAccepted" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+</div>

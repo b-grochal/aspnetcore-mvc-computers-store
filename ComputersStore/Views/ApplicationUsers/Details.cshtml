@@ -1,0 +1,44 @@
+﻿@model ApplicationUserViewModel
+
+@{
+    ViewData["Title"] = "User details";
+}
+
+<h3>Application user details</h3>
+<hr />
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-6 text-left text-lg-right text-break">
+        @Html.DisplayNameFor(model => model.FirstName)
+    </div>
+    <div class="col-6 text-left text-break">
+        @Html.DisplayFor(model => model.FirstName)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-6 text-left text-lg-right text-break">
+        @Html.DisplayNameFor(model => model.LastName)
+    </div>
+    <div class="col-6 text-left text-break">
+        @Html.DisplayFor(model => model.LastName)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-6 text-left text-lg-right text-break">
+        @Html.DisplayNameFor(model => model.Email)
+    </div>
+    <div class="col-6 text-left text-break">
+        @Html.DisplayFor(model => model.Email)
+    </div>
+</div>
+<div class="row product-specification-row py-1 border-bottom">
+    <div class="col-6 text-left text-lg-right text-break">
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </div>
+    <div class="col-6 text-left text-break">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+</div>
+
+<div class="d-flex justify-content-end mt-2">
+    <a class="btn btn-green ml-2 input-with-green-outline-on-focus" href="javascript:history.go(-1)">Back</a>
+</div>

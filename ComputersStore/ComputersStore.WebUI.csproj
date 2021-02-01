@@ -6,28 +6,55 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\ProductsSortMenu\**" />
     <Compile Remove="Migrations\**" />
+    <Content Remove="Components\ProductsSortMenu\**" />
     <Content Remove="Migrations\**" />
+    <EmbeddedResource Remove="Components\ProductsSortMenu\**" />
     <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Components\ProductsSortMenu\**" />
     <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="bundleconfig.json" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <ProjectReference Include="..\ComputersStore.Core\ComputersStore.Core.csproj" />
+    <ProjectReference Include="..\ComputersStore.BusinessServices\ComputersStore.BusinessServices.csproj" />
+    <ProjectReference Include="..\ComputersStore.Data\ComputersStore.Data.csproj" />
     <ProjectReference Include="..\ComputersStore.Database\ComputersStore.Database.csproj" />
+    <ProjectReference Include="..\ComputersStore.EmailService\ComputersStore.EmailHelper.csproj" />
+    <ProjectReference Include="..\ComputersStore.Models\ComputersStore.Models.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="bundleconfig.json" />
   </ItemGroup>
 
 </Project>

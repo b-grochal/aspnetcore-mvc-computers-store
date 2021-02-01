@@ -1,0 +1,15 @@
+﻿@using ComputersStore.EmailTemplates.Views.Emails.ConfirmAccountEmail
+@model ConfirmAccountEmailViewModel
+
+@{
+    ViewData["EmailTitle"] = "Welcome!";
+}
+<p>Hi @Model.CustomerFirstName,</p>
+<p>
+    We're excited to have you get started. First, you need to confirm your account. Just press the button below.
+</p>
+<a href="@Model.ConfirmEmailUrl">Confirm email address.</a>
+<p>
+    Cheers,<br />
+    ComputersStore
+</p>

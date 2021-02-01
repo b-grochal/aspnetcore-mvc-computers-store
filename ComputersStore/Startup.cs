@@ -12,8 +12,26 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ComputersStore.Data;
-using ComputersStore.Database.DataSeeder;
-using ComputersStore.Core.Data;
+using ComputersStore.Data.Entities;
+using AutoMapper;
+using ComputersStore.BusinessServices.Interfaces;
+using ComputersStore.BusinessServices.Implementation;
+using ComputersStore.Services.Interfaces;
+using ComputersStore.Services.Implementation;
+using ComputersStore.Models.Mappings;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
+using ComputersStore.Database.DatabaseContext;
+using ComputersStore.EmailHelper.Configuration;
+using ComputersStore.EmailHelper.Service.Interface;
+using ComputersStore.EmailHelper.Service.Implementation;
+using ComputersStore.EmailHelper.Sender.Interface;
+using ComputersStore.EmailHelper.Factory.Interface;
+using ComputersStore.EmailHelper.Sender.Implementation;
+using ComputersStore.EmailHelper.Factory.Implementation;
+using ComputersStore.EmailTemplates.Renderer.Interface;
+using ComputersStore.EmailTemplates.Renderer.Implementation;
+using ComputersStore.WebUI.ModelBinders;
 
 namespace ComputersStore
 {
@@ -29,19 +47,94 @@ namespace ComputersStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration
+            .GetSection("EmailConfiguration")
+            .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseLazyLoadingProxies()
+                .UseSqlServer(
+                    Configuration.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("ComputersStore.Database")));
+            
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<SignInManager<ApplicationUser>>();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+
+            //services.AddAutoMapper(typeof(Startup));
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ProductsMappingProfile());
+                mc.AddProfile(new NewsletterMappingProfile());
+                mc.AddProfile(new OrdersMappingProfile());
+                mc.AddProfile(new ApplicationUserMappings());
+                mc.AddProfile(new OrderStatusMappingProfile());
+                mc.AddProfile(new PaymentTypeMappingProfile());
+                mc.AddProfile(new AccountMappings());
+                mc.AddProfile(new ShoppingCartMappingProfile());
+                mc.AddProfile(new ProductCategoryMappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddTransient<IShoppingCartBusinessService, ShoppingCartBusinessService>();
+            services.AddTransient<IProductBusinessService, ProductBusinessService>();
+            services.AddTransient<IProductService, ProductService>();
+            services.AddTransient<INewsletterBusinessService, NewsletterBusinessService>();
+            services.AddTransient<INewsletterService, NewsletterService>();
+            services.AddTransient<IOrderBusinessService, OrderBusinessService>();
+            services.AddTransient<IOrderService, OrderService>();
+            services.AddTransient<IOrderStatusBusinessService, OrderStatusBusinessService>();
+            services.AddTransient<IOrderStatusService, OrderStatusService>();
+            services.AddTransient<IPaymentTypeBusinessService, PaymentTypeBusinessService>();
+            services.AddTransient<IPaymentTypeService, PaymentTypeService>();
+            services.AddTransient<IProductCategoryBusinessService, ProductCategoryBusinessService>();
+            services.AddTransient<IProductCategoryService, ProductCategoryService>();
+            services.AddTransient<IAccountBusinessService, AccountBusinessService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IApplicationUserBusinessService, ApplicationUserBusinessService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<IEmailMessageFactory, EmailMessageFactory>();
+            services.AddTransient<IRazorViewToStringRenderer, RazorViewToStringRenderer>();
+
+            services.AddMemoryCache();
+            services.AddSession();
+
+            services.AddControllers(options =>
+            {
+                options.ModelBinderProviders.Insert(0, new ProductCreateFormModelBinderProvider());
+                options.ModelBinderProviders.Insert(1, new ProductEditFormModelBinderProvider());
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            var cultureInfo = new CultureInfo("en-US");
+            cultureInfo.NumberFormat.NumberGroupSeparator = ".";
+
+            CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+            CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -57,9 +150,11 @@ namespace ComputersStore
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             app.UseAuthentication();
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
@@ -68,7 +163,6 @@ namespace ComputersStore
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
-            DataSeeder.SeedData(app);
         }
     }
 }
